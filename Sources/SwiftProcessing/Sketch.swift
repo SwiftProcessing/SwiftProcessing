@@ -24,8 +24,12 @@ protocol SketchDelegate: Sketch {
     }
     
     private func startAnimation(){
-        Timer.scheduledTimer(withTimeInterval: 1.0 / 60.0, repeats: true) { [weak self] _ in
-            self?.setNeedsDisplay();
+        if #available(iOS 10.0, *) {
+            Timer.scheduledTimer(withTimeInterval: 1.0 / 60.0, repeats: true) { [weak self] _ in
+                self?.setNeedsDisplay();
+            }
+        } else {
+            // Fallback on earlier versions
         }
     }
     
