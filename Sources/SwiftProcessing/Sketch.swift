@@ -5,7 +5,7 @@ public protocol SketchDelegate: Sketch {
     func draw()
 }
 
-@IBDesignable public class Sketch: UIView {
+@IBDesignable open class Sketch: UIView {
     weak var delegate: SketchDelegate?
     var rect: CGRect = CGRect()
     var width: CGFloat = 0
@@ -17,7 +17,7 @@ public protocol SketchDelegate: Sketch {
         startAnimation()
     }
     
-    required init(coder: NSCoder){
+    required public init(coder: NSCoder){
         super.init(coder: coder)!;
         delegate = self as? SketchDelegate
         startAnimation()
