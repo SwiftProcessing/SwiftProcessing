@@ -21,8 +21,9 @@ public extension Sketch{
     
     func line(_ x1: CGFloat, _ y1: CGFloat, _ x2: CGFloat, _ y2: CGFloat){
         let path: UIBezierPath = UIBezierPath()
-        path.move(to: CGPoint(x: x1, y: y1));
-        path.addLine(to: CGPoint(x: x2, y: y2));
+        path.move(to: CGPoint(x: x1, y: y1))
+        path.addLine(to: CGPoint(x: x2, y: y2))
+        path.stroke()
     }
 }
 
