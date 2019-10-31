@@ -7,9 +7,9 @@ public protocol SketchDelegate: Sketch {
 
 @IBDesignable open class Sketch: UIView {
     weak var delegate: SketchDelegate?
-    var rect: CGRect = CGRect()
-    var width: CGFloat = 0
-    var height: CGFloat = 0
+    public var rect: CGRect = CGRect()
+    public var width: CGFloat = 0
+    public var height: CGFloat = 0
     
     override init(frame: CGRect){
         super.init(frame: frame);
