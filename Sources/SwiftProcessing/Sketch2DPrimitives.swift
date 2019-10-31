@@ -30,7 +30,16 @@ public extension Sketch{
     }
     
     func point(_ x: CGFloat, _ y: CGFloat){
-        line(x, y, x + strokeWeight, y )
+        line(x, y, x + strokeWeight, y)
+    }
+    
+    func rect(_ x: CGFloat, _ y: CGFloat, _ w: CGFloat, _ h: CGFloat){
+        if (isStroke){
+            context?.stroke(CGRect(x: x, y: y, width: w, height: h))
+        }
+        if (isFill){
+            context?.fill(CGRect(x: x, y: y, width: w, height: h))
+        }
     }
 }
 
