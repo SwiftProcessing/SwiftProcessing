@@ -41,5 +41,9 @@ public extension Sketch{
             context?.fill(CGRect(x: x, y: y, width: w, height: h))
         }
     }
+    
+    func square(_ x: CGFloat, _ y: CGFloat, _ s: CGFloat){
+        rect(x, y, s, s)
+    }
 }
 
