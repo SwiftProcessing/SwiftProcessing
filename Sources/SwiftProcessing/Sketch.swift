@@ -10,6 +10,7 @@ public protocol SketchDelegate: Sketch {
     public var rect: CGRect = CGRect()
     public var width: CGFloat = 0
     public var height: CGFloat = 0
+    public var strokeWeight: CGFloat = 1
     
     override init(frame: CGRect){
         super.init(frame: frame);
