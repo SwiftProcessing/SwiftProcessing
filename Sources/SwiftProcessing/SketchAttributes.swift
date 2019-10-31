@@ -11,5 +11,14 @@ import UIKit
 public extension Sketch{
     func strokeWeight(_ weight: CGFloat){
         strokeWeight = weight
+        context?.setLineWidth(weight)
+    }
+    
+    func smooth(){
+        context?.setShouldAntialias(true)
+    }
+    
+    func noSmooth(){
+        context?.setShouldAntialias(false)
     }
 }

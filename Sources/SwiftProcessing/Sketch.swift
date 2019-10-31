@@ -10,7 +10,12 @@ public protocol SketchDelegate: Sketch {
     public var rect: CGRect = CGRect()
     public var width: CGFloat = 0
     public var height: CGFloat = 0
-    public var strokeWeight: CGFloat = 1
+    
+    var strokeWeight: CGFloat = 1
+    var isFill: Bool = true
+    var isStroke: Bool = true
+    
+    var context: CGContext?
     
     override init(frame: CGRect){
         super.init(frame: frame);
@@ -34,7 +39,10 @@ public protocol SketchDelegate: Sketch {
         }
     }
     
+    
+    
     override public func draw(_ rect: CGRect) {
+        self.context = UIGraphicsGetCurrentContext()
         self.width = rect.width
         self.height = rect.height
         self.rect = rect
