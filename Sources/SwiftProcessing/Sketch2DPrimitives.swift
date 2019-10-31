@@ -25,5 +25,9 @@ public extension Sketch{
         path.addLine(to: CGPoint(x: x2, y: y2))
         path.stroke()
     }
+    
+    func point(_ x: CGFloat, _ y: CGFloat){
+        line(x, y, x, y)
+    }
 }
 
