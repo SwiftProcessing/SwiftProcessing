@@ -1,6 +1,6 @@
 import UIKit
 
-extension Sketch{
+public extension Sketch{
     //TODO support arc function
     //    func arc(_ x: CGFloat, _ y: CGFloat, _ w: CGFloat, _ h: CGFloat, _ start: CGFloat, _ stop: CGFloat){
     //
