@@ -1,11 +1,11 @@
 import UIKit
 
-protocol SketchDelegate: Sketch {
+public protocol SketchDelegate: Sketch {
     func setup()
     func draw()
 }
 
-@IBDesignable class Sketch: UIView {
+@IBDesignable public class Sketch: UIView {
     weak var delegate: SketchDelegate?
     var rect: CGRect = CGRect()
     var width: CGFloat = 0
@@ -33,7 +33,7 @@ protocol SketchDelegate: Sketch {
         }
     }
     
-    override func draw(_ rect: CGRect) {
+    override public func draw(_ rect: CGRect) {
         self.width = rect.width
         self.height = rect.height
         self.rect = rect
