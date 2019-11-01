@@ -12,7 +12,7 @@ public extension Sketch{
             height = w
         }
         if (isStroke) {
-            context?.addEllipse(in: CGRect(x: x, y: y, width: w, height: height))
+            context?.strokeEllipse(in: CGRect(x: x, y: y, width: w, height: height))
         }
         if (isFill){
             context?.fillEllipse(in: CGRect(x: x, y: y, width: w, height: height))
