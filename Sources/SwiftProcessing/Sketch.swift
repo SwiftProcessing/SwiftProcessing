@@ -6,6 +6,17 @@ public protocol SketchDelegate: Sketch {
 }
 
 @IBDesignable open class Sketch: UIView {
+    //Processing Constants
+    public let HALF_PI = CGFloat.pi / 2
+    public let PI = CGFloat.pi
+    public let QUARTER_PI = CGFloat.pi / 4
+    public let TWO_PI = CGFloat.pi * 2
+    public let TAU = CGFloat.pi * 2
+
+    public let DEGREES = "degrees"
+    public let RADIANS = "radians"
+    
+    
     weak var delegate: SketchDelegate?
     public var rect: CGRect = CGRect()
     public var width: CGFloat = 0
