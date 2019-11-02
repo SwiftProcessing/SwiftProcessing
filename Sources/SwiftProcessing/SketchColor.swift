@@ -9,12 +9,8 @@ import UIKit
 
 public extension Sketch{
     
-    func color(_ v1: CGFloat, _ v2: CGFloat, _ v3: CGFloat, _ a: CGFloat = 255) -> Color{
-        return Color(v1, v2, v3, a)
-    }
-    
-    func color(_ value: String) -> Color{
-        return hexStringToUIColor(hex: value)
+    func clear(){
+        context?.clear(rect)
     }
     
     func background(_ color: Color){
@@ -41,6 +37,25 @@ public extension Sketch{
     
     func noStroke(){
         isStroke = false
+    }
+    
+    func erase(){
+        isErase = true
+        context?.setBlendMode(CGBlendMode.clear)
+    }
+    
+    func noErase(){
+        isErase = false
+        context?.setBlendMode(CGBlendMode.normal)
+
+    }
+    
+    func color(_ v1: CGFloat, _ v2: CGFloat, _ v3: CGFloat, _ a: CGFloat = 255) -> Color{
+        return Color(v1, v2, v3, a)
+    }
+    
+    func color(_ value: String) -> Color{
+        return hexStringToUIColor(hex: value)
     }
     
     func red(_ color: Color) -> CGFloat{
@@ -78,18 +93,18 @@ public extension Sketch{
     //credit https://stackoverflow.com/questions/24263007/how-to-use-hex-color-values
     private func hexStringToUIColor (hex:String) -> Color {
         var cString:String = hex.trimmingCharacters(in: .whitespacesAndNewlines).uppercased()
-
+        
         if (cString.hasPrefix("#")) {
             cString.remove(at: cString.startIndex)
         }
-
+        
         if ((cString.count) != 6) {
             assertionFailure("Invalid hex color")
         }
-
+        
         var rgbValue:UInt64 = 0
         Scanner(string: cString).scanHexInt64(&rgbValue)
-
+        
         return Color(
             CGFloat((rgbValue & 0xFF0000) >> 16),
             CGFloat((rgbValue & 0x00FF00) >> 8),
