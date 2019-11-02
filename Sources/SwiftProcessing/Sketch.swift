@@ -22,7 +22,9 @@ public protocol SketchDelegate: Sketch {
     public var width: CGFloat = 0
     public var height: CGFloat = 0
     
-    public var frameCount = 0
+    public var frameCount: CGFloat = 0
+    public var deltaTime: CGFloat = 1/60
+    private var lastTime: CGFloat = CGFloat(CACurrentMediaTime())
     
     var strokeWeight: CGFloat = 1
     var isFill: Bool = true
@@ -64,11 +66,18 @@ public protocol SketchDelegate: Sketch {
     
     
     override public func draw(_ rect: CGRect) {
-        frameCount =  frameCount + 1
+        updateTimes()
         self.context = UIGraphicsGetCurrentContext()
         self.width = rect.width
         self.height = rect.height
         self.rect = rect
         delegate?.draw()
+    }
+    
+    private func updateTimes() {
+        frameCount =  frameCount + 1
+        let newTime = CGFloat(CACurrentMediaTime())
+        deltaTime = newTime - lastTime
+        lastTime = newTime
     }
 }
