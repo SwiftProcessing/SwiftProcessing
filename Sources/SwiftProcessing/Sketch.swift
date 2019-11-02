@@ -12,7 +12,7 @@ public protocol SketchDelegate: Sketch {
     public let QUARTER_PI = CGFloat.pi / 4
     public let TWO_PI = CGFloat.pi * 2
     public let TAU = CGFloat.pi * 2
-
+    
     public let DEGREES = "degrees"
     public let RADIANS = "radians"
     
@@ -22,9 +22,12 @@ public protocol SketchDelegate: Sketch {
     public var width: CGFloat = 0
     public var height: CGFloat = 0
     
+    public var frameCount = 0
+    
     var strokeWeight: CGFloat = 1
     var isFill: Bool = true
     var isStroke: Bool = true
+    var isErase: Bool = false
     
     var context: CGContext?
     
@@ -40,11 +43,19 @@ public protocol SketchDelegate: Sketch {
         startAnimation()
     }
     
+    override open func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        print(touches.count)
+        if let touch = touches.first {
+            let position = touch.location(in: self)
+            print(position)
+        }
+    }
+    
     private func startAnimation(){
         if #available(iOS 10.0, *) {
-            Timer.scheduledTimer(withTimeInterval: 1.0 / 60.0, repeats: true) { [weak self] _ in
-                self?.setNeedsDisplay();
-            }
+            Timer.scheduledTimer(withTimeInterval: 1.0 / 60.0, repeats: true, block: {  _ in
+                self.setNeedsDisplay();
+            })
         } else {
             // Fallback on earlier versions
         }
@@ -53,11 +64,11 @@ public protocol SketchDelegate: Sketch {
     
     
     override public func draw(_ rect: CGRect) {
+        frameCount =  frameCount + 1
         self.context = UIGraphicsGetCurrentContext()
         self.width = rect.width
         self.height = rect.height
         self.rect = rect
         delegate?.draw()
     }
-    
 }
