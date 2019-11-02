@@ -13,6 +13,10 @@ public extension Sketch{
         return Color(v1, v2, v3, a)
     }
     
+    func color(_ value: String) -> Color{
+        return hexStringToUIColor(hex: value)
+    }
+    
     func background(_ color: Color){
         background(color.red, color.green, color.blue, color.alpha)
     }
@@ -69,6 +73,29 @@ public extension Sketch{
     
     func alpha(_ color: [CGFloat]) -> CGFloat{
         return color[3]
+    }
+    
+    //credit https://stackoverflow.com/questions/24263007/how-to-use-hex-color-values
+    private func hexStringToUIColor (hex:String) -> Color {
+        var cString:String = hex.trimmingCharacters(in: .whitespacesAndNewlines).uppercased()
+
+        if (cString.hasPrefix("#")) {
+            cString.remove(at: cString.startIndex)
+        }
+
+        if ((cString.count) != 6) {
+            assertionFailure("Invalid hex color")
+        }
+
+        var rgbValue:UInt64 = 0
+        Scanner(string: cString).scanHexInt64(&rgbValue)
+
+        return Color(
+            CGFloat((rgbValue & 0xFF0000) >> 16),
+            CGFloat((rgbValue & 0x00FF00) >> 8),
+            CGFloat(rgbValue & 0x0000FF),
+            CGFloat(1.0)
+        )
     }
 }
 
