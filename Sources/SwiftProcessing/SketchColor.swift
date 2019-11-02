@@ -39,12 +39,36 @@ public extension Sketch{
         isStroke = false
     }
     
-    func red(_ color: Color){
-        red(color.toArray())
+    func red(_ color: Color) -> CGFloat{
+        return red(color.toArray())
     }
     
     func red(_ color: [CGFloat]) -> CGFloat{
         return color[0]
+    }
+    
+    func green(_ color: Color) -> CGFloat{
+        return green(color.toArray())
+    }
+    
+    func green(_ color: [CGFloat]) -> CGFloat{
+        return color[1]
+    }
+    
+    func blue(_ color: Color) -> CGFloat{
+        return blue(color.toArray())
+    }
+    
+    func blue(_ color: [CGFloat]) -> CGFloat{
+        return color[2]
+    }
+    
+    func alpha(_ color: Color) -> CGFloat{
+        return alpha(color.toArray())
+    }
+    
+    func alpha(_ color: [CGFloat]) -> CGFloat{
+        return color[3]
     }
 }
 
