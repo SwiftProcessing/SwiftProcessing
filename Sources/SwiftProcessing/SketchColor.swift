@@ -43,7 +43,7 @@ public extension Sketch{
         red(color.toArray())
     }
     
-    func red(_ color: [CGFloat]){
+    func red(_ color: [CGFloat]) -> CGFloat{
         return color[0]
     }
 }
@@ -82,8 +82,8 @@ public class Color{
         return UIColor(red: self.red, green: self.green, blue: self.blue, alpha: self.alpha)
     }
     
-    func toString(){
-        return "rgba(" + self.red + "," + self.green + "," + self.blue + "," + self.alpha + ")"
+    func toString() -> String{
+        return "rgba(\(self.red),\(self.green),\(self.blue),\(self.blue))"
     }
     
     func toArray() -> [CGFloat]{
