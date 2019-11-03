@@ -38,8 +38,8 @@ public protocol SketchDelegate: Sketch {
     
     var context: CGContext?
     
-    override init(frame: CGRect){
-        super.init(frame: frame);
+    init(){
+        super.init(frame: CGRect())
         delegate = self as? SketchDelegate
         delegate?.setup()
         startAnimation()
