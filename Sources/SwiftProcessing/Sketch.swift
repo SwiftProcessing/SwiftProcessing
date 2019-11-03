@@ -38,7 +38,7 @@ public protocol SketchDelegate: Sketch {
     
     var context: CGContext?
     
-    init(){
+    public init(){
         super.init(frame: CGRect())
         delegate = self as? SketchDelegate
         delegate?.setup()
