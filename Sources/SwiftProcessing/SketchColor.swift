@@ -21,6 +21,10 @@ public extension Sketch{
         backgroundColor = UIColor(red: v1 / 255, green: v2 / 255, blue: v3 / 255, alpha: a / 255)
     }
     
+    func fill(_ color: Color){
+        fill(color.red, color.green, color.blue, color.alpha)
+    }
+    
     func fill(_ v1: CGFloat, _ v2: CGFloat, _ v3: CGFloat, _ a: CGFloat = 255){
         isFill = true
         context?.setFillColor(red: v1, green: v2, blue: v3, alpha: a)
@@ -28,6 +32,10 @@ public extension Sketch{
     
     func noFill(){
         isFill = false
+    }
+    
+    func stroke(_ color: Color){
+        stroke(color.red, color.green, color.blue, color.alpha)
     }
     
     func stroke(_ v1: CGFloat, _ v2: CGFloat, _ v3: CGFloat, _ a: CGFloat = 255){

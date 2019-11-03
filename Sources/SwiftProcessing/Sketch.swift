@@ -25,11 +25,16 @@ public protocol SketchDelegate: Sketch {
     public var frameCount: CGFloat = 0
     public var deltaTime: CGFloat = 1/60
     private var lastTime: CGFloat = CGFloat(CACurrentMediaTime())
+    var fps: CGFloat = 60
+    var fpsTimer: Timer?
     
     var strokeWeight: CGFloat = 1
     var isFill: Bool = true
     var isStroke: Bool = true
     var isErase: Bool = false
+    
+    var settingsStack: SketchSettingsStack = SketchSettingsStack()
+    var settings: SketchSettings = SketchSettings()
     
     var context: CGContext?
     
@@ -55,7 +60,7 @@ public protocol SketchDelegate: Sketch {
     
     private func startAnimation(){
         if #available(iOS 10.0, *) {
-            Timer.scheduledTimer(withTimeInterval: 1.0 / 60.0, repeats: true, block: {  _ in
+            fpsTimer = Timer.scheduledTimer(withTimeInterval: Double(1.0 / self.fps), repeats: true, block: {  _ in
                 self.setNeedsDisplay();
             })
         } else {
@@ -79,5 +84,14 @@ public protocol SketchDelegate: Sketch {
         let newTime = CGFloat(CACurrentMediaTime())
         deltaTime = newTime - lastTime
         lastTime = newTime
+    }
+    
+    open func push(){
+        settingsStack.push(settings: settings)
+    }
+    
+    open func pop(){
+        settings = settingsStack.pop()!
+        settings.restore(sketch: self)
     }
 }

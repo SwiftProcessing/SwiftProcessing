@@ -10,7 +10,7 @@ import UIKit
 
 public extension Sketch{
     func strokeWeight(_ weight: CGFloat){
-        strokeWeight = weight
+        settings.strokeWeight = weight
         context?.setLineWidth(weight)
     }
     
