@@ -27,7 +27,7 @@ public extension Sketch{
     
     func fill(_ v1: CGFloat, _ v2: CGFloat, _ v3: CGFloat, _ a: CGFloat = 255){
         isFill = true
-        context?.setFillColor(red: v1, green: v2, blue: v3, alpha: a)
+        context?.setFillColor(red: v1 / 255, green: v2 / 255, blue: v3 / 255, alpha: a / 255)
     }
     
     func noFill(){
@@ -122,14 +122,14 @@ public extension Sketch{
     }
 }
 
-public class Color{
+open class Color{
     var red: CGFloat
     var green: CGFloat
     var blue: CGFloat
     var alpha: CGFloat
     
     
-    init(_ v1: CGFloat, _ v2: CGFloat, _ v3: CGFloat, _ a: CGFloat = 255) {
+    public init(_ v1: CGFloat, _ v2: CGFloat, _ v3: CGFloat, _ a: CGFloat = 255) {
         self.red = v1
         self.green = v2
         self.blue = v3
@@ -153,7 +153,7 @@ public class Color{
     }
     
     func uiColor() -> UIColor{
-        return UIColor(red: self.red, green: self.green, blue: self.blue, alpha: self.alpha)
+        return UIColor(red: self.red / 255, green: self.green / 255, blue: self.blue / 255, alpha: self.alpha / 255)
     }
     
     func toString() -> String{

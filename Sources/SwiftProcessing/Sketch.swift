@@ -41,12 +41,14 @@ public protocol SketchDelegate: Sketch {
     override init(frame: CGRect){
         super.init(frame: frame);
         delegate = self as? SketchDelegate
+        delegate?.setup()
         startAnimation()
     }
     
     required public init(coder: NSCoder){
         super.init(coder: coder)!;
         delegate = self as? SketchDelegate
+        delegate?.setup()
         startAnimation()
     }
     
