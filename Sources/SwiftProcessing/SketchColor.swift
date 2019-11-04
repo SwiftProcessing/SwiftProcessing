@@ -40,7 +40,7 @@ public extension Sketch{
     
     func stroke(_ v1: CGFloat, _ v2: CGFloat, _ v3: CGFloat, _ a: CGFloat = 255){
         isStroke = true
-        context?.setStrokeColor(red: v1, green: v2, blue: v3, alpha: a)
+        context?.setStrokeColor(red: v1 / 255, green: v2 / 255, blue: v3 / 255, alpha: a / 255)
     }
     
     func noStroke(){
