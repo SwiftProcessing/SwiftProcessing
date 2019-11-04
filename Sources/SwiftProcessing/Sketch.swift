@@ -42,14 +42,14 @@ public protocol SketchDelegate: Sketch {
         super.init(frame: CGRect())
         delegate = self as? SketchDelegate
         delegate?.setup()
-        startAnimation()
+        loop()
     }
     
     required public init(coder: NSCoder){
         super.init(coder: coder)!;
         delegate = self as? SketchDelegate
         delegate?.setup()
-        startAnimation()
+        loop()
     }
     
     override open func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
@@ -59,18 +59,6 @@ public protocol SketchDelegate: Sketch {
             print(position)
         }
     }
-    
-    private func startAnimation(){
-        if #available(iOS 10.0, *) {
-            fpsTimer = Timer.scheduledTimer(withTimeInterval: Double(1.0 / self.fps), repeats: true, block: {  _ in
-                self.setNeedsDisplay();
-            })
-        } else {
-            // Fallback on earlier versions
-        }
-    }
-    
-    
     
     override public func draw(_ rect: CGRect) {
         updateTimes()
