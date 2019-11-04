@@ -19,6 +19,8 @@ public struct SketchSettings{
     var isErase: Bool = false
     var rotate: CGFloat = 0
     
+    var textSize: CGFloat = 32
+    
     init() {
         fillColor = Color(0, 0, 0)
         strokeColor = Color(0, 0, 0)
@@ -41,5 +43,7 @@ public struct SketchSettings{
         }
         
         sketch.rotate(rotate)
+        
+        sketch.textSize(textSize)
     }
 }
