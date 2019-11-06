@@ -17,7 +17,7 @@ public protocol SketchDelegate: Sketch {
     public let RADIANS = "radians"
     
     
-    weak var delegate: SketchDelegate?
+    public weak var delegate: SketchDelegate?
     public var rect: CGRect = CGRect()
     public var width: CGFloat = 0
     public var height: CGFloat = 0
