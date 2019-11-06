@@ -15,4 +15,8 @@ public extension Sketch{
     func noLoop(){
         fpsTimer!.invalidate()
     }
+    
+    func redraw(){
+        self.setNeedsDisplay()
+    }
 }
