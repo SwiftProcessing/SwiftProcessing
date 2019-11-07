@@ -21,6 +21,7 @@ public protocol SketchDelegate: Sketch {
     public var rect: CGRect = CGRect()
     public var width: CGFloat = 0
     public var height: CGFloat = 0
+    public var isFaceMode: Bool = false
     
     public var frameCount: CGFloat = 0
     public var deltaTime: CGFloat = 1/60

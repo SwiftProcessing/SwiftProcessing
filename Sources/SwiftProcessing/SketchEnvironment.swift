@@ -8,6 +8,14 @@ import UIKit
 
 public extension Sketch{
     
+    func faceMode(){
+        self.isFaceMode = true
+    }
+    
+    func appMode(){
+        self.isFaceMode = false
+    }
+    
     func frameRate() -> CGFloat{
         return fps
     }
