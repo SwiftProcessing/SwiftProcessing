@@ -16,4 +16,8 @@ public extension Sketch{
     func translate(_ x: CGFloat, _ y:CGFloat){
         context?.translateBy(x: x, y: y)
     }
+    
+    func scale(_ x: CGFloat, _ y:CGFloat){
+        context?.scaleBy(x: x, y: y)
+    }
 }
