@@ -36,6 +36,15 @@ cp -R SwiftProcessingProjectTemplate-master/Swift\ Processing\ App.xctemplate ~/
 7. Paste in the Swift Processing github link (https://github.com/jjkaufman/SwiftProcessing) and click next.
 <img src="https://i.imgur.com/s8cU4qc.png" width="512">
 
+8. Select the "master" option on the options screen and click next. On the next page, click finish.
+<img src="https://i.imgur.com/0TdyrNm.png" width="512">
+
+9. With an iPhone simulator selected, press the play button in the top-left. The iPhone simulator will bootup (be patient) and display a single red circle. Experiment with the MySketch.swift file. Can you get a second red circle to appear in a different location? 
+<img src="https://i.imgur.com/gJE95i1.png" width="512">
+<img src="https://i.imgur.com/0c4dv8m.png" width="512">
+
+
+
 ## Get Involved 
 
 SwiftProcessing is an open source project. If you'd let to get involved, join our slack.
