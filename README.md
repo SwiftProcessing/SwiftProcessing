@@ -4,6 +4,10 @@ Welcome to the beautiful world of Swift Processing.
 
 Swift Processing is being developed to enable students, artists, designers, and programmers of all skill levels to create creative iOS App and Augmented Reality experiences. 
 
+## Video Guide
+
+https://www.youtube.com/watch?v=vAjp61gQHoE
+
 ## Installation Guide
 
 1. Install Xcode through the App Store
