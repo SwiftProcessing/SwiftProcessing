@@ -17,6 +17,25 @@ cp -R SwiftProcessingProjectTemplate-master/Swift\ Processing\ App.xctemplate ~/
 
 ## Hello Swift World Project    
 
+1. Follow the Installation Guide above
+
+2. Open Xcode (press Command + Space and type in Xcode)
+
+3. On the top toolbar, click File -> New -> Project
+<img src="https://i.imgur.com/kuzd2F3.png" width="512">
+
+4. Scroll down and select the Swift Processing project template
+<img src="https://i.imgur.com/NRDmZu9.png" width="512">
+
+5. Type into Product Name "HelloSwiftWorld" and click next. Select the folder you want the project in. 
+<img src="https://i.imgur.com/IV6tRs4.png" width="512">
+
+6. Finally, we will need to add the Swift Processing dependency into our project. On the top toolbar, click File -> Swift Packages -> Add Package Dependency 
+<img src="https://i.imgur.com/ZnM5qgN.png" width="512">
+
+7. Paste in the Swift Processing github link (https://github.com/jjkaufman/SwiftProcessing) and click next.
+<img src="https://i.imgur.com/s8cU4qc.png" width="512">
+
 ## Get Involved 
 
 SwiftProcessing is an open source project. If you'd let to get involved, join our slack.
