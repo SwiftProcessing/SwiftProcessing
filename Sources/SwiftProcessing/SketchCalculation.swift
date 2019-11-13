@@ -43,7 +43,11 @@ public extension Sketch{
         }
     }
     
-    func max(_ array: [CGFloat]){
-        return array.max()
+    func max(_ array: [CGFloat]) -> CGFloat{
+        return array.max() ?? 0
+    }
+    
+    func min(_ array: [CGFloat]) -> CGFloat{
+        return array.min() ?? 0
     }
 }
