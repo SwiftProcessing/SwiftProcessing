@@ -31,5 +31,15 @@ public extension Sketch{
         return distance(0, 0, a, b)
     }
     
-    
+    func map(_ value: CGFloat, _ start1: CGFloat, _ stop1: CGFloat, _ start2: CGFloat, _ stop2: CGFloat, _ withinBounds: Bool = true) -> CGFloat{
+        let newval = (value - start1) / (stop1 - start1) * (stop2 - start2) + start2;
+        if (!withinBounds) {
+          return newval;
+        }
+        if (start2 < stop2) {
+          return self.constrain(newval, start2, stop2);
+        } else {
+          return self.constrain(newval, stop2, start2);
+        }
+    }
 }
