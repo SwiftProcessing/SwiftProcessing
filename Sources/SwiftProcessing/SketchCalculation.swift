@@ -42,4 +42,8 @@ public extension Sketch{
           return self.constrain(newval, stop2, start2);
         }
     }
+    
+    func max(_ array: [CGFloat]){
+        return array.max()
+    }
 }
