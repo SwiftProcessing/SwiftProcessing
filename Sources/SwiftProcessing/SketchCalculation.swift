@@ -50,4 +50,12 @@ public extension Sketch{
     func min(_ array: [CGFloat]) -> CGFloat{
         return array.min() ?? 0
     }
+    
+    func norm(_ num: CGFloat, _ start: CGFloat, _ stop: CGFloat) -> CGFloat{
+        return self.map(num, start, stop, 0, 1);
+    }
+    
+    func sq(_ num: CGFloat) -> CGFloat{
+        return pow(num, 2)
+    }
 }
