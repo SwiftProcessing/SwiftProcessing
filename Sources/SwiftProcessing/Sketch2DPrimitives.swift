@@ -64,5 +64,14 @@ public extension Sketch{
     func square(_ x: CGFloat, _ y: CGFloat, _ s: CGFloat){
         rect(x, y, s, s)
     }
+    
+    func triangle(_ x1: CGFloat, _ y1: CGFloat, _ x2: CGFloat, _ y2: CGFloat, _ x3: CGFloat, _ y3: CGFloat){
+        context?.beginPath()
+        context?.move(to: CGPoint(x:x1, y:y1))
+        context?.addLine(to: CGPoint(x:x2, y:y2))
+        context?.addLine(to: CGPoint(x:x3, y:y3))
+        context?.closePath()
+        context?.drawPath(using: .eoFillStroke)
+    }
 }
 
