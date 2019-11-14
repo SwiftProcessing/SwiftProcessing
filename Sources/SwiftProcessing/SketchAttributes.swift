@@ -10,7 +10,6 @@ import UIKit
 
 public extension Sketch{
     func strokeWeight(_ weight: CGFloat){
-        settings.strokeWeight = weight
         context?.setLineWidth(weight)
     }
     
@@ -20,5 +19,9 @@ public extension Sketch{
     
     func noSmooth(){
         context?.setShouldAntialias(false)
+    }
+    
+    func ellipseMode(_ eMode: String){
+        settings.ellipseMode = eMode
     }
 }

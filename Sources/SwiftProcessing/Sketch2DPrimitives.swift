@@ -11,16 +11,39 @@ public extension Sketch{
         if h == -1 {
             height = w
         }
-        if (isStroke) {
-            context?.strokeEllipse(in: CGRect(x: x, y: y, width: w, height: height))
+        push()
+        ellipseModeHelper(x, y, w, height)
+        
+        var newW = w
+        var newH = height
+        if settings.ellipseMode == CORNERS {
+            newW = w - x
+            newH = h - y
         }
-        if (isFill){
-            context?.fillEllipse(in: CGRect(x: x, y: y, width: w, height: height))
-        }
+        
+        context?.strokeEllipse(in: CGRect(x: x, y: y, width: newW, height: newH))
+        context?.fillEllipse(in: CGRect(x: x, y: y, width: newW, height: newH))
+        
+        pop()
     }
     
     func circle(_ x: CGFloat, _ y: CGFloat, _ d: CGFloat){
         ellipse(x, y, d, d)
+    }
+    
+    private func ellipseModeHelper(_ x: CGFloat, _ y: CGFloat, _ w: CGFloat, _ h: CGFloat){
+        switch settings.ellipseMode {
+        case CENTER:
+            translate(-w * 0.5, -h * 0.5)
+        case RADIUS:
+            scale(0.5, 0.5)
+        case CORNER:
+            return
+        case CORNERS:
+            return
+        default:
+            print("invalid ellipseModeValue")
+        }
     }
     
     func line(_ x1: CGFloat, _ y1: CGFloat, _ x2: CGFloat, _ y2: CGFloat){
@@ -34,12 +57,8 @@ public extension Sketch{
     }
     
     func rect(_ x: CGFloat, _ y: CGFloat, _ w: CGFloat, _ h: CGFloat){
-        if (isStroke){
-            context?.stroke(CGRect(x: x, y: y, width: w, height: h))
-        }
-        if (isFill){
-            context?.fill(CGRect(x: x, y: y, width: w, height: h))
-        }
+        context?.stroke(CGRect(x: x, y: y, width: w, height: h))
+        context?.fill(CGRect(x: x, y: y, width: w, height: h))
     }
     
     func square(_ x: CGFloat, _ y: CGFloat, _ s: CGFloat){
