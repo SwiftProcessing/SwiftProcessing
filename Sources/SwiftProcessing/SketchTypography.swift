@@ -13,12 +13,19 @@ public extension Sketch{
         settings.textSize = theSize
     }
     
+    func textFont(_ name: String){
+        settings.textFont = name
+    }
     
     func text(_ str: String, _ x: CGFloat, _ y: CGFloat ){
         let paragraphStyle = NSMutableParagraphStyle()
         
-        let attrs = [NSAttributedString.Key.font: UIFont(name: "HelveticaNeue-Thin", size: settings.textSize)!, NSAttributedString.Key.paragraphStyle: paragraphStyle, NSAttributedString.Key.strokeWidth: NSNumber(15.0), NSAttributedString.Key.strokeColor: settings.strokeColor.uiColor(), NSAttributedString.Key.foregroundColor: settings.strokeColor.uiColor()]
+        let attributes: [NSAttributedString.Key : Any] = [
+            .paragraphStyle: paragraphStyle,
+            .font: UIFont(name: settings.textFont, size: settings.textSize)!,
+            .foregroundColor: UIColor.blue,
+        ]
        
-        str.draw(with: CGRect(x: x, y: y, width: width, height: height), options: .usesLineFragmentOrigin, attributes: attrs, context: nil)
+        str.draw(with: CGRect(x: x, y: y, width: width, height: height), options: .usesLineFragmentOrigin, attributes: attributes, context: nil)
     }
 }
