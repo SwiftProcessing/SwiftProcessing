@@ -16,6 +16,10 @@ public protocol SketchDelegate: Sketch {
     public let DEGREES = "degrees"
     public let RADIANS = "radians"
     
+    public let RADIUS = "radius"
+    public let CORNER = "corner"
+    public let CORNERS = "corners"
+    public let CENTER = "center"
     
     public weak var delegate: SketchDelegate?
     public var rect: CGRect = CGRect()
@@ -78,10 +82,12 @@ public protocol SketchDelegate: Sketch {
     }
     
     open func push(){
+        context?.saveGState()
         settingsStack.push(settings: settings)
     }
     
     open func pop(){
+        context?.restoreGState()
         settings = settingsStack.pop()!
         settings.restore(sketch: self)
     }
