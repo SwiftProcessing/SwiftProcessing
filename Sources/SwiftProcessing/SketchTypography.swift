@@ -23,7 +23,9 @@ public extension Sketch{
         let attributes: [NSAttributedString.Key : Any] = [
             .paragraphStyle: paragraphStyle,
             .font: UIFont(name: settings.textFont, size: settings.textSize)!,
-            .foregroundColor: UIColor.blue,
+            .foregroundColor: settings.fill.uiColor(),
+            .strokeWidth: -settings.strokeWeight,
+            .strokeColor: settings.stroke.uiColor(),
         ]
        
         str.draw(with: CGRect(x: x, y: y, width: width, height: height), options: .usesLineFragmentOrigin, attributes: attributes, context: nil)

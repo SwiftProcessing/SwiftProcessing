@@ -27,6 +27,7 @@ public extension Sketch{
     
     func fill(_ v1: CGFloat, _ v2: CGFloat, _ v3: CGFloat, _ a: CGFloat = 255){
         context?.setFillColor(red: v1 / 255, green: v2 / 255, blue: v3 / 255, alpha: a / 255)
+        settings.fill = Color(v1, v2, v3, a)
     }
     
     func noFill(){
@@ -39,6 +40,7 @@ public extension Sketch{
     
     func stroke(_ v1: CGFloat, _ v2: CGFloat, _ v3: CGFloat, _ a: CGFloat = 255){
         context?.setStrokeColor(red: v1 / 255, green: v2 / 255, blue: v3 / 255, alpha: a / 255)
+        settings.stroke = Color(v1, v2, v3, a)
     }
     
     func noStroke(){

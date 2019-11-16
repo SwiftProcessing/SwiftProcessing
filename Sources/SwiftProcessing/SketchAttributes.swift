@@ -11,6 +11,7 @@ import UIKit
 public extension Sketch{
     func strokeWeight(_ weight: CGFloat){
         context?.setLineWidth(weight)
+        settings.strokeWeight = weight
     }
     
     func smooth(){
