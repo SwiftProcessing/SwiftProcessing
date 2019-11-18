@@ -1,10 +1,3 @@
-//
-//  File.swift
-//  
-//
-//  Created by Jonathan Kaufman on 11/2/19.
-//
-
 /*
  https://github.com/raywenderlich/swift-algorithm-club
  */

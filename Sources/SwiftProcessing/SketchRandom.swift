@@ -1,10 +1,3 @@
-//
-//  File.swift
-//  
-//
-//  Created by Jonathan Kaufman on 11/7/19.
-//
-
 import Foundation
 import UIKit
 
