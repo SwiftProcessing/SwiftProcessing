@@ -1,10 +1,3 @@
-//
-//  File.swift
-//  
-//
-//  Created by Jonathan Kaufman on 11/2/19.
-//
-
 import UIKit
 
 public struct SketchSettings{
@@ -17,6 +10,7 @@ public struct SketchSettings{
     var fill: Color = Color(255, 255, 255)
     var stroke: Color = Color(0, 0, 0)
     var strokeWeight: CGFloat = 1
+    var faceFill: Bool = true
    
     func restore(sketch: Sketch){
         sketch.textSize(textSize)
@@ -25,5 +19,6 @@ public struct SketchSettings{
         sketch.fill(fill)
         sketch.stroke(stroke)
         sketch.strokeWeight(strokeWeight)
+        faceFill ? sketch.faceFill(): sketch.noFill()
     }
 }
