@@ -1,10 +1,19 @@
 import UIKit
 
 public extension Sketch{
-    //TODO support arc function
-    //    func arc(_ x: CGFloat, _ y: CGFloat, _ w: CGFloat, _ h: CGFloat, _ start: CGFloat, _ stop: CGFloat){
-    //
-    //    }
+    
+    func arc(_ x: CGFloat, _ y: CGFloat, _ w: CGFloat, _ h: CGFloat, _ start: CGFloat, _ stop: CGFloat){
+        let cx = x + w * 0.5;
+        let cy = y + h * 0.5;
+        var r = w * 0.5;
+
+        let t = CGAffineTransform(translationX: cx, y: cy)
+        context?.beginPath()
+        let path: CGMutablePath = CGMutablePath()
+        path.addArc(center: CGPoint(x: x, y: y), radius: r, startAngle: start, endAngle: stop, clockwise: false, transform: t)
+        context?.addPath(path)
+        context?.drawPath(using: .eoFillStroke)
+    }
     
     func ellipse(_ x: CGFloat, _ y: CGFloat, _ w: CGFloat, _ h: CGFloat = -1 ){
         var height = h
