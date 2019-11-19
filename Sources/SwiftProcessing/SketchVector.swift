@@ -2,7 +2,7 @@ import Foundation
 import UIKit
 
 public extension Sketch{
-
+    
     func createVector(_ x: CGFloat, _ y: CGFloat) -> Vector{
         return Vector(x, y)
     }
@@ -16,6 +16,25 @@ open class Vector{
     public init(_ x: CGFloat, _ y: CGFloat) {
         self.x = x
         self.y = y
+    }
+    
+    func toString() -> String{
+        //todo
+        return ""
+    }
+    
+    func set(_ x: CGFloat, _ y: CGFloat){
+        self.x = x
+        self.y = y
+    }
+    
+    func set(_ v: Vector){
+        self.x = v.x
+        self.y = v.y
+    }
+    
+    func copy() -> Vector {
+        return Vector(self.x, self.y)
     }
     
     static func + (v1: Vector, v2: Vector) -> Vector {
@@ -48,6 +67,18 @@ open class Vector{
     
     func sub(_ x: CGFloat, _ y: CGFloat) -> Vector{
         return Vector.sub(self, Vector(x, y))
+    }
+    
+    static func * (_ v: Vector, _ n: CGFloat) -> Vector {
+        return Vector.mult(v, n)
+    }
+    
+    static func mult(_ v: Vector, _ n: CGFloat) -> Vector{
+        return Vector(v.x * n, v.y * n)
+    }
+    
+    func mult(_ n: CGFloat) -> Vector{
+        return Vector.mult(self, n)
     }
 }
 
