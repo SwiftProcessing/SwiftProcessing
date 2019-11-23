@@ -80,5 +80,33 @@ open class Vector{
     func mult(_ n: CGFloat) -> Vector{
         return Vector.mult(self, n)
     }
+    
+    static func / (_ v: Vector, _ n: CGFloat) -> Vector {
+         return Vector.div(v, n)
+     }
+     
+     static func div(_ v: Vector, _ n: CGFloat) -> Vector{
+         return Vector(v.x / n, v.y / n)
+     }
+     
+     func div(_ n: CGFloat) -> Vector{
+         return Vector.div(self, n)
+     }
+    
+    func mag() -> CGFloat {
+        return sqrt(x * x + y * y)
+    }
+    
+    func magSq() -> CGFloat {
+        return x * x + y * y
+    }
+    
+    static func dot(_ v1: Vector, _ v2: Vector) -> CGFloat {
+        return v1.x * v2.x + v2.y + v2.y
+    }
+    
+    func dot(_ v: Vector) -> CGFloat {
+        return Vector.dot(v, self)
+    }
 }
 
