@@ -1,4 +1,5 @@
 import UIKit
+import SceneKit
 
 public protocol SketchDelegate: Sketch {
     func setup()
@@ -21,7 +22,7 @@ public protocol SketchDelegate: Sketch {
     public let CORNERS = "corners"
     public let CENTER = "center"
     
-    public weak var delegate: SketchDelegate?
+    public weak var sketchDelegate: SketchDelegate?
     public var rect: CGRect = CGRect()
     public var width: CGFloat = 0
     public var height: CGFloat = 0
@@ -42,19 +43,19 @@ public protocol SketchDelegate: Sketch {
     var settingsStack: SketchSettingsStack = SketchSettingsStack()
     var settings: SketchSettings = SketchSettings()
     
-    var context: CGContext?
+    open var context: CGContext?
     
     public init(){
         super.init(frame: CGRect())
-        delegate = self as? SketchDelegate
-        delegate?.setup()
+        sketchDelegate = self as? SketchDelegate
+        sketchDelegate?.setup()
         loop()
     }
     
     required public init(coder: NSCoder){
         super.init(coder: coder)!;
-        delegate = self as? SketchDelegate
-        delegate?.setup()
+        sketchDelegate = self as? SketchDelegate
+        sketchDelegate?.setup()
         loop()
     }
     
@@ -72,7 +73,7 @@ public protocol SketchDelegate: Sketch {
         self.width = rect.width
         self.height = rect.height
         self.rect = rect
-        delegate?.draw()
+        sketchDelegate?.draw()
     }
     
     private func updateTimes() {

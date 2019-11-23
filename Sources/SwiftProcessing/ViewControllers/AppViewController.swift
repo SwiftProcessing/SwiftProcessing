@@ -1,11 +1,7 @@
-//
-//  File.swift
-//  
-//
-//  Created by Jonathan Kaufman on 11/23/19.
-//
-
-import Foundation
+import UIKit
+import SceneKit
+import ARKit
+import SwiftProcessing
 
 class AppViewController: UIViewController {
     
@@ -15,11 +11,15 @@ class AppViewController: UIViewController {
         
     }
     override func viewDidAppear(_ animated: Bool) {
-        let sketch = self.view as! MySketch
+        let sketch = self.view as! Sketch
         
-        if sketch.isFaceMode && ARFaceTrackingConfiguration.isSupported{
-            self.performSegue(withIdentifier: "presentFace", sender: nil)
-            
+        if #available(iOS 11.0, *) {
+            if sketch.isFaceMode && ARFaceTrackingConfiguration.isSupported{
+                self.performSegue(withIdentifier: "presentFace", sender: nil)
+                
+            }
+        } else {
+            // Fallback on earlier versions
         }
     }
     

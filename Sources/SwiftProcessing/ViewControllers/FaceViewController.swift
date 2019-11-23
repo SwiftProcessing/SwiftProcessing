@@ -1,6 +1,7 @@
 import UIKit
 import SceneKit
 import ARKit
+import SwiftProcessing
 
 @available(iOS 11.0, *)
 class FaceViewController: UIViewController, ARSCNViewDelegate {
@@ -13,7 +14,7 @@ class FaceViewController: UIViewController, ARSCNViewDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         sketch!.frame = CGRect(x: 0, y: 0, width: 1920, height: 1920)
-        sketch!.delegate?.setup()
+        sketch!.sketchDelegate?.setup()
         sketch!.layer.bounds = CGRect(x: 0, y: 0, width: 1920  , height: 1920)
         
         sceneView.delegate = self
