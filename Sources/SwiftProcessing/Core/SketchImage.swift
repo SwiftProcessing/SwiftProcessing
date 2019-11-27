@@ -34,7 +34,7 @@ open class Image{
         self.delay = CGFloat(image.duration) / 100
     }
     
-    func delay(_ d: CGFloat){
+    open func delay(_ d: CGFloat){
         self.delay = d
     }
     
