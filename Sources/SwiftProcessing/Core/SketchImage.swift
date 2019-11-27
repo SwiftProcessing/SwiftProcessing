@@ -34,6 +34,10 @@ open class Image{
         self.delay = CGFloat(image.duration) / 100
     }
     
+    func delay(_ d: CGFloat){
+        self.delay = d
+    }
+    
     func frame(_ deltaTime: CGFloat) -> UIImage{
         if(uiImage.count == 1){
             return uiImage[0]
