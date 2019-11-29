@@ -38,6 +38,11 @@ open class Image{
         self.delay = d
     }
     
+    open func resize(_ width: CGFloat, _ height: CGFloat){
+        self.width = width
+        self.height = height
+    }
+    
     func frame(_ deltaTime: CGFloat) -> UIImage{
         if(uiImage.count == 1){
             return uiImage[0]
