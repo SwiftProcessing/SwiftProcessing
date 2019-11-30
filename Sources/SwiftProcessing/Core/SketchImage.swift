@@ -13,7 +13,8 @@ public extension Sketch{
     func image(_ image: Image, _ x: CGFloat, _ y: CGFloat, _ width: CGFloat? = nil, _ height: CGFloat? = nil){
         let w = width == nil ? CGFloat(image.width) : width!
         let h = height == nil ? CGFloat(image.height) : height!
-        
+        image.width = w
+        image.height = h
         image.frame(deltaTime).draw(in: CGRect(x: x, y: y, width: w, height: h))
     }
 }
@@ -38,9 +39,32 @@ open class Image{
         self.delay = d
     }
     
+    open func get(_ x: CGFloat, _ y: CGFloat, _ w: CGFloat, _ h: CGFloat) -> Image{
+        UIGraphicsBeginImageContextWithOptions(CGSize(width: w, height:  h), false, 2.0)
+        let container = CGRect(x: -x, y: -y, width: self.width, height: self.height)
+        UIGraphicsGetCurrentContext()!.clip(to: CGRect(x: 0, y: 0,
+        width: w, height: h))
+        self.uiImage[0].draw(in: container)
+        let newImage = Image(UIGraphicsGetImageFromCurrentImageContext()!)
+        UIGraphicsEndImageContext()
+        return newImage
+    }
+    
     open func resize(_ width: CGFloat, _ height: CGFloat){
         self.width = width
         self.height = height
+    }
+    
+    open func copy(_ srcImage: Image, _ sx: CGFloat, _ sy: CGFloat, _ sw: CGFloat, _ sh: CGFloat, _ dx: CGFloat, _ dy: CGFloat, _ dw: CGFloat, _ dh: CGFloat){
+        UIGraphicsBeginImageContextWithOptions(CGSize(width: self.width, height:  self.height), false, 2.0)
+        UIGraphicsGetCurrentContext()!.interpolationQuality = .high
+        
+        self.uiImage[0].draw(in: CGRect(x: 0, y: 0, width: self.width, height: self.height))
+        srcImage.get(sx, sy, sw, sh).uiImage[0].draw(in: CGRect(x: dx, y: dy, width: dw, height: dh), blendMode: .normal, alpha: 1.0)
+        
+        //set to self if nothing is found in the image context... possible when bad parameters are passed into this function
+        self.uiImage[0] = UIGraphicsGetImageFromCurrentImageContext() ?? self.uiImage[0]
+        UIGraphicsEndImageContext()
     }
     
     func frame(_ deltaTime: CGFloat) -> UIImage{
