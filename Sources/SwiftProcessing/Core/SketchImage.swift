@@ -21,9 +21,11 @@ public extension Sketch{
 
 
 open class Image{
+    
     var uiImage: [UIImage]
     var delay: CGFloat = 0
     var curFrame: Int = 0
+    var isPlaying = true
     var deltaTime: CGFloat = 0
     var width: CGFloat = 0
     var height: CGFloat = 0
@@ -67,9 +69,19 @@ open class Image{
         UIGraphicsEndImageContext()
     }
     
+    open func play(){
+        self.isPlaying = true
+    }
+    
+    open func pause(){
+        self.isPlaying = false
+    }
+    
     func frame(_ deltaTime: CGFloat) -> UIImage{
         if(uiImage.count == 1){
             return uiImage[0]
+        }else if(!isPlaying){
+            return uiImage[curFrame]
         }
         
         self.deltaTime = self.deltaTime + deltaTime
