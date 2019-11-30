@@ -69,6 +69,46 @@ open class Image{
         UIGraphicsEndImageContext()
     }
     
+    open func mask(_ srcImage: Image){
+        UIGraphicsBeginImageContextWithOptions(CGSize(width: self.width, height:  self.height), false, 2.0)
+        let context = UIGraphicsGetCurrentContext()!
+        //mask strategy adapted from https://stackoverflow.com/questions/8126276/how-to-convert-uiimage-cgimagerefs-alpha-channel-to-mask
+        let decode = [ CGFloat(1), CGFloat(0),
+                       CGFloat(0), CGFloat(1),
+                       CGFloat(0), CGFloat(1),
+                       CGFloat(0), CGFloat(1) ]
+        
+        let cgImage = srcImage.uiImage[0].cgImage!
+        
+        // Create the mask `CGImage` by reusing the existing image data
+        // but applying a custom decode array.
+        let mask =  CGImage(width:              cgImage.width,
+                            height:             cgImage.height,
+                            bitsPerComponent:   cgImage.bitsPerComponent,
+                            bitsPerPixel:       cgImage.bitsPerPixel,
+                            bytesPerRow:        cgImage.bytesPerRow,
+                            space:              cgImage.colorSpace!,
+                            bitmapInfo:         cgImage.bitmapInfo,
+                            provider:           cgImage.dataProvider!,
+                            decode:             decode,
+                            shouldInterpolate:  cgImage.shouldInterpolate,
+                            intent:             cgImage.renderingIntent)
+        
+        context.saveGState();
+        context.translateBy(x: 0.0, y: self.height);
+        context.scaleBy(x: 1.0, y: -1.0);
+        context.clip(to: CGRect(x: 0, y: 0, width: self.width, height: self.height), mask: mask!)
+        context.scaleBy(x: 1.0, y: -1.0);
+        context.translateBy(x: 0.0, y: -self.height);
+        self.uiImage[0].draw(in: CGRect(x: 0, y: 0, width: self.width, height: self.height))
+        context.restoreGState();
+                
+        let image = UIGraphicsGetImageFromCurrentImageContext()!
+        UIGraphicsEndImageContext()
+        
+        self.uiImage[0] = image
+    }
+    
     open func play(){
         self.isPlaying = true
     }
