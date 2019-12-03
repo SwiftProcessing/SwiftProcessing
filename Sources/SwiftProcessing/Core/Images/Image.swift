@@ -18,10 +18,6 @@ open class Image{
         self.delay = CGFloat(image.duration) / 100
     }
     
-    open func delay(_ d: CGFloat){
-        self.delay = d
-    }
-    
     open func get(_ x: CGFloat, _ y: CGFloat, _ w: CGFloat, _ h: CGFloat) -> Image{
         UIGraphicsBeginImageContextWithOptions(CGSize(width: w, height:  h), false, 2.0)
         let container = CGRect(x: -x, y: -y, width: self.width, height: self.height)
@@ -88,6 +84,26 @@ open class Image{
         UIGraphicsEndImageContext()
         
         self.uiImage[0] = image
+    }
+    
+    open func delay(_ d: CGFloat){
+          self.delay = d
+    }
+    
+    open func numFrames() -> Int{
+        return self.uiImage.count
+    }
+    
+    open func getCurrentFrame() -> Int{
+        return self.curFrame
+    }
+    
+    open func setFrame(_ index: Int){
+        self.curFrame = index
+    }
+    
+    open func reset(){
+        self.curFrame = 0
     }
     
     open func play(){
