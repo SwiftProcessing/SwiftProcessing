@@ -2,6 +2,8 @@ import Foundation
 import UIKit
 
 open class Image{
+    open var pixels: [UInt8] = []
+    
     
     var uiImage: [UIImage]
     var delay: CGFloat = 0
@@ -18,11 +20,71 @@ open class Image{
         self.delay = CGFloat(image.duration) / 100
     }
     
+    func getPixels() -> [UInt8] {
+        let curImage = self.uiImage[curFrame]
+        let size = curImage.size
+        let dataSize = size.width * size.height * 4
+        var pixelData = [UInt8](repeating: 0, count: Int(dataSize))
+        let colorSpace = CGColorSpaceCreateDeviceRGB()
+        let context = CGContext(data: &pixelData,
+                                width: Int(size.width),
+                                height: Int(size.height),
+                                bitsPerComponent: 8,
+                                bytesPerRow: 4 * Int(size.width),
+                                space: colorSpace,
+                                bitmapInfo: CGImageAlphaInfo.noneSkipLast.rawValue)
+        context?.draw(curImage.cgImage!, in: CGRect(x: 0, y: 0, width: size.width, height: size.height))
+        return pixelData
+    }
+    
+    open func loadPixels(){
+        self.pixels = getPixels()
+    }
+    
+    @available(iOS 9.0, *)
+    open func updatePixels(){
+        self.updatePixels(0, 0, self.width, self.height)
+    }
+    
+    @available(iOS 9.0, *)
+    open func updatePixels(_ x: CGFloat, _ y: CGFloat, _ w: CGFloat, _ h: CGFloat){
+        //retrieve the current image and apply the current pixels loaded into the pixels array using the x, y, w, h inputs
+        var newImage = getPixels()
+        
+        for dy in Int(y)..<Int(h){
+            for dx in Int(x)..<Int(w){
+                let pixelPos = dx * 4 + Int(dy) * 4 * Int(width)
+                newImage[pixelPos] = self.pixels[pixelPos]
+                newImage[pixelPos + 1] = self.pixels[pixelPos + 1]
+                newImage[pixelPos + 2] = self.pixels[pixelPos + 2]
+                newImage[pixelPos + 3] = self.pixels[pixelPos + 3]
+            }
+        }
+        
+        //create a CGContext and draw the pixels as a CGImage.
+        let curImage = self.uiImage[curFrame]
+        let size = curImage.size
+        let colorSpace = CGColorSpaceCreateDeviceRGB()
+        let context = CGContext(data: &newImage,
+                                width: Int(size.width),
+                                height: Int(size.height),
+                                bitsPerComponent: 8,
+                                bytesPerRow: 4 * Int(size.width),
+                                space: colorSpace,
+                                bitmapInfo: CGImageAlphaInfo.noneSkipLast.rawValue)
+        
+        context?.draw(curImage.cgImage!, in: CGRect(x: 0, y: 0, width: size.width, height: size.height))
+        
+        //         Make an image from the context and set to current frame
+        context?.makeImage()
+        self.uiImage[curFrame] = UIImage(cgImage: (context!.makeImage()!))
+    }
+    
     open func get(_ x: CGFloat, _ y: CGFloat, _ w: CGFloat, _ h: CGFloat) -> Image{
         UIGraphicsBeginImageContextWithOptions(CGSize(width: w, height:  h), false, 2.0)
         let container = CGRect(x: -x, y: -y, width: self.width, height: self.height)
         UIGraphicsGetCurrentContext()!.clip(to: CGRect(x: 0, y: 0,
-        width: w, height: h))
+                                                       width: w, height: h))
         self.uiImage[0].draw(in: container)
         let newImage = Image(UIGraphicsGetImageFromCurrentImageContext()!)
         UIGraphicsEndImageContext()
@@ -79,7 +141,6 @@ open class Image{
         context.translateBy(x: 0.0, y: -self.height);
         self.uiImage[0].draw(in: CGRect(x: 0, y: 0, width: self.width, height: self.height))
         context.restoreGState();
-                
         let image = UIGraphicsGetImageFromCurrentImageContext()!
         UIGraphicsEndImageContext()
         
@@ -87,7 +148,7 @@ open class Image{
     }
     
     open func delay(_ d: CGFloat){
-          self.delay = d
+        self.delay = d
     }
     
     open func numFrames() -> Int{
