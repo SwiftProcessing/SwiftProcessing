@@ -10,6 +10,7 @@ open class Image{
     var curFrame: Int = 0
     var isPlaying = true
     var deltaTime: CGFloat = 0
+    
     var width: CGFloat = 0
     var height: CGFloat = 0
     
@@ -37,23 +38,34 @@ open class Image{
         return pixelData
     }
     
+    open func size() -> CGSize{
+        return CGSize(width: self.width, height: self.height)
+    }
+    
+    open func rawSize() -> CGSize{
+        return self.uiImage[curFrame].size
+    }
+    
     open func loadPixels(){
         self.pixels = getPixels()
     }
     
     @available(iOS 9.0, *)
     open func updatePixels(){
-        self.updatePixels(0, 0, self.width, self.height)
+        self.updatePixels(0, 0, uiImage[curFrame].size.width, uiImage[curFrame].size.height)
     }
     
     @available(iOS 9.0, *)
     open func updatePixels(_ x: CGFloat, _ y: CGFloat, _ w: CGFloat, _ h: CGFloat){
         //retrieve the current image and apply the current pixels loaded into the pixels array using the x, y, w, h inputs
         var newImage = getPixels()
+        let curImage = self.uiImage[curFrame]
+        let size = curImage.size
+        let colorSpace = CGColorSpaceCreateDeviceRGB()
         
         for dy in Int(y)..<Int(h){
             for dx in Int(x)..<Int(w){
-                let pixelPos = dx * 4 + Int(dy) * 4 * Int(width)
+                let pixelPos = (dx * 4) + (Int(dy) * 4 * Int(size.width))
                 newImage[pixelPos] = self.pixels[pixelPos]
                 newImage[pixelPos + 1] = self.pixels[pixelPos + 1]
                 newImage[pixelPos + 2] = self.pixels[pixelPos + 2]
@@ -62,22 +74,21 @@ open class Image{
         }
         
         //create a CGContext and draw the pixels as a CGImage.
-        let curImage = self.uiImage[curFrame]
-        let size = curImage.size
-        let colorSpace = CGColorSpaceCreateDeviceRGB()
         let context = CGContext(data: &newImage,
                                 width: Int(size.width),
                                 height: Int(size.height),
                                 bitsPerComponent: 8,
                                 bytesPerRow: 4 * Int(size.width),
                                 space: colorSpace,
-                                bitmapInfo: CGImageAlphaInfo.noneSkipLast.rawValue)
-        
-        context?.draw(curImage.cgImage!, in: CGRect(x: 0, y: 0, width: size.width, height: size.height))
+                                bitmapInfo: CGImageAlphaInfo.noneSkipLast.rawValue)!
+        UIGraphicsPushContext(context)
+        //without this clip, the data fails to draw
+        context.clip(to: CGRect())
+        context.draw(curImage.cgImage!, in: CGRect(x: 0, y: 0, width: size.width, height: size.height))
         
         //         Make an image from the context and set to current frame
-        context?.makeImage()
-        self.uiImage[curFrame] = UIImage(cgImage: (context!.makeImage()!))
+        self.uiImage[curFrame] = UIImage(cgImage: (context.makeImage()!))
+        UIGraphicsEndImageContext()
     }
     
     open func get(_ x: CGFloat, _ y: CGFloat, _ w: CGFloat, _ h: CGFloat) -> Image{
