@@ -16,7 +16,7 @@ https://www.youtube.com/watch?v=vAjp61gQHoE
 ```
 curl -LO https://github.com/jjkaufman/SwiftProcessingProjectTemplate/archive/master.zip
 unzip master.zip
-cp -R SwiftProcessingProjectTemplate-master/Swift\ Processing\ App.xctemplate ~/Library/Developer/Xcode/Templates
+cp -R SwiftProcessingProjectTemplate-master/ ~/Library/Developer/Xcode/Templates
 ```
 
 ## Hello Swift World Project    
