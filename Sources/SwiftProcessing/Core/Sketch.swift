@@ -22,6 +22,8 @@ public protocol SketchDelegate: Sketch {
     public let CORNERS = "corners"
     public let CENTER = "center"
     
+    public let CLOSE = "close"
+    
     public weak var sketchDelegate: SketchDelegate?
     public var rect: CGRect = CGRect()
     public var width: CGFloat = 0
