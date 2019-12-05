@@ -5,7 +5,7 @@ public extension Sketch{
     func arc(_ x: CGFloat, _ y: CGFloat, _ w: CGFloat, _ h: CGFloat, _ start: CGFloat, _ stop: CGFloat){
         let cx = x + w * 0.5;
         let cy = y + h * 0.5;
-        var r = w * 0.5;
+        let r = w * 0.5;
 
         let t = CGAffineTransform(translationX: cx, y: cy)
         context?.beginPath()

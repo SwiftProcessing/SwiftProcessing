@@ -44,6 +44,10 @@ public protocol SketchDelegate: Sketch {
     
     var settingsStack: SketchSettingsStack = SketchSettingsStack()
     var settings: SketchSettings = SketchSettings()
+   
+    var isContourStarted: Bool = false
+    var contourPoints: [CGPoint] = []
+    var shapePoints: [CGPoint] = []
     
     open var pixels: [UInt8] = []
     

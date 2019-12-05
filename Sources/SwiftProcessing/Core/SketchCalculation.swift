@@ -8,7 +8,7 @@ public extension Sketch{
 //    }
     
     func constrain(_ n: CGFloat, _ low: CGFloat, _ high: CGFloat) -> CGFloat{
-        return min(max(n, low), high)
+        return Swift.min(Swift.max(n, low), high)
     }
     
     func distance(_ x1: CGFloat, _ y1: CGFloat, _ x2: CGFloat, _ y2: CGFloat) -> CGFloat{
