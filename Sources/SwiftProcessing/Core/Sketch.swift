@@ -43,6 +43,8 @@ public protocol SketchDelegate: Sketch {
     var settingsStack: SketchSettingsStack = SketchSettingsStack()
     var settings: SketchSettings = SketchSettings()
     
+    open var pixels: [UInt8] = []
+    
     open var context: CGContext?
     
     public init(){

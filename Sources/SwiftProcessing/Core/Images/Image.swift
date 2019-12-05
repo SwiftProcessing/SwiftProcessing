@@ -21,7 +21,19 @@ open class Image{
         self.delay = CGFloat(image.duration) / 100
     }
     
-    func getPixels() -> [UInt8] {
+    open func size() -> CGSize{
+        return CGSize(width: self.width, height: self.height)
+    }
+    
+    open func rawSize() -> CGSize{
+        return self.uiImage[curFrame].size
+    }
+    
+    open func loadPixels(){
+        self.pixels = getPixelData()
+    }
+    
+    func getPixelData() -> [UInt8] {
         let curImage = self.uiImage[curFrame]
         let size = curImage.size
         let dataSize = size.width * size.height * 4
@@ -38,16 +50,15 @@ open class Image{
         return pixelData
     }
     
-    open func size() -> CGSize{
-        return CGSize(width: self.width, height: self.height)
-    }
-    
-    open func rawSize() -> CGSize{
-        return self.uiImage[curFrame].size
-    }
-    
-    open func loadPixels(){
-        self.pixels = getPixels()
+    open func get(_ x: CGFloat, _ y: CGFloat, _ w: CGFloat, _ h: CGFloat) -> Image{
+           UIGraphicsBeginImageContextWithOptions(CGSize(width: w, height:  h), false, 2.0)
+           let container = CGRect(x: -x, y: -y, width: self.width, height: self.height)
+           UIGraphicsGetCurrentContext()!.clip(to: CGRect(x: 0, y: 0,
+                                                          width: w, height: h))
+           self.uiImage[0].draw(in: container)
+           let newImage = Image(UIGraphicsGetImageFromCurrentImageContext()!)
+           UIGraphicsEndImageContext()
+           return newImage
     }
     
     @available(iOS 9.0, *)
@@ -58,7 +69,7 @@ open class Image{
     @available(iOS 9.0, *)
     open func updatePixels(_ x: CGFloat, _ y: CGFloat, _ w: CGFloat, _ h: CGFloat){
         //retrieve the current image and apply the current pixels loaded into the pixels array using the x, y, w, h inputs
-        var newImage = getPixels()
+        var newImage = getPixelData()
         let curImage = self.uiImage[curFrame]
         let size = curImage.size
         let colorSpace = CGColorSpaceCreateDeviceRGB()
@@ -89,17 +100,7 @@ open class Image{
         //         Make an image from the context and set to current frame
         self.uiImage[curFrame] = UIImage(cgImage: (context.makeImage()!))
         UIGraphicsEndImageContext()
-    }
-    
-    open func get(_ x: CGFloat, _ y: CGFloat, _ w: CGFloat, _ h: CGFloat) -> Image{
-        UIGraphicsBeginImageContextWithOptions(CGSize(width: w, height:  h), false, 2.0)
-        let container = CGRect(x: -x, y: -y, width: self.width, height: self.height)
-        UIGraphicsGetCurrentContext()!.clip(to: CGRect(x: 0, y: 0,
-                                                       width: w, height: h))
-        self.uiImage[0].draw(in: container)
-        let newImage = Image(UIGraphicsGetImageFromCurrentImageContext()!)
-        UIGraphicsEndImageContext()
-        return newImage
+        UIGraphicsPopContext()
     }
     
     open func resize(_ width: CGFloat, _ height: CGFloat){
