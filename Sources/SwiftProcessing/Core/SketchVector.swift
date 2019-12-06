@@ -10,8 +10,8 @@ public extension Sketch {
 }
 
 open class Vector {
-    var x: CGFloat
-    var y: CGFloat
+    open var x: CGFloat
+    open var y: CGFloat
     
     public init(_ x: CGFloat, _ y: CGFloat) {
         self.x = x
