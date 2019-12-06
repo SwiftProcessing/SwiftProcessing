@@ -23,6 +23,10 @@ public protocol SketchDelegate: Sketch {
     public let CENTER = "center"
     
     public let CLOSE = "close"
+    public let NORMAL_VERTEX = "normal"
+    public let CURVE_VERTEX = "curve"
+    public let BEZIER_VERTEX = "bezier"
+
     
     public weak var sketchDelegate: SketchDelegate?
     public var rect: CGRect = CGRect()
@@ -45,6 +49,7 @@ public protocol SketchDelegate: Sketch {
     var settingsStack: SketchSettingsStack = SketchSettingsStack()
     var settings: SketchSettings = SketchSettings()
    
+    var vertexMode: String = "normal"
     var isContourStarted: Bool = false
     var contourPoints: [CGPoint] = []
     var shapePoints: [CGPoint] = []
