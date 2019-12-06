@@ -108,4 +108,12 @@ open class Vector {
     open func dot(_ v: Vector) -> CGFloat {
         return Vector.dot(v, self)
     }
+    
+    public static func dist(_ v1: Vector, _ v2: Vector) -> CGFloat{
+        return sqrt(pow(v2.x - v1.x, 2) + pow(v2.y - v1.y, 2))
+    }
+    
+    open func dist(_ v: Vector) -> CGFloat {
+        return Vector.dist(v, self)
+    }
 }
