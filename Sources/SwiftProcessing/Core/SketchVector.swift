@@ -46,7 +46,9 @@ open class Vector {
     }
     
     open func add(_ v: Vector) -> Vector {
-        return Vector.add(self, v)
+        let result = Vector.add(self, v)
+        self.set(result)
+        return self
     }
     
     open func add(_ x: CGFloat, _ y: CGFloat) -> Vector {
@@ -62,7 +64,9 @@ open class Vector {
     }
     
     open func sub(_ v: Vector) -> Vector {
-        return Vector.add(self, v)
+        let result = Vector.sub(self, v)
+        self.set(result)
+        return self
     }
     
     open func sub(_ x: CGFloat, _ y: CGFloat) -> Vector {
@@ -78,7 +82,9 @@ open class Vector {
     }
     
     open func mult(_ n: CGFloat) -> Vector {
-        return Vector.mult(self, n)
+        let result = Vector.mult(self, n)
+        self.set(result)
+        return self
     }
     
     public static func / (_ v: Vector, _ n: CGFloat) -> Vector {
@@ -90,7 +96,9 @@ open class Vector {
     }
     
     open func div(_ n: CGFloat) -> Vector {
-        return Vector.div(self, n)
+        let result = Vector.div(self, n)
+        self.set(result)
+        return self
     }
     
     open func mag() -> CGFloat {
@@ -115,5 +123,13 @@ open class Vector {
     
     open func dist(_ v: Vector) -> CGFloat {
         return Vector.dist(v, self)
+    }
+    
+    open func normalize() -> Vector{
+        let len = self.mag()
+        if (len != 0){
+            self.mult(1 / len)
+        }
+        return self
     }
 }
