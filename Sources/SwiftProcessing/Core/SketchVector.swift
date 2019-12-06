@@ -2,110 +2,110 @@ import Foundation
 import UIKit
 
 public extension Sketch {
-
+    
     func createVector(_ x: CGFloat, _ y: CGFloat) -> Vector {
         return Vector(x, y)
     }
-
+    
 }
 
 open class Vector {
     var x: CGFloat
     var y: CGFloat
-
+    
     public init(_ x: CGFloat, _ y: CGFloat) {
         self.x = x
         self.y = y
     }
-
+    
     func toString() -> String {
         //todo
         return ""
     }
-
-    func set(_ x: CGFloat, _ y: CGFloat) {
+    
+    open func set(_ x: CGFloat, _ y: CGFloat) {
         self.x = x
         self.y = y
     }
-
-    func set(_ v: Vector) {
+    
+    open func set(_ v: Vector) {
         self.x = v.x
         self.y = v.y
     }
-
-    func copy() -> Vector {
+    
+    open func copy() -> Vector {
         return Vector(self.x, self.y)
     }
-
-    static func + (v1: Vector, v2: Vector) -> Vector {
+    
+    public static func + (v1: Vector, v2: Vector) -> Vector {
         return Vector(v1.x + v2.x, v1.y + v2.y)
     }
-
-    static func add (_ v1: Vector, _ v2: Vector) -> Vector {
+    
+    public static func add (_ v1: Vector, _ v2: Vector) -> Vector {
         return Vector(v1.x + v2.x, v1.y + v2.y)
     }
-
-    func add(_ v: Vector) -> Vector {
+    
+    open func add(_ v: Vector) -> Vector {
         return Vector.add(self, v)
     }
-
-    func add(_ x: CGFloat, _ y: CGFloat) -> Vector {
+    
+    open func add(_ x: CGFloat, _ y: CGFloat) -> Vector {
         return Vector.add(self, Vector(x, y))
     }
-
-    static func - (v1: Vector, v2: Vector) -> Vector {
+    
+    public static func - (v1: Vector, v2: Vector) -> Vector {
         return Vector(v1.x - v2.x, v1.y - v2.y)
     }
-
-    static func sub (_ v1: Vector, _ v2: Vector) -> Vector {
+    
+    public static func sub (_ v1: Vector, _ v2: Vector) -> Vector {
         return Vector(v1.x + v2.x, v1.y + v2.y)
     }
-
-    func sub(_ v: Vector) -> Vector {
+    
+    open func sub(_ v: Vector) -> Vector {
         return Vector.add(self, v)
     }
-
-    func sub(_ x: CGFloat, _ y: CGFloat) -> Vector {
+    
+    open func sub(_ x: CGFloat, _ y: CGFloat) -> Vector {
         return Vector.sub(self, Vector(x, y))
     }
-
-    static func * (_ v: Vector, _ n: CGFloat) -> Vector {
+    
+    public static func * (_ v: Vector, _ n: CGFloat) -> Vector {
         return Vector.mult(v, n)
     }
-
-    static func mult(_ v: Vector, _ n: CGFloat) -> Vector {
+    
+    public static func mult(_ v: Vector, _ n: CGFloat) -> Vector {
         return Vector(v.x * n, v.y * n)
     }
-
-    func mult(_ n: CGFloat) -> Vector {
+    
+    open func mult(_ n: CGFloat) -> Vector {
         return Vector.mult(self, n)
     }
-
-    static func / (_ v: Vector, _ n: CGFloat) -> Vector {
-         return Vector.div(v, n)
-     }
-
-     static func div(_ v: Vector, _ n: CGFloat) -> Vector {
-         return Vector(v.x / n, v.y / n)
-     }
-
-     func div(_ n: CGFloat) -> Vector {
-         return Vector.div(self, n)
-     }
-
-    func mag() -> CGFloat {
+    
+    public static func / (_ v: Vector, _ n: CGFloat) -> Vector {
+        return Vector.div(v, n)
+    }
+    
+    public static func div(_ v: Vector, _ n: CGFloat) -> Vector {
+        return Vector(v.x / n, v.y / n)
+    }
+    
+    open func div(_ n: CGFloat) -> Vector {
+        return Vector.div(self, n)
+    }
+    
+    open func mag() -> CGFloat {
         return sqrt(x * x + y * y)
     }
-
-    func magSq() -> CGFloat {
+    
+    open func magSq() -> CGFloat {
         return x * x + y * y
     }
-
-    static func dot(_ v1: Vector, _ v2: Vector) -> CGFloat {
+    
+    public static func dot(_ v1: Vector, _ v2: Vector) -> CGFloat {
         return v1.x * v2.x + v2.y + v2.y
     }
-
-    func dot(_ v: Vector) -> CGFloat {
+    
+    open func dot(_ v: Vector) -> CGFloat {
         return Vector.dot(v, self)
     }
 }
