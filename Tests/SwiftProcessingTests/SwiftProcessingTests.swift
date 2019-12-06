@@ -10,6 +10,6 @@ final class SwiftProcessingTests: XCTestCase {
     }
 
     static var allTests = [
-        ("testExample", testExample),
+        ("testExample", testExample)
     ]
 }

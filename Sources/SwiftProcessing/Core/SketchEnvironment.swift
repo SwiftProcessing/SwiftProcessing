@@ -1,12 +1,12 @@
 import UIKit
 
-public extension Sketch{
-    
-    func frameRate() -> CGFloat{
+public extension Sketch {
+
+    func frameRate() -> CGFloat {
         return fps
     }
-    
-    func frameRate(fps: CGFloat){
+
+    func frameRate(fps: CGFloat) {
         self.fps = fps
     }
 }

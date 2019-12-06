@@ -1,16 +1,16 @@
 import UIKit
 
-public extension Sketch{
-    
-    func loadImage(_ name: String) -> Image{
+public extension Sketch {
+
+    func loadImage(_ name: String) -> Image {
         var image = UIImage(named: name)
         if image == nil {
             image = UIImage.gifImageWithName(name)
         }
         return Image(image!)
     }
-    
-    func image(_ image: Image, _ x: CGFloat, _ y: CGFloat, _ width: CGFloat? = nil, _ height: CGFloat? = nil){
+
+    func image(_ image: Image, _ x: CGFloat, _ y: CGFloat, _ width: CGFloat? = nil, _ height: CGFloat? = nil) {
         let w = width == nil ? CGFloat(image.width) : width!
         let h = height == nil ? CGFloat(image.height) : height!
         image.width = w

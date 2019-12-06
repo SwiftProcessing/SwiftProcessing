@@ -1,18 +1,18 @@
 import Foundation
 import UIKit
 
-public extension Sketch{
-    func faceMode(){
+public extension Sketch {
+    func faceMode() {
         self.isFaceMode = true
     }
-    func appMode(){
+    func appMode() {
         self.isFaceMode = false
     }
-    func faceFill(){
+    func faceFill() {
         self.isFaceFill = true
     }
-    func noFaceFill(){
+    func noFaceFill() {
         self.isFaceFill = false
     }
-    
+
 }

@@ -1,9 +1,4 @@
-identifier_name:
-min_length: # only min_length
-  error: 4 # only error
-excluded: # excluded via string array
-  - id
-  - URL
-  - GlobalAPIKey
-  - x
-  - y
+disabled_rules:
+  - identifier_name
+  - shorthand_operator
+  - function_parameter_count
