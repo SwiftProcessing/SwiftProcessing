@@ -13,7 +13,7 @@ open class Image {
     var width: CGFloat = 0
     var height: CGFloat = 0
 
-    init(_ image: UIImage) {
+    public init(_ image: UIImage) {
         self.width = image.size.width
         self.height = image.size.height
         self.uiImage = image.images != nil ? image.images! : [image]
