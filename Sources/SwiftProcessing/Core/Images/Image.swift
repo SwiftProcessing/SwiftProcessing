@@ -203,4 +203,23 @@ open class Image {
         }
         return uiImage[curFrame]
     }
+    
+    open func filter(_ filterType:String, _ params: Any? = nil){
+        if filterType == Sketch.PIXELLATE{
+            guard let currentCGImage = self.uiImage[curFrame].cgImage else { return }
+            let currentCIImage = CIImage(cgImage: currentCGImage)
+
+            let filter = CIFilter(name: "CIPixellate")
+            filter?.setValue(currentCIImage, forKey: kCIInputImageKey)
+            filter?.setValue(params ?? 50, forKey: kCIInputScaleKey)
+            guard let outputImage = filter?.outputImage else { return }
+
+            let context = CIContext()
+
+            if let cgimg = context.createCGImage(outputImage, from: outputImage.extent) {
+                let processedImage = UIImage(cgImage: cgimg)
+                self.uiImage[curFrame] = processedImage
+            }
+        }
+    }
 }

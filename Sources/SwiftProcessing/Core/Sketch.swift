@@ -26,6 +26,9 @@ public protocol SketchDelegate: Sketch {
     public let NORMAL_VERTEX = "normal"
     public let CURVE_VERTEX = "curve"
     public let BEZIER_VERTEX = "bezier"
+    
+    public static let PIXELLATE = "pixellate"
+    public let PIXELLATE = "pixellate"
 
     public weak var sketchDelegate: SketchDelegate?
     public var rect: CGRect = CGRect()
