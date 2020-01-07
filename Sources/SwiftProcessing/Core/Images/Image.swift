@@ -222,4 +222,8 @@ open class Image {
             }
         }
     }
+    
+    open func currentFrame() -> UIImage{
+        return self.uiImage[curFrame]
+    }
 }
