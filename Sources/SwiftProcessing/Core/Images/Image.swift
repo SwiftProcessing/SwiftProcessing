@@ -12,6 +12,9 @@ open class Image {
 
     var width: CGFloat = 0
     var height: CGFloat = 0
+    
+    open  var loop: CGFloat = 0
+    open var loopMax: CGFloat = -1
 
     public init(_ image: UIImage) {
         self.width = image.size.width
@@ -198,8 +201,9 @@ open class Image {
             curFrame = curFrame + Int(self.deltaTime / self.delay)
             self.deltaTime = 0
         }
-        if curFrame >= uiImage.count {
+        if curFrame >= uiImage.count && (loop < loopMax || loopMax == -1) {
             curFrame = 0
+            loop += 1
         }
         return uiImage[curFrame]
     }
