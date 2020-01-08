@@ -202,7 +202,7 @@ open class Image {
             self.deltaTime = 0
         }
         if !(loop < loopMax || loopMax == -1){
-            curFrame = curFrame - 1
+            curFrame = uiImage.count - 1
         }
         else if curFrame >= uiImage.count {
             curFrame = 0
