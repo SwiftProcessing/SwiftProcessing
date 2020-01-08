@@ -205,7 +205,8 @@ open class Image {
             curFrame = uiImage.count - 1
         }
         else if curFrame >= uiImage.count {
-            curFrame = 0
+            //todo simplify this logic
+            curFrame = (loop + 1 < loopMax || loopMax == -1) ? 0 : curFrame
             loop += 1
         }
         return uiImage[curFrame]
