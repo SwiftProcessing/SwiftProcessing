@@ -1,3 +1,4 @@
+#if !os(tvOS)
 import UIKit
 import SceneKit
 import ARKit
@@ -86,3 +87,4 @@ class FaceViewController: UIViewController, ARSCNViewDelegate {
 
     }
 }
+#endif
