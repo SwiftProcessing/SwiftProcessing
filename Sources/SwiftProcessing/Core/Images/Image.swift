@@ -189,7 +189,7 @@ open class Image {
         self.isPlaying = false
     }
 
-    func frame(_ deltaTime: CGFloat) -> UIImage {
+    open func frame(_ deltaTime: CGFloat) -> UIImage {
         if uiImage.count == 1 {
             return uiImage[0]
         } else if !isPlaying {
