@@ -13,8 +13,11 @@ open class Image {
     var width: CGFloat = 0
     var height: CGFloat = 0
     
-    open  var loop: CGFloat = 0
+    open var loop: CGFloat = 0
     open var loopMax: CGFloat = -1
+    
+    open var blendMode: CGBlendMode = .normal
+    open var alpha: CGFloat = 1.0
     
     public init(_ image: UIImage) {
         self.width = image.size.width
