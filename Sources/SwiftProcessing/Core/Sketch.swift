@@ -29,6 +29,8 @@ public protocol SketchDelegate: Sketch {
     
     public static let PIXELLATE = "pixellate"
     public let PIXELLATE = "pixellate"
+    public static let HUE_ROTATE = "hue_rotate"
+    public let HUE_ROTATE = "hue_rotate"
 
     public weak var sketchDelegate: SketchDelegate?
     public var rect: CGRect = CGRect()
