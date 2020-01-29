@@ -56,7 +56,7 @@ open class Image {
     }
     
     open func get(_ x: CGFloat, _ y: CGFloat, _ w: CGFloat, _ h: CGFloat) -> Image {
-        UIGraphicsBeginImageContextWithOptions(CGSize(width: w, height: h), false, 2.0)
+        UIGraphicsBeginImageContextWithOptions(CGSize(width: w, height: h), false, 1.0)
         let container = CGRect(x: -x, y: -y, width: self.width, height: self.height)
         UIGraphicsGetCurrentContext()!.clip(to: CGRect(x: 0, y: 0,
                                                        width: w, height: h))
