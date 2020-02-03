@@ -33,6 +33,8 @@ public protocol SketchDelegate: Sketch {
     public let HUE_ROTATE = "hue_rotate"
     public static let SEPIA_TONE = "sepia_tone"
     public let SEPIA_TONE = "sepia_tone"
+    public static let TONAL = "tonal"
+    public let TONAL = "tonal"
 
     public weak var sketchDelegate: SketchDelegate?
     public var rect: CGRect = CGRect()

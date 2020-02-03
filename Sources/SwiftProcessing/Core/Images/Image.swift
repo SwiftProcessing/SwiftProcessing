@@ -232,6 +232,9 @@ open class Image {
             filter = CIFilter(name: "CISepiaTone")
             filter?.setValue(currentCIImage, forKey: kCIInputImageKey)
             filter?.setValue(params ?? 1.0, forKey: kCIInputIntensityKey)
+        }else if filterType == Sketch.TONAL{
+            filter = CIFilter(name: "CIPhotoEffectTonal")
+            filter?.setValue(currentCIImage, forKey: kCIInputImageKey)
         }
         guard let outputImage = filter?.outputImage else { return }
         
