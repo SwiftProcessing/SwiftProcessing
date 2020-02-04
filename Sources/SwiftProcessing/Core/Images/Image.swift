@@ -235,6 +235,12 @@ open class Image {
         }else if filterType == Sketch.TONAL{
             filter = CIFilter(name: "CIPhotoEffectTonal")
             filter?.setValue(currentCIImage, forKey: kCIInputImageKey)
+        }else if filterType == Sketch.MONOCHROME{
+            filter = CIFilter(name: "CIColorMonochrome")
+            let c = params as! Color
+            let ciColor = CIColor(red: c.red, green: c.green, blue: c.blue)
+            filter?.setValue(currentCIImage, forKey: kCIInputImageKey)
+            filter?.setValue(ciColor, forKey: kCIInputColorKey)
         }
         guard let outputImage = filter?.outputImage else { return }
         

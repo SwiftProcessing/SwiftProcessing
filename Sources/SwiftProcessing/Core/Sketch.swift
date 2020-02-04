@@ -35,6 +35,8 @@ public protocol SketchDelegate: Sketch {
     public let SEPIA_TONE = "sepia_tone"
     public static let TONAL = "tonal"
     public let TONAL = "tonal"
+    public static let MONOCHROME = "monochrome"
+    public let MONOCHROME = "monochrome"
 
     public weak var sketchDelegate: SketchDelegate?
     public var rect: CGRect = CGRect()
