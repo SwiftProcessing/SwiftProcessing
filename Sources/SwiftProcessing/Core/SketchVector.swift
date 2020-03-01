@@ -4,7 +4,7 @@ import UIKit
 public extension Sketch {
     
     func createVector(_ x: CGFloat, _ y: CGFloat, _ z: CGFloat? = nil) -> Vector {
-        return Vector(x, y)
+        return Vector(x, y, z)
     }
     
 }
