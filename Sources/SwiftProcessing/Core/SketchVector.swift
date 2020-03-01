@@ -60,7 +60,7 @@ open class Vector {
     }
     
     public static func - (v1: Vector, v2: Vector) -> Vector {
-        return Vector(v1.x - v2.x, v1.y - v2.y)
+        return Vector(v1.x - v2.x, v1.y - v2.y, v1.z != nil ? (v1.z! - v2.z!) : nil)
     }
     
     public static func sub (_ v1: Vector, _ v2: Vector) -> Vector {
