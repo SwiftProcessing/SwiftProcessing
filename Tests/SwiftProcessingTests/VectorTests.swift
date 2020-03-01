@@ -54,6 +54,72 @@ final class VectorTests: XCTestCase {
         XCTAssertEqual(result.z, 4034)
     }
     
+    func testStaticAdd2D(){
+        let sketch = Sketch()
+        let v1 = sketch.createVector(1, 13)
+        let v2 = v1.copy()
+        let result = Vector.add(v1, v2)
+        XCTAssertEqual(v1.x, 1)
+        XCTAssertEqual(v1.y, 13)
+        XCTAssertEqual(result.x, 2)
+        XCTAssertEqual(result.y, 26)
+    }
+    
+    func testStaticAdd3D(){
+        let sketch = Sketch()
+        let v1 = sketch.createVector(1, 13, 2017)
+        let v2 = v1.copy()
+        let result = Vector.add(v1, v2)
+        XCTAssertEqual(v1.x, 1)
+        XCTAssertEqual(v1.y, 13)
+        XCTAssertEqual(v1.z, 2017)
+        XCTAssertEqual(result.x, 2)
+        XCTAssertEqual(result.y, 26)
+        XCTAssertEqual(result.z, 4034)
+    }
+    func testMinus2D(){
+        let sketch = Sketch()
+        let v1 = sketch.createVector(1, 13)
+        let v2 = v1.copy()
+        let result = v1 - v2
+        XCTAssertEqual(v1.x, 1)
+        XCTAssertEqual(v1.y, 13)
+        XCTAssertEqual(result.x, 0)
+        XCTAssertEqual(result.y, 0)
+    }
+    
+    func testMinus3D(){
+        let sketch = Sketch()
+        let v1 = sketch.createVector(1, 13, 2017)
+        let v2 = v1.copy()
+        let result = v1 - v2
+        XCTAssertEqual(v1.z, 2017)
+        XCTAssertEqual(result.z, 0)
+    }
+    
+    func testStaticSub2D(){
+        let sketch = Sketch()
+        let v1 = sketch.createVector(1, 13)
+        let v2 = v1.copy()
+        let result = Vector.sub(v1, v2)
+        XCTAssertEqual(v1.x, 1)
+        XCTAssertEqual(v1.y, 13)
+        XCTAssertEqual(result.x, 0)
+        XCTAssertEqual(result.y, 0)
+    }
+    
+    func testStaticSub3D(){
+        let sketch = Sketch()
+        let v1 = sketch.createVector(1, 13, 2017)
+        let v2 = v1.copy()
+        let result = Vector.sub(v1, v2)
+        XCTAssertEqual(v1.x, 1)
+        XCTAssertEqual(v1.y, 13)
+        XCTAssertEqual(v1.z, 2017)
+        XCTAssertEqual(result.x, 0)
+        XCTAssertEqual(result.y, 0)
+        XCTAssertEqual(result.z, 0)
+    }
     static var allTests = [
         ("testCreate2D", testCreate2D),
         ("testCreate3D", testCreate3D)
