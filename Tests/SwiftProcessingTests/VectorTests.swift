@@ -294,8 +294,48 @@ final class VectorTests: XCTestCase {
         XCTAssertEqual(result.z, 1008.5)
     }
     
-    static var allTests = [
-        ("testCreate2D", testCreate2D),
-        ("testCreate3D", testCreate3D)
-    ]
+    func testMagSq(){
+        let sketch = Sketch()
+        let v1 = sketch.createVector(2, 2)
+        let r = v1.magSq()
+        XCTAssertEqual(r, 8)
+    }
+    
+    func testMag(){
+        let sketch = Sketch()
+        let v1 = sketch.createVector(10, 10)
+        let r = v1.mag()
+        XCTAssertEqual(floor(r), 14)
+    }
+    
+    func testDot2D(){
+        let sketch = Sketch()
+        let v1 = sketch.createVector(2, 2)
+        let v2 = sketch.createVector(2, 2)
+        let r = v1.dot(v2)
+        XCTAssertEqual(r, 8)
+    }
+    
+    func testDot3D(){
+        let sketch = Sketch()
+        let v1 = sketch.createVector(2, 2, 2)
+        let v2 = sketch.createVector(2, 2, 2)
+        let r = v1.dot(v2)
+        XCTAssertEqual(r, 12)
+    }
+    
+    func testDist(){
+        let sketch = Sketch()
+        let v1 = sketch.createVector(5, 0)
+        let v2 = sketch.createVector(0,0)
+        let dist = v1.dist(v2)
+        XCTAssertEqual(dist, 5)
+    }
+    
+    func testNormalize(){
+        let sketch = Sketch()
+        let v = sketch.createVector(5, 0)
+        v.normalize()
+        XCTAssertEqual(v.x, 1)
+    }
 }
