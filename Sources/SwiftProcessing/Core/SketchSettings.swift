@@ -6,12 +6,14 @@ public struct SketchSettings {
 
     var textSize: CGFloat = 32
     var textFont: String = "HelveticaNeue-Thin"
+    var textAlignment: String = "left"
     var ellipseMode: String = "center"
     var fill: Color = Color(255, 255, 255)
     var stroke: Color = Color(0, 0, 0)
     var strokeWeight: CGFloat = 1
 
     func restore(sketch: Sketch) {
+        sketch.textAlign(textAlignment)
         sketch.textSize(textSize)
         sketch.textFont(textFont)
         sketch.ellipseMode(ellipseMode)

@@ -37,6 +37,12 @@ public protocol SketchDelegate: Sketch {
     public let TONAL = "tonal"
     public static let MONOCHROME = "monochrome"
     public let MONOCHROME = "monochrome"
+    
+    public let LEFT = "left"
+    public let RIGHT = "right"
+    public let TOP = "top"
+    public let BOTTOM = "bottom"
+    public let BASELINE = "baseline"
 
     public weak var sketchDelegate: SketchDelegate?
     public var rect: CGRect = CGRect()
