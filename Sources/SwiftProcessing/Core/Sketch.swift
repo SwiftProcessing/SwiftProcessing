@@ -97,8 +97,13 @@ public protocol SketchDelegate: Sketch {
     }
 
     override public func draw(_ rect: CGRect) {
-        updateTimes()
         self.context = UIGraphicsGetCurrentContext()
+        
+        if self.context == nil {
+            return
+        }
+        
+        updateTimes()
         self.width = rect.width
         self.height = rect.height
         self.rect = rect
