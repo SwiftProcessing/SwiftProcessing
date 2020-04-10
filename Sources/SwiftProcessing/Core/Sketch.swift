@@ -76,7 +76,9 @@ public protocol SketchDelegate: Sketch {
 
     open var context: CGContext?
     
-    open var refs: [Button?] = []
+    // used to store references to UIKitViewElements created using SwiftProcessing. Storing references avoids
+    // the elements being deallocated from memory. This is needed to have the touch events continue to function
+    open var viewRefs: [String: UIKitViewElement?] = [:]
 
     public init() {
         super.init(frame: CGRect())

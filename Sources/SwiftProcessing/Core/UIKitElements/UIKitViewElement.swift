@@ -2,6 +2,7 @@ import Foundation
 import UIKit
 
 open class UIKitViewElement{
+    open var id: String = UUID().uuidString
     open var x: CGFloat = 0
     open var y: CGFloat = 0
     open var width: CGFloat = 0
@@ -19,5 +20,17 @@ open class UIKitViewElement{
        
     open func position(_ x: CGFloat, _ y: CGFloat){
         element.frame = CGRect(x: x, y: y, width: element.frame.width, height: element.frame.height)
+    }
+    
+    open func hide(){
+        element.isHidden = true
+    }
+    
+    open func show(){
+        element.isHidden = false
+    }
+    
+    open func remove(){
+        element.removeFromSuperview()
     }
 }
