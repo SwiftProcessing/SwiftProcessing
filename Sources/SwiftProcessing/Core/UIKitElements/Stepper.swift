@@ -1,0 +1,34 @@
+import Foundation
+import UIKit
+
+open class Stepper: UIKitControlElement {
+    
+    init(_ view: UIView, _ min: Float, _ max: Float, _ value: Float?, _ step: Float?) {
+        let stepper = UIStepper()
+        stepper.minimumValue = Double(min)
+        stepper.maximumValue = Double(max)
+        if let v = value{
+            stepper.value = Double(v)
+        }
+        if let s = step{
+            stepper.stepValue = Double(s)
+        }
+        super.init(view, stepper)
+    }
+    
+    open func value() -> Double{
+        return (element as! UIStepper).value
+    }
+    
+    open func value(_ v: Double){
+        (element as! UIStepper).value = v
+    }
+}
+
+extension Sketch{
+    open func createStepper(_ min: Float, _ max: Float, _ value: Float? = nil, _ step: Float? = nil) -> Stepper{
+        let s = Stepper(self, min, max, value, step)
+        viewRefs[s.id] = s
+        return s
+    }
+}
