@@ -4,11 +4,13 @@ import UIKit
 open class UIKitControlElement : UIKitViewElement{
     open var touchUpAction: () -> Void = {}
     open var touchDownAction: () -> Void = {}
+    open var valueChangedAction: () -> Void = {}
 
     override init(_ view: UIView, _ element: UIView) {
         super.init(view, element)
         (element as! UIControl).addTarget(self, action: #selector(touchUpInsideHelper(_:)), for: .touchUpInside)
         (element as! UIControl).addTarget(self, action: #selector(touchDownHelper(_:)), for: .touchDown)
+        (element as! UIControl).addTarget(self, action: #selector(valueChangedHelper(_:)), for: .valueChanged)
     }
     
     @objc func touchUpInsideHelper(_ sender: UIView) {
@@ -19,12 +21,20 @@ open class UIKitControlElement : UIKitViewElement{
        touchDownAction()
     }
     
+    @objc func valueChangedHelper(_ sender: UIView) {
+        valueChangedAction()
+    }
+    
     open func touchStarted(_ touchUpClosure: @escaping () -> Void){
         self.touchUpAction = touchUpClosure
     }
     
     open func touchEnded(_ touchDownClosure: @escaping () -> Void){
         self.touchDownAction = touchDownClosure
+    }
+    
+    open func valueChanged(_ valueChangedClosure: @escaping () -> Void){
+        self.valueChangedAction = valueChangedClosure
     }
   
 }
