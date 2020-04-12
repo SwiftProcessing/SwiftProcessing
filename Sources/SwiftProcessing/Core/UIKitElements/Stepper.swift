@@ -23,6 +23,14 @@ open class Stepper: UIKitControlElement {
     open func value(_ v: Double){
         (element as! UIStepper).value = v
     }
+    
+    open func plusImage(_ i: Image){
+        (self.element as! UIStepper).setIncrementImage(i.currentFrame(), for: .normal)
+    }
+    
+    open func minusImage(_ i: Image){
+        (self.element as! UIStepper).setDecrementImage(i.currentFrame(), for: .normal)
+    }
 }
 
 extension Sketch{
