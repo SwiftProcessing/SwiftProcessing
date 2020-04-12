@@ -72,10 +72,19 @@ public protocol SketchDelegate: Sketch {
 
     open var pixels: [UInt8] = []
 
+    var tap: Vector = Vector(0, 0)
+
     open var context: CGContext?
+    
+    // used to store references to UIKitViewElements created using SwiftProcessing. Storing references avoids
+    // the elements being deallocated from memory. This is needed to have the touch events continue to function
+    open var viewRefs: [String: UIKitViewElement?] = [:]
 
     public init() {
         super.init(frame: CGRect())
+        let gesture = UITapGestureRecognizer(target: self, action:  #selector(self.didTapScreen))
+        self.addGestureRecognizer(gesture)
+    
         sketchDelegate = self as? SketchDelegate
         sketchDelegate?.setup()
         loop()
@@ -83,19 +92,24 @@ public protocol SketchDelegate: Sketch {
 
     required public init(coder: NSCoder) {
         super.init(coder: coder)!
+        let gesture = UITapGestureRecognizer(target: self, action:  #selector(self.didTapScreen))
+        self.addGestureRecognizer(gesture)
+       
         sketchDelegate = self as? SketchDelegate
         sketchDelegate?.setup()
         loop()
     }
-
-    override open func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        print(touches.count)
-        if let touch = touches.first {
-            let position = touch.location(in: self)
-            print(position)
-        }
+    @objc func didTapScreen(sender : UITapGestureRecognizer) {
+          //        print(sender.location(in: self.view))
+        let loc = sender.location(in: self)
+        tap = createVector(loc.x, loc.y)
+        screenTapped()
     }
-
+    
+    func screenTapped(){
+       
+    }
+   
     override public func draw(_ rect: CGRect) {
         self.context = UIGraphicsGetCurrentContext()
         

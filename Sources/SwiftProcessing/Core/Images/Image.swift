@@ -112,6 +112,16 @@ open class Image {
     open func resize(_ width: CGFloat, _ height: CGFloat) {
         self.width = width
         self.height = height
+        let newSize = CGSize(width: width, height: height)
+        
+        self.uiImage = self.uiImage.map({
+            UIGraphicsBeginImageContextWithOptions(newSize, false, 0.0)
+            $0.draw(in: CGRect(x: 0, y: 0, width: newSize.width, height: newSize.height))
+
+            let newImage = UIGraphicsGetImageFromCurrentImageContext()
+            UIGraphicsEndImageContext()
+            return newImage!
+        })
     }
     
     open func copy(_ srcImage: Image, _ sx: CGFloat, _ sy: CGFloat, _ sw: CGFloat, _ sh: CGFloat, _ dx: CGFloat, _ dy: CGFloat, _ dw: CGFloat, _ dh: CGFloat) {
