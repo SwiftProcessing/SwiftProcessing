@@ -6,7 +6,7 @@ public protocol SketchDelegate: Sketch {
     func draw()
 }
 
-@IBDesignable open class Sketch: UIView {
+@IBDesignable open class Sketch: UIScrollView, UIScrollViewDelegate {
     //Processing Constants
     public let HALF_PI = CGFloat.pi / 2
     public let PI = CGFloat.pi
@@ -61,6 +61,13 @@ public protocol SketchDelegate: Sketch {
     var isFill: Bool = true
     var isStroke: Bool = true
     var isErase: Bool = false
+    
+    var isScrollX: Bool = false
+    var isScrollY: Bool = true
+    var minX: CGFloat = 0
+    var maxX: CGFloat = 0
+    var minY: CGFloat = 0
+    var maxY: CGFloat = 0
 
     var settingsStack: SketchSettingsStack = SketchSettingsStack()
     var settings: SketchSettings = SketchSettings()
@@ -76,6 +83,7 @@ public protocol SketchDelegate: Sketch {
 
     open var context: CGContext?
     
+    
     // used to store references to UIKitViewElements created using SwiftProcessing. Storing references avoids
     // the elements being deallocated from memory. This is needed to have the touch events continue to function
     open var viewRefs: [String: UIKitViewElement?] = [:]
@@ -84,7 +92,7 @@ public protocol SketchDelegate: Sketch {
         super.init(frame: CGRect())
         let gesture = UITapGestureRecognizer(target: self, action:  #selector(self.didTapScreen))
         self.addGestureRecognizer(gesture)
-    
+        delegate = self
         sketchDelegate = self as? SketchDelegate
         sketchDelegate?.setup()
         loop()
@@ -94,7 +102,7 @@ public protocol SketchDelegate: Sketch {
         super.init(coder: coder)!
         let gesture = UITapGestureRecognizer(target: self, action:  #selector(self.didTapScreen))
         self.addGestureRecognizer(gesture)
-       
+        delegate = self
         sketchDelegate = self as? SketchDelegate
         sketchDelegate?.setup()
         loop()
@@ -112,7 +120,7 @@ public protocol SketchDelegate: Sketch {
    
     override public func draw(_ rect: CGRect) {
         self.context = UIGraphicsGetCurrentContext()
-        
+
         if self.context == nil {
             return
         }
@@ -122,6 +130,7 @@ public protocol SketchDelegate: Sketch {
         self.height = rect.height
         self.rect = rect
         sketchDelegate?.draw()
+        updateScrollView()
     }
 
     private func updateTimes() {

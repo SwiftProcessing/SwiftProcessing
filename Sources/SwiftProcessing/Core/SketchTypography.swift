@@ -15,6 +15,8 @@ public extension Sketch {
     }
     
     func text(_ str: String, _ x: CGFloat, _ y: CGFloat, _ x2: CGFloat? = nil, _ y2: CGFloat? = nil) {
+        let fontSizeWidthRatio: CGFloat = 1.8
+        updateDims(x, y, settings.textSize * CGFloat(str.count) / fontSizeWidthRatio, settings.textSize)
         let paragraphStyle = NSMutableParagraphStyle()
         
         var align: NSTextAlignment!
