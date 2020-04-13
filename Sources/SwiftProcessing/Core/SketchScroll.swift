@@ -29,10 +29,13 @@ public extension Sketch {
     }
     
     func updateDims(_ x: CGFloat, _ y: CGFloat, _ w: CGFloat, _ h: CGFloat){
-        minX = min([minX, x])
-        minY = min([minY, y])
-        maxX = max([maxX, x + w])
-        maxY = max([maxY, y + h])
+        let offsetX = max([0, (context?.ctm.tx)! / UIScreen.main.scale - contentOffset.x])
+        let offsetY = max([0, -(context?.ctm.ty)! / UIScreen.main.scale + frame.height - contentOffset.y])
+       
+        minX = min([minX + offsetX, x + offsetX])
+        minY = min([minY, y + offsetY])
+        maxX = max([maxX, x + offsetX + w])
+        maxY = max([maxY, y + offsetY + h])
     }
     
     func updateScrollView(){
