@@ -9,20 +9,23 @@ public extension Sketch {
     
 }
 
-open class Vector {
+open class Vector: CustomStringConvertible {
+    public var description: String {
+        if z != nil{
+            return "(\(x), \(y), \(z))"
+        }else{
+            return "(\(x), \(y))"
+        }
+    }
+    
     open var x: CGFloat
     open var y: CGFloat
     open var z: CGFloat?
-
+    
     public init(_ x: CGFloat, _ y: CGFloat, _ z: CGFloat? = nil) {
         self.x = x
         self.y = y
         self.z = z
-    }
-    
-    func toString() -> String {
-        //todo
-        return ""
     }
     
     open func set(_ x: CGFloat, _ y: CGFloat, _ z: CGFloat? = nil) {
