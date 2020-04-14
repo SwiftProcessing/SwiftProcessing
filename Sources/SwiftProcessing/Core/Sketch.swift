@@ -1,9 +1,12 @@
 import UIKit
 import SceneKit
 
-public protocol SketchDelegate: Sketch {
+@objc public protocol SketchDelegate {
     func setup()
     func draw()
+    @objc optional func touchStarted()
+    @objc optional func touchMoved()
+    @objc optional func touchEnded()
 }
 
 @IBDesignable open class Sketch: UIScrollView, UIScrollViewDelegate {
@@ -79,8 +82,9 @@ public protocol SketchDelegate: Sketch {
 
     open var pixels: [UInt8] = []
 
-    var tap: Vector = Vector(0, 0)
-
+    open var touches: [Vector] = []
+    var touchRecongizer: UIGestureRecognizer!
+    
     open var context: CGContext?
     
     
@@ -90,8 +94,7 @@ public protocol SketchDelegate: Sketch {
 
     public init() {
         super.init(frame: CGRect())
-        let gesture = UITapGestureRecognizer(target: self, action:  #selector(self.didTapScreen))
-        self.addGestureRecognizer(gesture)
+        initTouch()
         delegate = self
         sketchDelegate = self as? SketchDelegate
         sketchDelegate?.setup()
@@ -100,23 +103,13 @@ public protocol SketchDelegate: Sketch {
 
     required public init(coder: NSCoder) {
         super.init(coder: coder)!
-        let gesture = UITapGestureRecognizer(target: self, action:  #selector(self.didTapScreen))
-        self.addGestureRecognizer(gesture)
+        initTouch()
         delegate = self
         sketchDelegate = self as? SketchDelegate
         sketchDelegate?.setup()
         loop()
     }
-    @objc func didTapScreen(sender : UITapGestureRecognizer) {
-          //        print(sender.location(in: self.view))
-        let loc = sender.location(in: self)
-        tap = createVector(loc.x, loc.y)
-        screenTapped()
-    }
     
-    func screenTapped(){
-       
-    }
    
     override public func draw(_ rect: CGRect) {
         self.context = UIGraphicsGetCurrentContext()
@@ -131,6 +124,7 @@ public protocol SketchDelegate: Sketch {
         self.rect = rect
         sketchDelegate?.draw()
         updateScrollView()
+        updateTouches()
     }
 
     private func updateTimes() {
