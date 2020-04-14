@@ -8,6 +8,7 @@ open class Image {
     var delay: CGFloat = 0
     var curFrame: Int = 0
     var isPlaying = true
+    var lastFrameDrawn: CGFloat = -1
     var deltaTime: CGFloat = 0
     
     var width: CGFloat = 0
@@ -203,13 +204,14 @@ open class Image {
         self.isPlaying = false
     }
     
-    open func frame(_ deltaTime: CGFloat) -> UIImage {
+    open func frame(_ deltaTime: CGFloat, _ frameCount: CGFloat) -> UIImage {
         if uiImage.count == 1 {
             return uiImage[0]
-        } else if !isPlaying {
+        } else if !isPlaying || frameCount == lastFrameDrawn {
             return uiImage[curFrame]
         }
         
+        self.lastFrameDrawn = frameCount
         self.deltaTime = self.deltaTime + deltaTime
         if self.deltaTime > self.delay {
             curFrame = curFrame + Int(self.deltaTime / self.delay)

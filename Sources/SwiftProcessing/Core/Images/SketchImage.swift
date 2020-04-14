@@ -16,6 +16,6 @@ public extension Sketch {
         updateDims(x, y, w, h)
         image.width = w
         image.height = h
-        image.frame(deltaTime).draw(in: CGRect(x: x, y: y, width: w, height: h), blendMode: image.blendMode, alpha: image.alpha)
+        image.frame(deltaTime, frameCount).draw(in: CGRect(x: x, y: y, width: w, height: h), blendMode: image.blendMode, alpha: image.alpha)
     }
 }
