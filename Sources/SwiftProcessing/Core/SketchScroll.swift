@@ -55,4 +55,14 @@ public extension Sketch {
             scrollView.contentOffset.y = 0.0
         }
     }
+    
+    func scrollViewWillBeginDragging(_ scrollView: UIScrollView){
+        isScrolling = true
+    }
+    
+    func scrollViewWillEndDragging(_ scrollView: UIScrollView,
+           withVelocity velocity: CGPoint,
+           targetContentOffset: UnsafeMutablePointer<CGPoint>){
+        isScrolling = false
+    }
 }
