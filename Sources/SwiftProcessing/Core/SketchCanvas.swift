@@ -4,9 +4,11 @@ import UIKit
 
 extension Sketch{
     
-    open func createCanvas(_ x: CGFloat, _ y: CGFloat, _ width: CGFloat, _ height: CGFloat){
-        self.isOpaque = false
-        self.frame = CGRect(x: x, y: y, width: width, height: height)
+    open func canvasSize(_ width: CGFloat, _ height: CGFloat){
+        self.frame = CGRect(x: self.frame.minX, y: self.frame.minY, width: width, height: height)
+    }
+    open func canvasPosition(_ x: CGFloat, _ y: CGFloat){
+        self.frame = CGRect(x: x, y: y, width: self.frame.width, height: self.frame.height)
     }
     
     open func addSketch(_ s: UIView){
@@ -22,6 +24,9 @@ extension Sketch{
     }
     
     open func addChildSketch(_ s: Sketch){
+        var currentTranslationX = context!.ctm.tx / UIScreen.main.scale
+        var currentTranslationY = -(context?.ctm.ty)! / UIScreen.main.scale + frame.height
+        s.frame = CGRect(x: currentTranslationX, y: currentTranslationY, width: s.frame.width, height: s.frame.height)
         self.addSubview(s)
     }
 }

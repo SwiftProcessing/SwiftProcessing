@@ -51,9 +51,11 @@ import SceneKit
     public var rect: CGRect = CGRect()
     public var width: CGFloat = 0
     public var height: CGFloat = 0
-    public let deviceWidth = UIScreen.main.bounds.width
-    public let deviceHeight = UIScreen.main.bounds.height
-
+    public var deviceWidth = UIScreen.main.bounds.width
+    public var deviceHeight = UIScreen.main.bounds.height
+    public var safeAreaWidth: CGFloat = 0
+    public var safeAreaHeight: CGFloat = 0
+    
     
     public var isFaceMode: Bool = false
     public var isFaceFill: Bool = true
@@ -108,10 +110,11 @@ import SceneKit
     }
     
     private func initHelper(){
+        isOpaque = false
         initTouch()
         delegate = self
         sketchDelegate = self as? SketchDelegate
-        createCanvas(0, 0, UIScreen.main.bounds.width, UIScreen.main.bounds.height)
+        canvasSize(UIScreen.main.bounds.width, UIScreen.main.bounds.height)
         loop()
     }
     
@@ -126,14 +129,18 @@ import SceneKit
             isSetup = true
         }
         updateTimes()
-        self.width = rect.width
-        self.height = rect.height
-        self.rect = rect
+        updateSizes(rect)
         sketchDelegate?.draw()
         updateScrollView()
         updateTouches()
     }
-    
+    private func updateSizes(_ rect: CGRect) {
+        safeAreaWidth = safeAreaLayoutGuide.layoutFrame.width
+        safeAreaHeight = safeAreaLayoutGuide.layoutFrame.height
+        width = rect.width
+        height = rect.height
+        self.rect = rect
+    }
     private func updateTimes() {
         frameCount =  frameCount + 1
         let newTime = CGFloat(CACurrentMediaTime())
