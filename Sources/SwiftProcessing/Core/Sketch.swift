@@ -53,6 +53,8 @@ import SceneKit
     public var height: CGFloat = 0
     public var deviceWidth = UIScreen.main.bounds.width
     public var deviceHeight = UIScreen.main.bounds.height
+    public var safeAreaX: CGFloat = 0
+    public var safeAreaY: CGFloat = 0
     public var safeAreaWidth: CGFloat = 0
     public var safeAreaHeight: CGFloat = 0
     
@@ -114,7 +116,9 @@ import SceneKit
         initTouch()
         delegate = self
         sketchDelegate = self as? SketchDelegate
-        canvasSize(UIScreen.main.bounds.width, UIScreen.main.bounds.height)
+        updateSafeArea()
+        canvasSize(safeAreaWidth, safeAreaHeight)
+        canvasPosition(safeAreaX, safeAreaY)
         loop()
     }
     
@@ -135,9 +139,16 @@ import SceneKit
         updateScrollView()
         updateTouches()
     }
-    private func updateSizes(_ rect: CGRect) {
+    
+    private func updateSafeArea(){
+        safeAreaX = safeAreaLayoutGuide.layoutFrame.minX
+        safeAreaY = safeAreaLayoutGuide.layoutFrame.minY
         safeAreaWidth = safeAreaLayoutGuide.layoutFrame.width
         safeAreaHeight = safeAreaLayoutGuide.layoutFrame.height
+    }
+    
+    private func updateSizes(_ rect: CGRect) {
+        updateSafeArea()
         width = rect.width
         height = rect.height
         self.rect = rect
