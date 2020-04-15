@@ -116,9 +116,8 @@ import SceneKit
         initTouch()
         delegate = self
         sketchDelegate = self as? SketchDelegate
+        canvasSize(UIScreen.main.bounds.width, UIScreen.main.bounds.height)
         updateSafeArea()
-        canvasSize(safeAreaWidth, safeAreaHeight)
-        canvasPosition(safeAreaX, safeAreaY)
         loop()
     }
     
