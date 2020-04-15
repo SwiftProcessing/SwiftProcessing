@@ -41,7 +41,6 @@ public extension Sketch {
     func updateScrollView(){
         let maxSubViewX = self.subviews.reduce(0, {(m: CGFloat, child) in max([m, child.frame.maxX])})
         let maxSubViewY = self.subviews.reduce(0, {(m: CGFloat, child) in max([m, child.frame.maxY - (child.superview?.frame.maxY)!])})
-        print(maxSubViewY)
         var size = CGSize()       
         size.width = isScrollX ? max([maxX, maxSubViewX]): 0
         size.height = isScrollY ? max([maxY, maxSubViewY]): 0
