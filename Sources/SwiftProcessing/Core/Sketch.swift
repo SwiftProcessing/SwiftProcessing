@@ -119,17 +119,18 @@ import SceneKit
     }
     
     override public func draw(_ rect: CGRect) {
+        updateSizes(rect)
         self.context = UIGraphicsGetCurrentContext()
         
         if self.context == nil {
             return
         }
+
         if !isSetup{
             sketchDelegate?.setup()
             isSetup = true
         }
         updateTimes()
-        updateSizes(rect)
         sketchDelegate?.draw()
         updateScrollView()
         updateTouches()
