@@ -79,7 +79,7 @@ import SceneKit
     var maxX: CGFloat = 0
     var minY: CGFloat = 0
     var maxY: CGFloat = 0
-    var isScrolling: Bool = false
+    
     
     var settingsStack: SketchSettingsStack = SketchSettingsStack()
     var settings: SketchSettings = SketchSettings()

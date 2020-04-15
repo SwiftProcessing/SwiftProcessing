@@ -19,7 +19,7 @@ extension Sketch {
         
         if touchRecongizer.numberOfTouches > touches.count{
             sketchDelegate?.touchStarted?()
-        }else if touchRecongizer.numberOfTouches < touches.count && !isScrolling{
+        }else if touchRecongizer.numberOfTouches < touches.count && !ScrollTracker.instance.isScrolling{
             sketchDelegate?.touchEnded?()
         }
         

@@ -1,5 +1,10 @@
 import UIKit
 
+public class ScrollTracker{
+    var isScrolling: Bool = false
+    static var instance = ScrollTracker()
+}
+
 public extension Sketch {
 
     func scroll() {
@@ -57,12 +62,12 @@ public extension Sketch {
     }
     
     func scrollViewWillBeginDragging(_ scrollView: UIScrollView){
-        isScrolling = true
+        ScrollTracker.instance.isScrolling = true
     }
     
     func scrollViewWillEndDragging(_ scrollView: UIScrollView,
            withVelocity velocity: CGPoint,
            targetContentOffset: UnsafeMutablePointer<CGPoint>){
-        isScrolling = false
+        ScrollTracker.instance.isScrolling = false
     }
 }
