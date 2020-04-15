@@ -5,7 +5,10 @@ import UIKit
 extension Sketch{
     
     open func canvasSize(_ width: CGFloat, _ height: CGFloat){
-        self.frame = CGRect(x: self.frame.minX, y: self.frame.minY, width: width, height: height)
+            self.frame = CGRect(x: self.frame.minX, y: self.frame.minY, width: width, height: height)
+            self.width = width
+            self.height = height
+        
     }
     open func canvasPosition(_ x: CGFloat, _ y: CGFloat){
         self.frame = CGRect(x: x, y: y, width: self.frame.width, height: self.frame.height)

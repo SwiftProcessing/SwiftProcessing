@@ -74,7 +74,7 @@ import SceneKit
     var isErase: Bool = false
     
     var isScrollX: Bool = false
-    var isScrollY: Bool = true
+    var isScrollY: Bool = false
     var minX: CGFloat = 0
     var maxX: CGFloat = 0
     var minY: CGFloat = 0
@@ -96,7 +96,7 @@ import SceneKit
     
     var isSetup: Bool = false
     open var context: CGContext?
-    
+    open var lastFrame: UIImage?
     
     // used to store references to UIKitViewElements created using SwiftProcessing. Storing references avoids
     // the elements being deallocated from memory. This is needed to have the touch events continue to function
@@ -113,6 +113,8 @@ import SceneKit
     }
     
     private func initHelper(){
+//        backgroundColor = nil
+//        clearsContextBeforeDrawing = false
         isOpaque = false
         initTouch()
         delegate = self
@@ -129,7 +131,10 @@ import SceneKit
         if self.context == nil {
             return
         }
-
+        if let i = lastFrame{
+            print(lastFrame?.size)
+            lastFrame?.draw(in: CGRect(x: contentOffset.x,y: contentOffset.y, width: frame.width, height: frame.height))
+        }
         if !isSetup{
             sketchDelegate?.setup()
             isSetup = true
@@ -138,6 +143,7 @@ import SceneKit
         sketchDelegate?.draw()
         updateScrollView()
         updateTouches()
+        lastFrame = UIImage(cgImage: context!.makeImage()!)
     }
     
     private func updateSafeArea(){
