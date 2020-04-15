@@ -29,8 +29,8 @@ public extension Sketch {
     }
     
     func updateDims(_ x: CGFloat, _ y: CGFloat, _ w: CGFloat, _ h: CGFloat){
-        let offsetX = max([0, (context?.ctm.tx)! / UIScreen.main.scale - contentOffset.x])
-        let offsetY = max([0, -(context?.ctm.ty)! / UIScreen.main.scale + frame.height - contentOffset.y])
+        let offsetX = context == nil ? 0 : max([0, (context?.ctm.tx)! / UIScreen.main.scale - contentOffset.x])
+        let offsetY = context == nil ? 0 : max([0, -(context?.ctm.ty)! / UIScreen.main.scale + frame.height - contentOffset.y])
        
         minX = min([minX + offsetX, x + offsetX])
         minY = min([minY, y + offsetY])
