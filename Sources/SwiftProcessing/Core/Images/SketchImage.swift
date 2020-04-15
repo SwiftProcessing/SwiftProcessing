@@ -13,7 +13,6 @@ public extension Sketch {
     func image(_ image: Image, _ x: CGFloat, _ y: CGFloat, _ width: CGFloat? = nil, _ height: CGFloat? = nil) {
         let w = width == nil ? CGFloat(image.width) : width!
         let h = height == nil ? CGFloat(image.height) : height!
-        updateDims(x, y, w, h)
         image.width = w
         image.height = h
         image.frame(deltaTime, frameCount).draw(in: CGRect(x: x, y: y, width: w, height: h), blendMode: image.blendMode, alpha: image.alpha)

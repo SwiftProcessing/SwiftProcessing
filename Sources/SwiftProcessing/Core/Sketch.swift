@@ -9,7 +9,7 @@ import SceneKit
     @objc optional func touchEnded()
 }
 
-@IBDesignable open class Sketch: UIScrollView, UIScrollViewDelegate {
+@IBDesignable open class Sketch: UIView {
     //Processing Constants
     public let HALF_PI = CGFloat.pi / 2
     public let PI = CGFloat.pi
@@ -109,7 +109,6 @@ import SceneKit
     
     private func initHelper(){
         initTouch()
-        delegate = self
         sketchDelegate = self as? SketchDelegate
         createCanvas(0, 0, UIScreen.main.bounds.width, UIScreen.main.bounds.height)
         loop()
@@ -130,7 +129,6 @@ import SceneKit
         self.height = rect.height
         self.rect = rect
         sketchDelegate?.draw()
-        updateScrollView()
         updateTouches()
     }
     

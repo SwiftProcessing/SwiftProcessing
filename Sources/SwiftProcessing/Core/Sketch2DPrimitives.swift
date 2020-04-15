@@ -3,7 +3,6 @@ import UIKit
 public extension Sketch {
 
     func arc(_ x: CGFloat, _ y: CGFloat, _ w: CGFloat, _ h: CGFloat, _ start: CGFloat, _ stop: CGFloat) {
-        updateDims(x, y, w, h)
         let cx = x + w * 0.5
         let cy = y + h * 0.5
         let r = w * 0.5
@@ -17,7 +16,6 @@ public extension Sketch {
     }
 
     func ellipse(_ x: CGFloat, _ y: CGFloat, _ w: CGFloat, _ h: CGFloat = -1 ) {
-        updateDims(x, y, w, h)
         var height = h
         if h == -1 {
             height = w
@@ -58,23 +56,15 @@ public extension Sketch {
     }
 
     func line(_ x1: CGFloat, _ y1: CGFloat, _ x2: CGFloat, _ y2: CGFloat) {
-        let minX = min([x1, x2])
-        let minY = min([y1, y2])
-        let maxX = max([x1, x2])
-        let maxY = max([y1, y2])
-        updateDims(minX, minY, maxX - minX, maxY - minY)
-        context?.move(to: CGPoint(x: x1, y: y1))
         context?.addLine(to: CGPoint(x: x2, y: y2))
         context?.strokePath()
     }
 
     func point(_ x: CGFloat, _ y: CGFloat) {
-        updateDims(x, y, strokeWeight, strokeWeight)
         line(x, y, x + strokeWeight, y)
     }
 
     func rect(_ x: CGFloat, _ y: CGFloat, _ w: CGFloat, _ h: CGFloat) {
-        updateDims(x, y, w, h)
         context?.stroke(CGRect(x: x, y: y, width: w, height: h))
         context?.fill(CGRect(x: x, y: y, width: w, height: h))
     }
@@ -84,11 +74,6 @@ public extension Sketch {
     }
 
     func triangle(_ x1: CGFloat, _ y1: CGFloat, _ x2: CGFloat, _ y2: CGFloat, _ x3: CGFloat, _ y3: CGFloat) {
-        let minX = min([x1, x2, x3])
-        let minY = min([y1, y2, y3])
-        let maxX = max([x1, x2, x3])
-        let maxY = max([y1, y2, y3])
-        updateDims(minX, minY, maxX - minX, maxY - minY)
         context?.beginPath()
         context?.move(to: CGPoint(x: x1, y: y1))
         context?.addLine(to: CGPoint(x: x2, y: y2))
