@@ -16,11 +16,12 @@ extension Sketch {
     }
     
     func updateTouches(){
-        
+        var isTouchStarted: Bool = false
+        var isTouchEnded: Bool = false
         if touchRecongizer.numberOfTouches > touches.count{
-            sketchDelegate?.touchStarted?()
+            isTouchStarted = true
         }else if touchRecongizer.numberOfTouches < touches.count{
-            sketchDelegate?.touchEnded?()
+            isTouchEnded = true
         }
         
         if touchRecongizer.numberOfTouches == 0{
@@ -44,6 +45,12 @@ extension Sketch {
         }
         
         touches = newTouches
+        if isTouchStarted {
+            sketchDelegate?.touchStarted?()
+        }
+        if isTouchEnded {
+            sketchDelegate?.touchEnded?()
+        }
     }
 
 }
