@@ -56,6 +56,7 @@ public extension Sketch {
     }
 
     func line(_ x1: CGFloat, _ y1: CGFloat, _ x2: CGFloat, _ y2: CGFloat) {
+        context?.move(to: CGPoint(x: x1, y: y1))
         context?.addLine(to: CGPoint(x: x2, y: y2))
         context?.strokePath()
     }
