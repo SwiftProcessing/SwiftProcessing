@@ -229,38 +229,40 @@ open class Image {
     }
     
     open func filter(_ filterType:String, _ params: Any? = nil){
-        guard let currentCGImage = self.uiImage[curFrame].cgImage else { return }
-        let currentCIImage = CIImage(cgImage: currentCGImage)
-        var filter: CIFilter?
-        if filterType == Sketch.PIXELLATE{
-            filter = CIFilter(name: "CIPixellate")
-            filter?.setValue(currentCIImage, forKey: kCIInputImageKey)
-            filter?.setValue(params ?? 50, forKey: kCIInputScaleKey)
-        }else if filterType == Sketch.HUE_ROTATE{
-            filter = CIFilter(name: "CIHueAdjust")
-            filter?.setValue(currentCIImage, forKey: kCIInputImageKey)
-            filter?.setValue(params ?? 50, forKey: kCIInputAngleKey)
-        }else if filterType == Sketch.SEPIA_TONE{
-            filter = CIFilter(name: "CISepiaTone")
-            filter?.setValue(currentCIImage, forKey: kCIInputImageKey)
-            filter?.setValue(params ?? 1.0, forKey: kCIInputIntensityKey)
-        }else if filterType == Sketch.TONAL{
-            filter = CIFilter(name: "CIPhotoEffectTonal")
-            filter?.setValue(currentCIImage, forKey: kCIInputImageKey)
-        }else if filterType == Sketch.MONOCHROME{
-            filter = CIFilter(name: "CIColorMonochrome")
-            let c = params as! Color
-            let ciColor = CIColor(red: c.red, green: c.green, blue: c.blue)
-            filter?.setValue(currentCIImage, forKey: kCIInputImageKey)
-            filter?.setValue(ciColor, forKey: kCIInputColorKey)
-        }
-        guard let outputImage = filter?.outputImage else { return }
-        
-        let context = CIContext()
-        
-        if let cgimg = context.createCGImage(outputImage, from: outputImage.extent) {
-            let processedImage = UIImage(cgImage: cgimg)
-            self.uiImage[curFrame] = processedImage
+        for i in 0...uiImage.count - 1{
+            guard let currentCGImage = self.uiImage[i].cgImage else { return }
+            let currentCIImage = CIImage(cgImage: currentCGImage)
+            var filter: CIFilter?
+            if filterType == Sketch.PIXELLATE{
+                filter = CIFilter(name: "CIPixellate")
+                filter?.setValue(currentCIImage, forKey: kCIInputImageKey)
+                filter?.setValue(params ?? 50, forKey: kCIInputScaleKey)
+            }else if filterType == Sketch.HUE_ROTATE{
+                filter = CIFilter(name: "CIHueAdjust")
+                filter?.setValue(currentCIImage, forKey: kCIInputImageKey)
+                filter?.setValue(params ?? 50, forKey: kCIInputAngleKey)
+            }else if filterType == Sketch.SEPIA_TONE{
+                filter = CIFilter(name: "CISepiaTone")
+                filter?.setValue(currentCIImage, forKey: kCIInputImageKey)
+                filter?.setValue(params ?? 1.0, forKey: kCIInputIntensityKey)
+            }else if filterType == Sketch.TONAL{
+                filter = CIFilter(name: "CIPhotoEffectTonal")
+                filter?.setValue(currentCIImage, forKey: kCIInputImageKey)
+            }else if filterType == Sketch.MONOCHROME{
+                filter = CIFilter(name: "CIColorMonochrome")
+                let c = params as! Color
+                let ciColor = CIColor(red: c.red, green: c.green, blue: c.blue)
+                filter?.setValue(currentCIImage, forKey: kCIInputImageKey)
+                filter?.setValue(ciColor, forKey: kCIInputColorKey)
+            }
+            guard let outputImage = filter?.outputImage else { return }
+            
+            let context = CIContext()
+            
+            if let cgimg = context.createCGImage(outputImage, from: outputImage.extent) {
+                let processedImage = UIImage(cgImage: cgimg)
+                self.uiImage[i] = processedImage
+            }
         }
     }
     
