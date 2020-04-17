@@ -254,7 +254,11 @@ open class Image {
                 let ciColor = CIColor(red: c.red, green: c.green, blue: c.blue)
                 filter?.setValue(currentCIImage, forKey: kCIInputImageKey)
                 filter?.setValue(ciColor, forKey: kCIInputColorKey)
+            }else if filterType == Sketch.INVERT{
+                filter = CIFilter(name: "CIColorInvert")
+                filter?.setValue(currentCIImage, forKey: kCIInputImageKey)
             }
+            
             guard let outputImage = filter?.outputImage else { return }
             
             let context = CIContext()

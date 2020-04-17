@@ -40,6 +40,8 @@ import SceneKit
     public let TONAL = "tonal"
     public static let MONOCHROME = "monochrome"
     public let MONOCHROME = "monochrome"
+    public static let INVERT = "invert"
+    public let INVERT = "invert"
     
     public let LEFT = "left"
     public let RIGHT = "right"
