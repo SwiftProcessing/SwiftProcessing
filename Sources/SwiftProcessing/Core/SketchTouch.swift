@@ -8,11 +8,17 @@
 import Foundation
 import UIKit
 
-extension Sketch {
+extension Sketch: UIGestureRecognizerDelegate {
     func initTouch(){
         isMultipleTouchEnabled = true
         touchRecongizer = UIGestureRecognizer()
+        touchRecongizer.delegate = self
+        touchRecongizer.cancelsTouchesInView = false
         addGestureRecognizer(touchRecongizer)
+    }
+    
+    public func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldReceive touch: UITouch) -> Bool {
+        return touch.view == gestureRecognizer.view
     }
     
     func updateTouches(){
