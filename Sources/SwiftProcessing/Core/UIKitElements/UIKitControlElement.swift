@@ -25,12 +25,12 @@ open class UIKitControlElement : UIKitViewElement{
         valueChangedAction()
     }
     
-    open func touchStarted(_ touchUpClosure: @escaping () -> Void){
-        self.touchUpAction = touchUpClosure
+    open func touchStarted(_ touchDownClosure: @escaping () -> Void){
+        self.touchDownAction = touchDownClosure
     }
     
-    open func touchEnded(_ touchDownClosure: @escaping () -> Void){
-        self.touchDownAction = touchDownClosure
+    open func touchEnded(_ touchUpClosure: @escaping () -> Void){
+        self.touchUpAction = touchUpClosure
     }
     
     open func valueChanged(_ valueChangedClosure: @escaping () -> Void){
