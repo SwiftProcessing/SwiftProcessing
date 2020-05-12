@@ -3,7 +3,7 @@ import Foundation
 import UIKit
 
 open class Switch: UIKitControlElement {
-    init(_ view: UIView) {
+    init(_ view: Sketch) {
         let s = UISwitch()
         super.init(view, s)
     }

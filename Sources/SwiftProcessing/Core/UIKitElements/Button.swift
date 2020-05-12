@@ -11,7 +11,7 @@ import UIKit
 open class Button: UIKitControlElement {
     var image: Image!
     
-    init(_ view: UIView, _ title: String) {
+    init(_ view: Sketch, _ title: String) {
         let button = UIButton()
         button.setTitle(title, for: .normal)
         button.sizeToFit()

@@ -8,10 +8,12 @@ open class UIKitViewElement{
     open var width: CGFloat = 0
     open var height: CGFloat = 0
     open var element: UIView!
+    open var sketch: Sketch!
     
-    init(_ view: UIView, _ element: UIView) {
+    init(_ view: Sketch, _ element: UIView) {
         self.element = element
         view.addSubview(element)
+        sketch = view
     }
     
     open func borderColor(_ v1: CGFloat, _ v2: CGFloat, _ v3: CGFloat, _ a: CGFloat = 255){
@@ -35,11 +37,13 @@ open class UIKitViewElement{
     }
     
     open func size(_ w: CGFloat, _ h: CGFloat){
-        element.frame = CGRect(x: element.frame.minX, y: element.frame.minY, width: w, height: h)
+        let s = sketch.scale
+        element.frame = CGRect(x: element.frame.minX, y: element.frame.minY, width: w * s.x, height: h * s.y)
     }
     
     open func position(_ x: CGFloat, _ y: CGFloat){
-        element.frame = CGRect(x: x, y: y, width: element.frame.width, height: element.frame.height)
+        let t = sketch.translation
+        element.frame = CGRect(x: x + t.x, y: y + t.y, width: element.frame.width, height: element.frame.height)
     }
     
     open func hide(){
