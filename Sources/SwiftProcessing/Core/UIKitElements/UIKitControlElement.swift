@@ -6,7 +6,7 @@ open class UIKitControlElement : UIKitViewElement{
     open var touchDownAction: () -> Void = {}
     open var valueChangedAction: () -> Void = {}
 
-    override init(_ view: UIView, _ element: UIView) {
+    override init(_ view: Sketch, _ element: UIView) {
         super.init(view, element)
         (element as! UIControl).addTarget(self, action: #selector(touchUpInsideHelper(_:)), for: .touchUpInside)
         (element as! UIControl).addTarget(self, action: #selector(touchDownHelper(_:)), for: .touchDown)

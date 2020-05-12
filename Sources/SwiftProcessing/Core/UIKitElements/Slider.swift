@@ -6,7 +6,7 @@ open class Slider: UIKitControlElement {
     
     let THUMB_SIZE: CGFloat = 32
     
-    init(_ view: UIView, _ min: Float, _ max: Float, _ value: Float?) {
+    init(_ view: Sketch, _ min: Float, _ max: Float, _ value: Float?) {
         let slider = UISlider()
         slider.minimumValue = Float(min)
         slider.maximumValue = Float(max)

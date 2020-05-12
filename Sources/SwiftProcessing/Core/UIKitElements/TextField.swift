@@ -2,7 +2,7 @@ import Foundation
 import UIKit
 
 open class TextField: UIKitControlElement {
-    init(_ view: UIView, _ title: String) {
+    init(_ view: Sketch, _ title: String) {
         let textField = UITextField()
         textField.placeholder = title
         textField.sizeToFit()

@@ -3,7 +3,7 @@ import UIKit
 
 open class Stepper: UIKitControlElement {
     
-    init(_ view: UIView, _ min: Float, _ max: Float, _ value: Float?, _ step: Float?) {
+    init(_ view: Sketch, _ min: Float, _ max: Float, _ value: Float?, _ step: Float?) {
         let stepper = UIStepper()
         stepper.minimumValue = Double(min)
         stepper.maximumValue = Double(max)
