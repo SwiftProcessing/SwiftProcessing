@@ -31,10 +31,6 @@ extension Sketch: UIGestureRecognizerDelegate {
             return true
         }
     }
-    //    public func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer,
-    //                                  shouldRecognizeSimultaneouslyWith otherGestureRecognizer: UIGestureRecognizer) -> Bool{
-    //        return true
-    //    }
     
     func updateTouches(){
         var isTouchStarted: Bool = false
