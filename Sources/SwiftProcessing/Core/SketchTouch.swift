@@ -9,6 +9,11 @@ import Foundation
 import UIKit
 
 extension Sketch: UIGestureRecognizerDelegate {
+    
+    open func touchMode(_ mode: String){
+        self.touchMode = mode
+    }
+    
     func initTouch(){
         isMultipleTouchEnabled = true
         touchRecongizer = UIGestureRecognizer()
@@ -18,7 +23,13 @@ extension Sketch: UIGestureRecognizerDelegate {
     }
     
     public func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldReceive touch: UITouch) -> Bool {
-        return touch.view == gestureRecognizer.view
+        if touchMode == SELF {
+            return touch.view == gestureRecognizer.view
+        }else if (touch.view as? UIControl) != nil{
+            return false
+        }else{
+            return true
+        }
     }
     
     func updateTouches(){
@@ -58,5 +69,5 @@ extension Sketch: UIGestureRecognizerDelegate {
             sketchDelegate?.touchEnded?()
         }
     }
-
+    
 }

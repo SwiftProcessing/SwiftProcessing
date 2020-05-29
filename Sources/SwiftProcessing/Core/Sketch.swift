@@ -89,6 +89,9 @@ import SceneKit
     open var pixels: [UInt8] = []
     
     open var touches: [Vector] = []
+    var touchMode: String = "self"
+    open var SELF: String = "self"
+    open var ALL: String = "all"
     var touchRecongizer: UIGestureRecognizer!
     
     var isSetup: Bool = false
