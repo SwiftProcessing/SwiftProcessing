@@ -24,7 +24,7 @@ open class Button: UIKitControlElement {
     
 }
 
-extension Sketch{
+extension Sketch {
     open func createButton(_ t: String = "") -> Button{
         let b = Button(self, t)
         viewRefs[b.id] = b

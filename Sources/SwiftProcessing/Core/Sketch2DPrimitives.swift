@@ -37,6 +37,7 @@ public extension Sketch {
     }
 
     func circle(_ x: CGFloat, _ y: CGFloat, _ d: CGFloat) {
+        // Hello
         ellipse(x, y, d, d)
     }
 
