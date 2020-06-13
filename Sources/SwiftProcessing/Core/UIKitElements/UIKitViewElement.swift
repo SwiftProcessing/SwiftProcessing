@@ -1,7 +1,7 @@
 import Foundation
 import UIKit
 
-open class UIKitViewElement{
+open class UIKitViewElement: NSObject{
     open var id: String = UUID().uuidString
     open var x: CGFloat = 0
     open var y: CGFloat = 0
