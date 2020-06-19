@@ -8,6 +8,7 @@ open class TextField: UIKitControlElement {
         textField.placeholder = title
         textField.sizeToFit()
         super.init(view, textField)
+        textField.addTarget(self, action: #selector(valueChangedHelper(_:)), for: .editingChanged)
     }
     
     open func textColor(_ r: CGFloat, _ g: CGFloat, _ b: CGFloat, _ a: CGFloat){
