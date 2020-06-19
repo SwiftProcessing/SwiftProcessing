@@ -22,6 +22,15 @@ open class Button: UIKitControlElement {
         (self.element as! UIButton).setImage(i.uiImage[0], for: .normal)
     }
     
+    open func textFont(_ name: String){
+        (self.element as! UIButton).titleLabel?.font = UIFont(name: name, size: ((self.element as! UIButton).titleLabel?.font.pointSize)!)
+    }
+    
+    open func textSize(_ size: CGFloat){
+        
+        (self.element as! UIButton).titleLabel?.font = UIFont(name: ((self.element as! UIButton).titleLabel?.font.fontName)!, size: size)
+    }
+    
 }
 
 extension Sketch{
