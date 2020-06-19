@@ -7,10 +7,13 @@ open class Camera: UIKitViewElement {
     private var previewView: UIView?
     private(set) var cameraIsReadyToUse = false
     
+    var alert: Alert
+    
     private let session = AVCaptureSession()
     private weak var previewLayer: AVCaptureVideoPreviewLayer?
     private lazy var sequenceHandler = VNSequenceRequestHandler()
     private lazy var capturePhotoOutput = AVCapturePhotoOutput()
+    private var videoConnection: AVCaptureConnection?
     
     
     private lazy var dataOutputQueue = DispatchQueue(label: "FaceDetectionService",
@@ -23,22 +26,33 @@ open class Camera: UIKitViewElement {
     
     private var photo:Image?
     
-    var AVCapturePositions = ["FRONT" : AVCaptureDevice.Position.front,
-                     "BACK" : AVCaptureDevice.Position.back]
+    var AVCapturePositions = ["front" : AVCaptureDevice.Position.front,
+                              "back" : AVCaptureDevice.Position.back]
     
-    var AVCaptureQuality = ["HIGH" : AVCaptureSession.Preset.high,
-                            "MEDIUM" : AVCaptureSession.Preset.medium,
-                            "LOW" : AVCaptureSession.Preset.low,
-                            "VGA" : AVCaptureSession.Preset.vga640x480,
-                            "720" : AVCaptureSession.Preset.hd1280x720,
-                            "1080" : AVCaptureSession.Preset.hd1920x1080]
+    var AVCaptureQuality = ["high" : AVCaptureSession.Preset.high,
+                            "medium" : AVCaptureSession.Preset.medium,
+                            "low" : AVCaptureSession.Preset.low,
+                            "vga" : AVCaptureSession.Preset.vga640x480,
+                            "hd" : AVCaptureSession.Preset.hd1280x720,
+                            "qhd" : AVCaptureSession.Preset.hd1920x1080]
+    
+    var orientation = [UIInterfaceOrientation.landscapeLeft : AVCaptureVideoOrientation.landscapeLeft,
+                       UIInterfaceOrientation.landscapeRight : AVCaptureVideoOrientation.landscapeRight,
+                       UIInterfaceOrientation.portrait : AVCaptureVideoOrientation.portrait,
+                       UIInterfaceOrientation.portraitUpsideDown : AVCaptureVideoOrientation.portraitUpsideDown]
+    
+    var orientationWords = ["up" : AVCaptureVideoOrientation.portrait,
+                            "upsidedown" : AVCaptureVideoOrientation.portraitUpsideDown,
+                            "left" : AVCaptureVideoOrientation.landscapeLeft,
+                            "right" : AVCaptureVideoOrientation.landscapeRight]
     
     init(_ view: Sketch) {
         self.previewView = UIView()
+        self.alert = Alert("default", "default")
         super.init(view, self.previewView!)
     }
     
-    open func setResolution(resolution: String) {
+    open func setResolution(_ resolution: String) {
         if let captureQuality = self.AVCaptureQuality[resolution] {
             self.session.sessionPreset = captureQuality
         } else {
@@ -56,7 +70,7 @@ open class Camera: UIKitViewElement {
         }
     }
     
-    open func getCameraPosition(position: String) -> AVCaptureDevice.Position {
+    open func getCameraPosition(_ position: String) -> AVCaptureDevice.Position {
         if let AVPosition = self.AVCapturePositions[position] {
             return AVPosition
         } else {
@@ -64,52 +78,57 @@ open class Camera: UIKitViewElement {
         }
     }
     
-    func setPhoto(finished: @escaping () -> Void) {
+    func setPhoto(_ width: CGFloat? = nil,_ height: CGFloat? = nil,_ finished: @escaping () -> Void) {
         self.capturePhoto { image in
             let newPhoto = self.flipImageLeftRight(image)
             self.photo =  Image(newPhoto!)
+            if width != nil && height != nil {
+                self.photo!.resize(width!,height!)
+            }
             finished()
         }
         
     }
     
-    open func get() -> Image? {
-        setPhoto {}
+    open func get(_ width: CGFloat? = nil,_ height: CGFloat? = nil) -> Image? {
+        setPhoto(width,height) {}
         return self.photo
     }
     
     func flipImageLeftRight(_ image: UIImage) -> UIImage? {
-
+        
         UIGraphicsBeginImageContextWithOptions(image.size, false, image.scale)
         let context = UIGraphicsGetCurrentContext()!
         context.translateBy(x: image.size.width, y: image.size.height)
         context.scaleBy(x: -image.scale, y: -image.scale)
-
+        
         context.draw(image.cgImage!, in: CGRect(origin:CGPoint.zero, size: image.size))
-
+        
         let newImage = UIGraphicsGetImageFromCurrentImageContext()
-
+        
         UIGraphicsEndImageContext()
-
+        
         return newImage
     }
     
     
     func prepare(
         cameraPosition: AVCaptureDevice.Position,
-        completion: ((Bool) -> Void)?) {
+        desiredFrameRate: Int? = nil,
+        completion: ((Bool) -> Void)?
+        ) {
         
         self.preparingCompletionHandler = completion
         self.cameraPosition = cameraPosition
         checkCameraAccess { allowed in
-            if allowed { self.setup() }
+            if allowed { self.setup(desiredFrameRate) }
             completion?(allowed)
             self.preparingCompletionHandler = nil
         }
     }
     
-    private func setup() {
-        configureCaptureSession()
+    private func setup(_ desiredFrameRate: Int? = nil) {
+        configureCaptureSession(desiredFrameRate)
     }
     
     func start() {
@@ -130,25 +149,27 @@ extension Camera {
         }
     }
     
-    private func checkCameraAccess(completion: ((Bool) -> Void)?) {
+    private func checkCameraAccess(_ completion: ((Bool) -> Void)?) {
         askUserForCameraPermission { [weak self] allowed in
             guard let self = self, let completion = completion else { return }
             self.cameraIsReadyToUse = allowed
             if allowed {
                 completion(true)
             } else {
-                self.showDisabledCameraAlert(completion: completion)
+                self.showDisabledCameraAlert(completion)
+                print("No Access to Camera")
             }
         }
     }
     
-    private func configureCaptureSession() {
+    private func configureCaptureSession(_ desiredFrameRate: Int? = nil) {
         guard let previewView = previewView else { return }
         // Define the capture device we want to use
         
         guard let camera = AVCaptureDevice.default(.builtInWideAngleCamera, for: .video, position: cameraPosition) else {
             let error = NSError(domain: "", code: 0, userInfo: [NSLocalizedDescriptionKey : "No front camera available"])
-            show(error: error)
+            let errorAlert = Alert(error)
+            errorAlert.show()
             return
         }
         
@@ -165,12 +186,17 @@ extension Camera {
             if camera.isExposureModeSupported(.continuousAutoExposure) {
                 camera.exposureMode = .continuousAutoExposure
             }
+            if desiredFrameRate != nil {
+                camera.activeVideoMinFrameDuration = CMTimeMake(value: 1,timescale: Int32(desiredFrameRate!))
+                camera.activeVideoMaxFrameDuration = CMTimeMake(value: 1,timescale: Int32(desiredFrameRate!))
+            }
             
             let cameraInput = try AVCaptureDeviceInput(device: camera)
             session.addInput(cameraInput)
             
         } catch {
-            show(error: error as NSError)
+            let errorAlert = Alert(error as NSError)
+            errorAlert.show()
             return
         }
         
@@ -183,21 +209,45 @@ extension Camera {
         session.addOutput(videoOutput)
         
         let videoConnection = videoOutput.connection(with: .video)
-        videoConnection?.videoOrientation = .portrait
-        
+        videoConnection?.videoOrientation = getOrientation((UIApplication.shared.windows.first?.windowScene!.interfaceOrientation)!)
+        self.videoConnection = videoConnection
+
         // Configure the preview layer
         let previewLayer = AVCaptureVideoPreviewLayer(session: session)
         previewLayer.videoGravity = .resizeAspectFill
         previewLayer.frame = previewView.bounds
+        previewLayer.connection?.videoOrientation = getOrientation((UIApplication.shared.windows.first?.windowScene!.interfaceOrientation)!)
         previewView.layer.insertSublayer(previewLayer, at: 0)
         self.previewLayer = previewLayer
+    }
+    
+    func getOrientation(_ orientation : UIInterfaceOrientation) -> AVCaptureVideoOrientation{
+        if let orientationReturnValue = self.orientation[orientation] {
+            return orientationReturnValue
+        } else {
+            return AVCaptureVideoOrientation.portrait
+        }
+    }
+    
+    public func rotateCamera(_ orientation: String? = nil) {
+        if orientation == nil {
+            self.previewLayer?.connection?.videoOrientation = getOrientation((UIApplication.shared.windows.first?.windowScene!.interfaceOrientation)!)
+            self.videoConnection?.videoOrientation = getOrientation((UIApplication.shared.windows.first?.windowScene!.interfaceOrientation)!)
+        } else {
+            if let orientationReturnValue = self.orientationWords[orientation!] {
+                 self.previewLayer?.connection?.videoOrientation = orientationReturnValue
+                 self.videoConnection?.videoOrientation = orientationReturnValue
+            } else {
+                print("Wrong orientation key word")
+            }
+        }
     }
 }
 
 extension Camera: AVCaptureVideoDataOutputSampleBufferDelegate {
     public func captureOutput(_ output: AVCaptureOutput, didOutput sampleBuffer: CMSampleBuffer, from connection: AVCaptureConnection) {
         guard   captureCompletionBlock != nil,
-            let outputImage = UIImage(sampleBuffer: sampleBuffer, orientation: snapshotImageOrientation) else { return }
+            let outputImage = UIImage(sampleBuffer, snapshotImageOrientation) else { return }
         DispatchQueue.main.async { [weak self] in
             guard let self = self else { return }
             if let captureCompletionBlock = self.captureCompletionBlock{
@@ -212,33 +262,23 @@ extension Camera: AVCaptureVideoDataOutputSampleBufferDelegate {
 
 extension Camera {
     
-    private func show(alert: UIAlertController) {
-        DispatchQueue.main.async {
-            UIApplication.topViewController?.present(alert, animated: true, completion: nil)
-        }
-    }
-    
-    private func showDisabledCameraAlert(completion: ((Bool) -> Void)?) {
-        let alertVC = UIAlertController(title: "Enable Camera Access",
-                                        message: "Please provide access to your camera",
-                                        preferredStyle: .alert)
-        alertVC.addAction(UIAlertAction(title: "Go to Settings", style: .default, handler: { action in
+    private func showDisabledCameraAlert(_ completion: ((Bool) -> Void)?, _ desiredFrameRate: Int? = nil) {
+        self.alert = Alert("Enable Camera Access",
+                           "Please provide access to your camera",
+                           .alert)
+        
+        self.alert.addAction(title: "Go to Settings", style: .default, handler: { action in
             guard let settingsUrl = URL(string: UIApplication.openSettingsURLString),
                 UIApplication.shared.canOpenURL(settingsUrl) else { return }
             UIApplication.shared.open(settingsUrl) { [weak self] _ in
                 guard let self = self else { return }
                 self.prepare(cameraPosition: self.cameraPosition,
-                             completion: self.preparingCompletionHandler)
+                             desiredFrameRate: desiredFrameRate, completion: self.preparingCompletionHandler
+                             )
             }
-        }))
-        alertVC.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: { _ in completion?(false) }))
-        show(alert: alertVC)
-    }
-    
-    private func show(error: NSError) {
-        let alertVC = UIAlertController(title: "Error", message: error.localizedDescription, preferredStyle: .alert)
-        alertVC.addAction(UIAlertAction(title: "Ok", style: .cancel, handler: nil ))
-        show(alert: alertVC)
+        })
+        self.alert.addAction(title: "Cancel", style: .cancel, handler: { _ in completion?(false) })
+        self.alert.show()
     }
 }
 
@@ -248,7 +288,7 @@ extension Camera: AVCapturePhotoCaptureDelegate {
 
 extension UIImage {
     
-    convenience init?(sampleBuffer: CMSampleBuffer, orientation: UIImage.Orientation = .upMirrored) {
+    convenience init?(_ sampleBuffer: CMSampleBuffer,_ orientation: UIImage.Orientation = .upMirrored) {
         guard let pixelBuffer = CMSampleBufferGetImageBuffer(sampleBuffer) else { return nil }
         CVPixelBufferLockBaseAddress(pixelBuffer, .readOnly)
         defer { CVPixelBufferUnlockBaseAddress(pixelBuffer, .readOnly) }
@@ -290,18 +330,18 @@ extension UIApplication {
 
 extension Sketch{
     
-    open func createCamera(position: String) -> Camera{
+    open func createCamera(_ position: String = "front", _ desiredFrameRate: Int? = nil) -> Camera{
         let b = Camera(self)
-        b.prepare(cameraPosition: b.getCameraPosition(position: position)) { success in
+        b.prepare(cameraPosition: b.getCameraPosition(position), desiredFrameRate: desiredFrameRate) { success in
             if success { b.start() }
         }
         viewRefs[b.id] = b
         return b
     }
     
-    open func createCamera() -> Camera{
+    open func createCamera(_ desiredFrameRate: Int? = nil) -> Camera{
         let b = Camera(self)
-        b.prepare(cameraPosition: .front) { success in
+        b.prepare(cameraPosition: b.getCameraPosition("front"), desiredFrameRate: desiredFrameRate) { success in
             if success { b.start() }
         }
         viewRefs[b.id] = b
