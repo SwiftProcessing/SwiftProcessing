@@ -14,6 +14,7 @@ open class Camera: UIKitViewElement {
     private lazy var sequenceHandler = VNSequenceRequestHandler()
     private lazy var capturePhotoOutput = AVCapturePhotoOutput()
     private var videoConnection: AVCaptureConnection?
+    private var cameraDevice: AVCaptureDevice?
     
     
     private lazy var dataOutputQueue = DispatchQueue(label: "FaceDetectionService",
@@ -60,6 +61,24 @@ open class Camera: UIKitViewElement {
         }
     }
     
+    open func setFrameRate(_ desiredFrameRate: Float64) {
+        guard let range = self.cameraDevice!.formats.first!.videoSupportedFrameRateRanges.first,
+            range.minFrameRate...range.maxFrameRate ~= (desiredFrameRate)
+            else {
+                print("Requested FPS is not supported by the device's activeFormat !")
+                return
+        }
+        
+        do {
+            try self.cameraDevice!.lockForConfiguration()
+            self.cameraDevice!.activeVideoMinFrameDuration = CMTimeMake(value: 1,timescale: Int32(desiredFrameRate))
+            self.cameraDevice!.activeVideoMaxFrameDuration = CMTimeMake(value: 1,timescale: Int32(desiredFrameRate))
+            self.cameraDevice!.unlockForConfiguration()
+        } catch {
+            print("Failure when locking Configuration")
+        }
+    }
+    
     private var cameraPosition = AVCaptureDevice.Position.front {
         didSet {
             switch cameraPosition {
@@ -80,8 +99,8 @@ open class Camera: UIKitViewElement {
     
     func setPhoto(_ width: CGFloat? = nil,_ height: CGFloat? = nil,_ finished: @escaping () -> Void) {
         self.capturePhoto { image in
-            let newPhoto = self.flipImageLeftRight(image)
-            self.photo =  Image(newPhoto!)
+            // let newPhoto = self.flipImageLeftRight(image)
+            self.photo =  Image(image)
             if width != nil && height != nil {
                 self.photo!.resize(width!,height!)
             }
@@ -116,7 +135,7 @@ open class Camera: UIKitViewElement {
         cameraPosition: AVCaptureDevice.Position,
         desiredFrameRate: Int? = nil,
         completion: ((Bool) -> Void)?
-        ) {
+    ) {
         
         self.preparingCompletionHandler = completion
         self.cameraPosition = cameraPosition
@@ -187,10 +206,26 @@ extension Camera {
                 camera.exposureMode = .continuousAutoExposure
             }
             if desiredFrameRate != nil {
-                camera.activeVideoMinFrameDuration = CMTimeMake(value: 1,timescale: Int32(desiredFrameRate!))
-                camera.activeVideoMaxFrameDuration = CMTimeMake(value: 1,timescale: Int32(desiredFrameRate!))
+                
+                guard let range = camera.formats.first!.videoSupportedFrameRateRanges.first,
+                    range.minFrameRate...range.maxFrameRate ~= Float64(desiredFrameRate!)
+                    else {
+                        print("Requested FPS is not supported by the device's activeFormat !")
+                        return
+                }
+                
+                do {
+                    try camera.lockForConfiguration()
+                    camera.activeVideoMinFrameDuration = CMTimeMake(value: 1,timescale: Int32(desiredFrameRate!))
+                    camera.activeVideoMaxFrameDuration = CMTimeMake(value: 1,timescale: Int32(desiredFrameRate!))
+                    camera.unlockForConfiguration()
+                } catch {
+                    print("Failure when locking Configuration")
+                }
+                
             }
             
+            self.cameraDevice = camera
             let cameraInput = try AVCaptureDeviceInput(device: camera)
             session.addInput(cameraInput)
             
@@ -211,7 +246,7 @@ extension Camera {
         let videoConnection = videoOutput.connection(with: .video)
         videoConnection?.videoOrientation = getOrientation((UIApplication.shared.windows.first?.windowScene!.interfaceOrientation)!)
         self.videoConnection = videoConnection
-
+        
         // Configure the preview layer
         let previewLayer = AVCaptureVideoPreviewLayer(session: session)
         previewLayer.videoGravity = .resizeAspectFill
@@ -235,8 +270,8 @@ extension Camera {
             self.videoConnection?.videoOrientation = getOrientation((UIApplication.shared.windows.first?.windowScene!.interfaceOrientation)!)
         } else {
             if let orientationReturnValue = self.orientationWords[orientation!] {
-                 self.previewLayer?.connection?.videoOrientation = orientationReturnValue
-                 self.videoConnection?.videoOrientation = orientationReturnValue
+                self.previewLayer?.connection?.videoOrientation = orientationReturnValue
+                self.videoConnection?.videoOrientation = orientationReturnValue
             } else {
                 print("Wrong orientation key word")
             }
@@ -274,7 +309,7 @@ extension Camera {
                 guard let self = self else { return }
                 self.prepare(cameraPosition: self.cameraPosition,
                              desiredFrameRate: desiredFrameRate, completion: self.preparingCompletionHandler
-                             )
+                )
             }
         })
         self.alert.addAction(title: "Cancel", style: .cancel, handler: { _ in completion?(false) })
