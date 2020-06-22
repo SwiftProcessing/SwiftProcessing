@@ -113,23 +113,6 @@ open class Camera: UIKitViewElement {
         return self.photo
     }
     
-    func flipImageLeftRight(_ image: UIImage) -> UIImage? {
-        
-        UIGraphicsBeginImageContextWithOptions(image.size, false, image.scale)
-        let context = UIGraphicsGetCurrentContext()!
-        context.translateBy(x: image.size.width, y: image.size.height)
-        context.scaleBy(x: -image.scale, y: -image.scale)
-        
-        context.draw(image.cgImage!, in: CGRect(origin:CGPoint.zero, size: image.size))
-        
-        let newImage = UIGraphicsGetImageFromCurrentImageContext()
-        
-        UIGraphicsEndImageContext()
-        
-        return newImage
-    }
-    
-    
     func prepare(
         cameraPosition: AVCaptureDevice.Position,
         desiredFrameRate: Int? = nil,
