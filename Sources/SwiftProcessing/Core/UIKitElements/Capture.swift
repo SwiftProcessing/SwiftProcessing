@@ -98,7 +98,6 @@ open class Camera: UIKitViewElement {
     
     func setPhoto(_ width: CGFloat? = nil,_ height: CGFloat? = nil,_ x: CGFloat = 0,_ y: CGFloat = 0,_ finished: @escaping () -> Void) {
         self.capturePhoto { image in
-            // let newPhoto = self.flipImageLeftRight(image)
             self.photo =  Image(image)
             if width != nil && height != nil {
                 self.photo = self.photo!.get(x,y,width!,height!)
