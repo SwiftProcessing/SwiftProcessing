@@ -110,7 +110,7 @@ open class Camera: UIKitViewElement {
     open func get(_ x: CGFloat = 0,_ y: CGFloat = 0,_ width: CGFloat? = nil,_ height: CGFloat? = nil) -> Image {
         setPhoto(x,y,width,height) {}
         if width == nil && height == nil {
-            return self.photo ?? Image(UIColor.black.image())
+            return self.photo ?? Image(UIColor.black.image(CGSize(width: 640, height: 480)))
         }
         return self.photo ?? Image(UIColor.black.image(CGSize(width: width!, height: height!)))
     }
