@@ -189,21 +189,7 @@ extension Camera {
             }
             if desiredFrameRate != nil {
                 
-                guard let range = camera.formats.first!.videoSupportedFrameRateRanges.first,
-                    range.minFrameRate...range.maxFrameRate ~= Float64(desiredFrameRate!)
-                    else {
-                        print("Requested FPS is not supported by the device's activeFormat !")
-                        return
-                }
-                
-                do {
-                    try camera.lockForConfiguration()
-                    camera.activeVideoMinFrameDuration = CMTimeMake(value: 1,timescale: Int32(desiredFrameRate!))
-                    camera.activeVideoMaxFrameDuration = CMTimeMake(value: 1,timescale: Int32(desiredFrameRate!))
-                    camera.unlockForConfiguration()
-                } catch {
-                    print("Failure when locking Configuration")
-                }
+                self.configureFrameRate(camera,desiredFrameRate!)
                 
             }
             
@@ -236,6 +222,24 @@ extension Camera {
         previewLayer.connection?.videoOrientation = getOrientation((UIApplication.shared.windows.first?.windowScene!.interfaceOrientation)!)
         previewView.layer.insertSublayer(previewLayer, at: 0)
         self.previewLayer = previewLayer
+    }
+    
+    func configureFrameRate(_ camera: AVCaptureDevice,_ desiredFrameRate: Int) {
+        guard let range = camera.formats.first!.videoSupportedFrameRateRanges.first,
+            range.minFrameRate...range.maxFrameRate ~= Float64(desiredFrameRate)
+            else {
+                print("Requested FPS is not supported by the device's activeFormat !")
+                return
+        }
+        
+        do {
+            try camera.lockForConfiguration()
+            camera.activeVideoMinFrameDuration = CMTimeMake(value: 1,timescale: Int32(desiredFrameRate))
+            camera.activeVideoMaxFrameDuration = CMTimeMake(value: 1,timescale: Int32(desiredFrameRate))
+            camera.unlockForConfiguration()
+        } catch {
+            print("Failure when locking Configuration")
+        }
     }
     
     func getOrientation(_ orientation : UIInterfaceOrientation) -> AVCaptureVideoOrientation{
