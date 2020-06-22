@@ -107,9 +107,9 @@ open class Camera: UIKitViewElement {
         
     }
     
-    open func get(_ x: CGFloat = 0,_ y: CGFloat = 0,_ width: CGFloat? = nil,_ height: CGFloat? = nil) -> Image? {
+    open func get(_ x: CGFloat = 0,_ y: CGFloat = 0,_ width: CGFloat? = nil,_ height: CGFloat? = nil) -> Image {
         setPhoto(x,y,width,height) {}
-        return self.photo
+        return self.photo ?? Image(UIColor.black.image())
     }
     
     func prepare(
