@@ -71,7 +71,6 @@ open class Camera: UIKitViewElement {
         
         do {
             try self.cameraDevice!.lockForConfiguration()
-            self.cameraDevice!.activeVideoMinFrameDuration = CMTimeMake(value: 1,timescale: Int32(desiredFrameRate))
             self.cameraDevice!.activeVideoMaxFrameDuration = CMTimeMake(value: 1,timescale: Int32(desiredFrameRate))
             self.cameraDevice!.unlockForConfiguration()
         } catch {
@@ -97,12 +96,12 @@ open class Camera: UIKitViewElement {
         }
     }
     
-    func setPhoto(_ width: CGFloat? = nil,_ height: CGFloat? = nil,_ finished: @escaping () -> Void) {
+    func setPhoto(_ width: CGFloat? = nil,_ height: CGFloat? = nil,_ x: CGFloat = 0,_ y: CGFloat = 0,_ finished: @escaping () -> Void) {
         self.capturePhoto { image in
             // let newPhoto = self.flipImageLeftRight(image)
             self.photo =  Image(image)
             if width != nil && height != nil {
-                self.photo!.resize(width!,height!)
+                self.photo = self.photo!.get(x,y,width!,height!)
             }
             finished()
         }
@@ -345,6 +344,7 @@ extension UIImage {
 ///////////////////////////////////////////////////////////////////////////
 
 extension UIApplication {
+    
     private class func topViewController(controller: UIViewController? = UIApplication.shared.keyWindow?.rootViewController) -> UIViewController? {
         if let navigationController = controller as? UINavigationController {
             return topViewController(controller: navigationController.visibleViewController)
@@ -361,6 +361,7 @@ extension UIApplication {
     }
     
     class var topViewController: UIViewController? { return topViewController() }
+    
 }
 
 extension Sketch{
@@ -369,17 +370,15 @@ extension Sketch{
         let b = Camera(self)
         b.prepare(cameraPosition: b.getCameraPosition(position), desiredFrameRate: desiredFrameRate) { success in
             if success { b.start() }
+            else {
+                print("Could not start Camera because could not prepare camera")
+            }
         }
         viewRefs[b.id] = b
         return b
     }
     
     open func createCamera(_ desiredFrameRate: Int? = nil) -> Camera{
-        let b = Camera(self)
-        b.prepare(cameraPosition: b.getCameraPosition("front"), desiredFrameRate: desiredFrameRate) { success in
-            if success { b.start() }
-        }
-        viewRefs[b.id] = b
-        return b
+        return createCamera("front",desiredFrameRate)
     }
 }
