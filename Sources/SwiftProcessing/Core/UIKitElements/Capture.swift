@@ -108,8 +108,8 @@ open class Camera: UIKitViewElement {
         
     }
     
-    open func get(_ width: CGFloat? = nil,_ height: CGFloat? = nil) -> Image? {
-        setPhoto(width,height) {}
+    open func get(_ width: CGFloat? = nil,_ height: CGFloat? = nil,_ x: CGFloat = 0,_ y: CGFloat = 0) -> Image? {
+        setPhoto(width,height,x,y) {}
         return self.photo
     }
     
