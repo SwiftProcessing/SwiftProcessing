@@ -49,6 +49,19 @@ import SceneKit
     public let BOTTOM = "bottom"
     public let BASELINE = "baseline"
     
+    public let FRONT = "front"
+    public let BACK = "back"
+    
+    public let HIGH = "high"
+    public let MEDIUM = "medium"
+    public let LOW = "low"
+    public let VGA = "vga"
+    public let HD = "hd"
+    public let QHD = "qhd"
+    
+    public let UP = "up"
+    public let UPSIDEDOWN = "upsidedown"
+    
     public weak var sketchDelegate: SketchDelegate?
     public var rect: CGRect = CGRect()
     public var width: CGFloat = 0
