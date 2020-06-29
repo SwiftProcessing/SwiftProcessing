@@ -26,6 +26,11 @@ open class TextField: UIKitControlElement {
     open func text() -> String {
         return (self.element as! UITextField).text ?? ""
     }
+    
+    open func text(_ newText: String) {
+        (self.element as! UITextField).text = newText
+    }
+    
 }
 
 extension Sketch{
