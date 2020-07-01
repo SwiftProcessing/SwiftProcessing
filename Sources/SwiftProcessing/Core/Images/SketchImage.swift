@@ -17,4 +17,12 @@ public extension Sketch {
         image.height = h
         image.frame(deltaTime, frameCount).draw(in: CGRect(x: x, y: y, width: w, height: h), blendMode: image.blendMode, alpha: image.alpha)
     }
+    
+    func saveSketch() {
+        UIGraphicsBeginImageContext(self.frame.size)
+        self.layer.render(in:UIGraphicsGetCurrentContext()!)
+        let image = UIGraphicsGetImageFromCurrentImageContext()
+        UIGraphicsEndImageContext()
+        UIImageWriteToSavedPhotosAlbum(image!, self, nil, nil)
+    }
 }
