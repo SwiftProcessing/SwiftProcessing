@@ -142,13 +142,13 @@ import SceneKit
         if self.context == nil {
             return
         }
+        self.width = rect.width
+        self.height = rect.height
         if !isSetup{
             sketchDelegate?.setup()
             isSetup = true
         }
         updateTimes()
-        self.width = rect.width
-        self.height = rect.height
         self.rect = rect
         sketchDelegate?.draw()
         updateTouches()
