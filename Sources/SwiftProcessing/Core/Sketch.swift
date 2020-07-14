@@ -110,6 +110,16 @@ import SceneKit
     var isSetup: Bool = false
     open var context: CGContext?
     
+    var scene: SCNScene = SCNScene()
+    var lightNode: SCNNode = SCNNode()
+    var cameraNode: SCNNode = SCNNode()
+    var nodeShapes: [String : SCNNode] = [:]
+    var rootNode: SCNNode = SCNNode()
+    var currentNodes: [String: Bool] = [:]
+    var stackOfTransformationNodes: [SCNNode] = []
+    
+    var globalPosition: SIMD3<Float> = simd_float3(0,0,0)
+    var drawFramePosition: SIMD3<Float> = simd_float3(0,0,0)
     
     // used to store references to UIKitViewElements created using SwiftProcessing. Storing references avoids
     // the elements being deallocated from memory. This is needed to have the touch events continue to function
@@ -133,6 +143,18 @@ import SceneKit
     }
     
     override public func draw(_ rect: CGRect) {
+        
+        for child in self.rootNode.childNodes {
+            child.removeFromParentNode()
+        }
+        
+        
+        self.drawFramePosition = self.globalPosition
+        
+        self.nodeShapes = [:]
+        self.stackOfTransformationNodes.append(self.rootNode)
+        self.currentNodes = [:]
+        
         self.context = UIGraphicsGetCurrentContext()
         
         if self.context == nil {
@@ -147,6 +169,13 @@ import SceneKit
         self.height = rect.height
         self.rect = rect
         sketchDelegate?.draw()
+        // After user functions
+//        for (tag,node) in self.nodeShapes {
+//            if self.currentNodes[tag] == nil{
+//                node.removeFromParentNode()
+//                self.nodeShapes.removeValue(forKey: tag)
+//            }
+//        }
         updateTouches()
     }
     

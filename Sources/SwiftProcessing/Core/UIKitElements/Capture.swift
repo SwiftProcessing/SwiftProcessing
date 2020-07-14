@@ -219,7 +219,7 @@ extension Camera {
         
         // Configure the preview layer
         let previewLayer = AVCaptureVideoPreviewLayer(session: session)
-        previewLayer.videoGravity = .resizeAspectFill
+        previewLayer.videoGravity = .resizeAspect
         previewLayer.frame = previewView.bounds
         previewLayer.connection?.videoOrientation = getOrientation((UIApplication.shared.windows.first?.windowScene!.interfaceOrientation)!)
         previewView.layer.insertSublayer(previewLayer, at: 0)
@@ -335,7 +335,9 @@ extension Sketch{
     open func createCamera(_ position: String = "front", _ desiredFrameRate: Int? = nil) -> Camera{
         let b = Camera(self)
         b.prepare(cameraPosition: b.getCameraPosition(position), desiredFrameRate: desiredFrameRate) { success in
-            if success { b.start() }
+            if success {
+                b.start()
+            }
             else {
                 print("Could not start Camera because could not prepare camera")
             }
