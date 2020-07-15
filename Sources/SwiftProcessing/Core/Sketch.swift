@@ -118,8 +118,8 @@ import SceneKit
     var currentNodes: [String: Bool] = [:]
     var stackOfTransformationNodes: [SCNNode] = []
     
-    var globalPosition: SIMD3<Float> = simd_float3(0,0,0)
-    var drawFramePosition: SIMD3<Float> = simd_float3(0,0,0)
+    var globalPosition: SIMD4<Float> = simd_float4(0,0,0,0)
+    var drawFramePosition: SIMD4<Float> = simd_float4(0,0,0,0)
     
     // used to store references to UIKitViewElements created using SwiftProcessing. Storing references avoids
     // the elements being deallocated from memory. This is needed to have the touch events continue to function

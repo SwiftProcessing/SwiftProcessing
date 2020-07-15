@@ -43,6 +43,8 @@ public extension Sketch {
 
         let tempPosition: SCNVector3 = SCNVector3(x,y,z)
         newTransformationNode.position = tempPosition
+        
+        drawFramePosition += simd_float4(x, y, z, 0)
     }
     
     func rotate(_ SCNMatrix4: SCNMatrix4){
@@ -55,6 +57,7 @@ public extension Sketch {
         self.stackOfTransformationNodes.append(newTransformationNode)
 
         newTransformationNode.pivot = SCNMatrix4
+        
     }
     
     func rotateX(_ r: Float){
@@ -70,76 +73,68 @@ public extension Sketch {
 //
 //        self.rootNode.rotate(by: SCNQuaternion(x: glOrientation.x, y: glOrientation.y, z: glOrientation.z, w: glOrientation.w), aroundTarget: pivot)
         rotate(SCNMatrix4MakeRotation(r, 1, 0, 0))
+        drawFramePosition += simd_float4(0, 0, 0, r)
         //let spin = CABasicAnimation(keyPath: "rotation")
     }
     
     func rotateY(_ r: Float){
         rotate(SCNMatrix4MakeRotation(r, 0, 1, 0))
+        drawFramePosition += simd_float4(0, 0, 0, r)
     }
     
     func rotateZ(_ r: Float){
         rotate(SCNMatrix4MakeRotation(r, 0, 0, 1))
+        drawFramePosition += simd_float4(0, 0, 0, r)
+    }
+    
+    func shapeCreate(_ tag: String, _ geometry: SCNGeometry) {
+        
+        let newTag = tag + "position" + "x" + self.drawFramePosition.x.description + "y" + self.drawFramePosition.y.description + "z" + self.drawFramePosition.z.description + "w" + self.drawFramePosition.w.description
+                
+        if self.nodeShapes[newTag] == nil {
+            
+            let node = SCNNode(geometry: geometry)
+            node.position = SCNVector3(x: 0, y: 0, z: 0)
+            
+            print(nodeShapes.count)
+            
+            let constraint = SCNLookAtConstraint(target: node)
+            constraint.isGimbalLockEnabled = true
+            cameraNode.constraints = [constraint]
+            
+            
+            self.stackOfTransformationNodes.last!.addChildNode(node)
+            
+            self.nodeShapes[newTag] = node
+            
+        }
+        
+        self.currentNodes[newTag] = true
     }
     
     func sphere(_ radius: CGFloat){
         
         let tag: String = "Sphere" + radius.description + "x" +
             String(self.drawFramePosition.x) + "y" + String(self.drawFramePosition.y) + "z" +
-            String(self.drawFramePosition.z)
+        String(self.drawFramePosition.z)
         
-        if self.nodeShapes[tag] == nil {
-            
-            let sphereGeometry = SCNSphere(radius: (radius))
-            let sphereNode = SCNNode(geometry: sphereGeometry)
-            sphereNode.position = SCNVector3(x: self.drawFramePosition.x, y: self.drawFramePosition.y, z: self.drawFramePosition.z)
-            //sphereNode.simdWorldPosition = simd_float3(x: self.drawFramePosition.x, y: self.drawFramePosition.y, z: self.drawFramePosition.z)
-                        
-            sphereGeometry.isGeodesic = true
-            sphereGeometry.segmentCount = 20
-            
-            print(nodeShapes.count)
-            
-            let constraint = SCNLookAtConstraint(target: sphereNode)
-            constraint.isGimbalLockEnabled = true
-            cameraNode.constraints = [constraint]
-            
-            
-            self.rootNode.addChildNode(sphereNode)
-            
-            self.nodeShapes[tag] = sphereNode
-            
-        }
+        let sphereGeometry = SCNSphere(radius: (radius))
         
-        self.currentNodes[tag] = true
+        sphereGeometry.isGeodesic = true
+        sphereGeometry.segmentCount = 20
+        
+        shapeCreate(tag, sphereGeometry)
     }
     
     func box(_ w: CGFloat,_ h: CGFloat,_ l: CGFloat,_ rounded: CGFloat = 0){
         
         let tag: String = "Cube" + "width" + w.description + "height" + h.description
-        + "length" + l.description + "chamfer" + rounded.description + "x" +
-            String(UInt(bitPattern: ObjectIdentifier(self.stackOfTransformationNodes.last!)))
-                
-        if self.nodeShapes[tag] == nil {
+        + "length" + l.description + "chamfer" + rounded.description + "x"  
             
-            let boxGeometry = SCNBox(width: w, height: h, length: l, chamferRadius: rounded)
-            let boxNode = SCNNode(geometry: boxGeometry)
-            boxNode.position = SCNVector3(x: 0, y: 0, z: 0)
-            //sphereNode.simdWorldPosition = simd_float3(x: self.drawFramePosition.x, y: self.drawFramePosition.y, z: self.drawFramePosition.z)
-            
-            print(nodeShapes.count)
-            
-            let constraint = SCNLookAtConstraint(target: boxNode)
-            constraint.isGimbalLockEnabled = true
-            cameraNode.constraints = [constraint]
-            
-            
-            self.stackOfTransformationNodes.last!.addChildNode(boxNode)
-            
-            self.nodeShapes[tag] = boxNode
-            
-        }
+        let boxGeometry = SCNBox(width: w, height: h, length: l, chamferRadius: rounded)
         
-        self.currentNodes[tag] = true
+        shapeCreate(tag, boxGeometry)
+
     }
     
 }
