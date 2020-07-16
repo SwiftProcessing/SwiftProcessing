@@ -14,7 +14,7 @@ public extension Sketch {
         let camera = SCNCamera()
         self.cameraNode = SCNNode()
         self.cameraNode.camera = camera
-        self.cameraNode.position = SCNVector3(x: -40, y: 0, z: 0)
+        self.cameraNode.position = SCNVector3(x: 0, y: 0, z: 40)
         
         let light = SCNLight()
         light.type = SCNLight.LightType.omni
@@ -33,30 +33,50 @@ public extension Sketch {
     
     func translate(_ x: Float, _ y: Float, _ z: Float){
         
-        let newTransformationNode = SCNNode()
-        
-        
-        self.stackOfTransformationNodes.last!.addChildNode(newTransformationNode)
-
-        
-        self.stackOfTransformationNodes.append(newTransformationNode)
-
         let tempPosition: SCNVector3 = SCNVector3(x,y,z)
-        newTransformationNode.position = tempPosition
+        
+        var lastNode = self.stackOfTransformationNodes.last!
+                
+        if lastNode.childNodes.count == 0 && self.stackOfTransformationNodes.count > 1{
+            
+            lastNode.position.add(tempPosition)
+            
+        } else {
+                        
+            let newTransformationNode = SCNNode()
+            
+            
+            lastNode.addChildNode(newTransformationNode)
+
+            
+            self.stackOfTransformationNodes.append(newTransformationNode)
+
+            newTransformationNode.position = tempPosition
+            
+        }
         
         drawFramePosition += simd_float4(x, y, z, 0)
     }
     
-    func rotate(_ SCNMatrix4: SCNMatrix4){
-        let newTransformationNode = SCNNode()
+    func rotate(_ vector: SCNVector3){
         
-        
-        self.stackOfTransformationNodes.last!.addChildNode(newTransformationNode)
+        let lastNode = self.stackOfTransformationNodes.last!
 
-        
-        self.stackOfTransformationNodes.append(newTransformationNode)
+        if lastNode.childNodes.count == 0 && self.stackOfTransformationNodes.count > 1{
+            
+            lastNode.eulerAngles.add(vector)
+            
+        } else {
+            
+            let newTransformationNode = SCNNode()
+            
+            lastNode.addChildNode(newTransformationNode)
+            
+            self.stackOfTransformationNodes.append(newTransformationNode)
 
-        newTransformationNode.pivot = SCNMatrix4
+            newTransformationNode.eulerAngles = vector
+            
+        }
         
     }
     
@@ -72,18 +92,18 @@ public extension Sketch {
 //        let pivot: SCNVector3 = SCNVector3(self.globalPosition.x, self.globalPosition.y, self.globalPosition.z)
 //
 //        self.rootNode.rotate(by: SCNQuaternion(x: glOrientation.x, y: glOrientation.y, z: glOrientation.z, w: glOrientation.w), aroundTarget: pivot)
-        rotate(SCNMatrix4MakeRotation(r, 1, 0, 0))
+        rotate(SCNVector3(r, 0, 0))
         drawFramePosition += simd_float4(0, 0, 0, r)
         //let spin = CABasicAnimation(keyPath: "rotation")
     }
     
     func rotateY(_ r: Float){
-        rotate(SCNMatrix4MakeRotation(r, 0, 1, 0))
+        rotate(SCNVector3(0, r, 0))
         drawFramePosition += simd_float4(0, 0, 0, r)
     }
     
     func rotateZ(_ r: Float){
-        rotate(SCNMatrix4MakeRotation(r, 0, 0, 1))
+        rotate(SCNVector3(0, 0, r))
         drawFramePosition += simd_float4(0, 0, 0, r)
     }
     
@@ -129,7 +149,7 @@ public extension Sketch {
     func box(_ w: CGFloat,_ h: CGFloat,_ l: CGFloat,_ rounded: CGFloat = 0){
         
         let tag: String = "Cube" + "width" + w.description + "height" + h.description
-        + "length" + l.description + "chamfer" + rounded.description + "x"  
+        + "length" + l.description + "chamfer" + rounded.description + "x"
             
         let boxGeometry = SCNBox(width: w, height: h, length: l, chamferRadius: rounded)
         
@@ -137,4 +157,12 @@ public extension Sketch {
 
     }
     
+}
+
+extension SCNVector3 {
+    mutating func add(_ v1: SCNVector3){
+        self.x += v1.x
+        self.y += v1.y
+        self.z += v1.z
+    }
 }

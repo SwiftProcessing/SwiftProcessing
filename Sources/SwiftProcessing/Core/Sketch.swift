@@ -151,6 +151,7 @@ import SceneKit
         
         self.drawFramePosition = self.globalPosition
         
+        self.stackOfTransformationNodes = []
         self.nodeShapes = [:]
         self.stackOfTransformationNodes.append(self.rootNode)
         self.currentNodes = [:]
