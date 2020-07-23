@@ -9,8 +9,6 @@ open class UIKitControlElement : UIKitViewElement, UIGestureRecognizerDelegate{
     override init(_ view: Sketch, _ element: UIView) {
         super.init(view, element)
         
-        (element as! UIControl).addTarget(self, action: #selector(touchUpInsideHelper(_:)), for: .touchUpInside)
-        (element as! UIControl).addTarget(self, action: #selector(touchDownHelper(_:)), for: .touchDown)
         (element as! UIControl).addTarget(self, action: #selector(valueChangedHelper(_:)), for: .valueChanged)
         
         let singleTapGesture = UITapGestureRecognizer(target: self, action: #selector(touchUpInsideHelper))
@@ -32,19 +30,16 @@ open class UIKitControlElement : UIKitViewElement, UIGestureRecognizerDelegate{
        touchUpAction()
     }
     
-    @objc func touchDownHelper(_ sender: UIView) {
-       touchDownAction()
-    }
-    
     @objc func valueChangedHelper(_ sender: UIView) {
         valueChangedAction()
     }
     
-    open func touchStarted(_ touchDownClosure: @escaping () -> Void){
-        self.touchDownAction = touchDownClosure
+   
+    open func touchEnded(_ touchUpClosure: @escaping () -> Void){
+        self.touchUpAction = touchUpClosure
     }
     
-    open func touchEnded(_ touchUpClosure: @escaping () -> Void){
+    open func tapped(_ touchUpClosure: @escaping () -> Void){
         self.touchUpAction = touchUpClosure
     }
     
