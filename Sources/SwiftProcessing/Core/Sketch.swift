@@ -113,13 +113,25 @@ import SceneKit
     var scene: SCNScene = SCNScene()
     var lightNode: SCNNode = SCNNode()
     var cameraNode: SCNNode = SCNNode()
-    var nodeShapes: [String : SCNNode] = [:]
-    var rootNode: SCNNode = SCNNode()
-    var currentNodes: [String: Bool] = [:]
-    var stackOfTransformationNodes: [SCNNode] = []
+    var rootNode: TransitionSCNNode = TransitionSCNNode()
+    
+    //var currentNumber: Int = 0
+    //var currentTransformationNode: SCNNode = self.rootNode
+    var stackOfTransformationNodes: [TransitionSCNNode] = []
+    var lastFrameTransformationNodes: [TransitionSCNNode] = []
+    var currentTransformationNode: TransitionSCNNode = TransitionSCNNode()
+    
+//    var nodeShapes: [String : SCNNode] = [:]
+//    var currentNodes: [String: Bool] = [:]
+//    var lastFrameAllNodes: [SCNNode] = []
+//    var allNodes: [SCNNode] = []
+//
+//    var mapParents: [String: [String]] = [:]
     
     var globalPosition: SIMD4<Float> = simd_float4(0,0,0,0)
+    var globalRotation: SIMD4<Float> = simd_float4(0,0,0,0)
     var drawFramePosition: SIMD4<Float> = simd_float4(0,0,0,0)
+    var drawFrameRotation: SIMD4<Float> = simd_float4(0,0,0,0)
     
     // used to store references to UIKitViewElements created using SwiftProcessing. Storing references avoids
     // the elements being deallocated from memory. This is needed to have the touch events continue to function
@@ -143,18 +155,8 @@ import SceneKit
     }
     
     override public func draw(_ rect: CGRect) {
-        
-        for child in self.rootNode.childNodes {
-            child.removeFromParentNode()
-        }
-        
-        
-        self.drawFramePosition = self.globalPosition
-        
-        self.stackOfTransformationNodes = []
-        self.nodeShapes = [:]
-        self.stackOfTransformationNodes.append(self.rootNode)
-        self.currentNodes = [:]
+                
+        beforeNodes()
         
         self.context = UIGraphicsGetCurrentContext()
         
@@ -170,13 +172,9 @@ import SceneKit
         self.height = rect.height
         self.rect = rect
         sketchDelegate?.draw()
-        // After user functions
-//        for (tag,node) in self.nodeShapes {
-//            if self.currentNodes[tag] == nil{
-//                node.removeFromParentNode()
-//                self.nodeShapes.removeValue(forKey: tag)
-//            }
-//        }
+        
+        updateNodes()
+        
         updateTouches()
     }
     
