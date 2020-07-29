@@ -167,17 +167,17 @@ public extension Sketch {
     
     func shapeCreate(_ tag: String, _ geometry: SCNGeometry,_ type: String) {
         
-        let newTranslationTag =  "position" + "x" + self.drawFramePosition.x.description + "y" + self.drawFramePosition.y.description + "z" + self.drawFramePosition.z.description
-        
-        let newRotationTag = "rotation" + "x" + self.drawFrameRotation.x.description + "y" + self.drawFrameRotation.y.description + "z" + self.drawFrameRotation.z.description
-        
-        let newTag = tag + newTranslationTag + newRotationTag
-        
-//        if self.currentTransformationNode.availableShapeNodes[type]?.count > 0 {
+//        let newTranslationTag =  "position" + "x" + self.drawFramePosition.x.description + "y" + self.drawFramePosition.y.description + "z" + self.drawFramePosition.z.description
 //
-//            self.currentTransformationNode.availableShapeNodes.popFirst().
-//
-//        } else {
+//        let newRotationTag = "rotation" + "x" + self.drawFrameRotation.x.description + "y" + self.drawFrameRotation.y.description + "z" + self.drawFrameRotation.z.description
+        
+//        let newTag = tag + newTranslationTag + newRotationTag
+        
+        if var shapeNode = self.currentTransformationNode.getAvailableShape(tag) {
+            
+            
+            
+        } else {
             
             let node = SCNNode(geometry: geometry)
             node.position = SCNVector3(x: 0, y: 0, z: 0)
@@ -186,7 +186,11 @@ public extension Sketch {
             constraint.isGimbalLockEnabled = true
             node.constraints = [constraint]
             
-            self.currentTransformationNode.addShapeNode(node)
+            self.currentTransformationNode.addShapeNode(node,tag)
+            
+        }
+            
+            
             
 //        }
     }
@@ -328,6 +332,7 @@ extension SCNNode {
         for child in childNodes {
            child.cleanup()
         }
+        self.constraints = []
         self.geometry = nil
     }
 }
@@ -339,6 +344,7 @@ class TransitionSCNNode: SCNNode {
     var availabletransitionNodes: [TransitionSCNNode] = []
     var currentShapes: [SCNNode] = []
     var availableShapeNodes: [String : [SCNNode]] = [:]
+    var currentShapeNodes: [String : [SCNNode]] = [:]
     
     func hasNoShapeNodes() -> Bool {
         return self.currentShapes.count == 0
@@ -368,9 +374,32 @@ class TransitionSCNNode: SCNNode {
         }
     }
     
-    func addShapeNode(_ node: SCNNode) {
+    func addShapeNode(_ node: SCNNode, _ tag: String) {
         self.addChildNode(node)
         self.currentShapes.append(node)
+        if var arrayOfAvailableShapes = self.currentShapeNodes[tag] {
+            arrayOfAvailableShapes.append(node)
+        } else {
+            self.currentShapeNodes[tag] = [node]
+        }
+    }
+    
+    func hasAvailableShape(_ tag: String) -> Bool{
+        return self.availableShapeNodes[tag]!.count > 0
+    }
+    
+    func getAvailableShape(_ tag: String) -> SCNNode? {
+        if self.availableShapeNodes[tag] != nil && self.availableShapeNodes[tag]!.count > 0 {
+            let usedNode = self.availableShapeNodes[tag]!.popLast()
+            if var arrayOfAvailableShapes = self.currentShapeNodes[tag] {
+                arrayOfAvailableShapes.append(usedNode!)
+            } else {
+                self.currentShapeNodes[tag] = [usedNode!]
+            }
+            self.currentShapes.append(usedNode!)
+            return usedNode
+        }
+        return nil
     }
         
     func removeShapeNodes() {
@@ -378,11 +407,14 @@ class TransitionSCNNode: SCNNode {
 //        while currentShapes.count > 0 {
 //            currentShapes.popLast()?.removeFromParentNode()
 //        }
-        for shapes in currentShapes {
-            shapes.cleanup()
-            shapes.removeFromParentNode()
-            
+        for (key, arrayOfShapes) in self.availableShapeNodes {
+            for shapes in arrayOfShapes {
+                shapes.cleanup()
+                shapes.removeFromParentNode()
+            }
         }
-        currentShapes = []
+        self.availableShapeNodes = self.currentShapeNodes
+        self.currentShapeNodes = [:]
+        self.currentShapes = []
     }
 }
