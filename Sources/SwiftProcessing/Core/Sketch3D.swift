@@ -20,7 +20,7 @@ public extension Sketch {
         light.type = SCNLight.LightType.omni
         self.lightNode = SCNNode()
         self.lightNode.light = light
-        self.lightNode.position = SCNVector3(x: 0, y: -40, z: -40)
+        self.lightNode.position = SCNVector3(x: 0, y: 0, z: 50)
         
         let baseTransformationNode = TransitionSCNNode()
         self.rootNode = baseTransformationNode
@@ -175,9 +175,11 @@ public extension Sketch {
         
         if var shapeNode = self.currentTransformationNode.getAvailableShape(tag) {
             
-            
+    
             
         } else {
+            
+            geometry.firstMaterial?.diffuse.contents = UIColor(red: self.settings.fill.red/255.0, green: self.settings.fill.green/255.0, blue: self.settings.fill.blue/255.0, alpha: self.settings.fill.alpha)
             
             let node = SCNNode(geometry: geometry)
             node.position = SCNVector3(x: 0, y: 0, z: 0)
@@ -205,6 +207,66 @@ public extension Sketch {
         sphereGeometry.segmentCount = 20
         
         shapeCreate(tag, sphereGeometry, "Sphere")
+    }
+    
+    func cylinder(_ width: CGFloat, _ height: CGFloat){
+        
+        let tag: String = "Cylinder" + "w" + width.description + "h" + height.description
+        
+        let cylinderGeometry = SCNCylinder(radius: width,height: height)
+        
+        
+        shapeCreate(tag, cylinderGeometry, "Cylinder")
+        
+    }
+    
+    func cone(_ topRadius: CGFloat, _ bottomRadius: CGFloat, _ height: CGFloat){
+        
+        let tag: String = "Cone" + "r" + topRadius.description + "r" + bottomRadius.description + "h" + height.description
+        
+        let coneGeometry = SCNCone(topRadius: topRadius,bottomRadius: bottomRadius, height: height)
+        
+        shapeCreate(tag, coneGeometry, "Cone")
+        
+    }
+    
+    func pyramid(_ width: CGFloat, _ height: CGFloat, _ length: CGFloat){
+        
+        let tag: String = "Pyramid" + "w" + width.description + "h" + height.description + "l" + length.description
+        
+        let pyramidGeometry = SCNPyramid(width: width,height: height,length: length)
+        
+        shapeCreate(tag, pyramidGeometry, "Pyramid")
+        
+    }
+    
+    func capsule(_ radius: CGFloat, _ height: CGFloat, _ length: CGFloat) {
+        
+        let tag: String = "Capsule" + "r" + radius.description + "h" + height.description
+        
+        let capsuleGeomtry = SCNPyramid(width: radius,height: height, length: length)
+        
+        shapeCreate(tag, capsuleGeomtry, "Capsule")
+        
+    }
+    
+    func torus(_ ringRadius: CGFloat, _ pipeRadius: CGFloat) {
+        
+        let tag: String = "Torus" + "rr" + ringRadius.description + "pr" + pipeRadius.description
+        
+        let torusGeomtry = SCNTorus(ringRadius: ringRadius,pipeRadius: pipeRadius)
+        
+        shapeCreate(tag, torusGeomtry, "Torus")
+        
+    }
+    
+    func plane(_ width: CGFloat, _ height: CGFloat){
+        
+        let tag: String = "Plane" + "w" + width.description + "h" + height.description
+        
+        let planeGeometry = SCNPlane(width: width,height: height)
+        
+        shapeCreate(tag, planeGeometry, "Plane")
     }
     
     func box(_ w: CGFloat,_ h: CGFloat,_ l: CGFloat,_ rounded: CGFloat = 0){
