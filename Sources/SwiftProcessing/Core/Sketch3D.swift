@@ -71,9 +71,7 @@ public extension Sketch {
             
             self.stackOfTransformationNodes.append(nextNode)
             self.currentTransformationNode = nextNode
-            
-            print("!!!!!!")
-            
+                        
         } else {
             
             let newTransformationNode: TransitionSCNNode = TransitionSCNNode()
@@ -247,7 +245,6 @@ public extension Sketch {
         self.currentTransformationNode = self.rootNode
         
         for node in lastFrameTransformationNodes {
-            print(node.childNodes.count)
             node.addTransitionNodes()
             node.removeShapeNodes()
         }
