@@ -95,41 +95,7 @@ public extension Sketch {
 
             
         }
-        
-        
-        
-//        if self.lastFrameAllNodes[self.currentNumber].sameNode(vector, property)  {
-//
-//            self.allNodes.append(self.lastFrameAllNodes[self.currentNumber])
-//
-//            self.stackOfTransformationNodes.append(self.lastFrameAllNodes[self.currentNumber] as! TransitionSCNNode)
-//
-//        } else {
-//
-//            self.lastFrameAllNodes[self.currentNumber].removeFromParentNode()
-//
-//            let newTransformationNode: TransitionSCNNode = TransitionSCNNode()
-//
-//            lastNode.addChildNode(newTransformationNode)
-//
-//            self.allNodes.append(newTransformationNode)
-//
-//            self.stackOfTransformationNodes.append(newTransformationNode)
-//
-//            switch property {
-//            case "position":
-//                newTransformationNode.position = vector
-//
-//            case "rotation":
-//                newTransformationNode.eulerAngles = vector
-//            default:
-//                print("Wrong translation property key word")
-//            }
-//
-//        }
-        
-        //self.currentNumber += 1
-        
+
     }
     
     func translate(_ x: Float, _ y: Float, _ z: Float){
@@ -167,16 +133,11 @@ public extension Sketch {
     
     func shapeCreate(_ tag: String, _ geometry: SCNGeometry,_ type: String) {
         
-//        let newTranslationTag =  "position" + "x" + self.drawFramePosition.x.description + "y" + self.drawFramePosition.y.description + "z" + self.drawFramePosition.z.description
-//
-//        let newRotationTag = "rotation" + "x" + self.drawFrameRotation.x.description + "y" + self.drawFrameRotation.y.description + "z" + self.drawFrameRotation.z.description
+        let newtag = tag + "r" + self.settings.fill.red.description + "g" + self.settings.fill.green.description + "b" + self.settings.fill.blue.description + "a" + self.settings.fill.alpha.description
         
-//        let newTag = tag + newTranslationTag + newRotationTag
-        
-        if var shapeNode = self.currentTransformationNode.getAvailableShape(tag) {
+        if var shapeNode = self.currentTransformationNode.getAvailableShape(newtag) {
             
     
-            
         } else {
             
             geometry.firstMaterial?.diffuse.contents = UIColor(red: self.settings.fill.red/255.0, green: self.settings.fill.green/255.0, blue: self.settings.fill.blue/255.0, alpha: self.settings.fill.alpha)
@@ -188,13 +149,10 @@ public extension Sketch {
             constraint.isGimbalLockEnabled = true
             node.constraints = [constraint]
             
-            self.currentTransformationNode.addShapeNode(node,tag)
+            self.currentTransformationNode.addShapeNode(node,newtag)
             
         }
             
-            
-            
-//        }
     }
     
     func sphere(_ radius: CGFloat){
@@ -294,27 +252,9 @@ public extension Sketch {
             node.removeShapeNodes()
         }
         
-        
-//        self.lastFrameAllNodes = self.allNodes
-//        self.currentTransformationNode = self.rootNode
-//        self.allNodes = []
-//        self.currentNodes = [:]
-        
-        
         self.drawFramePosition = self.globalPosition
         
     }
-    
-//    func removeUnusedNodes(){
-//
-//        for (tag,node) in self.nodeShapes {
-//            if self.currentNodes[tag] == nil {
-//                node.removeFromParentNode()
-//                self.nodeShapes.removeValue(forKey: tag)
-//            }
-//        }
-//
-//    }
     
     func mergeUnusedTranslationNodes(){
         
@@ -338,18 +278,6 @@ public extension Sketch {
         for node in lastFrameTransformationNodes {
             node.removeUnusedTransitionNnodes()
         }
-//        print(nodeShapes.count)
-//        print(currentNodes.count)
-        print(lastFrameTransformationNodes.count)
-//        print(allNodes.count)
-        print(stackOfTransformationNodes.count)
-        print(lastFrameTransformationNodes.count)
-//        print(mapParents.count)
-        
-//        removeUnusedNodes()
-//
-//        mergeUnusedTranslationNodes()
-        
         
     }
 }
@@ -465,10 +393,6 @@ class TransitionSCNNode: SCNNode {
     }
         
     func removeShapeNodes() {
-//        var c = currentShapes.count
-//        while currentShapes.count > 0 {
-//            currentShapes.popLast()?.removeFromParentNode()
-//        }
         for (key, arrayOfShapes) in self.availableShapeNodes {
             for shapes in arrayOfShapes {
                 shapes.cleanup()
