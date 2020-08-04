@@ -107,6 +107,9 @@ import SceneKit
     open var ALL: String = "all"
     var touchRecongizer: UIGestureRecognizer!
     
+    var notificationActionsWithData: [String: (_ data: [AnyHashable : Any]) -> Void] = [:]
+    var notificationActions: [String: () -> Void] = [:]
+
     var isSetup: Bool = false
     open var context: CGContext?
     
@@ -149,6 +152,7 @@ import SceneKit
     
     private func initHelper(){
         initTouch()
+        initNotifications()
         sketchDelegate = self as? SketchDelegate
         createCanvas(0, 0, UIScreen.main.bounds.width, UIScreen.main.bounds.height)
         loop()
@@ -163,13 +167,13 @@ import SceneKit
         if self.context == nil {
             return
         }
+        self.width = rect.width
+        self.height = rect.height
         if !isSetup{
             sketchDelegate?.setup()
             isSetup = true
         }
         updateTimes()
-        self.width = rect.width
-        self.height = rect.height
         self.rect = rect
         sketchDelegate?.draw()
         
