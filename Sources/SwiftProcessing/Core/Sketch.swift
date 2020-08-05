@@ -151,7 +151,7 @@ import SceneKit
     
     override public func draw(_ rect: CGRect) {
                 
-        beforeNodes()
+        preDraw3D()
         
         self.context = UIGraphicsGetCurrentContext()
         
@@ -168,7 +168,7 @@ import SceneKit
         self.rect = rect
         sketchDelegate?.draw()
         
-        updateNodes()
+        postDraw3D()
         
         updateTouches()
     }

@@ -236,7 +236,7 @@ public extension Sketch {
         
     }
     
-    func beforeNodes(){
+    func preDraw3D(){
         
         self.lastFrameTransformationNodes = self.stackOfTransformationNodes
         self.stackOfTransformationNodes = [self.rootNode]
@@ -270,7 +270,7 @@ public extension Sketch {
         }
     }
     
-    func updateNodes(){
+    func postDraw3D(){
         
         for node in lastFrameTransformationNodes {
             node.removeUnusedTransitionNnodes()
