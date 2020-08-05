@@ -1,3 +1,6 @@
+import UIKit
+import SceneKit
+
 public extension Sketch {
     
     func translationNode(_ vector: SCNVector3,_ property: String) {

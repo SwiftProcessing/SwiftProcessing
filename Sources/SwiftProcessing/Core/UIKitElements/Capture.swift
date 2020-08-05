@@ -290,7 +290,7 @@ extension Camera {
                            "Please provide access to your camera",
                            .alert)
 
-        self.alert.addAction(title: "Go to Settings", style: .default, handler: { action in
+        self.alert.addAction("Go to Settings", .default, handler: { action in
             guard let settingsUrl = URL(string: UIApplication.openSettingsURLString),
                 UIApplication.shared.canOpenURL(settingsUrl) else { return }
             UIApplication.shared.open(settingsUrl) { [weak self] _ in
@@ -300,7 +300,7 @@ extension Camera {
                 )
             }
         })
-        self.alert.addAction(title: "Cancel", style: .cancel, handler: { _ in completion?(false) })
+        self.alert.addAction("Cancel", .cancel, handler: { _ in completion?(false) })
         self.alert.show()
     }
 }

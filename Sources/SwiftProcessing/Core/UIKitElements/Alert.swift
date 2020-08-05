@@ -11,7 +11,7 @@ open class Alert {
 
     init(_ error: NSError) {
         self.alert = UIAlertController(title: "Error", message: error.localizedDescription, preferredStyle: .alert)
-        self.addAction(title: "Ok", style: .cancel, handler: nil )
+        self.addAction("Ok")
     }
 
     public  func show() {

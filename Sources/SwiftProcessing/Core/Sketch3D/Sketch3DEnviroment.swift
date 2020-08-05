@@ -1,3 +1,6 @@
+import UIKit
+import SceneKit
+
 public extension Sketch {
     
     func create3D(){

@@ -1,3 +1,6 @@
+import UIKit
+import SceneKit
+
 class TransitionSCNNode: SCNNode {
     
     var parentTransitionNodeTag: String = ""

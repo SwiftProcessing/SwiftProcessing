@@ -1,3 +1,6 @@
+import UIKit
+import SceneKit
+
 public extension Sketch {
 
     func shapeCreate(_ tag: String, _ geometry: SCNGeometry,_ type: String) {
