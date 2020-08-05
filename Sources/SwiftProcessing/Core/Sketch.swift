@@ -118,18 +118,9 @@ import SceneKit
     var cameraNode: SCNNode = SCNNode()
     var rootNode: TransitionSCNNode = TransitionSCNNode()
     
-    //var currentNumber: Int = 0
-    //var currentTransformationNode: SCNNode = self.rootNode
     var stackOfTransformationNodes: [TransitionSCNNode] = []
     var lastFrameTransformationNodes: [TransitionSCNNode] = []
     var currentTransformationNode: TransitionSCNNode = TransitionSCNNode()
-    
-//    var nodeShapes: [String : SCNNode] = [:]
-//    var currentNodes: [String: Bool] = [:]
-//    var lastFrameAllNodes: [SCNNode] = []
-//    var allNodes: [SCNNode] = []
-//
-//    var mapParents: [String: [String]] = [:]
     
     var globalPosition: SIMD4<Float> = simd_float4(0,0,0,0)
     var globalRotation: SIMD4<Float> = simd_float4(0,0,0,0)
