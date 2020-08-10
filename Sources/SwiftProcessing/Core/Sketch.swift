@@ -113,6 +113,19 @@ import SceneKit
     var isSetup: Bool = false
     open var context: CGContext?
     
+    var scene: SCNScene = SCNScene()
+    var lightNode: SCNNode = SCNNode()
+    var cameraNode: SCNNode = SCNNode()
+    var rootNode: TransitionSCNNode = TransitionSCNNode()
+    
+    var stackOfTransformationNodes: [TransitionSCNNode] = []
+    var lastFrameTransformationNodes: [TransitionSCNNode] = []
+    var currentTransformationNode: TransitionSCNNode = TransitionSCNNode()
+    
+    var globalPosition: SIMD4<Float> = simd_float4(0,0,0,0)
+    var globalRotation: SIMD4<Float> = simd_float4(0,0,0,0)
+    var drawFramePosition: SIMD4<Float> = simd_float4(0,0,0,0)
+    var drawFrameRotation: SIMD4<Float> = simd_float4(0,0,0,0)
     
     // used to store references to UIKitViewElements created using SwiftProcessing. Storing references avoids
     // the elements being deallocated from memory. This is needed to have the touch events continue to function
@@ -137,6 +150,9 @@ import SceneKit
     }
     
     override public func draw(_ rect: CGRect) {
+                
+        preDraw3D()
+        
         self.context = UIGraphicsGetCurrentContext()
         
         if self.context == nil {
@@ -151,6 +167,9 @@ import SceneKit
         updateTimes()
         self.rect = rect
         sketchDelegate?.draw()
+        
+        postDraw3D()
+        
         updateTouches()
     }
     
