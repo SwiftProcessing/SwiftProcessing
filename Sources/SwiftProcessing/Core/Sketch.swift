@@ -121,11 +121,17 @@ import SceneKit
     var stackOfTransformationNodes: [TransitionSCNNode] = []
     var lastFrameTransformationNodes: [TransitionSCNNode] = []
     var currentTransformationNode: TransitionSCNNode = TransitionSCNNode()
+    var currentStack: [TransitionSCNNode] = []
     
     var globalPosition: SIMD4<Float> = simd_float4(0,0,0,0)
     var globalRotation: SIMD4<Float> = simd_float4(0,0,0,0)
     var drawFramePosition: SIMD4<Float> = simd_float4(0,0,0,0)
     var drawFrameRotation: SIMD4<Float> = simd_float4(0,0,0,0)
+    
+    var texture: Image? = nil
+    var textureEnabled: Bool = false
+
+    var enable3DMode: Bool = false
     
     // used to store references to UIKitViewElements created using SwiftProcessing. Storing references avoids
     // the elements being deallocated from memory. This is needed to have the touch events continue to function
@@ -183,11 +189,22 @@ import SceneKit
     open func push() {
         context?.saveGState()
         settingsStack.push(settings: settings)
+        
+        let rootTransformationNode = self.currentTransformationNode
+
+        let newTransformationNode = rootTransformationNode.addNewTransitionNode()
+
+        self.currentStack.append(newTransformationNode)
+        self.stackOfTransformationNodes.append(newTransformationNode)
+
+        self.translationNode(SCNVector3(0,0,0), "position", false)
     }
     
     open func pop() {
         context?.restoreGState()
         settings = settingsStack.pop()!
         settings.restore(sketch: self)
+        
+        self.currentTransformationNode = self.currentStack.popLast()!
     }
 }

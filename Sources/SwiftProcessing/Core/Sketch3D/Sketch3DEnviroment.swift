@@ -24,7 +24,6 @@ public extension Sketch {
         
         let baseTransformationNode = TransitionSCNNode()
         self.rootNode = baseTransformationNode
-        self.stackOfTransformationNodes.append(baseTransformationNode)
         
         self.scene.rootNode.addChildNode(baseTransformationNode)
         self.scene.rootNode.addChildNode(lightNode)

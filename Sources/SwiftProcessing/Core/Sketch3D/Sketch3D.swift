@@ -20,23 +20,6 @@ public extension Sketch {
         
     }
     
-    func mergeUnusedTranslationNodes(){
-        
-        if self.stackOfTransformationNodes.count > 2 {
-            for child in self.stackOfTransformationNodes.dropFirst().dropLast() {
-                if child.childNodes.count == 1 {
-                    child.childNodes.first!.position.add(child.position)
-                    child.childNodes.first!.eulerAngles.add(child.eulerAngles)
-                    child.parent?.addChildNode(child.childNodes.first!)
-                    child.removeFromParentNode()
-                    // Not sure if this works
-                    self.stackOfTransformationNodes = self.stackOfTransformationNodes.filter(){$0 != child}
-                }
-            }
-            
-        }
-    }
-    
     func postDraw3D(){
         
         for node in lastFrameTransformationNodes {
@@ -87,6 +70,7 @@ extension SCNNode {
            child.cleanup()
         }
         self.constraints = []
+        self.geometry?.materials = []
         self.geometry = nil
     }
 }

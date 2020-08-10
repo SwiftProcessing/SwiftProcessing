@@ -14,6 +14,10 @@ public extension Sketch {
             
             geometry.firstMaterial?.diffuse.contents = UIColor(red: self.settings.fill.red/255.0, green: self.settings.fill.green/255.0, blue: self.settings.fill.blue/255.0, alpha: self.settings.fill.alpha)
             
+            if self.texture != nil && self.textureEnabled {
+                geometry.firstMaterial?.diffuse.contents = self.texture!.currentFrame()
+            }
+            
             let node = SCNNode(geometry: geometry)
             node.position = SCNVector3(x: 0, y: 0, z: 0)
                         

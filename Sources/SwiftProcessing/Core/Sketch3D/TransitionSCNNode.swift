@@ -65,8 +65,9 @@ class TransitionSCNNode: SCNNode {
         }
         return nil
     }
-        
+    
     func removeShapeNodes() {
+        print(self.availableShapeNodes.count)
         for (key, arrayOfShapes) in self.availableShapeNodes {
             for shapes in arrayOfShapes {
                 shapes.cleanup()
@@ -77,4 +78,17 @@ class TransitionSCNNode: SCNNode {
         self.currentShapeNodes = [:]
         self.currentShapes = []
     }
+    
+    func addNewTransitionNode() -> TransitionSCNNode{
+        let newTransitionNode = TransitionSCNNode()
+        
+        self.addChildNode(newTransitionNode)
+        
+        newTransitionNode.position = SCNVector3(0,0,0)
+        newTransitionNode.eulerAngles = SCNVector3(0,0,0)
+                
+        return newTransitionNode
+    }
 }
+
+
