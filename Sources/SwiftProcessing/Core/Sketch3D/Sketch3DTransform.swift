@@ -3,7 +3,7 @@ import SceneKit
 
 public extension Sketch {
 
-    func translationNode(_ vector: SCNVector3,_ property: String, _ checkNoShapeNodes: Bool = true) {
+    func translationNode(_ vector: SCNVector3,_ property: String, _ checkNoShapeNodes: Bool = true, _ changeCurrentTransitionNode: Bool = true) {
         let lastNode = currentTransformationNode
 
         if lastNode.hasNoShapeNodes() && checkNoShapeNodes {
@@ -20,7 +20,7 @@ public extension Sketch {
 
             }
 
-        } else if lastNode.hasAvailableTransitionNodes() && checkNoShapeNodes {
+        } else if lastNode.hasAvailableTransitionNodes() {
             let nextNode = lastNode.getNextAvailableTransitionNode()
 
             switch property {
@@ -38,8 +38,11 @@ public extension Sketch {
 
             }
             self.stackOfTransformationNodes.append(nextNode)
-            self.currentTransformationNode = nextNode
-
+            
+            if (changeCurrentTransitionNode){
+                self.currentTransformationNode = nextNode
+            }
+            
         } else {
             let newTransformationNode: TransitionSCNNode = TransitionSCNNode()
 
@@ -55,8 +58,10 @@ public extension Sketch {
                 print("Wrong translation property key word")
             }
             self.stackOfTransformationNodes.append(newTransformationNode)
-            self.currentTransformationNode = newTransformationNode
-
+            
+            if (changeCurrentTransitionNode){
+                self.currentTransformationNode = newTransformationNode
+            }
 
         }
 
