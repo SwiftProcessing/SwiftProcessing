@@ -129,6 +129,7 @@ import SceneKit
     var drawFrameRotation: SIMD4<Float> = simd_float4(0,0,0,0)
     
     var texture: Image? = nil
+    var textureID: String = ""
     var textureEnabled: Bool = false
 
     var enable3DMode: Bool = false
@@ -164,6 +165,9 @@ import SceneKit
         if self.context == nil {
             return
         }
+        self.settingsStack.cleanup()
+        currentStack = []
+        self.settingsStack = SketchSettingsStack()
         self.width = rect.width
         self.height = rect.height
         if !isSetup{

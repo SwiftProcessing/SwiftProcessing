@@ -22,9 +22,18 @@ class TransitionSCNNode: SCNNode {
         return self.availabletransitionNodes.popLast()!
     }
     
+    func deleteTransitionNode() {
+        for node in self.availabletransitionNodes {
+            node.deleteTransitionNode()
+        }
+        self.availabletransitionNodes = []
+        self.removeFromParentNode()
+        self.removeShapeNodes()
+    }
+    
     func removeUnusedTransitionNnodes() {
         for node in self.availabletransitionNodes {
-            node.removeFromParentNode()
+            node.deleteTransitionNode()
         }
         
         availabletransitionNodes = []
@@ -67,7 +76,6 @@ class TransitionSCNNode: SCNNode {
     }
     
     func removeShapeNodes() {
-        print(self.availableShapeNodes.count)
         for (key, arrayOfShapes) in self.availableShapeNodes {
             for shapes in arrayOfShapes {
                 shapes.cleanup()

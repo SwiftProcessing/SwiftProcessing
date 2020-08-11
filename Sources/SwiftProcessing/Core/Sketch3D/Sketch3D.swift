@@ -17,7 +17,6 @@ public extension Sketch {
         }
         
         self.drawFramePosition = self.globalPosition
-        
     }
     
     func postDraw3D(){

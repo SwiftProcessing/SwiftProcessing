@@ -9,6 +9,7 @@ public extension Sketch {
 
         self.texture = image
         self.textureEnabled = true
+        self.textureID = String(UInt(bitPattern: ObjectIdentifier(self.texture!)))
     }
 
 }

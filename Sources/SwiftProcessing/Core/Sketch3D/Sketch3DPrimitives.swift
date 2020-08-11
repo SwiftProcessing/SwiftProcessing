@@ -5,7 +5,7 @@ public extension Sketch {
 
     func shapeCreate(_ tag: String, _ geometry: SCNGeometry,_ type: String) {
         
-        let newtag = tag + "r" + self.settings.fill.red.description + "g" + self.settings.fill.green.description + "b" + self.settings.fill.blue.description + "a" + self.settings.fill.alpha.description
+        var newtag = tag + "r" + self.settings.fill.red.description + "g" + self.settings.fill.green.description + "b" + self.settings.fill.blue.description + "a" + self.settings.fill.alpha.description
         
         if var shapeNode = self.currentTransformationNode.getAvailableShape(newtag) {
             
@@ -16,6 +16,8 @@ public extension Sketch {
             
             if self.texture != nil && self.textureEnabled {
                 geometry.firstMaterial?.diffuse.contents = self.texture!.currentFrame()
+                newtag = newtag + self.textureID
+                
             }
             
             let node = SCNNode(geometry: geometry)
