@@ -63,7 +63,6 @@ import SceneKit
     public let UPSIDEDOWN = "upsidedown"
     
     public weak var sketchDelegate: SketchDelegate?
-    public var rect: CGRect = CGRect()
     public var width: CGFloat = 0
     public var height: CGFloat = 0
     public let deviceWidth = UIScreen.main.bounds.width
@@ -77,7 +76,7 @@ import SceneKit
     public var deltaTime: CGFloat = 1/60
     private var lastTime: CGFloat = CGFloat(CACurrentMediaTime())
     var fps: CGFloat = 60
-    var fpsTimer: Timer?
+    var fpsTimer: CADisplayLink?
     
     var strokeWeight: CGFloat = 1
     var isFill: Bool = true
@@ -112,6 +111,9 @@ import SceneKit
 
     var isSetup: Bool = false
     open var context: CGContext?
+    open var prevFrame: CGImage?
+    
+    open var lastContext: CGContext?
     
     var scene: SCNScene = SCNScene()
     var lightNode: SCNNode = SCNNode()
@@ -146,31 +148,43 @@ import SceneKit
         initNotifications()
         sketchDelegate = self as? SketchDelegate
         createCanvas(0, 0, UIScreen.main.bounds.width, UIScreen.main.bounds.height)
+        self.layer.drawsAsynchronously = true
+        UIGraphicsBeginImageContext(CGSize(width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height))
+        self.context = UIGraphicsGetCurrentContext()
+        UIGraphicsEndImageContext()
         loop()
     }
-    
     override public func draw(_ rect: CGRect) {
-                
+        //this override is not actually called
+        //but required for the UIView to call the
+        //display function
+    }
+    override public func display(_ layer: CALayer) {
+      
         preDraw3D()
-        
-        self.context = UIGraphicsGetCurrentContext()
+        UIGraphicsPushContext(context!)
         
         if self.context == nil {
             return
         }
-        self.width = rect.width
-        self.height = rect.height
+      
+        self.width = layer.preferredFrameSize().width
+        self.height = layer.preferredFrameSize().height
         if !isSetup{
             sketchDelegate?.setup()
             isSetup = true
         }
         updateTimes()
-        self.rect = rect
         sketchDelegate?.draw()
         
         postDraw3D()
         
         updateTouches()
+        
+        UIGraphicsPopContext()
+        let img = context!.makeImage()
+        layer.contents = img
+        
     }
     
     private func updateTimes() {
