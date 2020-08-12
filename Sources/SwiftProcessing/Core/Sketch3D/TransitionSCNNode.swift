@@ -1,13 +1,7 @@
 import UIKit
 import SceneKit
 
-<<<<<<< Updated upstream
 class TransitionSCNNode: SCNNode {
-    
-=======
-public class TransitionSCNNode: SCNNode {
-
->>>>>>> Stashed changes
     var parentTransitionNodeTag: String = ""
     var tag: String = ""
     var availabletransitionNodes: [TransitionSCNNode] = []
