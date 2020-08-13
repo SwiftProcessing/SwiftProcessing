@@ -7,6 +7,7 @@ public extension Sketch {
         let lastNode = currentTransformationNode
 
         if lastNode.hasNoShapeNodes() && checkNoShapeNodes {
+            // select current transition node since no shapes in children
             switch property {
 
             case "position":
@@ -21,6 +22,8 @@ public extension Sketch {
             }
 
         } else if lastNode.hasAvailableTransitionNodes() {
+            // select node from available nodes from last frome branching off
+            // current transition node
             let nextNode = lastNode.getNextAvailableTransitionNode()
 
             switch property {
@@ -39,11 +42,14 @@ public extension Sketch {
             }
             self.stackOfTransformationNodes.append(nextNode)
             
+            // changeCurrentTransitionNode enabled default
+            // determines if future nodes will branch off this node
             if (changeCurrentTransitionNode){
                 self.currentTransformationNode = nextNode
             }
             
         } else {
+            // creating new node because no nodes available
             let newTransformationNode: TransitionSCNNode = TransitionSCNNode()
 
             lastNode.addChildNode(newTransformationNode)
