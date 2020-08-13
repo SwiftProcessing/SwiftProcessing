@@ -28,5 +28,7 @@ public extension Sketch {
         self.scene.rootNode.addChildNode(baseTransformationNode)
         self.scene.rootNode.addChildNode(lightNode)
         self.scene.rootNode.addChildNode(cameraNode)
+        
+        self.enable3DMode = true
     }
 }

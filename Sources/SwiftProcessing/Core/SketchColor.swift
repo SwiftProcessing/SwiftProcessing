@@ -3,7 +3,7 @@ import UIKit
 public extension Sketch {
 
     func clear() {
-        context?.clear(rect)
+        context?.clear(UIScreen.main.bounds)
     }
 
     func background(_ color: Color) {
@@ -11,7 +11,10 @@ public extension Sketch {
     }
 
     func background(_ v1: CGFloat, _ v2: CGFloat, _ v3: CGFloat, _ a: CGFloat = 255) {
-        backgroundColor = UIColor(red: v1 / 255, green: v2 / 255, blue: v3 / 255, alpha: a / 255)
+        push()
+        fill(v1, v2, v3, a)
+        rect(0, 0, width, height)
+        pop()
     }
 
     func fill(_ color: Color) {
