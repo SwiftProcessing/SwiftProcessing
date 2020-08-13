@@ -22,7 +22,7 @@ public extension Sketch {
     func postDraw3D(){
 
         for node in lastFrameTransformationNodes {
-            node.removeUnusedTransitionNnodes()
+            node.removeUnusedTransitionNodes()
         }
 
     }

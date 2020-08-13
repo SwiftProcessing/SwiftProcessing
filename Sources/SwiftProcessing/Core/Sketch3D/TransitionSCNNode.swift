@@ -31,7 +31,7 @@ class TransitionSCNNode: SCNNode {
         self.removeShapeNodes()
     }
 
-    func removeUnusedTransitionNnodes() {
+    func removeUnusedTransitionNodes() {
         for node in self.availabletransitionNodes {
             node.deleteTransitionNode()
         }
