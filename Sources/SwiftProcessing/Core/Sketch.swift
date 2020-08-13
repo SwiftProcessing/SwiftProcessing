@@ -193,22 +193,25 @@ import SceneKit
     open func push() {
         context?.saveGState()
         settingsStack.push(settings: settings)
+        if (self.enable3DMode) {
+            let rootTransformationNode = self.currentTransformationNode
 
-        let rootTransformationNode = self.currentTransformationNode
+            let newTransformationNode = rootTransformationNode.addNewTransitionNode()
 
-        let newTransformationNode = rootTransformationNode.addNewTransitionNode()
+            self.currentStack.append(newTransformationNode)
+            self.stackOfTransformationNodes.append(newTransformationNode)
 
-        self.currentStack.append(newTransformationNode)
-        self.stackOfTransformationNodes.append(newTransformationNode)
-
-        self.translationNode(SCNVector3(0,0,0), "position", false)
+            self.translationNode(SCNVector3(0,0,0), "position", false)
+        }
     }
 
     open func pop() {
         context?.restoreGState()
         settings = settingsStack.pop()!
         settings.restore(sketch: self)
-
-        self.currentTransformationNode = self.currentStack.popLast()!
+        
+        if(self.enable3DMode){
+            self.currentTransformationNode = self.currentStack.popLast()!
+        }
     }
 }
