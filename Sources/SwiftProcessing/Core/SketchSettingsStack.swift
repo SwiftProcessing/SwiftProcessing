@@ -27,4 +27,8 @@ public struct SketchSettingsStack {
   public var top: SketchSettings? {
     return array.last
   }
+    
+    public mutating func cleanup(){
+        self.array = [SketchSettings]()
+    }
 }
