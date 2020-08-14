@@ -130,6 +130,8 @@ import SceneKit
     var texture: Image? = nil
     var textureID: String = ""
     var textureEnabled: Bool = false
+    
+    var scnmat: SCNMaterial = SCNMaterial()
 
     var enable3DMode: Bool = false
 

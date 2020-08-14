@@ -14,13 +14,13 @@ public extension Sketch {
         let camera = SCNCamera()
         self.cameraNode = SCNNode()
         self.cameraNode.camera = camera
-        self.cameraNode.position = SCNVector3(x: 0, y: 0, z: 40)
+        self.cameraNode.position = SCNVector3(x: 0, y: 0, z: 100)
 
         let light = SCNLight()
         light.type = SCNLight.LightType.omni
         self.lightNode = SCNNode()
         self.lightNode.light = light
-        self.lightNode.position = SCNVector3(x: 0, y: 0, z: 50)
+        self.lightNode.position = SCNVector3(x: 0, y: 0, z: 110)
 
         let baseTransformationNode = TransitionSCNNode()
         self.rootNode = baseTransformationNode
