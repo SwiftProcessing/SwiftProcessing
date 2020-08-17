@@ -200,7 +200,6 @@ import SceneKit
         UIGraphicsPopContext()
         let img = context!.makeImage()
         layer.contents = img
-        
     }
 
     private func updateTimes() {
@@ -229,7 +228,7 @@ import SceneKit
         context?.restoreGState()
         settings = settingsStack.pop()!
         settings.restore(sketch: self)
-        
+
         if(self.enable3DMode){
             self.currentTransformationNode = self.currentStack.popLast()!
         }
