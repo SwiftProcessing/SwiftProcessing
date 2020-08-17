@@ -165,17 +165,22 @@ import SceneKit
         //display function
     }
     override public func display(_ layer: CALayer) {
-      
         preDraw3D()
-        UIGraphicsPushContext(context!)
         
         if self.context == nil {
             return
         }
-      
         self.width = layer.preferredFrameSize().width
         self.height = layer.preferredFrameSize().height
 
+        if (self.context?.width != Int(self.width) || self.context?.height != Int(self.height)) {
+            UIGraphicsBeginImageContext(CGSize(width: self.width, height: self.height))
+            self.context = UIGraphicsGetCurrentContext()
+            UIGraphicsEndImageContext()
+        }
+        
+        UIGraphicsPushContext(context!)
+        
         self.settingsStack.cleanup()
         currentStack = []
         self.settingsStack = SketchSettingsStack()
@@ -185,8 +190,9 @@ import SceneKit
             isSetup = true
         }
         updateTimes()
+        push()
         sketchDelegate?.draw()
-
+        pop()
         postDraw3D()
 
         updateTouches()
