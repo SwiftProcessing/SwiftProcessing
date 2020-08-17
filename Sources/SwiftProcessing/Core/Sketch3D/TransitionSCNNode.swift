@@ -88,18 +88,18 @@ class TransitionSCNNode: SCNNode {
     }
 
     func addNewTransitionNode() -> TransitionSCNNode{
-        
+
         if self.hasAvailableTransitionNodes() {
-            
+
             let nextNode = self.getNextAvailableTransitionNode()
-            
+
             nextNode.position = SCNVector3(0,0,0)
             nextNode.eulerAngles = SCNVector3(0,0,0)
-            
+
             return nextNode
-            
+
         } else {
-            
+
             let newTransitionNode = TransitionSCNNode()
 
             self.addChildNode(newTransitionNode)
@@ -108,8 +108,8 @@ class TransitionSCNNode: SCNNode {
             newTransitionNode.eulerAngles = SCNVector3(0,0,0)
 
             return newTransitionNode
-            
+
         }
-        
+
     }
 }

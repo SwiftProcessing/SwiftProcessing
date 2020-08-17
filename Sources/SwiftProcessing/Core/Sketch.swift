@@ -77,7 +77,7 @@ import SceneKit
     var fps: CGFloat = 60
 
     var fpsTimer: CADisplayLink?
-    
+
     var strokeWeight: CGFloat = 1
     var isFill: Bool = true
     var isStroke: Bool = true
@@ -111,7 +111,7 @@ import SceneKit
 
     var isSetup: Bool = false
     open var context: CGContext?
- 
+
     var scene: SCNScene = SCNScene()
     var lightNode: SCNNode = SCNNode()
     var cameraNode: SCNNode = SCNNode()
@@ -165,21 +165,21 @@ import SceneKit
         //display function
     }
     override public func display(_ layer: CALayer) {
-      
+
         preDraw3D()
         UIGraphicsPushContext(context!)
-        
+
         if self.context == nil {
             return
         }
-      
+
         self.width = layer.preferredFrameSize().width
         self.height = layer.preferredFrameSize().height
 
         self.settingsStack.cleanup()
         currentStack = []
         self.settingsStack = SketchSettingsStack()
-    
+
         if !isSetup{
             sketchDelegate?.setup()
             isSetup = true
@@ -190,11 +190,11 @@ import SceneKit
         postDraw3D()
 
         updateTouches()
-        
+
         UIGraphicsPopContext()
         let img = context!.makeImage()
         layer.contents = img
-        
+
     }
 
     private func updateTimes() {
@@ -223,7 +223,7 @@ import SceneKit
         context?.restoreGState()
         settings = settingsStack.pop()!
         settings.restore(sketch: self)
-        
+
         if(self.enable3DMode){
             self.currentTransformationNode = self.currentStack.popLast()!
         }
