@@ -200,6 +200,10 @@ import SceneKit
         UIGraphicsPopContext()
         let img = context!.makeImage()
         layer.contents = img
+        
+        for l in layer.sublayers ?? []{
+            l.setNeedsDisplay()
+        }
     }
 
     private func updateTimes() {
