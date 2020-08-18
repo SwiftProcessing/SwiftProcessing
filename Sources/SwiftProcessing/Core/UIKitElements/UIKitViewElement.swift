@@ -13,6 +13,7 @@ open class UIKitViewElement: NSObject{
     init(_ view: Sketch, _ element: UIView) {
         self.element = element
         view.addSubview(element)
+        element.layer.anchorPoint = CGPoint(x: 0,y: 0)
         sketch = view
     }
     
@@ -38,12 +39,12 @@ open class UIKitViewElement: NSObject{
     
     open func size(_ w: CGFloat, _ h: CGFloat){
         let s = sketch.scale
-        element.frame = CGRect(x: element.frame.minX, y: element.frame.minY, width: w * s.x, height: h * s.y)
+        element.layer.frame = CGRect(x: element.layer.frame.minX, y: element.layer.frame.minY, width: w * s.x, height: h * s.y)
     }
     
     open func position(_ x: CGFloat, _ y: CGFloat){
         let t = sketch.translation
-        element.frame = CGRect(x: x + t.x, y: y + t.y, width: element.frame.width, height: element.frame.height)
+        element.layer.frame = CGRect(x: x + t.x, y: y + t.y, width: element.layer.frame.width, height: element.layer.frame.height)
         element.layer.position = CGPoint(x: x, y: y)
     }
     
