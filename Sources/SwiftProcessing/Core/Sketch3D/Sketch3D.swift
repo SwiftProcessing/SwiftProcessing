@@ -16,7 +16,6 @@ public extension Sketch {
             node.removeShapeNodes()
         }
 
-        self.drawFramePosition = self.globalPosition
     }
 
     func postDraw3D(){
