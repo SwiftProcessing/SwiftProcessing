@@ -170,9 +170,9 @@ import SceneKit
         if self.context == nil {
             return
         }
-        self.width = layer.preferredFrameSize().width
-        self.height = layer.preferredFrameSize().height
-
+        self.width = self.frame.width
+        self.height = self.frame.height
+        print(self.context?.width, Int(self.width))
         if (self.context?.width != Int(self.width) || self.context?.height != Int(self.height)) {
             UIGraphicsBeginImageContext(CGSize(width: self.width, height: self.height))
             self.context = UIGraphicsGetCurrentContext()
