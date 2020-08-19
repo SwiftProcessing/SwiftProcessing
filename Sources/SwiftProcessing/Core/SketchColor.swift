@@ -3,7 +3,7 @@ import UIKit
 public extension Sketch {
 
     func clear() {
-        context?.clear(self.frame)
+        context?.clear(CGRect(x: 0, y: 0, width: self.frame.width, height: self.frame.height))
     }
 
     func background(_ color: Color) {
