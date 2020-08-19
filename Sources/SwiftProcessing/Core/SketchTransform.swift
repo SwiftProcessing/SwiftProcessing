@@ -4,8 +4,8 @@ public extension Sketch {
     
     var translation: Vector{
         get{
-            let translationX = context == nil ? 0 : (context?.ctm.tx)! / UIScreen.main.scale
-            let translationY = context == nil ? 0 :  -(context?.ctm.ty)! / UIScreen.main.scale + frame.height
+            let translationX = context == nil ? 0 : (context?.ctm.tx)!
+            let translationY = context == nil ? 0 :  -(context?.ctm.ty)! + frame.height
             return createVector(translationX, translationY)
         }
     }
