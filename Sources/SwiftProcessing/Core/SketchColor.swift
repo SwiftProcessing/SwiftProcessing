@@ -3,7 +3,7 @@ import UIKit
 public extension Sketch {
 
     func clear() {
-        context?.clear(UIScreen.main.bounds)
+        context?.clear(self.frame)
     }
 
     func background(_ color: Color) {
