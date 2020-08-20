@@ -4,7 +4,7 @@ import Foundation
 
 public extension Sketch {
     
-    func ambientLight(_ v1: CGFloat, _v2: CGFloat, _v3: CGFloat, _ alpha: CGFloat = 1){
+    func ambientLight(_ v1: CGFloat, _ v2: CGFloat, _ v3: CGFloat, _ alpha: CGFloat = 1){
         self.lightNode.light?.type = SCNLight.LightType.ambient
         self.lightNode.light?.color = CGColor(srgbRed: v1, green: v2, blue: v3, alpha: alpha)
     }
@@ -16,14 +16,14 @@ public extension Sketch {
     
     func createLight(_ tag: String, _ lightSCN: SCNLight, _type: String){
         
-        var newtag = tag
+        let newtag = tag
 
         if var shapeNode = self.currentTransformationNode.getAvailableShape(newtag) {
 
 
         } else {
 
-            let node = SCNNode(geometry: geometry)
+            let node = SCNNode()
             node.position = SCNVector3(x: 0, y: 0, z: 0)
 
             let constraint = SCNLookAtConstraint(target: node)
@@ -37,26 +37,32 @@ public extension Sketch {
         }
     }
     
-    func pointLight(_ v1: CGFloat, _v2: CGFloat, _v3: CGFloat, _x: CGFloat, _y: CGFloat, _z: CGFloat){
+    func pointLight(_ v1: CGFloat, _ v2: CGFloat, _ v3: CGFloat, _ x: CGFloat, _ y: CGFloat, _ z: CGFloat){
         let light = SCNLight()
         light.type = SCNLight.LightType.spot
-        
         light.color = CGColor(srgbRed: v1, green: v2, blue: v3, alpha: alpha)
         
-        let tag = "SPOT" + "r" + v1 + "g" + v2 + "b" + v3 + "x" + x + "y" + y + "z" + z
+        let tag = "SPOT" + "r" + v1.description + "g" + v2.description + "b" + v3.description
         
-        createLight(tag, light, _type: "SPOT")
+        let positiontag = "x" + x.description + "y" + y.description + "z" + z.description
+        
+        let newtag = tag + positiontag
+        
+        createLight(newtag, light, _type: "SPOT")
     }
     
-    func directionalLight(_ v1: CGFloat, _v2: CGFloat, _v3: CGFloat, _x: CGFloat, _y: CGFloat, _z: CGFloat){
+    func directionalLight(_ v1: CGFloat, _ v2: CGFloat, _ v3: CGFloat, _ x: CGFloat, _ y: CGFloat, _ z: CGFloat){
         let light = SCNLight()
         light.type = SCNLight.LightType.directional
-        
         light.color = CGColor(srgbRed: v1, green: v2, blue: v3, alpha: alpha)
         
-        let tag = "DIRECTIONAL" + "r" + v1 + "g" + v2 + "b" + v3 + "x" + x + "y" + y + "z" + z
+        let tag = "SPOT" + "r" + v1.description + "g" + v2.description + "b" + v3.description
         
-        createLight(tag, light, _type: "DIRECTIONAL")
+        let positiontag = "x" + x.description + "y" + y.description + "z" + z.description
+        
+        let newtag = tag + positiontag
+        
+        createLight(newtag, light, _type: "DIRECTIONAL")
     }
     
 }

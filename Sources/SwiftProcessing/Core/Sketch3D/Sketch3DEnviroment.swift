@@ -17,7 +17,7 @@ public extension Sketch {
         self.cameraNode.position = SCNVector3(x: 0, y: 0, z: 100)
 
         let light = SCNLight()
-        light.type = SCNLight.LightType.ambient
+        light.type = SCNLight.LightType.omni
         self.lightNode = SCNNode()
         self.lightNode.light = light
         self.lightNode.position = SCNVector3(x: 0, y: 0, z: 110)
