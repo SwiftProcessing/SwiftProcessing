@@ -15,20 +15,22 @@ public extension Sketch {
     }
 
     func loadPixels() {
-        self.pixels = get()
+        var i = get()
+        i.loadPixels()
+        self.pixels = i.pixels
     }
 
-    func get() -> [UInt8] {
+    func get() -> Image {
         get(0, 0, self.width, self.height)
     }
 
-    func get(_ x: CGFloat, _ y: CGFloat, _ w: CGFloat, _ h: CGFloat) -> [UInt8] {
-        let image = Image(UIImage(cgImage: context!.makeImage()!))
-        image.loadPixels()
-        return image.pixels
+    func get(_ x: CGFloat, _ y: CGFloat, _ w: CGFloat, _ h: CGFloat) -> Image {
+        var image = context!.makeImage()
+        image = image?.cropping(to: CGRect(x: x, y: y, width: w, height: h))
+        return Image(UIImage(cgImage: image!))
     }
 
-    func get(_ x: CGFloat, _ y: CGFloat) -> [UInt8] {
+    func get(_ x: CGFloat, _ y: CGFloat) -> Image {
         get(x, y, self.width, self.height)
     }
 

@@ -4,15 +4,19 @@ public extension Sketch {
 
     func loop() {
         if #available(iOS 10.0, *) {
-            fpsTimer = Timer(timeInterval: Double(1.0 / self.fps), repeats: true, block: {  _ in
-                self.setNeedsDisplay()
-            })
-            RunLoop.main.add(fpsTimer!, forMode: RunLoop.Mode.common)
+           
+            fpsTimer = CADisplayLink(target: self,
+                                            selector: #selector(nextFrame))
+            fpsTimer?.preferredFramesPerSecond = Int(fps)
+            fpsTimer!.add(to: .current,
+                            forMode: RunLoop.Mode.default)
         } else {
             // Fallback on earlier versions
         }
     }
-
+    @objc func nextFrame(displaylink: CADisplayLink) {
+        self.setNeedsDisplay()
+    }
     func noLoop() {
         fpsTimer!.invalidate()
     }

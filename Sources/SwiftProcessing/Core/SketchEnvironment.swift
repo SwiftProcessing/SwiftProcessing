@@ -8,5 +8,6 @@ public extension Sketch {
 
     func frameRate(fps: CGFloat) {
         self.fps = fps
+        fpsTimer?.preferredFramesPerSecond = Int(fps)
     }
 }
