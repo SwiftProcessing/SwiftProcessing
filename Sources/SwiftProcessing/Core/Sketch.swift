@@ -156,6 +156,7 @@ import SceneKit
         UIGraphicsBeginImageContext(CGSize(width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height))
         self.context = UIGraphicsGetCurrentContext()
         UIGraphicsEndImageContext()
+    
         loop()
     }
 
@@ -170,8 +171,8 @@ import SceneKit
         if self.context == nil {
             return
         }
-        self.width = self.frame.width
-        self.height = self.frame.height
+        self.width = self.frame.width * UIScreen.main.scale
+        self.height = self.frame.height * UIScreen.main.scale
         print(self.context?.width, Int(self.width))
         if (self.context?.width != Int(self.width) || self.context?.height != Int(self.height)) {
             UIGraphicsBeginImageContext(CGSize(width: self.width, height: self.height))
@@ -199,7 +200,9 @@ import SceneKit
         
         UIGraphicsPopContext()
         let img = context!.makeImage()
+        layer.frame = self.bounds
         layer.contents = img
+        layer.contentsGravity = .resizeAspect
     }
 
     private func updateTimes() {
