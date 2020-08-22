@@ -179,7 +179,8 @@ import SceneKit
             self.context = UIGraphicsGetCurrentContext()
             UIGraphicsEndImageContext()
         }
-        
+        self.width = self.frame.width
+        self.height = self.frame.height
         UIGraphicsPushContext(context!)
         
         self.settingsStack.cleanup()
@@ -203,6 +204,7 @@ import SceneKit
         layer.frame = self.bounds
         layer.contents = img
         layer.contentsGravity = .resizeAspect
+        self.scale(UIScreen.main.scale, UIScreen.main.scale)
     }
 
     private func updateTimes() {
