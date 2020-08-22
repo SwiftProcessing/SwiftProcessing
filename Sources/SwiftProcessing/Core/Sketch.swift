@@ -202,7 +202,7 @@ import SceneKit
         
         UIGraphicsPopContext()
         let img = context!.makeImage()
-        layer.frame = self.bounds
+//        layer.frame = self.bounds
         layer.contents = img
         layer.contentsGravity = .resizeAspect
     }
