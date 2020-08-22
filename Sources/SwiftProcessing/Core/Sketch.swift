@@ -193,6 +193,7 @@ import SceneKit
         }
         updateTimes()
         push()
+        self.scale(UIScreen.main.scale, UIScreen.main.scale)
         sketchDelegate?.draw()
         pop()
         postDraw3D()
@@ -204,7 +205,6 @@ import SceneKit
         layer.frame = self.bounds
         layer.contents = img
         layer.contentsGravity = .resizeAspect
-        self.scale(UIScreen.main.scale, UIScreen.main.scale)
     }
 
     private func updateTimes() {
