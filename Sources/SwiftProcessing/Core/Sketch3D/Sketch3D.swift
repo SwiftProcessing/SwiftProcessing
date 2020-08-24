@@ -10,7 +10,6 @@ public extension Sketch {
         self.rootNode.position = SCNVector3(0,0,0)
         self.rootNode.eulerAngles = SCNVector3(0,0,0)
         self.currentTransformationNode = self.rootNode
-
         for node in lastFrameTransformationNodes {
             node.addTransitionNodes()
             node.removeShapeNodes()
@@ -69,6 +68,7 @@ extension SCNNode {
            child.cleanup()
         }
         self.constraints = []
+        self.geometry?.firstMaterial?.diffuse.contents = nil
         self.geometry?.materials = []
         self.geometry = nil
     }
