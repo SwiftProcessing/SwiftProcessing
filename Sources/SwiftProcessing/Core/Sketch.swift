@@ -77,7 +77,7 @@ import SceneKit
     var fps: CGFloat = 60
 
     var fpsTimer: CADisplayLink?
-    
+
     var strokeWeight: CGFloat = 1
     var isFill: Bool = true
     var isStroke: Bool = true
@@ -111,10 +111,11 @@ import SceneKit
 
     var isSetup: Bool = false
     open var context: CGContext?
- 
+
     var scene: SCNScene = SCNScene()
     var lightNode: SCNNode = SCNNode()
     var cameraNode: SCNNode = SCNNode()
+    var cameraBase: SCNNode = SCNNode()
     var rootNode: TransitionSCNNode = TransitionSCNNode()
 
     var stackOfTransformationNodes: [TransitionSCNNode] = []
@@ -130,6 +131,8 @@ import SceneKit
     var texture: Image? = nil
     var textureID: String = ""
     var textureEnabled: Bool = false
+    
+    var scnmat: SCNMaterial = SCNMaterial()
 
     var enable3DMode: Bool = false
 
@@ -165,41 +168,36 @@ import SceneKit
         //display function
     }
     override public func display(_ layer: CALayer) {
+
         preDraw3D()
-        
+        UIGraphicsPushContext(context!)
+
         if self.context == nil {
             return
         }
+
         self.width = layer.preferredFrameSize().width
         self.height = layer.preferredFrameSize().height
 
-        if (self.context?.width != Int(self.width) || self.context?.height != Int(self.height)) {
-            UIGraphicsBeginImageContext(CGSize(width: self.width, height: self.height))
-            self.context = UIGraphicsGetCurrentContext()
-            UIGraphicsEndImageContext()
-        }
-        
-        UIGraphicsPushContext(context!)
-        
         self.settingsStack.cleanup()
         currentStack = []
         self.settingsStack = SketchSettingsStack()
-    
+
         if !isSetup{
             sketchDelegate?.setup()
             isSetup = true
         }
         updateTimes()
-        push()
         sketchDelegate?.draw()
-        pop()
+
         postDraw3D()
 
         updateTouches()
-        
+
         UIGraphicsPopContext()
         let img = context!.makeImage()
         layer.contents = img
+
     }
 
     private func updateTimes() {
