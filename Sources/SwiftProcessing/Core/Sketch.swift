@@ -115,6 +115,7 @@ import SceneKit
     var scene: SCNScene = SCNScene()
     var lightNode: SCNNode = SCNNode()
     var cameraNode: SCNNode = SCNNode()
+    var lookAtNode: SCNNode = SCNNode()
     var rootNode: TransitionSCNNode = TransitionSCNNode()
 
     var stackOfTransformationNodes: [TransitionSCNNode] = []
@@ -124,12 +125,12 @@ import SceneKit
 
     var globalPosition: SIMD4<Float> = simd_float4(0,0,0,0)
     var globalRotation: SIMD4<Float> = simd_float4(0,0,0,0)
-    var drawFramePosition: SIMD4<Float> = simd_float4(0,0,0,0)
-    var drawFrameRotation: SIMD4<Float> = simd_float4(0,0,0,0)
 
     var texture: Image? = nil
     var textureID: String = ""
     var textureEnabled: Bool = false
+
+    var scnmat: SCNMaterial = SCNMaterial()
 
     var enable3DMode: Bool = false
 
@@ -165,11 +166,14 @@ import SceneKit
         //display function
     }
     override public func display(_ layer: CALayer) {
+
         preDraw3D()
+        UIGraphicsPushContext(context!)
 
         if self.context == nil {
             return
         }
+
         self.width = layer.preferredFrameSize().width
         self.height = layer.preferredFrameSize().height
 
@@ -190,9 +194,8 @@ import SceneKit
             isSetup = true
         }
         updateTimes()
-        push()
         sketchDelegate?.draw()
-        pop()
+
         postDraw3D()
 
         updateTouches()
@@ -200,6 +203,7 @@ import SceneKit
         UIGraphicsPopContext()
         let img = context!.makeImage()
         layer.contents = img
+
     }
 
     private func updateTimes() {
