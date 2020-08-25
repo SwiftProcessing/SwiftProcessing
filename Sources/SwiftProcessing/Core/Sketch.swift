@@ -115,7 +115,7 @@ import SceneKit
     var scene: SCNScene = SCNScene()
     var lightNode: SCNNode = SCNNode()
     var cameraNode: SCNNode = SCNNode()
-    var cameraBase: SCNNode = SCNNode()
+    var lookAtNode: SCNNode = SCNNode()
     var rootNode: TransitionSCNNode = TransitionSCNNode()
 
     var stackOfTransformationNodes: [TransitionSCNNode] = []
