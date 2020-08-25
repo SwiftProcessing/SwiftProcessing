@@ -39,7 +39,7 @@ open class UIKitViewElement: NSObject{
     
     open func size(_ w: CGFloat, _ h: CGFloat){
         let s = sketch.scale
-        element.frame = CGRect(x: element.frame.minX, y: element.frame.minY, width: w, height: h)
+        element.frame = CGRect(x: element.frame.minX, y: element.frame.minY, width: w * s.x, height: h * s.y)
     }
     
     open func position(_ x: CGFloat, _ y: CGFloat){

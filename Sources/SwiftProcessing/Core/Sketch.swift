@@ -178,15 +178,14 @@ import SceneKit
         self.settingsStack.cleanup()
         currentStack = []
         self.settingsStack = SketchSettingsStack()
-    
-        if !isSetup{
-            sketchDelegate?.setup()
-            isSetup = true
-        }
         updateTimes()
 
         push()
         scale(UIScreen.main.scale, UIScreen.main.scale)
+        if !isSetup{
+            sketchDelegate?.setup()
+            isSetup = true
+        }       
         sketchDelegate?.draw()
         pop()
         updateTouches()
