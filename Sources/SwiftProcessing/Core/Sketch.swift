@@ -132,8 +132,6 @@ import SceneKit
 
     var scnmat: SCNMaterial = SCNMaterial()
 
-    var scnmat: SCNMaterial = SCNMaterial()
-
     var enable3DMode: Bool = false
 
     // used to store references to UIKitViewElements created using SwiftProcessing. Storing references avoids
@@ -180,7 +178,7 @@ import SceneKit
         self.height = layer.preferredFrameSize().height
 
         if (self.context?.width != Int(self.width) || self.context?.height != Int(self.height)) {
-            UIGraphicsBeginImageContext(CGSize(width: self.width, heighst: self.height))
+            UIGraphicsBeginImageContext(CGSize(width: self.width, height: self.height))
             self.context = UIGraphicsGetCurrentContext()
             UIGraphicsEndImageContext()
         }

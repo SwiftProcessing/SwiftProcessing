@@ -15,7 +15,6 @@ public extension Sketch {
             node.removeShapeNodes()
         }
 
-        self.drawFramePosition = self.globalPosition
 
         self.scnmat = SCNMaterial()
     }
