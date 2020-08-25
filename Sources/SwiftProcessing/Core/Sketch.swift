@@ -115,6 +115,7 @@ import SceneKit
     var scene: SCNScene = SCNScene()
     var lightNode: SCNNode = SCNNode()
     var cameraNode: SCNNode = SCNNode()
+    var lookAtNode: SCNNode = SCNNode()
     var rootNode: TransitionSCNNode = TransitionSCNNode()
 
     var stackOfTransformationNodes: [TransitionSCNNode] = []
@@ -128,6 +129,8 @@ import SceneKit
     var texture: Image? = nil
     var textureID: String = ""
     var textureEnabled: Bool = false
+
+    var scnmat: SCNMaterial = SCNMaterial()
 
     var scnmat: SCNMaterial = SCNMaterial()
 
@@ -177,7 +180,7 @@ import SceneKit
         self.height = layer.preferredFrameSize().height
 
         if (self.context?.width != Int(self.width) || self.context?.height != Int(self.height)) {
-            UIGraphicsBeginImageContext(CGSize(width: self.width, height: self.height))
+            UIGraphicsBeginImageContext(CGSize(width: self.width, heighst: self.height))
             self.context = UIGraphicsGetCurrentContext()
             UIGraphicsEndImageContext()
         }
@@ -193,9 +196,8 @@ import SceneKit
             isSetup = true
         }
         updateTimes()
-        push()
         sketchDelegate?.draw()
-        pop()
+
         postDraw3D()
 
         updateTouches()

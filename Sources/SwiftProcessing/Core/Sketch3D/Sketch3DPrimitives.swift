@@ -13,9 +13,7 @@ public extension Sketch {
 
         if var shapeNode = self.currentTransformationNode.getAvailableShape(newtag) {
 
-
         } else {
-
             geometry.firstMaterial?.diffuse.contents = UIColor(red: self.settings.fill.red/255.0, green: self.settings.fill.green/255.0, blue: self.settings.fill.blue/255.0, alpha: self.settings.fill.alpha)
 
             if self.texture != nil && self.textureEnabled {
