@@ -184,8 +184,6 @@ import SceneKit
             UIGraphicsEndImageContext()
         }
 
-        UIGraphicsPushContext(context!)
-
         self.settingsStack.cleanup()
         currentStack = []
         self.settingsStack = SketchSettingsStack()
