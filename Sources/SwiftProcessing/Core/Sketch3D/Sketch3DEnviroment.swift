@@ -27,6 +27,11 @@ public extension Sketch {
         self.lightNode = SCNNode()
         self.lightNode.light = light
         self.lightNode.position = SCNVector3(x: 0, y: 0, z: 110)
+        
+        let ambientLight = SCNLight()
+        self.ambientLightNode = SCNNode()
+        self.ambientLightNode.light = ambientLight
+        self.lightNode.position = SCNVector3(x: 0, y: 0, z: 110)
 
         let baseTransformationNode = TransitionSCNNode()
         self.rootNode = baseTransformationNode
@@ -35,6 +40,7 @@ public extension Sketch {
         self.scene.rootNode.addChildNode(lightNode)
         self.scene.rootNode.addChildNode(lookAtNode)
         self.scene.rootNode.addChildNode(cameraNode)
+        self.scene.rootNode.addChildNode(ambientLightNode)
 
         self.enable3DMode = true
     }

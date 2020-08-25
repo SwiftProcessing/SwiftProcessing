@@ -5,23 +5,20 @@ import Foundation
 public extension Sketch {
     
     func ambientLight(_ v1: CGFloat, _ v2: CGFloat, _ v3: CGFloat, _ alpha: CGFloat = 1){
-        self.lightNode.light?.type = SCNLight.LightType.ambient
-        self.lightNode.light?.color = CGColor(srgbRed: v1, green: v2, blue: v3, alpha: alpha)
+        self.ambientLightNode.light?.type = SCNLight.LightType.ambient
+        self.ambientLightNode.light?.color = CGColor(srgbRed: v1, green: v2, blue: v3, alpha: alpha)
     }
     
     func ambientLight(_ gray: CGFloat, _ alpha: CGFloat = 1){
-        self.lightNode.light?.type = SCNLight.LightType.ambient
-        self.lightNode.light?.color = CGColor(genericGrayGamma2_2Gray: gray, alpha: alpha)
+        self.ambientLightNode.light?.type = SCNLight.LightType.ambient
+        self.ambientLightNode.light?.color = CGColor(genericGrayGamma2_2Gray: gray, alpha: alpha)
     }
     
     func createLight(_ tag: String, _ lightSCN: SCNLight, _type: String){
         
         let newtag = tag
-
-        if var shapeNode = self.currentTransformationNode.getAvailableShape(newtag) {
-
-
-        } else {
+        
+        if(self.currentTransformationNode.getAvailableShape(newtag) == nil) {
 
             let node = SCNNode()
             node.position = SCNVector3(x: 0, y: 0, z: 0)
