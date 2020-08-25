@@ -5,13 +5,15 @@ public extension Sketch {
 
     func shapeCreate(_ tag: String, _ geometry: SCNGeometry,_ type: String) {
 
-        var newtag = tag + "r" + self.settings.fill.red.description + "g" + self.settings.fill.green.description + "b" + self.settings.fill.blue.description + "a" + self.settings.fill.alpha.description
+        var colorTag =  "r" + self.settings.fill.red.description + "g" + self.settings.fill.green.description + "b" + self.settings.fill.blue.description + "a" + self.settings.fill.alpha.description
+
+        var materialTag =  String(UInt(bitPattern: ObjectIdentifier(self.scnmat)))
+
+        var newtag = tag + colorTag + materialTag
 
         if var shapeNode = self.currentTransformationNode.getAvailableShape(newtag) {
 
-
         } else {
-
             geometry.firstMaterial?.diffuse.contents = UIColor(red: self.settings.fill.red/255.0, green: self.settings.fill.green/255.0, blue: self.settings.fill.blue/255.0, alpha: self.settings.fill.alpha)
 
             if self.texture != nil && self.textureEnabled {

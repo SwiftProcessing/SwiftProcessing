@@ -79,7 +79,7 @@ import SceneKit
     var fps: CGFloat = 60
     
     var fpsTimer: CADisplayLink?
-    
+
     var strokeWeight: CGFloat = 1
     var isFill: Bool = true
     var isStroke: Bool = true
@@ -113,10 +113,13 @@ import SceneKit
     
     var isSetup: Bool = false
     open var context: CGContext?
-    
+
+
     var scene: SCNScene = SCNScene()
     var lightNode: SCNNode = SCNNode()
+    var ambientLightNode: SCNNode = SCNNode()
     var cameraNode: SCNNode = SCNNode()
+    var lookAtNode: SCNNode = SCNNode()
     var rootNode: TransitionSCNNode = TransitionSCNNode()
     
     var stackOfTransformationNodes: [TransitionSCNNode] = []
@@ -126,13 +129,14 @@ import SceneKit
     
     var globalPosition: SIMD4<Float> = simd_float4(0,0,0,0)
     var globalRotation: SIMD4<Float> = simd_float4(0,0,0,0)
+
     var drawFramePosition: SIMD4<Float> = simd_float4(0,0,0,0)
     var drawFrameRotation: SIMD4<Float> = simd_float4(0,0,0,0)
     
     var texture: Image? = nil
     var textureID: String = ""
     var textureEnabled: Bool = false
-    
+    var scnmat: SCNMaterial = SCNMaterial()
     var enable3DMode: Bool = false
     
     // used to store references to UIKitViewElements created using SwiftProcessing. Storing references avoids
@@ -168,19 +172,22 @@ import SceneKit
         //display function
     }
     override public func display(_ layer: CALayer) {
+
         preDraw3D()
+
         updateDimensions()
         UIGraphicsPushContext(context!)
         
         self.settingsStack.cleanup()
         currentStack = []
         self.settingsStack = SketchSettingsStack()
-        
+    
         if !isSetup{
             sketchDelegate?.setup()
             isSetup = true
         }
         updateTimes()
+
         push()
         scale(UIScreen.main.scale, UIScreen.main.scale)
         sketchDelegate?.draw()
