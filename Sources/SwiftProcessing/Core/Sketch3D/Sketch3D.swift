@@ -15,6 +15,8 @@ public extension Sketch {
             node.removeShapeNodes()
         }
 
+
+        self.scnmat = SCNMaterial()
     }
 
     func postDraw3D(){

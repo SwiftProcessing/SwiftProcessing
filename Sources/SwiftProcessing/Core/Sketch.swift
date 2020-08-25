@@ -114,6 +114,7 @@ import SceneKit
 
     var scene: SCNScene = SCNScene()
     var lightNode: SCNNode = SCNNode()
+    var ambientLightNode: SCNNode = SCNNode()
     var cameraNode: SCNNode = SCNNode()
     var lookAtNode: SCNNode = SCNNode()
     var rootNode: TransitionSCNNode = TransitionSCNNode()
@@ -129,7 +130,7 @@ import SceneKit
     var texture: Image? = nil
     var textureID: String = ""
     var textureEnabled: Bool = false
-    
+
     var scnmat: SCNMaterial = SCNMaterial()
 
     var enable3DMode: Bool = false
@@ -176,6 +177,12 @@ import SceneKit
 
         self.width = layer.preferredFrameSize().width
         self.height = layer.preferredFrameSize().height
+
+        if (self.context?.width != Int(self.width) || self.context?.height != Int(self.height)) {
+            UIGraphicsBeginImageContext(CGSize(width: self.width, height: self.height))
+            self.context = UIGraphicsGetCurrentContext()
+            UIGraphicsEndImageContext()
+        }
 
         self.settingsStack.cleanup()
         currentStack = []

@@ -10,15 +10,15 @@ public extension Sketch {
 
         self.scene = SCNScene()
         sceneView.scene = scene
-        
+
         self.lookAtNode = SCNNode()
         self.lookAtNode.position = SCNVector3(x: 0, y: 0, z: 0)
-        
+
         let camera = SCNCamera()
         self.cameraNode = SCNNode()
         self.cameraNode.camera = camera
         self.cameraNode.position = SCNVector3(x: 0, y: 0, z: 100)
-        
+
         let lookAtConstraint = SCNLookAtConstraint(target: self.lookAtNode)
         self.cameraNode.constraints = [lookAtConstraint]
 
@@ -26,6 +26,11 @@ public extension Sketch {
         light.type = SCNLight.LightType.omni
         self.lightNode = SCNNode()
         self.lightNode.light = light
+        self.lightNode.position = SCNVector3(x: 0, y: 0, z: 110)
+        
+        let ambientLight = SCNLight()
+        self.ambientLightNode = SCNNode()
+        self.ambientLightNode.light = ambientLight
         self.lightNode.position = SCNVector3(x: 0, y: 0, z: 110)
 
         let baseTransformationNode = TransitionSCNNode()
@@ -35,7 +40,8 @@ public extension Sketch {
         self.scene.rootNode.addChildNode(lightNode)
         self.scene.rootNode.addChildNode(lookAtNode)
         self.scene.rootNode.addChildNode(cameraNode)
-        
+        self.scene.rootNode.addChildNode(ambientLightNode)
+
         self.enable3DMode = true
     }
 

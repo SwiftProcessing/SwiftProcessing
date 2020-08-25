@@ -14,12 +14,12 @@ public extension Sketch {
         guard let object = asset.object(at: 0) as? MDLMesh
              else { fatalError("Failed to get mesh from asset.") }
         var tag = "model" + assetName + extensionName
-        
+
         var modelObject = ModelNode(tag: tag, mdlObject: object)
-        
+
         return modelObject
     }
-    
+
     func model(_ mdlObject: ModelNode){
         if var shapeNode = self.currentTransformationNode.getAvailableShape(mdlObject.tag) {
 
@@ -34,7 +34,7 @@ public extension Sketch {
 
             self.currentTransformationNode.addShapeNode(node,mdlObject.tag)
         }
-        
+
     }
 
 }
