@@ -125,8 +125,6 @@ import SceneKit
 
     var globalPosition: SIMD4<Float> = simd_float4(0,0,0,0)
     var globalRotation: SIMD4<Float> = simd_float4(0,0,0,0)
-    var drawFramePosition: SIMD4<Float> = simd_float4(0,0,0,0)
-    var drawFrameRotation: SIMD4<Float> = simd_float4(0,0,0,0)
 
     var texture: Image? = nil
     var textureID: String = ""
