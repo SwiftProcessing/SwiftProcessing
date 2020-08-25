@@ -124,13 +124,11 @@ import SceneKit
 
     var globalPosition: SIMD4<Float> = simd_float4(0,0,0,0)
     var globalRotation: SIMD4<Float> = simd_float4(0,0,0,0)
-    var drawFramePosition: SIMD4<Float> = simd_float4(0,0,0,0)
-    var drawFrameRotation: SIMD4<Float> = simd_float4(0,0,0,0)
 
     var texture: Image? = nil
     var textureID: String = ""
     var textureEnabled: Bool = false
-    
+
     var scnmat: SCNMaterial = SCNMaterial()
 
     var enable3DMode: Bool = false
@@ -178,6 +176,14 @@ import SceneKit
         self.width = layer.preferredFrameSize().width
         self.height = layer.preferredFrameSize().height
 
+        if (self.context?.width != Int(self.width) || self.context?.height != Int(self.height)) {
+            UIGraphicsBeginImageContext(CGSize(width: self.width, height: self.height))
+            self.context = UIGraphicsGetCurrentContext()
+            UIGraphicsEndImageContext()
+        }
+
+        UIGraphicsPushContext(context!)
+
         self.settingsStack.cleanup()
         currentStack = []
         self.settingsStack = SketchSettingsStack()
@@ -187,8 +193,9 @@ import SceneKit
             isSetup = true
         }
         updateTimes()
+        push()
         sketchDelegate?.draw()
-
+        pop()
         postDraw3D()
 
         updateTouches()

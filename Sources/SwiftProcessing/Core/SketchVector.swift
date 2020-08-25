@@ -139,4 +139,18 @@ open class Vector: CustomStringConvertible {
         }
         return self
     }
+    
+    open func heading() -> CGFloat{
+        var h = atan2(self.y, self.x)
+        return h
+    }
+    
+    open func rotate(_ a: CGFloat) -> Vector {
+        var newHeading = self.heading()
+        newHeading += a;
+        let mag = self.mag();
+        self.x = cos(newHeading) * mag;
+        self.y = sin(newHeading) * mag;
+        return self;
+    }
 }

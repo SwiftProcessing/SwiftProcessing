@@ -7,6 +7,7 @@ public extension Sketch {
            
             fpsTimer = CADisplayLink(target: self,
                                             selector: #selector(nextFrame))
+            fpsTimer?.preferredFramesPerSecond = Int(fps)
             fpsTimer!.add(to: .current,
                             forMode: RunLoop.Mode.default)
         } else {

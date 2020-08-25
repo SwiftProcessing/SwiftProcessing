@@ -17,7 +17,7 @@ public extension Sketch {
         }
 
         self.drawFramePosition = self.globalPosition
-        
+
         self.scnmat = SCNMaterial()
     }
 
