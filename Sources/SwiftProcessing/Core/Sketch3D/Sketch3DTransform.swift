@@ -26,13 +26,13 @@ public extension Sketch {
 
             }
             self.stackOfTransformationNodes.append(nextNode)
-            
+
             // changeCurrentTransitionNode enabled default
             // determines if future nodes will branch off this node
             if (changeCurrentTransitionNode){
                 self.currentTransformationNode = nextNode
             }
-            
+
         } else {
             // creating new node because no nodes available
             let newTransformationNode: TransitionSCNNode = TransitionSCNNode()
@@ -49,7 +49,7 @@ public extension Sketch {
                 print("Wrong translation property key word")
             }
             self.stackOfTransformationNodes.append(newTransformationNode)
-            
+
             if (changeCurrentTransitionNode){
                 self.currentTransformationNode = newTransformationNode
             }
