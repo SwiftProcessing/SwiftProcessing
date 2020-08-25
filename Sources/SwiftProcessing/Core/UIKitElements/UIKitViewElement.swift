@@ -39,12 +39,14 @@ open class UIKitViewElement: NSObject{
     
     open func size(_ w: CGFloat, _ h: CGFloat){
         let s = sketch.scale
-        element.layer.frame = CGRect(x: element.layer.frame.minX, y: element.layer.frame.minY, width: w * s.x * UIScreen.main.scale, height: h * s.y * UIScreen.main.scale)
+        element.frame = CGRect(x: element.frame.minX, y: element.frame.minY, width: w, height: h)
+//        element.layer.frame = CGRect(x: element.layer.frame.minX, y: element.layer.frame.minY, width: w * s.x * UIScreen.main.scale, height: h * s.y * UIScreen.main.scale)
     }
     
     open func position(_ x: CGFloat, _ y: CGFloat){
         let t = sketch.translation
-        element.layer.position = CGPoint(x: x + t.x, y: y + t.y)
+        element.layer.frame = CGRect(x: (x + t.x), y: (y + t.y), width: element.layer.frame.width, height: element.layer.frame.height)
+        element.layer.position = CGPoint(x: x, y: y)
     }
     
     open func hide(){
