@@ -25,6 +25,9 @@ import SceneKit
     public let CORNERS = "corners"
     public let CENTER = "center"
     
+    public let PIE = "pie"
+    public let CHORD = "chord"
+    public let OPEN = "open"
     public let CLOSE = "close"
     public let NORMAL_VERTEX = "normal"
     public let CURVE_VERTEX = "curve"
