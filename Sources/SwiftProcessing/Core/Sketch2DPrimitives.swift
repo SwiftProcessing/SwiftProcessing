@@ -2,15 +2,25 @@ import UIKit
 
 public extension Sketch {
 
-    func arc(_ x: CGFloat, _ y: CGFloat, _ w: CGFloat, _ h: CGFloat, _ start: CGFloat, _ stop: CGFloat) {
-        let cx = x + w * 0.5
-        let cy = y + h * 0.5
+    func arc(_ x: CGFloat, _ y: CGFloat, _ w: CGFloat, _ h: CGFloat, _ start: CGFloat, _ stop: CGFloat, _ mode: String = "pie") {
+ 
         let r = w * 0.5
-
-        let t = CGAffineTransform(translationX: cx, y: cy)
+        let t = CGAffineTransform(scaleX: 1.0, y: h / w)
+        
         context?.beginPath()
         let path: CGMutablePath = CGMutablePath()
-        path.addArc(center: CGPoint(x: x, y: y), radius: r, startAngle: start, endAngle: stop, clockwise: false, transform: t)
+        path.addArc(center: CGPoint(x: x, y: y / t.d), radius: r, startAngle: start, endAngle: stop, clockwise: false, transform: t)
+        switch mode{
+            case PIE:
+                path.addLine(to: CGPoint(x: x, y: y))
+                path.closeSubpath()
+            case CHORD:
+                path.closeSubpath()
+            case OPEN:
+                break
+            default:
+                break
+        }
         context?.addPath(path)
         context?.drawPath(using: .eoFillStroke)
     }
