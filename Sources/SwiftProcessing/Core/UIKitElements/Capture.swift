@@ -134,11 +134,12 @@ open class Camera: UIKitViewElement {
         configureCaptureSession(desiredFrameRate)
     }
 
-    func start() {
-        if cameraIsReadyToUse { session.startRunning() }
+    open func start() {
+        if cameraIsReadyToUse { session.startRunning()
+        }
     }
 
-    func stop() {
+    open func stop() {
         session.stopRunning()
     }
 
