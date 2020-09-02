@@ -184,14 +184,14 @@ import SceneKit
         self.settingsStack = SketchSettingsStack()
         updateTimes()
 
-//        push()
+        push()
 //        scale(UIScreen.main.scale, UIScreen.main.scale)
         if !isSetup{
             sketchDelegate?.setup()
             isSetup = true
         }       
         sketchDelegate?.draw()
-//        pop()
+        pop()
         updateTouches()
         
         postDraw3D()
