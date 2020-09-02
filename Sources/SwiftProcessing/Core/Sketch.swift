@@ -162,7 +162,8 @@ import SceneKit
         UIGraphicsBeginImageContext(CGSize(width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height))
         self.context = UIGraphicsGetCurrentContext()
         UIGraphicsEndImageContext()
-        
+        push()
+        scale(UIScreen.main.scale, UIScreen.main.scale)
         loop()
     }
     
@@ -183,13 +184,14 @@ import SceneKit
         self.settingsStack = SketchSettingsStack()
         updateTimes()
 
+//        push()
+//        scale(UIScreen.main.scale, UIScreen.main.scale)
         if !isSetup{
-            scale(UIScreen.main.scale, UIScreen.main.scale)
             sketchDelegate?.setup()
             isSetup = true
         }       
         sketchDelegate?.draw()
-
+//        pop()
         updateTouches()
         
         postDraw3D()
