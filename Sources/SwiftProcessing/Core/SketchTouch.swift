@@ -48,7 +48,7 @@ extension Sketch: UIGestureRecognizerDelegate {
         
         let newTouches = (0...touchRecongizer.numberOfTouches - 1)
             .map({touchRecongizer.location(ofTouch: $0, in: self)})
-            .map({createVector($0.x, $0.y)})
+            .map({createVector($0.x * UIScreen.main.scale, $0.y * UIScreen.main.scale)})
         
         let moveThreshold: CGFloat = 1.0
         if newTouches.count == touches.count{
