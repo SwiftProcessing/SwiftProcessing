@@ -18,9 +18,6 @@ public struct SketchSettingsStack {
   }
 
   public mutating func pop() -> SketchSettings? {
-    if array.count == 0 {
-              assertionFailure("Error: invalid call to pop")
-    }
     return array.popLast()
   }
 

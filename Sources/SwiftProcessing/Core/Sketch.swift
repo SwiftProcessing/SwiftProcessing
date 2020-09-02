@@ -162,8 +162,6 @@ import SceneKit
         UIGraphicsBeginImageContext(CGSize(width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height))
         self.context = UIGraphicsGetCurrentContext()
         UIGraphicsEndImageContext()
-        push()
-        scale(UIScreen.main.scale, UIScreen.main.scale)
         loop()
     }
     
@@ -173,7 +171,7 @@ import SceneKit
         //display function
     }
     override public func display(_ layer: CALayer) {
-
+        pop()
         preDraw3D()
 
         updateDimensions()
@@ -185,7 +183,7 @@ import SceneKit
         updateTimes()
 
         push()
-//        scale(UIScreen.main.scale, UIScreen.main.scale)
+        scale(UIScreen.main.scale, UIScreen.main.scale)
         if !isSetup{
             sketchDelegate?.setup()
             isSetup = true
@@ -200,6 +198,8 @@ import SceneKit
         let img = context!.makeImage()
         layer.contents = img
         layer.contentsGravity = .resizeAspect
+        push()
+        scale(UIScreen.main.scale, UIScreen.main.scale)
     }
     
     private func updateDimensions() {
@@ -240,11 +240,13 @@ import SceneKit
     
     open func pop() {
         context?.restoreGState()
-        settings = settingsStack.pop()!
-        settings.restore(sketch: self)
+        if let settings = settingsStack.pop(){
         
-        if(self.enable3DMode){
-            self.currentTransformationNode = self.currentStack.popLast()!
+            settings.restore(sketch: self)
+            
+            if(self.enable3DMode){
+                self.currentTransformationNode = self.currentStack.popLast()!
+            }
         }
     }
 }
