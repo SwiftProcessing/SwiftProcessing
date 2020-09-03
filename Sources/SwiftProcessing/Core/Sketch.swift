@@ -171,7 +171,6 @@ import SceneKit
         //display function
     }
     override public func display(_ layer: CALayer) {
-        pop()
         preDraw3D()
 
         updateDimensions()
@@ -198,8 +197,6 @@ import SceneKit
         let img = context!.makeImage()
         layer.contents = img
         layer.contentsGravity = .resizeAspect
-        push()
-        scale(UIScreen.main.scale, UIScreen.main.scale)
     }
     
     private func updateDimensions() {
