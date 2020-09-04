@@ -106,6 +106,10 @@ import SceneKit
     open var pixels: [UInt8] = []
     
     open var touches: [Vector] = []
+    open var touched: Bool = false
+    open var touchX: CGFloat = -1
+    open var touchY: CGFloat = -1
+    
     var touchMode: String = "self"
     open var SELF: String = "self"
     open var ALL: String = "all"
@@ -182,7 +186,8 @@ import SceneKit
         currentStack = []
         self.settingsStack = SketchSettingsStack()
         updateTimes()
-
+        updateTouches()
+        
         push()
         scale(UIScreen.main.scale, UIScreen.main.scale)
         if !isSetup{
@@ -191,7 +196,7 @@ import SceneKit
         }       
         sketchDelegate?.draw()
         pop()
-        updateTouches()
+   
         
         postDraw3D()
 

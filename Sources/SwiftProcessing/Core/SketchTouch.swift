@@ -68,6 +68,12 @@ extension Sketch: UIGestureRecognizerDelegate {
         if isTouchEnded {
             sketchDelegate?.touchEnded?()
         }
+        
+        touched =  touches.count > 0
+        if let t = touches.first {
+            touchX = t.x
+            touchY = t.y
+        }
     }
     
 }
