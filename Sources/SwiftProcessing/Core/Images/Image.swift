@@ -260,9 +260,7 @@ open class Image {
                 filter?.setValue(currentCIImage, forKey: kCIInputImageKey)
             }
             
-            guard let outputImage = filter?.outputImage else {
-                print("UNFILTERED")
-                return }
+            guard let outputImage = filter?.outputImage else { return }
    
             let processedImage = UIImage(cgImage: ciContext.createCGImage(outputImage, from: outputImage.extent)!)
             self.uiImage[i] = processedImage
