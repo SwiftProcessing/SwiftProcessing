@@ -1,9 +1,9 @@
 //
-//  File.swift
-//  
+//  ImagePicker.swift
+//
 //
 //  Created by Jonathan Kaufman on 9/6/20.
-//
+//  Adapted from https://theswiftdev.com/picking-images-with-uiimagepickercontroller-in-swift-5/
 
 import UIKit
 
@@ -40,7 +40,12 @@ open class ImagePicker: NSObject {
         }
     }
 
-    public func present(from sourceView: UIView, _ picked: @escaping (Image) -> Void) {
+    public func show(_ from: UIView? = nil, _ picked: @escaping (Image) -> Void) {
+        var sourceView: UIView! = from
+        if from == nil {
+            sourceView = sketch
+        }
+        
         pickedAction = picked
         
         let alertController = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
@@ -59,7 +64,7 @@ open class ImagePicker: NSObject {
 
         if UIDevice.current.userInterfaceIdiom == .pad {
             alertController.popoverPresentationController?.sourceView = sourceView
-            alertController.popoverPresentationController?.sourceRect = sourceView.bounds
+            alertController.popoverPresentationController?.sourceRect = sourceView!.bounds
             alertController.popoverPresentationController?.permittedArrowDirections = [.down, .up]
         }
 
@@ -70,7 +75,10 @@ open class ImagePicker: NSObject {
         controller.dismiss(animated: true, completion: nil)
         if let i = image {
             UIGraphicsPushContext(sketch.context!)
+            sketch.push()
+            sketch.scale(UIScreen.main.scale, UIScreen.main.scale)
             pickedAction(Image(i))
+            sketch.pop()
             UIGraphicsPopContext()
         }
     }
@@ -92,8 +100,8 @@ extension ImagePicker: UIImagePickerControllerDelegate {
 }
 
 extension ImagePicker: UINavigationControllerDelegate {
-
 }
+
 extension UIView {
     var parentViewController: UIViewController? {
         var parentResponder: UIResponder? = self
