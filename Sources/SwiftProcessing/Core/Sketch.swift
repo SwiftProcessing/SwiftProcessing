@@ -65,6 +65,10 @@ import SceneKit
     public let UP = "up"
     public let UPSIDEDOWN = "upsidedown"
     
+    public let CAMERA = "camera"
+    public let PHOTO_LIBRARY = "photo library"
+    public let CAMERA_ROLL = "camera roll"
+    
     public weak var sketchDelegate: SketchDelegate?
     public var width: CGFloat = 0
     public var height: CGFloat = 0

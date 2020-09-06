@@ -26,18 +26,26 @@ open class ImagePicker: NSObject {
         
         self.pickerController.delegate = self
         self.pickerController.allowsEditing = true
+        
         self.pickerController.mediaTypes = ["public.image"]
     }
     
-    public func show(for type: UIImagePickerController.SourceType, _ picked: @escaping (Image) -> Void) {
+    public func show(_ type: String = "camera roll", _ picked: @escaping (Image) -> Void) {
+        var pickType: UIImagePickerController.SourceType = .photoLibrary
+        switch type{
+        case sketch.CAMERA: pickType = .camera
+        case sketch.CAMERA_ROLL: pickType = .savedPhotosAlbum
+        case sketch.PHOTO_LIBRARY: pickType = .photoLibrary
+        default: pickType = .photoLibrary
+        }
         
-        guard UIImagePickerController.isSourceTypeAvailable(type) else {
+        guard UIImagePickerController.isSourceTypeAvailable(pickType) else {
             return
         }
         
         pickedAction = picked
         
-        self.pickerController.sourceType = type
+        self.pickerController.sourceType = pickType
         self.presentationController?.present(self.pickerController, animated: true)
     }
     
