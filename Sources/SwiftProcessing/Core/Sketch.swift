@@ -166,7 +166,6 @@ import SceneKit
         UIGraphicsBeginImageContext(CGSize(width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height))
         self.context = UIGraphicsGetCurrentContext()
         UIGraphicsEndImageContext()
-        
         loop()
     }
     
