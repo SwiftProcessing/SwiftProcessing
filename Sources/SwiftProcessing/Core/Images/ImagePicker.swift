@@ -69,7 +69,7 @@ extension ImagePicker: UIImagePickerControllerDelegate {
     
     public func imagePickerController(_ picker: UIImagePickerController,
                                       didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey: Any]) {
-        guard let image = info[.editedImage] as? UIImage else {
+        guard let image = info[.originalImage] as? UIImage else {
             return self.pickerController(picker, didSelect: nil)
         }
         self.pickerController(picker, didSelect: image)
