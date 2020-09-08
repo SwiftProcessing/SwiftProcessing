@@ -65,6 +65,10 @@ import SceneKit
     public let UP = "up"
     public let UPSIDEDOWN = "upsidedown"
     
+    public let CAMERA = "camera"
+    public let PHOTO_LIBRARY = "photo library"
+    public let CAMERA_ROLL = "camera roll"
+    
     public weak var sketchDelegate: SketchDelegate?
     public var width: CGFloat = 0
     public var height: CGFloat = 0
@@ -106,6 +110,10 @@ import SceneKit
     open var pixels: [UInt8] = []
     
     open var touches: [Vector] = []
+    open var touched: Bool = false
+    open var touchX: CGFloat = -1
+    open var touchY: CGFloat = -1
+    
     var touchMode: String = "self"
     open var SELF: String = "self"
     open var ALL: String = "all"
@@ -162,7 +170,6 @@ import SceneKit
         UIGraphicsBeginImageContext(CGSize(width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height))
         self.context = UIGraphicsGetCurrentContext()
         UIGraphicsEndImageContext()
-        
         loop()
     }
     
@@ -182,7 +189,8 @@ import SceneKit
         currentStack = []
         self.settingsStack = SketchSettingsStack()
         updateTimes()
-
+        updateTouches()
+        
         push()
         scale(UIScreen.main.scale, UIScreen.main.scale)
         if !isSetup{
@@ -191,7 +199,7 @@ import SceneKit
         }       
         sketchDelegate?.draw()
         pop()
-        updateTouches()
+   
         
         postDraw3D()
 

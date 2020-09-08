@@ -2,6 +2,7 @@ import Foundation
 import UIKit
 
 open class Image {
+    open var ciContext: CIContext = CIContext()
     open var pixels: [UInt8] = []
     
     var uiImage: [UIImage]
@@ -260,13 +261,9 @@ open class Image {
             }
             
             guard let outputImage = filter?.outputImage else { return }
-            
-            let context = CIContext()
-            
-            if let cgimg = context.createCGImage(outputImage, from: outputImage.extent) {
-                let processedImage = UIImage(cgImage: cgimg)
-                self.uiImage[i] = processedImage
-            }
+   
+            let processedImage = UIImage(cgImage: ciContext.createCGImage(outputImage, from: outputImage.extent)!)
+            self.uiImage[i] = processedImage
         }
     }
     
