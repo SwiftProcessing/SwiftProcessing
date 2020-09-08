@@ -43,6 +43,7 @@ extension Sketch: UIGestureRecognizerDelegate {
         
         if touchRecongizer.numberOfTouches == 0{
             touches = []
+            touched = false
             return
         }
         
