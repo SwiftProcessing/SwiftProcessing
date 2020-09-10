@@ -27,8 +27,11 @@ open class Button: UIKitControlElement {
     }
     
     open func textSize(_ size: CGFloat){
-        
         (self.element as! UIButton).titleLabel?.font = UIFont(name: ((self.element as! UIButton).titleLabel?.font.fontName)!, size: size)
+    }
+    
+    open func textColor(_ r: CGFloat, _ g: CGFloat, _ b: CGFloat, _ a: CGFloat = 255){
+        (self.element as! UIButton).titleLabel?.textColor = UIColor(red: r / 255, green: g / 255, blue: b / 255, alpha: a / 255)
     }
     
 }
