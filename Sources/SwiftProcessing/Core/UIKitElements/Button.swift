@@ -31,7 +31,7 @@ open class Button: UIKitControlElement {
     }
     
     open func textColor(_ r: CGFloat, _ g: CGFloat, _ b: CGFloat, _ a: CGFloat = 255){
-        (self.element as! UIButton).titleLabel?.textColor = UIColor(red: r / 255, green: g / 255, blue: b / 255, alpha: a / 255)
+        (self.element as! UIButton).setTitleColor(UIColor(red: r / 255, green: g / 255, blue: b / 255, alpha: a / 255), for: .normal)
     }
     
 }
