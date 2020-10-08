@@ -26,7 +26,7 @@ public extension Sketch {
 
     func get(_ x: CGFloat, _ y: CGFloat, _ w: CGFloat, _ h: CGFloat) -> Image {
         var image = context!.makeImage()
-        image = image?.cropping(to: CGRect(x: x, y: y, width: w, height: h))
+        image = image?.cropping(to: CGRect(x: x * self.scale.x, y: y * self.scale.y, width: w * self.scale.x, height: h * self.scale.y))
         return Image(UIImage(cgImage: image!))
     }
 
