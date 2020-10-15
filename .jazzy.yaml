@@ -1,0 +1,15 @@
+
+author: Swift Processing
+author_url: https://swiftprocessing.org/
+github_url: https://github.com/jjkaufman/SwiftProcessing
+output: Docs
+sdk: iphonesimulator
+swift_version: 5.3
+skip_undocumented: true
+custom_categories:
+  - name: Drawing
+    children:
+    - Shapes
+  - name: Transformations
+    children:
+    - Sketch
