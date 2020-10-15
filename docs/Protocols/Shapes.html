@@ -1,0 +1,746 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Shapes Protocol Reference</title>
+    <link rel="stylesheet" type="text/css" href="../css/jazzy.css" />
+    <link rel="stylesheet" type="text/css" href="../css/highlight.css" />
+    <meta charset='utf-8'>
+    <script src="../js/jquery.min.js" defer></script>
+    <script src="../js/jazzy.js" defer></script>
+    
+    <script src="../js/lunr.min.js" defer></script>
+    <script src="../js/typeahead.jquery.js" defer></script>
+    <script src="../js/jazzy.search.js" defer></script>
+  </head>
+  <body>
+    <a name="//apple_ref/swift/Protocol/Shapes" class="dashAnchor"></a>
+    <a title="Shapes Protocol Reference"></a>
+    <header>
+      <div class="content-wrapper">
+        <p><a href="../index.html"> Docs</a> (12% documented)</p>
+        <p class="header-right"><a href="https://github.com/jjkaufman/SwiftProcessing"><img src="../img/gh.png"/>View on GitHub</a></p>
+        <p class="header-right">
+          <form role="search" action="../search.json">
+            <input type="text" placeholder="Search documentation" data-typeahead>
+          </form>
+        </p>
+      </div>
+    </header>
+    <div class="content-wrapper">
+      <p id="breadcrumbs">
+        <a href="../index.html"> Reference</a>
+        <img id="carat" src="../img/carat.png" />
+        Shapes Protocol Reference
+      </p>
+    </div>
+    <div class="content-wrapper">
+      <nav class="sidebar">
+        <ul class="nav-groups">
+          <li class="nav-group-name">
+            <a href="../Drawing.html">Drawing</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="../Protocols/Shapes.html">Shapes</a>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </nav>
+      <article class="main-content">
+        <section>
+          <section class="section">
+            <h1>Shapes</h1>
+              <div class="declaration">
+                <div class="language">
+                  
+                  <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">protocol</span> <span class="kt">Shapes</span></code></pre>
+
+                </div>
+              </div>
+            <p>Draw 2D Primitives to the screen</p>
+
+          </section>
+          <section class="section task-group-section">
+            <div class="task-group">
+              <ul>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:15SwiftProcessing6ShapesP3arcyy12CoreGraphics7CGFloatV_A5GSStF"></a>
+                    <a name="//apple_ref/swift/Method/arc(_:_:_:_:_:_:_:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:15SwiftProcessing6ShapesP3arcyy12CoreGraphics7CGFloatV_A5GSStF">arc(_:<wbr>_:<wbr>_:<wbr>_:<wbr>_:<wbr>_:<wbr>_:<wbr>)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Draw an arc to the screen.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">func</span> <span class="nf">arc</span><span class="p">(</span><span class="n">_</span> <span class="nv">x</span><span class="p">:</span> <span class="kt">CGFloat</span><span class="p">,</span> <span class="n">_</span> <span class="nv">y</span><span class="p">:</span> <span class="kt">CGFloat</span><span class="p">,</span> <span class="n">_</span> <span class="nv">w</span><span class="p">:</span> <span class="kt">CGFloat</span><span class="p">,</span> <span class="n">_</span> <span class="nv">h</span><span class="p">:</span> <span class="kt">CGFloat</span><span class="p">,</span> <span class="n">_</span> <span class="nv">start</span><span class="p">:</span> <span class="kt">CGFloat</span><span class="p">,</span> <span class="n">_</span> <span class="nv">stop</span><span class="p">:</span> <span class="kt">CGFloat</span><span class="p">,</span> <span class="n">_</span> <span class="nv">mode</span><span class="p">:</span> <span class="kt">String</span><span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>x</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>x-coordinate of the arc&rsquo;s ellipse</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>y</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>y-coordinate of the arc&rsquo;s ellipse</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>w</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>width of the arc&rsquo;s ellipse by default</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>h</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>height of the arc&rsquo;s ellipse by default</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>start</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>angle to start the arc, specified in radians</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>stop</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>angle to stop the arc, specified in radians</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>mode</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>optional parameter to determine the way of drawing the arc. either CHORD, PIE or OPEN</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:15SwiftProcessing6ShapesP7ellipseyy12CoreGraphics7CGFloatV_A3GtF"></a>
+                    <a name="//apple_ref/swift/Method/ellipse(_:_:_:_:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:15SwiftProcessing6ShapesP7ellipseyy12CoreGraphics7CGFloatV_A3GtF">ellipse(_:<wbr>_:<wbr>_:<wbr>_:<wbr>)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Draw an ellipse to the screen.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">func</span> <span class="nf">ellipse</span><span class="p">(</span><span class="n">_</span> <span class="nv">x</span><span class="p">:</span> <span class="kt">CGFloat</span><span class="p">,</span> <span class="n">_</span> <span class="nv">y</span><span class="p">:</span> <span class="kt">CGFloat</span><span class="p">,</span> <span class="n">_</span> <span class="nv">w</span><span class="p">:</span> <span class="kt">CGFloat</span><span class="p">,</span> <span class="n">_</span> <span class="nv">h</span><span class="p">:</span> <span class="kt">CGFloat</span><span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>x</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>x-coordinate of the center of ellipse.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>y</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>y-coordinate of the center of ellipse.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>w</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>width of the ellipse.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>h</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>height of the ellipse. (optional)</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:15SwiftProcessing6ShapesP6circleyy12CoreGraphics7CGFloatV_A2GtF"></a>
+                    <a name="//apple_ref/swift/Method/circle(_:_:_:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:15SwiftProcessing6ShapesP6circleyy12CoreGraphics7CGFloatV_A2GtF">circle(_:<wbr>_:<wbr>_:<wbr>)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Draw a circle to the screen</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">func</span> <span class="nf">circle</span><span class="p">(</span><span class="n">_</span> <span class="nv">x</span><span class="p">:</span> <span class="kt">CGFloat</span><span class="p">,</span> <span class="n">_</span> <span class="nv">y</span><span class="p">:</span> <span class="kt">CGFloat</span><span class="p">,</span> <span class="n">_</span> <span class="nv">d</span><span class="p">:</span> <span class="kt">CGFloat</span><span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>x</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>x-coordinate of the centre of the circle.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>y</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>y-coordinate of the centre of the circle.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>d</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>diameter of the circle.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:15SwiftProcessing6ShapesP4lineyy12CoreGraphics7CGFloatV_A3GtF"></a>
+                    <a name="//apple_ref/swift/Method/line(_:_:_:_:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:15SwiftProcessing6ShapesP4lineyy12CoreGraphics7CGFloatV_A3GtF">line(_:<wbr>_:<wbr>_:<wbr>_:<wbr>)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Draw a line to the screen.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">func</span> <span class="nf">line</span><span class="p">(</span><span class="n">_</span> <span class="nv">x1</span><span class="p">:</span> <span class="kt">CGFloat</span><span class="p">,</span> <span class="n">_</span> <span class="nv">y1</span><span class="p">:</span> <span class="kt">CGFloat</span><span class="p">,</span> <span class="n">_</span> <span class="nv">x2</span><span class="p">:</span> <span class="kt">CGFloat</span><span class="p">,</span> <span class="n">_</span> <span class="nv">y2</span><span class="p">:</span> <span class="kt">CGFloat</span><span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>x1</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>the x-coordinate of the first point</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>y1</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>the y-coordinate of the first point</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>x2</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>the x-coordinate of the second point</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>y2</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>the y-coordinate of the second point</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:15SwiftProcessing6ShapesP5pointyy12CoreGraphics7CGFloatV_AGtF"></a>
+                    <a name="//apple_ref/swift/Method/point(_:_:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:15SwiftProcessing6ShapesP5pointyy12CoreGraphics7CGFloatV_AGtF">point(_:<wbr>_:<wbr>)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Draws a single point on the screen using the current stroke weight.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">func</span> <span class="nf">point</span><span class="p">(</span><span class="n">_</span> <span class="nv">x</span><span class="p">:</span> <span class="kt">CGFloat</span><span class="p">,</span> <span class="n">_</span> <span class="nv">y</span><span class="p">:</span> <span class="kt">CGFloat</span><span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>x</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>the x-coordinate</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>y</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>the y-coordinate</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:15SwiftProcessing6ShapesP4rectyy12CoreGraphics7CGFloatV_A3GtF"></a>
+                    <a name="//apple_ref/swift/Method/rect(_:_:_:_:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:15SwiftProcessing6ShapesP4rectyy12CoreGraphics7CGFloatV_A3GtF">rect(_:<wbr>_:<wbr>_:<wbr>_:<wbr>)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Draws a rectangle on the screen</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">func</span> <span class="nf">rect</span><span class="p">(</span><span class="n">_</span> <span class="nv">x</span><span class="p">:</span> <span class="kt">CGFloat</span><span class="p">,</span> <span class="n">_</span> <span class="nv">y</span><span class="p">:</span> <span class="kt">CGFloat</span><span class="p">,</span> <span class="n">_</span> <span class="nv">w</span><span class="p">:</span> <span class="kt">CGFloat</span><span class="p">,</span> <span class="n">_</span> <span class="nv">h</span><span class="p">:</span> <span class="kt">CGFloat</span><span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>x</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>x-coordinate of the rectangle.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>y</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>y-coordinate of the rectangle.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>w</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>width of the rectangle.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>h</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>height of the rectangle. (Optional)</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:15SwiftProcessing6ShapesP6squareyy12CoreGraphics7CGFloatV_A2GtF"></a>
+                    <a name="//apple_ref/swift/Method/square(_:_:_:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:15SwiftProcessing6ShapesP6squareyy12CoreGraphics7CGFloatV_A2GtF">square(_:<wbr>_:<wbr>_:<wbr>)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Draws a square to the screen.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">func</span> <span class="nf">square</span><span class="p">(</span><span class="n">_</span> <span class="nv">x</span><span class="p">:</span> <span class="kt">CGFloat</span><span class="p">,</span> <span class="n">_</span> <span class="nv">y</span><span class="p">:</span> <span class="kt">CGFloat</span><span class="p">,</span> <span class="n">_</span> <span class="nv">s</span><span class="p">:</span> <span class="kt">CGFloat</span><span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>x</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>x-coordinate of the square.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>y</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>y-coordinate of the square.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>s</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>size of the square.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:15SwiftProcessing6ShapesP8triangleyy12CoreGraphics7CGFloatV_A5GtF"></a>
+                    <a name="//apple_ref/swift/Method/triangle(_:_:_:_:_:_:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:15SwiftProcessing6ShapesP8triangleyy12CoreGraphics7CGFloatV_A5GtF">triangle(_:<wbr>_:<wbr>_:<wbr>_:<wbr>_:<wbr>_:<wbr>)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Draws a trangle to the screen.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">func</span> <span class="nf">triangle</span><span class="p">(</span><span class="n">_</span> <span class="nv">x1</span><span class="p">:</span> <span class="kt">CGFloat</span><span class="p">,</span> <span class="n">_</span> <span class="nv">y1</span><span class="p">:</span> <span class="kt">CGFloat</span><span class="p">,</span> <span class="n">_</span> <span class="nv">x2</span><span class="p">:</span> <span class="kt">CGFloat</span><span class="p">,</span> <span class="n">_</span> <span class="nv">y2</span><span class="p">:</span> <span class="kt">CGFloat</span><span class="p">,</span> <span class="n">_</span> <span class="nv">x3</span><span class="p">:</span> <span class="kt">CGFloat</span><span class="p">,</span> <span class="n">_</span> <span class="nv">y3</span><span class="p">:</span> <span class="kt">CGFloat</span><span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>x1</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>x-coordinate of the first point</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>y1</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>y-coordinate of the first point</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>x2</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>x-coordinate of the second point</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>y2</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>y-coordinate of the second point</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>x3</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>x-coordinate of the third point</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>y3</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>y-coordinate of the third point</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+          </section>
+        </section>
+        <section id="footer">
+          <p>&copy; 2020 <a class="link" href="https://swiftprocessing.org/" target="_blank" rel="external">Swift Processing</a>. All rights reserved. (Last updated: 2020-10-15)</p>
+          <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.13.5</a>, a <a class="link" href="https://realm.io" target="_blank" rel="external">Realm</a> project.</p>
+        </section>
+      </article>
+    </div>
+  </body>
+</div>
+</html>
