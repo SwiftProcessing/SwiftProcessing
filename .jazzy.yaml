@@ -2,7 +2,7 @@
 author: Swift Processing
 author_url: https://swiftprocessing.org/
 github_url: https://github.com/jjkaufman/SwiftProcessing
-output: Docs
+output: docs
 sdk: iphonesimulator
 swift_version: 5.3
 skip_undocumented: true
