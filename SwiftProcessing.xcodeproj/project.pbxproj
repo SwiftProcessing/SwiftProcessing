@@ -1,0 +1,716 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXAggregateTarget section */
+		"SwiftProcessing::SwiftProcessingPackageTests::ProductTarget" /* SwiftProcessingPackageTests */ = {
+			isa = PBXAggregateTarget;
+			buildConfigurationList = OBJ_131 /* Build configuration list for PBXAggregateTarget "SwiftProcessingPackageTests" */;
+			buildPhases = (
+			);
+			dependencies = (
+				OBJ_134 /* PBXTargetDependency */,
+			);
+			name = SwiftProcessingPackageTests;
+			productName = SwiftProcessingPackageTests;
+		};
+/* End PBXAggregateTarget section */
+
+/* Begin PBXBuildFile section */
+		OBJ_100 /* SketchNotifications.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_36 /* SketchNotifications.swift */; };
+		OBJ_101 /* SketchPixels.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_37 /* SketchPixels.swift */; };
+		OBJ_102 /* SketchRandom.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_38 /* SketchRandom.swift */; };
+		OBJ_103 /* SketchScroll.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_39 /* SketchScroll.swift */; };
+		OBJ_104 /* SketchSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_40 /* SketchSettings.swift */; };
+		OBJ_105 /* SketchSettingsStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_41 /* SketchSettingsStack.swift */; };
+		OBJ_106 /* SketchStructure.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_42 /* SketchStructure.swift */; };
+		OBJ_107 /* SketchTouch.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_43 /* SketchTouch.swift */; };
+		OBJ_108 /* SketchTransform.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_44 /* SketchTransform.swift */; };
+		OBJ_109 /* SketchTypography.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_45 /* SketchTypography.swift */; };
+		OBJ_110 /* SketchVector.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_46 /* SketchVector.swift */; };
+		OBJ_111 /* SketchVertex.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_47 /* SketchVertex.swift */; };
+		OBJ_112 /* SketchVisibility.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_48 /* SketchVisibility.swift */; };
+		OBJ_113 /* Alert.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_50 /* Alert.swift */; };
+		OBJ_114 /* Button.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_51 /* Button.swift */; };
+		OBJ_115 /* Capture.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_52 /* Capture.swift */; };
+		OBJ_116 /* Slider.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_53 /* Slider.swift */; };
+		OBJ_117 /* Stepper.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_54 /* Stepper.swift */; };
+		OBJ_118 /* Switch.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_55 /* Switch.swift */; };
+		OBJ_119 /* TextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_56 /* TextField.swift */; };
+		OBJ_120 /* UIApplicationExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_57 /* UIApplicationExtensions.swift */; };
+		OBJ_121 /* UIKitControlElement.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_58 /* UIKitControlElement.swift */; };
+		OBJ_122 /* UIKitViewElement.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_59 /* UIKitViewElement.swift */; };
+		OBJ_129 /* Package.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_6 /* Package.swift */; };
+		OBJ_140 /* SwiftProcessingTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_62 /* SwiftProcessingTests.swift */; };
+		OBJ_141 /* VectorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_63 /* VectorTests.swift */; };
+		OBJ_142 /* XCTestManifests.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_64 /* XCTestManifests.swift */; };
+		OBJ_144 /* SwiftProcessing.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = "SwiftProcessing::SwiftProcessing::Product" /* SwiftProcessing.framework */; };
+		OBJ_76 /* GifSwift.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_11 /* GifSwift.swift */; };
+		OBJ_77 /* Image.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_12 /* Image.swift */; };
+		OBJ_78 /* ImagePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_13 /* ImagePicker.swift */; };
+		OBJ_79 /* SketchImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_14 /* SketchImage.swift */; };
+		OBJ_80 /* Sketch.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_15 /* Sketch.swift */; };
+		OBJ_81 /* Sketch2DPrimitives.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_16 /* Sketch2DPrimitives.swift */; };
+		OBJ_82 /* Camera3D.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_18 /* Camera3D.swift */; };
+		OBJ_83 /* ModelNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_19 /* ModelNode.swift */; };
+		OBJ_84 /* Sketch3D.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_20 /* Sketch3D.swift */; };
+		OBJ_85 /* Sketch3DCamera.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_21 /* Sketch3DCamera.swift */; };
+		OBJ_86 /* Sketch3DEnviroment.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_22 /* Sketch3DEnviroment.swift */; };
+		OBJ_87 /* Sketch3DLight.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_23 /* Sketch3DLight.swift */; };
+		OBJ_88 /* Sketch3DModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_24 /* Sketch3DModel.swift */; };
+		OBJ_89 /* Sketch3DPrimitives.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_25 /* Sketch3DPrimitives.swift */; };
+		OBJ_90 /* Sketch3DTexture.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_26 /* Sketch3DTexture.swift */; };
+		OBJ_91 /* Sketch3DTransform.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_27 /* Sketch3DTransform.swift */; };
+		OBJ_92 /* TransitionSCNNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_28 /* TransitionSCNNode.swift */; };
+		OBJ_93 /* SketchAttributes.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_29 /* SketchAttributes.swift */; };
+		OBJ_94 /* SketchAugmentedReality.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_30 /* SketchAugmentedReality.swift */; };
+		OBJ_95 /* SketchCalculation.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_31 /* SketchCalculation.swift */; };
+		OBJ_96 /* SketchCanvas.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_32 /* SketchCanvas.swift */; };
+		OBJ_97 /* SketchColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_33 /* SketchColor.swift */; };
+		OBJ_98 /* SketchData.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_34 /* SketchData.swift */; };
+		OBJ_99 /* SketchEnvironment.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_35 /* SketchEnvironment.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		F0823A0E2538FA670026169A /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = OBJ_1 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = "SwiftProcessing::SwiftProcessing";
+			remoteInfo = SwiftProcessing;
+		};
+		F0823A112538FA7A0026169A /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = OBJ_1 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = "SwiftProcessing::SwiftProcessingTests";
+			remoteInfo = SwiftProcessingTests;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		OBJ_11 /* GifSwift.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GifSwift.swift; sourceTree = "<group>"; };
+		OBJ_12 /* Image.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Image.swift; sourceTree = "<group>"; };
+		OBJ_13 /* ImagePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePicker.swift; sourceTree = "<group>"; };
+		OBJ_14 /* SketchImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SketchImage.swift; sourceTree = "<group>"; };
+		OBJ_15 /* Sketch.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sketch.swift; sourceTree = "<group>"; };
+		OBJ_16 /* Sketch2DPrimitives.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sketch2DPrimitives.swift; sourceTree = "<group>"; };
+		OBJ_18 /* Camera3D.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Camera3D.swift; sourceTree = "<group>"; };
+		OBJ_19 /* ModelNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModelNode.swift; sourceTree = "<group>"; };
+		OBJ_20 /* Sketch3D.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sketch3D.swift; sourceTree = "<group>"; };
+		OBJ_21 /* Sketch3DCamera.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sketch3DCamera.swift; sourceTree = "<group>"; };
+		OBJ_22 /* Sketch3DEnviroment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sketch3DEnviroment.swift; sourceTree = "<group>"; };
+		OBJ_23 /* Sketch3DLight.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sketch3DLight.swift; sourceTree = "<group>"; };
+		OBJ_24 /* Sketch3DModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sketch3DModel.swift; sourceTree = "<group>"; };
+		OBJ_25 /* Sketch3DPrimitives.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sketch3DPrimitives.swift; sourceTree = "<group>"; };
+		OBJ_26 /* Sketch3DTexture.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sketch3DTexture.swift; sourceTree = "<group>"; };
+		OBJ_27 /* Sketch3DTransform.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sketch3DTransform.swift; sourceTree = "<group>"; };
+		OBJ_28 /* TransitionSCNNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransitionSCNNode.swift; sourceTree = "<group>"; };
+		OBJ_29 /* SketchAttributes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SketchAttributes.swift; sourceTree = "<group>"; };
+		OBJ_30 /* SketchAugmentedReality.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SketchAugmentedReality.swift; sourceTree = "<group>"; };
+		OBJ_31 /* SketchCalculation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SketchCalculation.swift; sourceTree = "<group>"; };
+		OBJ_32 /* SketchCanvas.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SketchCanvas.swift; sourceTree = "<group>"; };
+		OBJ_33 /* SketchColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SketchColor.swift; sourceTree = "<group>"; };
+		OBJ_34 /* SketchData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SketchData.swift; sourceTree = "<group>"; };
+		OBJ_35 /* SketchEnvironment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SketchEnvironment.swift; sourceTree = "<group>"; };
+		OBJ_36 /* SketchNotifications.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SketchNotifications.swift; sourceTree = "<group>"; };
+		OBJ_37 /* SketchPixels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SketchPixels.swift; sourceTree = "<group>"; };
+		OBJ_38 /* SketchRandom.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SketchRandom.swift; sourceTree = "<group>"; };
+		OBJ_39 /* SketchScroll.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SketchScroll.swift; sourceTree = "<group>"; };
+		OBJ_40 /* SketchSettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SketchSettings.swift; sourceTree = "<group>"; };
+		OBJ_41 /* SketchSettingsStack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SketchSettingsStack.swift; sourceTree = "<group>"; };
+		OBJ_42 /* SketchStructure.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SketchStructure.swift; sourceTree = "<group>"; };
+		OBJ_43 /* SketchTouch.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SketchTouch.swift; sourceTree = "<group>"; };
+		OBJ_44 /* SketchTransform.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SketchTransform.swift; sourceTree = "<group>"; };
+		OBJ_45 /* SketchTypography.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SketchTypography.swift; sourceTree = "<group>"; };
+		OBJ_46 /* SketchVector.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SketchVector.swift; sourceTree = "<group>"; };
+		OBJ_47 /* SketchVertex.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SketchVertex.swift; sourceTree = "<group>"; };
+		OBJ_48 /* SketchVisibility.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SketchVisibility.swift; sourceTree = "<group>"; };
+		OBJ_50 /* Alert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Alert.swift; sourceTree = "<group>"; };
+		OBJ_51 /* Button.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Button.swift; sourceTree = "<group>"; };
+		OBJ_52 /* Capture.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Capture.swift; sourceTree = "<group>"; };
+		OBJ_53 /* Slider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Slider.swift; sourceTree = "<group>"; };
+		OBJ_54 /* Stepper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Stepper.swift; sourceTree = "<group>"; };
+		OBJ_55 /* Switch.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Switch.swift; sourceTree = "<group>"; };
+		OBJ_56 /* TextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextField.swift; sourceTree = "<group>"; };
+		OBJ_57 /* UIApplicationExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIApplicationExtensions.swift; sourceTree = "<group>"; };
+		OBJ_58 /* UIKitControlElement.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIKitControlElement.swift; sourceTree = "<group>"; };
+		OBJ_59 /* UIKitViewElement.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIKitViewElement.swift; sourceTree = "<group>"; };
+		OBJ_6 /* Package.swift */ = {isa = PBXFileReference; explicitFileType = sourcecode.swift; path = Package.swift; sourceTree = "<group>"; };
+		OBJ_62 /* SwiftProcessingTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftProcessingTests.swift; sourceTree = "<group>"; };
+		OBJ_63 /* VectorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VectorTests.swift; sourceTree = "<group>"; };
+		OBJ_64 /* XCTestManifests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XCTestManifests.swift; sourceTree = "<group>"; };
+		OBJ_68 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
+		OBJ_69 /* _config.yml */ = {isa = PBXFileReference; lastKnownFileType = text.yaml; path = _config.yml; sourceTree = "<group>"; };
+		OBJ_70 /* install-swift-processing-template.command */ = {isa = PBXFileReference; lastKnownFileType = text; path = "install-swift-processing-template.command"; sourceTree = "<group>"; };
+		"SwiftProcessing::SwiftProcessing::Product" /* SwiftProcessing.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = SwiftProcessing.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		"SwiftProcessing::SwiftProcessingTests::Product" /* SwiftProcessingTests.xctest */ = {isa = PBXFileReference; lastKnownFileType = file; path = SwiftProcessingTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		OBJ_123 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 0;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		OBJ_143 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 0;
+			files = (
+				OBJ_144 /* SwiftProcessing.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		OBJ_10 /* Images */ = {
+			isa = PBXGroup;
+			children = (
+				OBJ_11 /* GifSwift.swift */,
+				OBJ_12 /* Image.swift */,
+				OBJ_13 /* ImagePicker.swift */,
+				OBJ_14 /* SketchImage.swift */,
+			);
+			path = Images;
+			sourceTree = "<group>";
+		};
+		OBJ_17 /* Sketch3D */ = {
+			isa = PBXGroup;
+			children = (
+				OBJ_18 /* Camera3D.swift */,
+				OBJ_19 /* ModelNode.swift */,
+				OBJ_20 /* Sketch3D.swift */,
+				OBJ_21 /* Sketch3DCamera.swift */,
+				OBJ_22 /* Sketch3DEnviroment.swift */,
+				OBJ_23 /* Sketch3DLight.swift */,
+				OBJ_24 /* Sketch3DModel.swift */,
+				OBJ_25 /* Sketch3DPrimitives.swift */,
+				OBJ_26 /* Sketch3DTexture.swift */,
+				OBJ_27 /* Sketch3DTransform.swift */,
+				OBJ_28 /* TransitionSCNNode.swift */,
+			);
+			path = Sketch3D;
+			sourceTree = "<group>";
+		};
+		OBJ_49 /* UIKitElements */ = {
+			isa = PBXGroup;
+			children = (
+				OBJ_50 /* Alert.swift */,
+				OBJ_51 /* Button.swift */,
+				OBJ_52 /* Capture.swift */,
+				OBJ_53 /* Slider.swift */,
+				OBJ_54 /* Stepper.swift */,
+				OBJ_55 /* Switch.swift */,
+				OBJ_56 /* TextField.swift */,
+				OBJ_57 /* UIApplicationExtensions.swift */,
+				OBJ_58 /* UIKitControlElement.swift */,
+				OBJ_59 /* UIKitViewElement.swift */,
+			);
+			path = UIKitElements;
+			sourceTree = "<group>";
+		};
+		OBJ_5 /*  */ = {
+			isa = PBXGroup;
+			children = (
+				OBJ_6 /* Package.swift */,
+				OBJ_7 /* Sources */,
+				OBJ_60 /* Tests */,
+				OBJ_65 /* Products */,
+				OBJ_68 /* README.md */,
+				OBJ_69 /* _config.yml */,
+				OBJ_70 /* install-swift-processing-template.command */,
+			);
+			name = "";
+			sourceTree = "<group>";
+		};
+		OBJ_60 /* Tests */ = {
+			isa = PBXGroup;
+			children = (
+				OBJ_61 /* SwiftProcessingTests */,
+			);
+			name = Tests;
+			sourceTree = SOURCE_ROOT;
+		};
+		OBJ_61 /* SwiftProcessingTests */ = {
+			isa = PBXGroup;
+			children = (
+				OBJ_62 /* SwiftProcessingTests.swift */,
+				OBJ_63 /* VectorTests.swift */,
+				OBJ_64 /* XCTestManifests.swift */,
+			);
+			name = SwiftProcessingTests;
+			path = Tests/SwiftProcessingTests;
+			sourceTree = SOURCE_ROOT;
+		};
+		OBJ_65 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				"SwiftProcessing::SwiftProcessingTests::Product" /* SwiftProcessingTests.xctest */,
+				"SwiftProcessing::SwiftProcessing::Product" /* SwiftProcessing.framework */,
+			);
+			name = Products;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		OBJ_7 /* Sources */ = {
+			isa = PBXGroup;
+			children = (
+				OBJ_8 /* SwiftProcessing */,
+			);
+			name = Sources;
+			sourceTree = SOURCE_ROOT;
+		};
+		OBJ_8 /* SwiftProcessing */ = {
+			isa = PBXGroup;
+			children = (
+				OBJ_9 /* Core */,
+			);
+			name = SwiftProcessing;
+			path = Sources/SwiftProcessing;
+			sourceTree = SOURCE_ROOT;
+		};
+		OBJ_9 /* Core */ = {
+			isa = PBXGroup;
+			children = (
+				OBJ_10 /* Images */,
+				OBJ_15 /* Sketch.swift */,
+				OBJ_16 /* Sketch2DPrimitives.swift */,
+				OBJ_17 /* Sketch3D */,
+				OBJ_29 /* SketchAttributes.swift */,
+				OBJ_30 /* SketchAugmentedReality.swift */,
+				OBJ_31 /* SketchCalculation.swift */,
+				OBJ_32 /* SketchCanvas.swift */,
+				OBJ_33 /* SketchColor.swift */,
+				OBJ_34 /* SketchData.swift */,
+				OBJ_35 /* SketchEnvironment.swift */,
+				OBJ_36 /* SketchNotifications.swift */,
+				OBJ_37 /* SketchPixels.swift */,
+				OBJ_38 /* SketchRandom.swift */,
+				OBJ_39 /* SketchScroll.swift */,
+				OBJ_40 /* SketchSettings.swift */,
+				OBJ_41 /* SketchSettingsStack.swift */,
+				OBJ_42 /* SketchStructure.swift */,
+				OBJ_43 /* SketchTouch.swift */,
+				OBJ_44 /* SketchTransform.swift */,
+				OBJ_45 /* SketchTypography.swift */,
+				OBJ_46 /* SketchVector.swift */,
+				OBJ_47 /* SketchVertex.swift */,
+				OBJ_48 /* SketchVisibility.swift */,
+				OBJ_49 /* UIKitElements */,
+			);
+			path = Core;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		"SwiftProcessing::SwiftPMPackageDescription" /* SwiftProcessingPackageDescription */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = OBJ_125 /* Build configuration list for PBXNativeTarget "SwiftProcessingPackageDescription" */;
+			buildPhases = (
+				OBJ_128 /* Sources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = SwiftProcessingPackageDescription;
+			productName = SwiftProcessingPackageDescription;
+			productType = "com.apple.product-type.framework";
+		};
+		"SwiftProcessing::SwiftProcessing" /* SwiftProcessing */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = OBJ_72 /* Build configuration list for PBXNativeTarget "SwiftProcessing" */;
+			buildPhases = (
+				OBJ_75 /* Sources */,
+				OBJ_123 /* Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = SwiftProcessing;
+			productName = SwiftProcessing;
+			productReference = "SwiftProcessing::SwiftProcessing::Product" /* SwiftProcessing.framework */;
+			productType = "com.apple.product-type.framework";
+		};
+		"SwiftProcessing::SwiftProcessingTests" /* SwiftProcessingTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = OBJ_136 /* Build configuration list for PBXNativeTarget "SwiftProcessingTests" */;
+			buildPhases = (
+				OBJ_139 /* Sources */,
+				OBJ_143 /* Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				OBJ_145 /* PBXTargetDependency */,
+			);
+			name = SwiftProcessingTests;
+			productName = SwiftProcessingTests;
+			productReference = "SwiftProcessing::SwiftProcessingTests::Product" /* SwiftProcessingTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		OBJ_1 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastSwiftMigration = 9999;
+				LastUpgradeCheck = 9999;
+			};
+			buildConfigurationList = OBJ_2 /* Build configuration list for PBXProject "SwiftProcessing" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = OBJ_5 /*  */;
+			productRefGroup = OBJ_65 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				"SwiftProcessing::SwiftProcessing" /* SwiftProcessing */,
+				"SwiftProcessing::SwiftPMPackageDescription" /* SwiftProcessingPackageDescription */,
+				"SwiftProcessing::SwiftProcessingPackageTests::ProductTarget" /* SwiftProcessingPackageTests */,
+				"SwiftProcessing::SwiftProcessingTests" /* SwiftProcessingTests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXSourcesBuildPhase section */
+		OBJ_128 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 0;
+			files = (
+				OBJ_129 /* Package.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		OBJ_139 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 0;
+			files = (
+				OBJ_140 /* SwiftProcessingTests.swift in Sources */,
+				OBJ_141 /* VectorTests.swift in Sources */,
+				OBJ_142 /* XCTestManifests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		OBJ_75 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 0;
+			files = (
+				OBJ_76 /* GifSwift.swift in Sources */,
+				OBJ_77 /* Image.swift in Sources */,
+				OBJ_78 /* ImagePicker.swift in Sources */,
+				OBJ_79 /* SketchImage.swift in Sources */,
+				OBJ_80 /* Sketch.swift in Sources */,
+				OBJ_81 /* Sketch2DPrimitives.swift in Sources */,
+				OBJ_82 /* Camera3D.swift in Sources */,
+				OBJ_83 /* ModelNode.swift in Sources */,
+				OBJ_84 /* Sketch3D.swift in Sources */,
+				OBJ_85 /* Sketch3DCamera.swift in Sources */,
+				OBJ_86 /* Sketch3DEnviroment.swift in Sources */,
+				OBJ_87 /* Sketch3DLight.swift in Sources */,
+				OBJ_88 /* Sketch3DModel.swift in Sources */,
+				OBJ_89 /* Sketch3DPrimitives.swift in Sources */,
+				OBJ_90 /* Sketch3DTexture.swift in Sources */,
+				OBJ_91 /* Sketch3DTransform.swift in Sources */,
+				OBJ_92 /* TransitionSCNNode.swift in Sources */,
+				OBJ_93 /* SketchAttributes.swift in Sources */,
+				OBJ_94 /* SketchAugmentedReality.swift in Sources */,
+				OBJ_95 /* SketchCalculation.swift in Sources */,
+				OBJ_96 /* SketchCanvas.swift in Sources */,
+				OBJ_97 /* SketchColor.swift in Sources */,
+				OBJ_98 /* SketchData.swift in Sources */,
+				OBJ_99 /* SketchEnvironment.swift in Sources */,
+				OBJ_100 /* SketchNotifications.swift in Sources */,
+				OBJ_101 /* SketchPixels.swift in Sources */,
+				OBJ_102 /* SketchRandom.swift in Sources */,
+				OBJ_103 /* SketchScroll.swift in Sources */,
+				OBJ_104 /* SketchSettings.swift in Sources */,
+				OBJ_105 /* SketchSettingsStack.swift in Sources */,
+				OBJ_106 /* SketchStructure.swift in Sources */,
+				OBJ_107 /* SketchTouch.swift in Sources */,
+				OBJ_108 /* SketchTransform.swift in Sources */,
+				OBJ_109 /* SketchTypography.swift in Sources */,
+				OBJ_110 /* SketchVector.swift in Sources */,
+				OBJ_111 /* SketchVertex.swift in Sources */,
+				OBJ_112 /* SketchVisibility.swift in Sources */,
+				OBJ_113 /* Alert.swift in Sources */,
+				OBJ_114 /* Button.swift in Sources */,
+				OBJ_115 /* Capture.swift in Sources */,
+				OBJ_116 /* Slider.swift in Sources */,
+				OBJ_117 /* Stepper.swift in Sources */,
+				OBJ_118 /* Switch.swift in Sources */,
+				OBJ_119 /* TextField.swift in Sources */,
+				OBJ_120 /* UIApplicationExtensions.swift in Sources */,
+				OBJ_121 /* UIKitControlElement.swift in Sources */,
+				OBJ_122 /* UIKitViewElement.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		OBJ_134 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = "SwiftProcessing::SwiftProcessingTests" /* SwiftProcessingTests */;
+			targetProxy = F0823A112538FA7A0026169A /* PBXContainerItemProxy */;
+		};
+		OBJ_145 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = "SwiftProcessing::SwiftProcessing" /* SwiftProcessing */;
+			targetProxy = F0823A0E2538FA670026169A /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin XCBuildConfiguration section */
+		OBJ_126 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				LD = /usr/bin/true;
+				OTHER_SWIFT_FLAGS = "-swift-version 5 -I $(TOOLCHAIN_DIR)/usr/lib/swift/pm/4_2 -sdk /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.15.sdk -package-description-version 5.1.0";
+				SWIFT_VERSION = 5.0;
+			};
+			name = Debug;
+		};
+		OBJ_127 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				LD = /usr/bin/true;
+				OTHER_SWIFT_FLAGS = "-swift-version 5 -I $(TOOLCHAIN_DIR)/usr/lib/swift/pm/4_2 -sdk /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.15.sdk -package-description-version 5.1.0";
+				SWIFT_VERSION = 5.0;
+			};
+			name = Release;
+		};
+		OBJ_132 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+			};
+			name = Debug;
+		};
+		OBJ_133 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+			};
+			name = Release;
+		};
+		OBJ_137 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
+				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PLATFORM_DIR)/Developer/Library/Frameworks",
+				);
+				HEADER_SEARCH_PATHS = "$(inherited)";
+				INFOPLIST_FILE = SwiftProcessing.xcodeproj/SwiftProcessingTests_Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @loader_path/../Frameworks @loader_path/Frameworks";
+				MACOSX_DEPLOYMENT_TARGET = 10.15;
+				OTHER_CFLAGS = "$(inherited)";
+				OTHER_LDFLAGS = "$(inherited)";
+				OTHER_SWIFT_FLAGS = "$(inherited)";
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited)";
+				SWIFT_VERSION = 5.0;
+				TARGET_NAME = SwiftProcessingTests;
+				TVOS_DEPLOYMENT_TARGET = 9.0;
+				WATCHOS_DEPLOYMENT_TARGET = 2.0;
+			};
+			name = Debug;
+		};
+		OBJ_138 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
+				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PLATFORM_DIR)/Developer/Library/Frameworks",
+				);
+				HEADER_SEARCH_PATHS = "$(inherited)";
+				INFOPLIST_FILE = SwiftProcessing.xcodeproj/SwiftProcessingTests_Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @loader_path/../Frameworks @loader_path/Frameworks";
+				MACOSX_DEPLOYMENT_TARGET = 10.15;
+				OTHER_CFLAGS = "$(inherited)";
+				OTHER_LDFLAGS = "$(inherited)";
+				OTHER_SWIFT_FLAGS = "$(inherited)";
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited)";
+				SWIFT_VERSION = 5.0;
+				TARGET_NAME = SwiftProcessingTests;
+				TVOS_DEPLOYMENT_TARGET = 9.0;
+				WATCHOS_DEPLOYMENT_TARGET = 2.0;
+			};
+			name = Release;
+		};
+		OBJ_3 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ENABLE_OBJC_ARC = YES;
+				COMBINE_HIDPI_IMAGES = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				ENABLE_NS_ASSERTIONS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"$(inherited)",
+					"SWIFT_PACKAGE=1",
+					"DEBUG=1",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 10.10;
+				ONLY_ACTIVE_ARCH = YES;
+				OTHER_SWIFT_FLAGS = "$(inherited) -DXcode";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SUPPORTED_PLATFORMS = "iphonesimulator iphoneos";
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) SWIFT_PACKAGE DEBUG";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				USE_HEADERMAP = NO;
+			};
+			name = Debug;
+		};
+		OBJ_4 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ENABLE_OBJC_ARC = YES;
+				COMBINE_HIDPI_IMAGES = YES;
+				COPY_PHASE_STRIP = YES;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				GCC_OPTIMIZATION_LEVEL = s;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"$(inherited)",
+					"SWIFT_PACKAGE=1",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 10.10;
+				OTHER_SWIFT_FLAGS = "$(inherited) -DXcode";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SUPPORTED_PLATFORMS = "iphonesimulator iphoneos";
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) SWIFT_PACKAGE";
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
+				USE_HEADERMAP = NO;
+			};
+			name = Release;
+		};
+		OBJ_73 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ENABLE_TESTABILITY = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PLATFORM_DIR)/Developer/Library/Frameworks",
+				);
+				HEADER_SEARCH_PATHS = "$(inherited)";
+				INFOPLIST_FILE = SwiftProcessing.xcodeproj/SwiftProcessing_Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) $(TOOLCHAIN_DIR)/usr/lib/swift/macosx";
+				MACOSX_DEPLOYMENT_TARGET = 10.10;
+				OTHER_CFLAGS = "$(inherited)";
+				OTHER_LDFLAGS = "$(inherited)";
+				OTHER_SWIFT_FLAGS = "$(inherited)";
+				PRODUCT_BUNDLE_IDENTIFIER = SwiftProcessing;
+				PRODUCT_MODULE_NAME = "$(TARGET_NAME:c99extidentifier)";
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				SKIP_INSTALL = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited)";
+				SWIFT_VERSION = 5.0;
+				TARGET_NAME = SwiftProcessing;
+				TVOS_DEPLOYMENT_TARGET = 9.0;
+				WATCHOS_DEPLOYMENT_TARGET = 2.0;
+			};
+			name = Debug;
+		};
+		OBJ_74 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ENABLE_TESTABILITY = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PLATFORM_DIR)/Developer/Library/Frameworks",
+				);
+				HEADER_SEARCH_PATHS = "$(inherited)";
+				INFOPLIST_FILE = SwiftProcessing.xcodeproj/SwiftProcessing_Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) $(TOOLCHAIN_DIR)/usr/lib/swift/macosx";
+				MACOSX_DEPLOYMENT_TARGET = 10.10;
+				OTHER_CFLAGS = "$(inherited)";
+				OTHER_LDFLAGS = "$(inherited)";
+				OTHER_SWIFT_FLAGS = "$(inherited)";
+				PRODUCT_BUNDLE_IDENTIFIER = SwiftProcessing;
+				PRODUCT_MODULE_NAME = "$(TARGET_NAME:c99extidentifier)";
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				SKIP_INSTALL = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited)";
+				SWIFT_VERSION = 5.0;
+				TARGET_NAME = SwiftProcessing;
+				TVOS_DEPLOYMENT_TARGET = 9.0;
+				WATCHOS_DEPLOYMENT_TARGET = 2.0;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		OBJ_125 /* Build configuration list for PBXNativeTarget "SwiftProcessingPackageDescription" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				OBJ_126 /* Debug */,
+				OBJ_127 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		OBJ_131 /* Build configuration list for PBXAggregateTarget "SwiftProcessingPackageTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				OBJ_132 /* Debug */,
+				OBJ_133 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		OBJ_136 /* Build configuration list for PBXNativeTarget "SwiftProcessingTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				OBJ_137 /* Debug */,
+				OBJ_138 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		OBJ_2 /* Build configuration list for PBXProject "SwiftProcessing" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				OBJ_3 /* Debug */,
+				OBJ_4 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		OBJ_72 /* Build configuration list for PBXNativeTarget "SwiftProcessing" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				OBJ_73 /* Debug */,
+				OBJ_74 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = OBJ_1 /* Project object */;
+}
