@@ -10,6 +10,7 @@ custom_categories:
   - name: Drawing
     children:
     - Shapes
+    - Attributes
   - name: Transformations
     children:
     - Sketch
