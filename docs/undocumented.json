@@ -164,13 +164,6 @@
     {
       "file": "/Users/jonathankaufman/Documents/GitHub/SwiftProcessing/Sources/SwiftProcessing/Core/Sketch.swift",
       "line": 4,
-      "symbol": "Sketch",
-      "symbol_kind": "source.lang.swift.decl.extension",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/jonathankaufman/Documents/GitHub/SwiftProcessing/Sources/SwiftProcessing/Core/Sketch.swift",
-      "line": 4,
       "symbol": "SketchDelegate",
       "symbol_kind": "source.lang.swift.decl.protocol",
       "warning": "undocumented"
@@ -283,6 +276,13 @@
     {
       "file": "/Users/jonathankaufman/Documents/GitHub/SwiftProcessing/Sources/SwiftProcessing/Core/Sketch.swift",
       "line": 54,
+      "symbol": "Sketch",
+      "symbol_kind": "source.lang.swift.decl.extension",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/jonathankaufman/Documents/GitHub/SwiftProcessing/Sources/SwiftProcessing/Core/Sketch.swift",
+      "line": 67,
       "symbol": "Sketch",
       "symbol_kind": "source.lang.swift.decl.extension",
       "warning": "undocumented"

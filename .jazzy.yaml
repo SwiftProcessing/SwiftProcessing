@@ -11,6 +11,6 @@ custom_categories:
     children:
     - Shapes
     - Attributes
-  - name: Transformations
+  - name: Math
     children:
-    - Sketch
+    - Calculation
