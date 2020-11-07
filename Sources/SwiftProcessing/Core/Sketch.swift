@@ -76,6 +76,7 @@ import SceneKit
     public var nativeHeight: CGFloat = 0
     public let deviceWidth = UIScreen.main.bounds.width
     public let deviceHeight = UIScreen.main.bounds.height
+    public var sketchScale = UIScreen.main.scale
     
     public var isFaceMode: Bool = false
     public var isFaceFill: Bool = true
@@ -192,7 +193,7 @@ import SceneKit
         updateTouches()
         
         push()
-        scale(UIScreen.main.scale, UIScreen.main.scale)
+        scale(sketchScale, sketchScale)
         if !isSetup{
             sketchDelegate?.setup()
             isSetup = true
@@ -212,8 +213,8 @@ import SceneKit
     private func updateDimensions() {
         self.width = self.frame.width
         self.height = self.frame.height
-        self.nativeWidth = self.frame.width * UIScreen.main.scale
-        self.nativeHeight = self.frame.height * UIScreen.main.scale
+        self.nativeWidth = self.frame.width * sketchScale
+        self.nativeHeight = self.frame.height * sketchScale
         //recreate the backing ImageContext when the native dimensions do not match the context dimensions
         if (self.context?.width != Int(nativeWidth)
             || self.context?.height != Int(nativeHeight)) {
