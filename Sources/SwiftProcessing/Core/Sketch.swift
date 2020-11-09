@@ -205,6 +205,9 @@ import SceneKit
         postDraw3D()
 
         UIGraphicsPopContext()
+        setLayerImage()
+    }
+    public func setLayerImage(){
         let img = context!.makeImage()
         layer.contents = img
         layer.contentsGravity = .resizeAspect
