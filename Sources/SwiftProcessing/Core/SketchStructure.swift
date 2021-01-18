@@ -10,6 +10,8 @@ public extension Sketch {
             fpsTimer?.preferredFramesPerSecond = Int(fps)
             fpsTimer!.add(to: .main,
                             forMode: RunLoop.Mode.default)
+            fpsTimer!.add(to: .main,
+                            forMode: RunLoop.Mode.tracking)
         } else {
             // Fallback on earlier versions
         }
