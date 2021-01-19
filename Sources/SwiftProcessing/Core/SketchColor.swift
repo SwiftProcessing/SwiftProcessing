@@ -16,6 +16,13 @@ public extension Sketch {
         rect(0, 0, width, height)
         pop()
     }
+    
+    func background(_ v1: CGFloat, _ a: CGFloat = 255) {
+        push()
+        fill(v1, v1, v1, a)
+        rect(0, 0, width, height)
+        pop()
+    }
 
     func fill(_ color: Color) {
         fill(color.red, color.green, color.blue, color.alpha)
@@ -24,6 +31,10 @@ public extension Sketch {
     func fill(_ v1: CGFloat, _ v2: CGFloat, _ v3: CGFloat, _ a: CGFloat = 255) {
         context?.setFillColor(red: v1 / 255, green: v2 / 255, blue: v3 / 255, alpha: a / 255)
         settings.fill = Color(v1, v2, v3, a)
+    }
+    func fill(_ v1: CGFloat,_ a: CGFloat = 255) {
+        context?.setFillColor(red: v1 / 255, green: v1 / 255, blue: v1 / 255, alpha: a / 255)
+        settings.fill = Color(v1, v1, v1, a)
     }
 
     func noFill() {
@@ -37,6 +48,11 @@ public extension Sketch {
     func stroke(_ v1: CGFloat, _ v2: CGFloat, _ v3: CGFloat, _ a: CGFloat = 255) {
         context?.setStrokeColor(red: v1 / 255, green: v2 / 255, blue: v3 / 255, alpha: a / 255)
         settings.stroke = Color(v1, v2, v3, a)
+    }
+    
+    func stroke(_ v1: CGFloat,_ a: CGFloat = 255) {
+        context?.setStrokeColor(red: v1 / 255, green: v1 / 255, blue: v1 / 255, alpha: a / 255)
+        settings.stroke = Color(v1, v1, v1, a)
     }
 
     func noStroke() {
@@ -53,6 +69,10 @@ public extension Sketch {
 
     func color(_ v1: CGFloat, _ v2: CGFloat, _ v3: CGFloat, _ a: CGFloat = 255) -> Color {
         return Color(v1, v2, v3, a)
+    }
+    
+    func color(_ v1: CGFloat, _ a: CGFloat = 255) -> Color {
+        return Color(v1, v1, v1, a)
     }
 
     func color(_ value: String) -> Color {
