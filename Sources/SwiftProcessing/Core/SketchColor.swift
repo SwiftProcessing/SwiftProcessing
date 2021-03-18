@@ -17,6 +17,7 @@ public extension Sketch {
         pop()
     }
     
+
     func background(_ systemColorName: Color.SystemColor) {
         let systemColor = systemColorName.rawValue
         push()
@@ -25,6 +26,14 @@ public extension Sketch {
         pop()
     }
  
+
+    func background(_ v1: CGFloat, _ a: CGFloat = 255) {
+        push()
+        fill(v1, v1, v1, a)
+        rect(0, 0, width, height)
+        pop()
+    }
+
     func fill(_ color: Color) {
         fill(color.red, color.green, color.blue, color.alpha)
     }
@@ -33,6 +42,7 @@ public extension Sketch {
         context?.setFillColor(red: v1 / 255, green: v2 / 255, blue: v3 / 255, alpha: a / 255)
         settings.fill = Color(v1, v2, v3, a)
     }
+
     
     func fill(_ systemColorName: Color.SystemColor) {
         let systemColor = systemColorName.rawValue
@@ -40,6 +50,12 @@ public extension Sketch {
         settings.fill = Color(systemColor.ciColor.red, systemColor.ciColor.green, systemColor.ciColor.blue, systemColor.ciColor.alpha)
     }
  
+
+    func fill(_ v1: CGFloat,_ a: CGFloat = 255) {
+        context?.setFillColor(red: v1 / 255, green: v1 / 255, blue: v1 / 255, alpha: a / 255)
+        settings.fill = Color(v1, v1, v1, a)
+    }
+
     func noFill() {
         fill(0, 0, 0, 0)
     }
@@ -52,13 +68,19 @@ public extension Sketch {
         context?.setStrokeColor(red: v1 / 255, green: v2 / 255, blue: v3 / 255, alpha: a / 255)
         settings.stroke = Color(v1, v2, v3, a)
     }
-    
+
     func stroke(_ systemColorName: Color.SystemColor) {
         let systemColor = systemColorName.rawValue
         context?.setStrokeColor(red: systemColor.ciColor.red / 255, green: systemColor.ciColor.green / 255, blue: systemColor.ciColor.blue / 255, alpha: systemColor.ciColor.alpha / 255)
         settings.stroke = Color(systemColor.ciColor.red, systemColor.ciColor.green, systemColor.ciColor.blue, systemColor.ciColor.alpha)
     }
  
+    func stroke(_ v1: CGFloat,_ a: CGFloat = 255) {
+        context?.setStrokeColor(red: v1 / 255, green: v1 / 255, blue: v1 / 255, alpha: a / 255)
+        settings.stroke = Color(v1, v1, v1, a)
+    }
+
+
     func noStroke() {
         stroke(0, 0, 0, 0)
     }
@@ -74,7 +96,11 @@ public extension Sketch {
     func color(_ v1: CGFloat, _ v2: CGFloat, _ v3: CGFloat, _ a: CGFloat = 255) -> Color {
         return Color(v1, v2, v3, a)
     }
- 
+    
+    func color(_ v1: CGFloat, _ a: CGFloat = 255) -> Color {
+        return Color(v1, v1, v1, a)
+    }
+
     func color(_ value: String) -> Color {
         return hexStringToUIColor(hex: value)
     }
