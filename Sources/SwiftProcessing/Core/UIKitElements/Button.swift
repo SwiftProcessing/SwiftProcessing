@@ -42,4 +42,12 @@ extension Sketch {
         viewRefs[b.id] = b
         return b
     }
+    
+    open func createButton(_ t: String = "", _ x: CGFloat, _ y: CGFloat, _ w: CGFloat, _ h: CGFloat) -> Button {
+        let b = Button(self, t)
+        b.position(x, y)
+        b.size(w, h)
+        viewRefs[b.id] = b
+        return b
+    }
 }
