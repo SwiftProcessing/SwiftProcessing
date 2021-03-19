@@ -11,7 +11,8 @@ public extension Sketch {
     }
     
     func textAlign(_ horizonalAlign: String, _ verticalAlign: String? = nil){
-        settings.textAlignment = horizonalAlign
+        settings.horizontalTextAlignment = horizonalAlign
+        settings.verticalTextAlignment = verticalAlign
     }
     
     func text(_ str: String, _ x: CGFloat, _ y: CGFloat, _ x2: CGFloat? = nil, _ y2: CGFloat? = nil) {
@@ -19,7 +20,7 @@ public extension Sketch {
         let paragraphStyle = NSMutableParagraphStyle()
         
         var align: NSTextAlignment!
-        switch settings.textAlignment {
+        switch settings.horizontalTextAlignment {
         case LEFT:
             align = .left
         case RIGHT:
@@ -39,10 +40,38 @@ public extension Sketch {
             .strokeColor: settings.stroke.uiColor()
         ]
         
-        if x2 == nil {
+        if let width = x2 {
+            let h = y2 ?? height
+            let size = str.size(withAttributes: attributes)
+            let centeredRect: CGRect
+            if let verticalTextAlignment = settings.verticalTextAlignment {
+                switch verticalTextAlignment {
+                case TOP:
+                    centeredRect = CGRect(x: x,
+                                          y: y,
+                                          width: width,
+                                          height: size.height)
+                case CENTER:
+                    centeredRect = CGRect(x: x,
+                                          y: y + h * 0.5 - size.height * 0.5,
+                                          width: width,
+                                          height: size.height)
+                case BOTTOM:
+                    centeredRect = CGRect(x: x,
+                                          y: y + h - size.height,
+                                          width: width,
+                                          height: size.height)
+                default:
+                    centeredRect = CGRect(x: x, y: y, width: (x2 != nil) ? x2! : width, height: (y2 != nil) ? y2! : height)
+                }
+                str.draw(with: centeredRect, options: .usesLineFragmentOrigin, attributes: attributes, context: nil)
+            } else {
+                str.draw(with: CGRect(x: x, y: y, width: (x2 != nil) ? x2! : width, height: (y2 != nil) ? y2! : height), options: .usesLineFragmentOrigin, attributes: attributes, context: nil)
+            }
+            
+            
+        } else {
             str.draw(at: CGPoint(x: x, y: y), withAttributes: attributes)
-        }else{
-            str.draw(with: CGRect(x: x, y: y, width: (x2 != nil) ? x2! : width, height: (y2 != nil) ? y2! : height), options: .usesLineFragmentOrigin, attributes: attributes, context: nil)
         }
     }
 }
