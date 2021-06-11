@@ -251,7 +251,7 @@ open class Image {
                 filter?.setValue(currentCIImage, forKey: kCIInputImageKey)
             }else if filterType == Sketch.MONOCHROME{
                 filter = CIFilter(name: "CIColorMonochrome")
-                let c = params as! Color
+                let c = params as! SketchColor
                 let ciColor = CIColor(red: c.red, green: c.green, blue: c.blue)
                 filter?.setValue(currentCIImage, forKey: kCIInputImageKey)
                 filter?.setValue(ciColor, forKey: kCIInputColorKey)

@@ -6,7 +6,7 @@ public extension Sketch {
         context?.clear(CGRect(x: 0, y: 0, width: self.frame.width, height: self.frame.height))
     }
  
-    func background(_ color: Color) {
+    func background(_ color: SketchColor) {
         background(color.red, color.green, color.blue, color.alpha)
     }
  
@@ -18,7 +18,7 @@ public extension Sketch {
     }
     
 
-    func background(_ systemColorName: Color.SystemColor) {
+    func background(_ systemColorName: SketchColor.SystemColor) {
         let systemColor = systemColorName.rawValue
         push()
         fill(systemColor.ciColor.red, systemColor.ciColor.green, systemColor.ciColor.blue, systemColor.ciColor.alpha)
@@ -34,50 +34,50 @@ public extension Sketch {
         pop()
     }
 
-    func fill(_ color: Color) {
+    func fill(_ color: SketchColor) {
         fill(color.red, color.green, color.blue, color.alpha)
     }
  
     func fill(_ v1: CGFloat, _ v2: CGFloat, _ v3: CGFloat, _ a: CGFloat = 255) {
         context?.setFillColor(red: v1 / 255, green: v2 / 255, blue: v3 / 255, alpha: a / 255)
-        settings.fill = Color(v1, v2, v3, a)
+        settings.fill = SketchColor(v1, v2, v3, a)
     }
 
     
-    func fill(_ systemColorName: Color.SystemColor) {
+    func fill(_ systemColorName: SketchColor.SystemColor) {
         let systemColor = systemColorName.rawValue
         context?.setFillColor(red: systemColor.ciColor.red / 255, green: systemColor.ciColor.green / 255, blue: systemColor.ciColor.blue / 255, alpha: systemColor.ciColor.alpha / 255)
-        settings.fill = Color(systemColor.ciColor.red, systemColor.ciColor.green, systemColor.ciColor.blue, systemColor.ciColor.alpha)
+        settings.fill = SketchColor(systemColor.ciColor.red, systemColor.ciColor.green, systemColor.ciColor.blue, systemColor.ciColor.alpha)
     }
  
 
     func fill(_ v1: CGFloat,_ a: CGFloat = 255) {
         context?.setFillColor(red: v1 / 255, green: v1 / 255, blue: v1 / 255, alpha: a / 255)
-        settings.fill = Color(v1, v1, v1, a)
+        settings.fill = SketchColor(v1, v1, v1, a)
     }
 
     func noFill() {
         fill(0, 0, 0, 0)
     }
  
-    func stroke(_ color: Color) {
+    func stroke(_ color: SketchColor) {
         stroke(color.red, color.green, color.blue, color.alpha)
     }
  
     func stroke(_ v1: CGFloat, _ v2: CGFloat, _ v3: CGFloat, _ a: CGFloat = 255) {
         context?.setStrokeColor(red: v1 / 255, green: v2 / 255, blue: v3 / 255, alpha: a / 255)
-        settings.stroke = Color(v1, v2, v3, a)
+        settings.stroke = SketchColor(v1, v2, v3, a)
     }
 
-    func stroke(_ systemColorName: Color.SystemColor) {
+    func stroke(_ systemColorName: SketchColor.SystemColor) {
         let systemColor = systemColorName.rawValue
         context?.setStrokeColor(red: systemColor.ciColor.red / 255, green: systemColor.ciColor.green / 255, blue: systemColor.ciColor.blue / 255, alpha: systemColor.ciColor.alpha / 255)
-        settings.stroke = Color(systemColor.ciColor.red, systemColor.ciColor.green, systemColor.ciColor.blue, systemColor.ciColor.alpha)
+        settings.stroke = SketchColor(systemColor.ciColor.red, systemColor.ciColor.green, systemColor.ciColor.blue, systemColor.ciColor.alpha)
     }
  
     func stroke(_ v1: CGFloat,_ a: CGFloat = 255) {
         context?.setStrokeColor(red: v1 / 255, green: v1 / 255, blue: v1 / 255, alpha: a / 255)
-        settings.stroke = Color(v1, v1, v1, a)
+        settings.stroke = SketchColor(v1, v1, v1, a)
     }
 
 
@@ -93,19 +93,19 @@ public extension Sketch {
         context?.setBlendMode(CGBlendMode.normal)
     }
  
-    func color(_ v1: CGFloat, _ v2: CGFloat, _ v3: CGFloat, _ a: CGFloat = 255) -> Color {
-        return Color(v1, v2, v3, a)
+    func color(_ v1: CGFloat, _ v2: CGFloat, _ v3: CGFloat, _ a: CGFloat = 255) -> SketchColor {
+        return SketchColor(v1, v2, v3, a)
     }
     
-    func color(_ v1: CGFloat, _ a: CGFloat = 255) -> Color {
-        return Color(v1, v1, v1, a)
+    func color(_ v1: CGFloat, _ a: CGFloat = 255) -> SketchColor {
+        return SketchColor(v1, v1, v1, a)
     }
 
-    func color(_ value: String) -> Color {
+    func color(_ value: String) -> SketchColor {
         return hexStringToUIColor(hex: value)
     }
  
-    func red(_ color: Color) -> CGFloat {
+    func red(_ color: SketchColor) -> CGFloat {
         return red(color.toArray())
     }
  
@@ -113,7 +113,7 @@ public extension Sketch {
         return color[0]
     }
  
-    func green(_ color: Color) -> CGFloat {
+    func green(_ color: SketchColor) -> CGFloat {
         return green(color.toArray())
     }
  
@@ -121,7 +121,7 @@ public extension Sketch {
         return color[1]
     }
  
-    func blue(_ color: Color) -> CGFloat {
+    func blue(_ color: SketchColor) -> CGFloat {
         return blue(color.toArray())
     }
  
@@ -129,7 +129,7 @@ public extension Sketch {
         return color[2]
     }
  
-    func alpha(_ color: Color) -> CGFloat {
+    func alpha(_ color: SketchColor) -> CGFloat {
         return alpha(color.toArray())
     }
  
@@ -138,7 +138,7 @@ public extension Sketch {
     }
  
     //credit https://stackoverflow.com/questions/24263007/how-to-use-hex-color-values
-    private func hexStringToUIColor (hex: String) -> Color {
+    private func hexStringToUIColor (hex: String) -> SketchColor {
         var cString: String = hex.trimmingCharacters(in: .whitespacesAndNewlines).uppercased()
  
         if cString.hasPrefix("#") {
@@ -152,7 +152,7 @@ public extension Sketch {
         var rgbValue: UInt64 = 0
         Scanner(string: cString).scanHexInt64(&rgbValue)
  
-        return Color(
+        return SketchColor(
             CGFloat((rgbValue & 0xFF0000) >> 16),
             CGFloat((rgbValue & 0x00FF00) >> 8),
             CGFloat(rgbValue & 0x0000FF),
@@ -161,7 +161,7 @@ public extension Sketch {
     }
 }
  
-open class Color {
+open class SketchColor {
     
     var red: CGFloat
     var green: CGFloat
@@ -204,7 +204,7 @@ open class Color {
     }
 }
  
-extension Color {
+extension SketchColor {
     
     public enum SystemColor {
         case systemRed
@@ -225,7 +225,7 @@ extension Color {
     }
 }
  
-extension Color.SystemColor: RawRepresentable {
+extension SketchColor.SystemColor: RawRepresentable {
     public typealias RawValue = UIColor
  
     public init?(rawValue: RawValue) {
