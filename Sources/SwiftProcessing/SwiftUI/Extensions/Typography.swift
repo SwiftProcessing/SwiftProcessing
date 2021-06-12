@@ -1,5 +1,5 @@
 //
-//  File.swift
+//  Typography.swift
 //  
 //
 //  Created by Jonathan Kaufman on 6/10/21.

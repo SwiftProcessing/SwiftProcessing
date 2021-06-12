@@ -1,5 +1,5 @@
 //
-//  SwiftUIView.swift
+//  SketchContainer.swift
 //  
 //
 //  Created by Jonathan Kaufman on 6/10/21.
@@ -17,8 +17,10 @@ public struct SketchContainer: View {
     }
     
     public var body: some View {
-        TimelineView(.animation) { timeline in
-            Canvas { context, size in
+        // TODO expose paused boolean to Sketch noLoop
+        // TODO expose interval to Sketch frameRate
+        TimelineView(.animation(minimumInterval: 1 / 60, paused: false)) { timeline in
+            Canvas(rendersAsynchronously: true) { context, size in
                 sketch.updateContext(
                     context,
                     size,
@@ -26,6 +28,11 @@ public struct SketchContainer: View {
                 )
                 sketch.display()
             }
+            .overlay(
+                TouchListener { touches in
+                    sketch.updateTouches(touches: touches)
+                }
+            )
         }
         
     }

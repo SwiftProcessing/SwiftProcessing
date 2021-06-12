@@ -1,5 +1,5 @@
 //
-//  File.swift
+//  SketchUI.swift
 //  
 //
 //  Created by Jonathan Kaufman on 6/10/21.
@@ -13,6 +13,10 @@ open class SketchUI {
     public var width: Double = 0
     public var height: Double = 0
     public var deltaTime: Double = 0
+    
+    public var touches: [CGPoint] = []
+    public var touchX: Double = 0
+    public var touchY: Double = 0
     
     var context: GraphicsContext?
     var sketchDelegate: SketchDelegateUI?
