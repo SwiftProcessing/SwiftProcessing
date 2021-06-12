@@ -10,7 +10,7 @@ import SwiftUI
 
 @available(iOS 15.0, *)
 extension SketchUI {
-    public func fill(red: Double, green: Double, blue: Double) {
-        fillColor = Color(.sRGB, red: red / 255, green: green / 255, blue: blue / 255, opacity: 1)
+    public func fill(red: Double, green: Double, blue: Double, alpha: Double = 255) {
+        fillColor = Color(.sRGB, red: red / 255, green: green / 255, blue: blue / 255, opacity: alpha / 255)
     }
 }
