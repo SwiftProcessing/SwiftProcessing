@@ -21,7 +21,7 @@ public struct SketchContainer: View {
         // TODO expose interval to Sketch frameRate
         TimelineView(.animation(minimumInterval: 1 / 30, paused: false)) { timeline in
             ZStack {
-                Canvas { context, size in
+                Canvas(renderer: { context, size in
                     sketch.operations.forEach { $0(context) }
                     sketch.updateContext(
                         context,
@@ -29,7 +29,11 @@ public struct SketchContainer: View {
                         timeline.date.timeIntervalSinceReferenceDate
                     )
                     sketch.display()
-                }
+                }, symbols: {
+                    ForEach(sketch.loadedImages) { image in
+                        image.view
+                    }
+                })
                 .drawingGroup()
             }
             .overlay(

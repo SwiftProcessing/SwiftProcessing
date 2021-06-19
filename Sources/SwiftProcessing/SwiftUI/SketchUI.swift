@@ -21,6 +21,10 @@ open class SketchUI {
     var context: GraphicsContext?
     var sketchDelegate: SketchDelegateUI?
     var prev: TimeInterval = Date().timeIntervalSinceReferenceDate
+    var frameCount: Int = 0
+    
+    // Orange into seperate struct
+    var loadedImages: [Image] = []
     
     // Organize into seperate struct
     var fillColor: Color = Color.primary
@@ -45,6 +49,9 @@ open class SketchUI {
     }
     
     func display() {
+        if frameCount == 0 {
+            sketchDelegate?.setup()
+        }
         // if operations already exceeds a threshnold N, flatten into a single image operation
         if !isFlattening && operations.count > flattenTreshhold {
             flatten()
@@ -63,14 +70,19 @@ open class SketchUI {
             isFlattening = false
         }
         sketchDelegate?.draw()
+        frameCount += 1
     }
     
     func flatten() {
         isFlattening = true
         let threshold = flattenTreshhold
-        let c = Canvas { context, size in
+        let c = Canvas(renderer: { context, size in
             self.operations[0..<threshold].forEach { $0(context) }
-        }
+        }, symbols: {
+            ForEach(self.loadedImages) { image in
+                image.view
+            }
+        })
         .frame(width: self.width, height: self.height)
         .ignoresSafeArea()
         

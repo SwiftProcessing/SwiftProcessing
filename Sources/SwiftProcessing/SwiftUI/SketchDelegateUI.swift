@@ -9,5 +9,6 @@ import Foundation
 
 @available(iOS 15.0, *)
 public protocol SketchDelegateUI: SketchUI {
+    func setup()
     func draw()
 }

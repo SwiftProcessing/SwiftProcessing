@@ -10,6 +10,10 @@ import Foundation
 
 @available(iOS 15.0, *)
 class ExplodingCircleSketch: SketchUI, SketchDelegateUI {
+    func setup() {
+        
+    }
+    
     var bombs: [Bomb] = []
     func draw() {
         for touch in touches {

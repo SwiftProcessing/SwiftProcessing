@@ -9,6 +9,10 @@ import Foundation
 
 @available(iOS 15.0, *)
 class CirclePortalExample: SketchUI, SketchDelegateUI {
+    func setup() {
+        
+    }
+    
     
     var redModifier: Double = 1
     var redSpeed: Double = 0.1
