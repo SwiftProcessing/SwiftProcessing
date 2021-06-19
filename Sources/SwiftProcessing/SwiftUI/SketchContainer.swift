@@ -22,11 +22,8 @@ public struct SketchContainer: View {
         TimelineView(.animation(minimumInterval: 1 / 60, paused: false)) { timeline in
             ZStack {
                 Canvas(rendersAsynchronously: true) { context, size in
-                    print(sketch.operations.count)
                     sketch.operations.forEach { $0(context) }
                 
-                    
-                   
                     sketch.updateContext(
                         context,
                         size,

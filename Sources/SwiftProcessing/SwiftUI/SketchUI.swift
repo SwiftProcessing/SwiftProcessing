@@ -27,7 +27,7 @@ open class SketchUI {
     
     var flattenImage: SwiftUI.Image?
     var isFlattening = false
-    let flattenTreshhold = 100
+    let flattenTreshhold = 500
     
     public init() {
         self.sketchDelegate = self as? SketchDelegateUI
@@ -69,9 +69,7 @@ open class SketchUI {
         .ignoresSafeArea()
         
         DispatchQueue.main.async { [weak self] in
-            let uiImage = c.snapshot()
-//            UIImageWriteToSavedPhotosAlbum(uiImage, nil, nil, nil)
-            self?.flattenImage = SwiftUI.Image(uiImage: uiImage)
+            self?.flattenImage = SwiftUI.Image(uiImage: c.snapshot())
         }
     }
 }
