@@ -25,6 +25,9 @@ open class SketchUI {
     
     var operations: [Operation] = []
     
+    var flattenImage: SwiftUI.Image?
+    var isFlattening = false
+    
     public init() {
         self.sketchDelegate = self as? SketchDelegateUI
     }
@@ -38,6 +41,42 @@ open class SketchUI {
     }
     
     func display() {
+        // if operations already exceeds a threshnold N, flatten into a single image operation
+        if !isFlattening && operations.count > 1000 {
+            flatten()
+        } else {
+            
+        }
         sketchDelegate?.draw()
+    }
+    
+    func flatten() {
+        isFlattening = true
+        let c = Canvas { context, size in
+            self.operations[0..<1000].forEach { $0.execute(context) }
+        }
+        .frame(width: self.width, height: self.height)
+        
+        DispatchQueue.main.async { [weak self] in
+            self?.flattenImage = SwiftUI.Image(uiImage: c.snapshot())
+        }
+    }
+}
+
+extension View {
+    func snapshot() -> UIImage {
+        let controller = UIHostingController(rootView: self)
+        
+        let view = controller.view
+        let size = controller.view.intrinsicContentSize
+        
+        view?.bounds = CGRect(origin: .zero, size: size)
+        view?.backgroundColor = .clear
+
+        let renderer = UIGraphicsImageRenderer(size: size)
+
+        return renderer.image { _ in
+            view?.drawHierarchy(in: controller.view.bounds, afterScreenUpdates: true)
+        }
     }
 }
