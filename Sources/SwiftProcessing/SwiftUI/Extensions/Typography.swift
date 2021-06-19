@@ -11,6 +11,16 @@ import SwiftUI
 @available(iOS 15.0, *)
 extension SketchUI {
     public func text(content: String, x: Double, y: Double) {
-        context?.draw(Text(content), at: CGPoint(x: x, y: y))
+        let text = Text(content)
+            .foregroundColor(fillColor)
+            .font(.system(size: textSize))
+        
+        operations.append({ context in
+            context.draw(
+                text,
+                at: CGPoint(x: x, y: y),
+                anchor: .topLeading
+            )
+        })
     }
 }

@@ -19,11 +19,10 @@ public struct SketchContainer: View {
     public var body: some View {
         // TODO expose paused boolean to Sketch noLoop
         // TODO expose interval to Sketch frameRate
-        TimelineView(.animation(minimumInterval: 1 / 60, paused: false)) { timeline in
+        TimelineView(.animation(minimumInterval: 1 / 30, paused: false)) { timeline in
             ZStack {
-                Canvas(rendersAsynchronously: true) { context, size in
+                Canvas { context, size in
                     sketch.operations.forEach { $0(context) }
-                
                     sketch.updateContext(
                         context,
                         size,

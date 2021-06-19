@@ -20,11 +20,14 @@ open class SketchUI {
     
     var context: GraphicsContext?
     var sketchDelegate: SketchDelegateUI?
-    var fillColor: Color = Color.primary
     var prev: TimeInterval = Date().timeIntervalSinceReferenceDate
     
-    var operations: [(GraphicsContext) -> Void] = []
+    // Organize into seperate struct
+    var fillColor: Color = Color.primary
+    var textSize: Double = 20
     
+    // Organize into seperate struct
+    var operations: [(GraphicsContext) -> Void] = []
     var flattenImage: SwiftUI.Image?
     var isFlattening = false
     let flattenTreshhold = 500
@@ -48,11 +51,14 @@ open class SketchUI {
         } else if let i = flattenImage {
             let w = self.width
             let h = self.height
-            operations.replaceSubrange(0..<flattenTreshhold, with: [
-                { context in
-                        context.draw(i, in: CGRect(x: 0, y: 0, width: w, height: h))
-                }
-            ])
+            operations.replaceSubrange(
+                0..<flattenTreshhold,
+                with: [
+                    { context in
+                            context.draw(i, in: CGRect(x: 0, y: 0, width: w, height: h))
+                    }
+                ]
+            )
             flattenImage = nil
             isFlattening = false
         }
