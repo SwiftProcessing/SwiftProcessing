@@ -23,6 +23,8 @@ open class SketchUI {
     var fillColor: Color = Color.primary
     var prev: TimeInterval = Date().timeIntervalSinceReferenceDate
     
+    var operations: [Operation] = []
+    
     public init() {
         self.sketchDelegate = self as? SketchDelegateUI
     }

@@ -20,13 +20,21 @@ public struct SketchContainer: View {
         // TODO expose paused boolean to Sketch noLoop
         // TODO expose interval to Sketch frameRate
         TimelineView(.animation(minimumInterval: 1 / 60, paused: false)) { timeline in
-            Canvas(rendersAsynchronously: true) { context, size in
-                sketch.updateContext(
-                    context,
-                    size,
-                    timeline.date.timeIntervalSinceReferenceDate
-                )
-                sketch.display()
+            ZStack {
+                Canvas(rendersAsynchronously: true) { context, size in
+                    print(sketch.operations.count)
+                    sketch.operations.forEach { $0.execute(context) }
+                
+                    
+                   
+                    sketch.updateContext(
+                        context,
+                        size,
+                        timeline.date.timeIntervalSinceReferenceDate
+                    )
+                    sketch.display()
+                }
+                .drawingGroup()
             }
             .overlay(
                 TouchListener { touches in
@@ -34,6 +42,7 @@ public struct SketchContainer: View {
                 }
             )
         }
+       
         
     }
 }
