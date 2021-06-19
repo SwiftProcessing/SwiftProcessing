@@ -27,6 +27,7 @@ open class SketchUI {
     
     var flattenImage: SwiftUI.Image?
     var isFlattening = false
+    let flattenTreshhold = 100
     
     public init() {
         self.sketchDelegate = self as? SketchDelegateUI
@@ -42,23 +43,38 @@ open class SketchUI {
     
     func display() {
         // if operations already exceeds a threshnold N, flatten into a single image operation
-        if !isFlattening && operations.count > 1000 {
+        if !isFlattening && operations.count > flattenTreshhold {
             flatten()
-        } else {
-            
+        } else if let i = flattenImage {
+            let w = self.width
+            let h = self.height
+            operations.replaceSubrange(0..<flattenTreshhold, with: [
+                Operation(
+                    name: .circle,
+                    execute: { context in
+                        context.draw(i, in: CGRect(x: 0, y: 0, width: w, height: h))
+                    }
+                )
+            ])
+            flattenImage = nil
+            isFlattening = false
         }
         sketchDelegate?.draw()
     }
     
     func flatten() {
         isFlattening = true
+        let threshold = flattenTreshhold
         let c = Canvas { context, size in
-            self.operations[0..<1000].forEach { $0.execute(context) }
+            self.operations[0..<threshold].forEach { $0.execute(context) }
         }
         .frame(width: self.width, height: self.height)
+        .ignoresSafeArea()
         
         DispatchQueue.main.async { [weak self] in
-            self?.flattenImage = SwiftUI.Image(uiImage: c.snapshot())
+            let uiImage = c.snapshot()
+//            UIImageWriteToSavedPhotosAlbum(uiImage, nil, nil, nil)
+            self?.flattenImage = SwiftUI.Image(uiImage: uiImage)
         }
     }
 }
