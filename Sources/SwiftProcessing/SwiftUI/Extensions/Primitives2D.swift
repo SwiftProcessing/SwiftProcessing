@@ -12,12 +12,9 @@ import SwiftUI
 extension SketchUI {
     public func ellipse(x: Double, y: Double, width: Double, height: Double) {
         operations.append(
-            Operation(
-                name: .circle,
-                execute: { [weak self] context in
+            { [weak self] context in
                     self?.executeEllipse(context: context, x: x, y: y, width: width, height: height)
                 }
-            )
         )
     }
     

@@ -23,7 +23,7 @@ open class SketchUI {
     var fillColor: Color = Color.primary
     var prev: TimeInterval = Date().timeIntervalSinceReferenceDate
     
-    var operations: [Operation] = []
+    var operations: [(GraphicsContext) -> Void] = []
     
     var flattenImage: SwiftUI.Image?
     var isFlattening = false
@@ -49,12 +49,9 @@ open class SketchUI {
             let w = self.width
             let h = self.height
             operations.replaceSubrange(0..<flattenTreshhold, with: [
-                Operation(
-                    name: .circle,
-                    execute: { context in
+                { context in
                         context.draw(i, in: CGRect(x: 0, y: 0, width: w, height: h))
-                    }
-                )
+                }
             ])
             flattenImage = nil
             isFlattening = false
@@ -66,7 +63,7 @@ open class SketchUI {
         isFlattening = true
         let threshold = flattenTreshhold
         let c = Canvas { context, size in
-            self.operations[0..<threshold].forEach { $0.execute(context) }
+            self.operations[0..<threshold].forEach { $0(context) }
         }
         .frame(width: self.width, height: self.height)
         .ignoresSafeArea()

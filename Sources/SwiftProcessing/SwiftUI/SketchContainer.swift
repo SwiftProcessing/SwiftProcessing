@@ -23,7 +23,7 @@ public struct SketchContainer: View {
             ZStack {
                 Canvas(rendersAsynchronously: true) { context, size in
                     print(sketch.operations.count)
-                    sketch.operations.forEach { $0.execute(context) }
+                    sketch.operations.forEach { $0(context) }
                 
                     
                    
