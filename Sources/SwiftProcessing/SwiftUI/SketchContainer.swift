@@ -9,19 +9,19 @@ import SwiftUI
 
 @available(iOS 15.0, *)
 public struct SketchContainer: View {
-    
+    @StateObject
     var sketch: SketchUI
     
     public init(sketch: SketchUI) {
-        self.sketch = sketch
+        self._sketch = StateObject.init(wrappedValue: sketch)
     }
     
     public var body: some View {
-        // TODO expose paused boolean to Sketch noLoop
         // TODO expose interval to Sketch frameRate
-        TimelineView(.animation(minimumInterval: 1 / 30, paused: false)) { timeline in
+        TimelineView(.animation(minimumInterval: 1 / 30, paused: sketch.isPaused)) { timeline in
             ZStack {
                 Canvas(renderer: { context, size in
+                    print(sketch.operations.count, 1 / sketch.deltaTime, sketch.loadedText.count)
                     sketch.operations.forEach { $0(context) }
                     sketch.updateContext(
                         context,
@@ -33,6 +33,9 @@ public struct SketchContainer: View {
                     ForEach(sketch.loadedImages) { image in
                         image.view
                     }
+                    ForEach(Array(sketch.cleanLoadedText())) { text in
+                        text.text.tag(text.id)
+                    }
                 })
                 .drawingGroup()
             }
@@ -42,6 +45,9 @@ public struct SketchContainer: View {
                 }
             )
         }
+        .onDisappear(perform: {
+            print("Disappear")
+        })
        
         
     }

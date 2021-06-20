@@ -9,7 +9,10 @@ import Foundation
 import SwiftUI
 
 @available(iOS 15.0, *)
-open class SketchUI {
+open class SketchUI: ObservableObject{
+    @Published
+    var isPaused: Bool = false
+    
     public var width: Double = 0
     public var height: Double = 0
     public var deltaTime: Double = 0
@@ -25,7 +28,16 @@ open class SketchUI {
     
     // Orange into seperate struct
     var loadedImages: [Image] = []
-    
+    var loadedText: [TextCachable] = []
+    func cleanLoadedText() -> [TextCachable] {
+        if shouldCleanupText {
+//            loadedText = loadedText.filter {
+//                $0.operation >= flattenTreshhold - 1 
+//            }
+            shouldCleanupText = false
+        }
+        return loadedText
+    }
     // Organize into seperate struct
     var fillColor: Color = Color.primary
     var textSize: Double = 20
@@ -34,7 +46,8 @@ open class SketchUI {
     var operations: [(GraphicsContext) -> Void] = []
     var flattenImage: SwiftUI.Image?
     var isFlattening = false
-    let flattenTreshhold = 500
+    var shouldCleanupText = false
+    let flattenTreshhold = 25
     
     public init() {
         self.sketchDelegate = self as? SketchDelegateUI
@@ -66,6 +79,8 @@ open class SketchUI {
                     }
                 ]
             )
+
+            shouldCleanupText = true
             flattenImage = nil
             isFlattening = false
         }
@@ -81,6 +96,11 @@ open class SketchUI {
         }, symbols: {
             ForEach(self.loadedImages) { image in
                 image.view
+            }
+            ForEach(Array(self.loadedText)) { text in
+                if text.includeInSymbols {
+                    text.text.tag(text.id)
+                }
             }
         })
         .frame(width: self.width, height: self.height)
