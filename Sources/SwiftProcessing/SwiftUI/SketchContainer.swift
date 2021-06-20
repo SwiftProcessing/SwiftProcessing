@@ -18,36 +18,32 @@ public struct SketchContainer: View {
     
     public var body: some View {
         TimelineView(.animation(minimumInterval: sketch.targetFrameRate, paused: sketch.isPaused)) { timeline in
-            ZStack {
-                Canvas(renderer: { context, size in
-                    print(sketch.operations.count, 1 / sketch.deltaTime, sketch.loadedText.count)
-                    sketch.operations.forEach { $0(context) }
-                    sketch.updateContext(
-                        context,
-                        size,
-                        timeline.date.timeIntervalSinceReferenceDate
-                    )
-                    sketch.display()
-                }, symbols: {
-                    ForEach(sketch.loadedImages) { image in
-                        image.view
-                    }
-                    ForEach(sketch.loadedText) { text in
-                        text.text.tag(text.id)
-                    }
-                })
-                .drawingGroup()
-            }
+            Canvas(renderer: { context, size in
+                print(sketch.operations.count, 1 / sketch.deltaTime, sketch.loadedText.count)
+                sketch.operations.forEach { $0(context) }
+                sketch.updateContext(
+                    context,
+                    size,
+                    timeline.date.timeIntervalSinceReferenceDate
+                )
+                sketch.display()
+            }, symbols: {
+                ForEach(sketch.loadedImages) { image in
+                    image.view
+                }
+                ForEach(sketch.loadedText) { text in
+                    text.text.tag(text.id)
+                }
+            })
+            .drawingGroup()
             .overlay(
                 TouchListener { touches in
                     sketch.updateTouches(touches: touches)
                 }
             )
         }
-        .onDisappear(perform: {
-            print("Disappear")
-        })
        
+        
         
     }
 }
