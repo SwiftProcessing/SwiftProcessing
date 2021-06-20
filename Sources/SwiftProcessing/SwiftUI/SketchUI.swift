@@ -13,6 +13,10 @@ open class SketchUI: ObservableObject{
     @Published
     var isPaused: Bool = false
     
+    // TODO init to refresh rate of screen to better support iPad Pro / future iPhones
+    @Published
+    var targetFrameRate: Double = 1 / 60
+    
     public var width: Double = 0
     public var height: Double = 0
     public var deltaTime: Double = 0

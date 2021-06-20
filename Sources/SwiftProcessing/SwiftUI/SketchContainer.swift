@@ -17,8 +17,7 @@ public struct SketchContainer: View {
     }
     
     public var body: some View {
-        // TODO expose interval to Sketch frameRate
-        TimelineView(.animation(minimumInterval: 1 / 30, paused: sketch.isPaused)) { timeline in
+        TimelineView(.animation(minimumInterval: sketch.targetFrameRate, paused: sketch.isPaused)) { timeline in
             ZStack {
                 Canvas(renderer: { context, size in
                     print(sketch.operations.count, 1 / sketch.deltaTime, sketch.loadedText.count)
