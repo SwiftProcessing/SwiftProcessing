@@ -44,7 +44,8 @@ open class SketchUI: ObservableObject{
     var operations: [(GraphicsContext) -> Void] = []
     var flattenImage: SwiftUI.Image?
     var isFlattening = false
-    let flattenTreshhold = 25
+    // TODO what is the best flatten threshhold... should it even be static?
+    let flattenTreshhold = 250
     
     public init() {
         self.sketchDelegate = self as? SketchDelegateUI
