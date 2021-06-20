@@ -17,6 +17,12 @@ open class SketchUI: ObservableObject{
     @Published
     var targetFrameRate: Double = 1 / 60
     
+    @Published
+    var loadedImages: [Image] = []
+    
+    @Published
+    var loadedText: [TextCachable] = []
+    
     public var width: Double = 0
     public var height: Double = 0
     public var deltaTime: Double = 0
@@ -30,18 +36,6 @@ open class SketchUI: ObservableObject{
     var prev: TimeInterval = Date().timeIntervalSinceReferenceDate
     var frameCount: Int = 0
     
-    // Orange into seperate struct
-    var loadedImages: [Image] = []
-    var loadedText: [TextCachable] = []
-    func cleanLoadedText() -> [TextCachable] {
-        if shouldCleanupText {
-//            loadedText = loadedText.filter {
-//                $0.operation >= flattenTreshhold - 1 
-//            }
-            shouldCleanupText = false
-        }
-        return loadedText
-    }
     // Organize into seperate struct
     var fillColor: Color = Color.primary
     var textSize: Double = 20
@@ -50,7 +44,6 @@ open class SketchUI: ObservableObject{
     var operations: [(GraphicsContext) -> Void] = []
     var flattenImage: SwiftUI.Image?
     var isFlattening = false
-    var shouldCleanupText = false
     let flattenTreshhold = 25
     
     public init() {
@@ -83,8 +76,7 @@ open class SketchUI: ObservableObject{
                     }
                 ]
             )
-
-            shouldCleanupText = true
+            
             flattenImage = nil
             isFlattening = false
         }

@@ -32,7 +32,7 @@ public struct SketchContainer: View {
                     ForEach(sketch.loadedImages) { image in
                         image.view
                     }
-                    ForEach(Array(sketch.cleanLoadedText())) { text in
+                    ForEach(sketch.loadedText) { text in
                         text.text.tag(text.id)
                     }
                 })
