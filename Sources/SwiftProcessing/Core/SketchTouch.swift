@@ -1,5 +1,5 @@
 //
-//  File.swift
+//  SketchTouch.swift
 //  
 //
 //  Created by Jonathan Kaufman on 4/13/20.
@@ -72,8 +72,8 @@ extension Sketch: UIGestureRecognizerDelegate {
         
         touched =  touches.count > 0
         if let t = touches.first {
-            touchX = t.x
-            touchY = t.y
+            touchX = Double(t.x)
+            touchY = Double(t.y)
         }
     }
     
