@@ -1,11 +1,24 @@
+/*
+ * SwiftProcessing: Color
+ *
+ * */
+
 import UIKit
  
+// =======================================================================
+// MARK: - EXTENSION: COLOR
+// =======================================================================
+
 public extension Sketch {
  
     func clear() {
         context?.clear(CGRect(x: 0, y: 0, width: self.frame.width, height: self.frame.height))
     }
- 
+    
+    /*
+    * MARK: - BACKGROUND
+    */
+    
     func background(_ color: Color) {
         background(color.red, color.green, color.blue, color.alpha)
     }
@@ -17,7 +30,6 @@ public extension Sketch {
         pop()
     }
     
-
     func background(_ systemColorName: Color.SystemColor) {
         let systemColor = systemColorName.rawValue
         push()
@@ -34,6 +46,10 @@ public extension Sketch {
         pop()
     }
 
+    /*
+    * MARK: FILL
+    */
+    
     func fill(_ color: Color) {
         fill(color.red, color.green, color.blue, color.alpha)
     }
@@ -59,6 +75,10 @@ public extension Sketch {
     func noFill() {
         fill(0, 0, 0, 0)
     }
+    
+    /*
+    * MARK: STROKE
+    */
  
     func stroke(_ color: Color) {
         stroke(color.red, color.green, color.blue, color.alpha)
@@ -84,6 +104,10 @@ public extension Sketch {
     func noStroke() {
         stroke(0, 0, 0, 0)
     }
+    
+    /*
+    * MARK: ERASE
+    */
  
     func erase() {
         context?.setBlendMode(CGBlendMode.clear)
@@ -92,7 +116,11 @@ public extension Sketch {
     func noErase() {
         context?.setBlendMode(CGBlendMode.normal)
     }
- 
+    
+    /*
+    * MARK: COLOR
+    */
+    
     func color(_ v1: CGFloat, _ v2: CGFloat, _ v3: CGFloat, _ a: CGFloat = 255) -> Color {
         return Color(v1, v2, v3, a)
     }
@@ -104,6 +132,10 @@ public extension Sketch {
     func color(_ value: String) -> Color {
         return hexStringToUIColor(hex: value)
     }
+    
+    /*
+    * MARK: COMPONENT-WISE COLOR
+    */
  
     func red(_ color: Color) -> CGFloat {
         return red(color.toArray())
@@ -160,6 +192,10 @@ public extension Sketch {
         )
     }
 }
+
+// =======================================================================
+// MARK: - CLASS: COLOR
+// =======================================================================
  
 open class Color {
     
@@ -203,7 +239,11 @@ open class Color {
         return [red, green, blue, alpha]
     }
 }
- 
+
+// =======================================================================
+// MARK: - COLOR EXTENSION FOR CONSTANTS
+// =======================================================================
+
 extension Color {
     
     public enum SystemColor {
