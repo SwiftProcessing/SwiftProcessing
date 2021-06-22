@@ -8,8 +8,8 @@ public struct SketchSettings {
     var textFont: String = "HelveticaNeue-Thin"
     var textAlignment: String = "left"
     var ellipseMode: String = "center"
-    var fill: Color = Color(255, 255, 255)
-    var stroke: Color = Color(0, 0, 0)
+    var fill: Color = Color(255.0, 255.0, 255.0)
+    var stroke: Color = Color(0.0, 0.0, 0.0)
     var strokeWeight: Double = 1
 
     func restore(sketch: Sketch) {
