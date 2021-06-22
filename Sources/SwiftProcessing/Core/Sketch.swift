@@ -1,15 +1,5 @@
-/*
- * SwiftProcessing
- *
- * */
-
-
 import UIKit
 import SceneKit
-
-// =======================================================================
-// MARK: - Delegate/Protocol
-// =======================================================================
 
 @objc public protocol SketchDelegate {
     func setup()
@@ -20,23 +10,12 @@ import SceneKit
 }
 
 @IBDesignable open class Sketch: UIView {
-    // =======================================================================
-    // MARK: - Processing Constants
-    // =======================================================================
-
-    /*
-    * MARK: - TRIGONOMETRY CONSTANTS
-    */
-
+    //Processing Constants
     public let HALF_PI = CGFloat.pi / 2
     public let PI = CGFloat.pi
     public let QUARTER_PI = CGFloat.pi / 4
     public let TWO_PI = CGFloat.pi * 2
     public let TAU = CGFloat.pi * 2
-    
-    /*
-    * MARK: - KEYWORD CONSTANTS
-    */
     
     public let DEGREES = "degrees"
     public let RADIANS = "radians"
@@ -89,10 +68,6 @@ import SceneKit
     public let CAMERA = "camera"
     public let PHOTO_LIBRARY = "photo library"
     public let CAMERA_ROLL = "camera roll"
-    
-    /*
-    * MARK: - SCREEN / DISPLAY PROPERTIES
-    */
     
     public weak var sketchDelegate: SketchDelegate?
     public var width: CGFloat = 0
@@ -150,9 +125,6 @@ import SceneKit
     var isSetup: Bool = false
     open var context: CGContext?
 
-    /*
-    * MARK: - TRANSFORMATION PROPERTIES
-    */
 
     var scene: SCNScene = SCNScene()
     var lightNode: SCNNode = SCNNode()
@@ -179,10 +151,6 @@ import SceneKit
     // the elements being deallocated from memory. This is needed to have the touch events continue to function
     open var viewRefs: [String: UIKitViewElement?] = [:]
     
-    // =======================================================================
-    // MARK: - INIT
-    // =======================================================================
-
     public init() {
         super.init(frame: CGRect())
         initHelper()
@@ -205,19 +173,11 @@ import SceneKit
         loop()
     }
     
-    // =======================================================================
-    // MARK: - DRAW LOOP
-    // =======================================================================
-
     override public func draw(_ rect: CGRect) {
-        // this override is not actually called
-        // but required for the UIView to call the
-        // display function
-            
-        // This is a reference to the UIView's draw,
-        // not Processing's draw loop.
+        //this override is not actually called
+        //but required for the UIView to call the
+        //display function
     }
-    
     override public func display(_ layer: CALayer) {
 
         preDraw3D()
@@ -233,22 +193,17 @@ import SceneKit
         
         push()
         scale(UIScreen.main.scale, UIScreen.main.scale)
-        
-        // To ensure setup only runs once.
         if !isSetup{
             sketchDelegate?.setup()
             isSetup = true
-        }
-        
+        }       
         sketchDelegate?.draw()
-        
         pop()
    
+        
         postDraw3D()
 
         UIGraphicsPopContext()
-        
-        // This makes the background persist if the background isn't cleared.
         let img = context!.makeImage()
         layer.contents = img
         layer.contentsGravity = .resizeAspect
@@ -274,10 +229,6 @@ import SceneKit
         deltaTime = newTime - lastTime
         lastTime = newTime
     }
-        
-    // =======================================================================
-    // MARK: - FOR RETAINING GLOBAL PROCESSING STATES
-    // =======================================================================
     
     open func push() {
         context?.saveGState()
