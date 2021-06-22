@@ -65,6 +65,10 @@ public extension Sketch {
         self.translationNode(tempPosition, "position")
 
     }
+    
+    func translate(_ x: Double, _ y: Double, _ z: Double){
+        translate(Float(x), Float(y), Float(z))
+    }
 
     func rotate(_ x: Float, _ y: Float, _ z: Float){
 
@@ -72,17 +76,34 @@ public extension Sketch {
 
         self.translationNode(tempRotation, "rotation")
     }
+    
+    func rotate(_ x: Double, _ y: Double, _ z: Double){
+        rotate(Float(x), Float(y), Float(z))
+    }
 
     func rotateX(_ r: Float){
         rotate(r, 0, 0)
+    }
+    
+    func rotateX(_ r: Double){
+        rotateX(Float(r))
     }
 
     func rotateY(_ r: Float){
         rotate(0, r, 0)
     }
+    
+    func rotateY(_ r: Double){
+        rotateY(Float(r))
+    }
 
     func rotateZ(_ r: Float){
         rotate(0, 0, r)
     }
+    
+    func rotateZ(_ r: Double){
+        rotateZ(Float(r))
+    }
+
 
 }

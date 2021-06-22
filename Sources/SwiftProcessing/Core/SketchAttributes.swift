@@ -22,9 +22,13 @@ public protocol Attributes {
 extension Sketch: Attributes {
     public func strokeWeight(_ weight: CGFloat) {
         context?.setLineWidth(weight)
-        settings.strokeWeight = weight
+        settings.strokeWeight = Double(weight)
     }
 
+    public func strokeWeight(_ weight: Double) {
+        strokeWeight(CGFloat(weight))
+    }
+    
     public func smooth() {
         context?.setShouldAntialias(true)
     }

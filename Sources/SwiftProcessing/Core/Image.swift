@@ -69,6 +69,11 @@ open class Image {
         return newImage
     }
     
+    open func get(_ x: Double, _ y: Double, _ w: Double, _ h: Double) -> Image {
+
+        return get(CGFloat(x), CGFloat(y), CGFloat(w), CGFloat(h))
+    }
+    
     @available(iOS 9.0, *)
     open func updatePixels() {
         self.updatePixels(0, 0, uiImage[curFrame].size.width, uiImage[curFrame].size.height)

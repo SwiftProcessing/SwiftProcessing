@@ -1,5 +1,15 @@
+/*
+ * SwiftProcessing
+ *
+ * */
+
+
 import UIKit
 import SceneKit
+
+// =======================================================================
+// MARK: - Delegate/Protocol
+// =======================================================================
 
 @objc public protocol SketchDelegate {
     func setup()
@@ -10,12 +20,23 @@ import SceneKit
 }
 
 @IBDesignable open class Sketch: UIView {
-    //Processing Constants
-    public let HALF_PI = CGFloat.pi / 2
-    public let PI = CGFloat.pi
-    public let QUARTER_PI = CGFloat.pi / 4
-    public let TWO_PI = CGFloat.pi * 2
-    public let TAU = CGFloat.pi * 2
+    // =======================================================================
+    // MARK: - Processing Constants
+    // =======================================================================
+
+    /*
+    * MARK: - TRIGONOMETRY CONSTANTS
+    */
+
+    public let HALF_PI = Double.pi / 2
+    public let PI = Double.pi
+    public let QUARTER_PI = Double.pi / 4
+    public let TWO_PI = Double.pi * 2
+    public let TAU = Double.pi * 2
+    
+    /*
+    * MARK: - KEYWORD CONSTANTS
+    */
     
     public let DEGREES = "degrees"
     public let RADIANS = "radians"
@@ -69,35 +90,39 @@ import SceneKit
     public let PHOTO_LIBRARY = "photo library"
     public let CAMERA_ROLL = "camera roll"
     
+    /*
+    * MARK: - SCREEN / DISPLAY PROPERTIES
+    */
+    
     public weak var sketchDelegate: SketchDelegate?
-    public var width: CGFloat = 0
-    public var height: CGFloat = 0
-    public var nativeWidth: CGFloat = 0
-    public var nativeHeight: CGFloat = 0
-    public let deviceWidth = UIScreen.main.bounds.width
-    public let deviceHeight = UIScreen.main.bounds.height
+    public var width: Double = 0
+    public var height: Double = 0
+    public var nativeWidth: Double = 0
+    public var nativeHeight: Double = 0
+    public let deviceWidth = Double(UIScreen.main.bounds.width)
+    public let deviceHeight = Double(UIScreen.main.bounds.height)
     
     public var isFaceMode: Bool = false
     public var isFaceFill: Bool = true
     
-    public var frameCount: CGFloat = 0
-    public var deltaTime: CGFloat = 1/60
-    private var lastTime: CGFloat = CGFloat(CACurrentMediaTime())
-    var fps: CGFloat = 60
+    public var frameCount: Double = 0
+    public var deltaTime: Double = 1/60
+    private var lastTime: Double = CACurrentMediaTime()
+    var fps: Double = 60
     
     var fpsTimer: CADisplayLink?
 
-    var strokeWeight: CGFloat = 1
+    var strokeWeight: Double = 1
     var isFill: Bool = true
     var isStroke: Bool = true
     var isErase: Bool = false
     
     var isScrollX: Bool = false
     var isScrollY: Bool = true
-    var minX: CGFloat = 0
-    var maxX: CGFloat = 0
-    var minY: CGFloat = 0
-    var maxY: CGFloat = 0
+    var minX: Double = 0
+    var maxX: Double = 0
+    var minY: Double = 0
+    var maxY: Double = 0
     
     var settingsStack: SketchSettingsStack = SketchSettingsStack()
     var settings: SketchSettings = SketchSettings()
@@ -111,8 +136,8 @@ import SceneKit
     
     open var touches: [Vector] = []
     open var touched: Bool = false
-    open var touchX: CGFloat = -1
-    open var touchY: CGFloat = -1
+    open var touchX: Double = -1
+    open var touchY: Double = -1
     
     var touchMode: String = "self"
     open var SELF: String = "self"
@@ -125,6 +150,9 @@ import SceneKit
     var isSetup: Bool = false
     open var context: CGContext?
 
+    /*
+    * MARK: - TRANSFORMATION PROPERTIES
+    */
 
     var scene: SCNScene = SCNScene()
     var lightNode: SCNNode = SCNNode()
@@ -151,6 +179,10 @@ import SceneKit
     // the elements being deallocated from memory. This is needed to have the touch events continue to function
     open var viewRefs: [String: UIKitViewElement?] = [:]
     
+    // =======================================================================
+    // MARK: - INIT
+    // =======================================================================
+
     public init() {
         super.init(frame: CGRect())
         initHelper()
@@ -173,11 +205,19 @@ import SceneKit
         loop()
     }
     
+    // =======================================================================
+    // MARK: - DRAW LOOP
+    // =======================================================================
+
     override public func draw(_ rect: CGRect) {
-        //this override is not actually called
-        //but required for the UIView to call the
-        //display function
+        // this override is not actually called
+        // but required for the UIView to call the
+        // display function
+            
+        // This is a reference to the UIView's draw,
+        // not Processing's draw loop.
     }
+    
     override public func display(_ layer: CALayer) {
 
         preDraw3D()
@@ -193,27 +233,32 @@ import SceneKit
         
         push()
         scale(UIScreen.main.scale, UIScreen.main.scale)
+        
+        // To ensure setup only runs once.
         if !isSetup{
             sketchDelegate?.setup()
             isSetup = true
-        }       
+        }
+        
         sketchDelegate?.draw()
+        
         pop()
    
-        
         postDraw3D()
 
         UIGraphicsPopContext()
+        
+        // This makes the background persist if the background isn't cleared.
         let img = context!.makeImage()
         layer.contents = img
         layer.contentsGravity = .resizeAspect
     }
     
     private func updateDimensions() {
-        self.width = self.frame.width
-        self.height = self.frame.height
-        self.nativeWidth = self.frame.width * UIScreen.main.scale
-        self.nativeHeight = self.frame.height * UIScreen.main.scale
+        self.width = Double(self.frame.width)
+        self.height = Double(self.frame.height)
+        self.nativeWidth = Double(self.frame.width) * Double(UIScreen.main.scale)
+        self.nativeHeight = Double(self.frame.height) * Double(UIScreen.main.scale)
         //recreate the backing ImageContext when the native dimensions do not match the context dimensions
         if (self.context?.width != Int(nativeWidth)
             || self.context?.height != Int(nativeHeight)) {
@@ -225,10 +270,14 @@ import SceneKit
     
     private func updateTimes() {
         frameCount =  frameCount + 1
-        let newTime = CGFloat(CACurrentMediaTime())
+        let newTime = CACurrentMediaTime()
         deltaTime = newTime - lastTime
         lastTime = newTime
     }
+        
+    // =======================================================================
+    // MARK: - FOR RETAINING GLOBAL PROCESSING STATES
+    // =======================================================================
     
     open func push() {
         context?.saveGState()

@@ -4,13 +4,13 @@ public struct SketchSettings {
 //   Stores properties
 //    fill(), noFill(), noStroke(), stroke(), tint(), noTint(), strokeWeight(), strokeCap(), strokeJoin(), imageMode(), rectMode(), ellipseMode(), colorMode(), textAlign(), textFont(), textSize(), textLeading(), applyMatrix(), resetMatrix(), rotate(), scale(), shearX(), shearY(), translate(), noiseSeed().
 
-    var textSize: CGFloat = 32
+    var textSize: Double = 32
     var textFont: String = "HelveticaNeue-Thin"
     var textAlignment: String = "left"
     var ellipseMode: String = "center"
-    var fill: Color = Color(255, 255, 255)
-    var stroke: Color = Color(0, 0, 0)
-    var strokeWeight: CGFloat = 1
+    var fill: Color = Color(255.0, 255.0, 255.0)
+    var stroke: Color = Color(0.0, 0.0, 0.0)
+    var strokeWeight: Double = 1
 
     func restore(sketch: Sketch) {
         sketch.textAlign(textAlignment)
@@ -19,6 +19,6 @@ public struct SketchSettings {
         sketch.ellipseMode(ellipseMode)
         sketch.fill(fill)
         sketch.stroke(stroke)
-        sketch.strokeWeight(strokeWeight)
+        sketch.strokeWeight(CGFloat(strokeWeight))
     }
 }

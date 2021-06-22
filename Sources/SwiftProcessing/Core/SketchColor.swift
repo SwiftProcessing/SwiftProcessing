@@ -1,11 +1,67 @@
+/*
+ * SwiftProcessing: Color
+ *
+ * */
+
 import UIKit
  
+/*
+* MARK: - UICOLOR EXTENSION FOR PLAYGROUND LITERAL COLOR SUPPORT
+*/
+
+// Source: https://theswiftdev.com/uicolor-best-practices-in-swift/
+
+public extension UIColor {
+    // Only used internally, so no need to use Doubles.
+    var rgba: (red: CGFloat, green: CGFloat, blue: CGFloat, alpha: CGFloat) {
+        var r: CGFloat = 0
+        var g: CGFloat = 0
+        var b: CGFloat = 0
+        var a: CGFloat = 0
+        self.getRed(&r, green: &g, blue: &b, alpha: &a)
+        return (r, g, b, a)
+    }
+    
+    // To better interface with SwiftProcessing
+    var rgba255: (red: CGFloat, green: CGFloat, blue: CGFloat, alpha: CGFloat) {
+        var r: CGFloat = 0
+        var g: CGFloat = 0
+        var b: CGFloat = 0
+        var a: CGFloat = 0
+        self.getRed(&r, green: &g, blue: &b, alpha: &a)
+        return (r * 255, g * 255, b * 255, a * 255)
+    }
+    
+    var hsba: (hue: CGFloat, saturation: CGFloat, brightness: CGFloat, alpha: CGFloat) {
+        var h: CGFloat = 0
+        var s: CGFloat = 0
+        var b: CGFloat = 0
+        var a: CGFloat = 0
+        self.getHue(&h, saturation: &s, brightness: &b, alpha: &a)
+        return (h, s, b, a)
+    }
+}
+
+
+// =======================================================================
+// MARK: - EXTENSION: COLOR
+// =======================================================================
+
 public extension Sketch {
  
     func clear() {
         context?.clear(CGRect(x: 0, y: 0, width: self.frame.width, height: self.frame.height))
     }
- 
+    
+    /*
+    * MARK: - BACKGROUND
+    */
+    
+    // For Playground Literal Color Support
+    func background(_ color: UIColor) {
+        background(color.rgba255.red, color.rgba255.green, color.rgba255.blue, color.rgba255.alpha)
+    }
+    
     func background(_ color: Color) {
         background(color.red, color.green, color.blue, color.alpha)
     }
@@ -17,7 +73,10 @@ public extension Sketch {
         pop()
     }
     
-
+    func background(_ v1: Double, _ v2: Double, _ v3: Double, _ a: Double = 255) {
+        background(CGFloat(v1), CGFloat(v2), CGFloat(v3), CGFloat(a))
+    }
+    
     func background(_ systemColorName: Color.SystemColor) {
         let systemColor = systemColorName.rawValue
         push()
@@ -26,14 +85,26 @@ public extension Sketch {
         pop()
     }
  
-
     func background(_ v1: CGFloat, _ a: CGFloat = 255) {
         push()
         fill(v1, v1, v1, a)
         rect(0, 0, width, height)
         pop()
     }
+    
+    func background(_ v1: Double, _ a: Double = 255) {
+        background(CGFloat(v1), CGFloat(a))
+    }
 
+    /*
+    * MARK: FILL
+    */
+    
+    // For Playground Literal Color Support
+    func fill(_ color: UIColor) {
+        fill(color.rgba255.red, color.rgba255.green, color.rgba255.blue, color.rgba255.alpha)
+    }
+    
     func fill(_ color: Color) {
         fill(color.red, color.green, color.blue, color.alpha)
     }
@@ -43,6 +114,9 @@ public extension Sketch {
         settings.fill = Color(v1, v2, v3, a)
     }
 
+    func fill(_ v1: Double, _ v2: Double, _ v3: Double, _ a: Double = 255) {
+        fill(CGFloat(v1), CGFloat(v2), CGFloat(v3), CGFloat(a))
+    }
     
     func fill(_ systemColorName: Color.SystemColor) {
         let systemColor = systemColorName.rawValue
@@ -55,9 +129,26 @@ public extension Sketch {
         context?.setFillColor(red: v1 / 255, green: v1 / 255, blue: v1 / 255, alpha: a / 255)
         settings.fill = Color(v1, v1, v1, a)
     }
+    
+    func fill(_ v1: Double,_ a: Double = 255) {
+        fill(CGFloat(v1), CGFloat(a))
+    }
 
     func noFill() {
-        fill(0, 0, 0, 0)
+        fill(0.0, 0.0, 0.0, 0.0)
+    }
+    
+    /*
+    * MARK: STROKE
+    */
+    
+    // For Playground Literal Color Support
+    func stroke(_ color: UIColor) {
+        let red = color.rgba.red * 255.0
+        let green = color.rgba.green * 255.0
+        let blue = color.rgba.blue * 255.0
+        let alpha = color.rgba.alpha * 255.0
+        stroke(red, green, blue, alpha)
     }
  
     func stroke(_ color: Color) {
@@ -67,6 +158,10 @@ public extension Sketch {
     func stroke(_ v1: CGFloat, _ v2: CGFloat, _ v3: CGFloat, _ a: CGFloat = 255) {
         context?.setStrokeColor(red: v1 / 255, green: v2 / 255, blue: v3 / 255, alpha: a / 255)
         settings.stroke = Color(v1, v2, v3, a)
+    }
+    
+    func stroke(_ v1: Double, _ v2: Double, _ v3: Double, _ a: Double = 255) {
+        stroke(CGFloat(v1), CGFloat(v2), CGFloat(v3), CGFloat(a))
     }
 
     func stroke(_ systemColorName: Color.SystemColor) {
@@ -80,10 +175,18 @@ public extension Sketch {
         settings.stroke = Color(v1, v1, v1, a)
     }
 
+    func stroke(_ v1: Double,_ a: Double = 255) {
+        stroke(CGFloat(v1), CGFloat(a))
+    }
+
 
     func noStroke() {
-        stroke(0, 0, 0, 0)
+        stroke(0.0, 0.0, 0.0, 0.0)
     }
+    
+    /*
+    * MARK: ERASE
+    */
  
     func erase() {
         context?.setBlendMode(CGBlendMode.clear)
@@ -92,24 +195,49 @@ public extension Sketch {
     func noErase() {
         context?.setBlendMode(CGBlendMode.normal)
     }
- 
+    
+    /*
+    * MARK: COLOR
+    */
+    
+    // For Playground Literal Color Support
+    func color(_ c: UIColor) -> Color {
+        return Color(c.rgba255.red, c.rgba255.green, c.rgba255.blue, c.rgba255.alpha)
+    }
+    
     func color(_ v1: CGFloat, _ v2: CGFloat, _ v3: CGFloat, _ a: CGFloat = 255) -> Color {
+        return Color(v1, v2, v3, a)
+    }
+    
+    func color(_ v1: Double, _ v2: Double, _ v3: Double, _ a: Double = 255) -> Color {
         return Color(v1, v2, v3, a)
     }
     
     func color(_ v1: CGFloat, _ a: CGFloat = 255) -> Color {
         return Color(v1, v1, v1, a)
     }
+    
+    func color(_ v1: Double, _ a: Double = 255) -> Color {
+        return Color(v1, v1, v1, a)
+    }
 
     func color(_ value: String) -> Color {
         return hexStringToUIColor(hex: value)
     }
+    
+    /*
+    * MARK: COMPONENT-WISE COLOR
+    */
  
     func red(_ color: Color) -> CGFloat {
         return red(color.toArray())
     }
  
     func red(_ color: [CGFloat]) -> CGFloat {
+        return color[0]
+    }
+    
+    func red(_ color: [Double]) -> Double {
         return color[0]
     }
  
@@ -120,6 +248,10 @@ public extension Sketch {
     func green(_ color: [CGFloat]) -> CGFloat {
         return color[1]
     }
+    
+    func green(_ color: [Double]) -> Double {
+        return color[1]
+    }
  
     func blue(_ color: Color) -> CGFloat {
         return blue(color.toArray())
@@ -128,12 +260,20 @@ public extension Sketch {
     func blue(_ color: [CGFloat]) -> CGFloat {
         return color[2]
     }
+    
+    func blue(_ color: [Double]) -> Double {
+        return color[2]
+    }
  
     func alpha(_ color: Color) -> CGFloat {
         return alpha(color.toArray())
     }
  
     func alpha(_ color: [CGFloat]) -> CGFloat {
+        return color[3]
+    }
+    
+    func alpha(_ color: [Double]) -> Double {
         return color[3]
     }
  
@@ -160,6 +300,10 @@ public extension Sketch {
         )
     }
 }
+
+// =======================================================================
+// MARK: - CLASS: COLOR
+// =======================================================================
  
 open class Color {
     
@@ -173,6 +317,13 @@ open class Color {
         self.green = v2
         self.blue = v3
         self.alpha = a
+    }
+    
+    public init(_ v1: Double, _ v2: Double, _ v3: Double, _ a: Double = 255) {
+        self.red = CGFloat(v1)
+        self.green = CGFloat(v2)
+        self.blue = CGFloat(v3)
+        self.alpha = CGFloat(a)
     }
  
     func setRed(_ red: CGFloat) {
@@ -190,7 +341,23 @@ open class Color {
     func setAlpha(_ alpha: CGFloat) {
         self.alpha = alpha
     }
- 
+    
+    func setRed(_ red: Double) {
+        self.red = CGFloat(red)
+    }
+    
+    func setGreen(_ green: Double) {
+        self.green = CGFloat(green)
+    }
+    
+    func setBlue(_ blue: Double) {
+        self.blue = CGFloat(blue)
+    }
+    
+    func setAlpha(_ alpha: Double) {
+        self.alpha = CGFloat(alpha)
+    }
+
     func uiColor() -> UIColor {
         return UIColor(red: self.red / 255, green: self.green / 255, blue: self.blue / 255, alpha: self.alpha / 255)
     }
@@ -202,8 +369,16 @@ open class Color {
     func toArray() -> [CGFloat] {
         return [red, green, blue, alpha]
     }
+    
+    func toArray() -> [Double] {
+        return [Double(red), Double(green), Double(blue), Double(alpha)]
+    }
 }
- 
+
+// =======================================================================
+// MARK: - COLOR EXTENSION FOR CONSTANTS
+// =======================================================================
+
 extension Color {
     
     public enum SystemColor {

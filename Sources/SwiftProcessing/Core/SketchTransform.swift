@@ -22,11 +22,23 @@ public extension Sketch {
         context?.rotate(by: angle)
     }
     
+    func rotate(_ angle: Double) {
+        rotate(CGFloat(angle))
+    }
+    
     func translate(_ x: CGFloat, _ y: CGFloat) {
         context?.translateBy(x: x, y: y)
     }
     
+    func translate(_ x: Double, _ y: Double) {
+        translate(CGFloat(x), CGFloat(y))
+    }
+    
     func scale(_ x: CGFloat, _ y: CGFloat) {
         context?.scaleBy(x: x, y: y)
+    }
+    
+    func scale(_ x: Double, _ y: Double) {
+        scale(CGFloat(x), CGFloat(y))
     }
 }

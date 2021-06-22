@@ -11,7 +11,7 @@ public extension Sketch {
         curImage.pixels = self.pixels
         curImage.updatePixels(x, y, w, h)
         curImage.loadPixels()
-        image(curImage, 0, 0, self.width, self.height)
+        image(curImage, 0, 0, CGFloat(self.width), CGFloat(self.height))
     }
 
     func loadPixels() {
@@ -21,7 +21,7 @@ public extension Sketch {
     }
 
     func get() -> Image {
-        get(0, 0, self.width, self.height)
+        get(0, 0, CGFloat(self.width), CGFloat(self.height))
     }
 
     func get(_ x: CGFloat, _ y: CGFloat, _ w: CGFloat, _ h: CGFloat) -> Image {
@@ -32,7 +32,7 @@ public extension Sketch {
     }
 
     func get(_ x: CGFloat, _ y: CGFloat) -> Image {
-        get(x, y, self.width, self.height)
+        get(x, y, CGFloat(self.width), CGFloat(self.height))
     }
 
 }

@@ -15,7 +15,7 @@ public extension Sketch {
         let h = height == nil ? CGFloat(image.height) : height!
         image.width = w
         image.height = h
-        image.frame(deltaTime, frameCount).draw(in: CGRect(x: x, y: y, width: w, height: h), blendMode: image.blendMode, alpha: image.alpha)
+        image.frame(CGFloat(deltaTime), CGFloat(frameCount)).draw(in: CGRect(x: x, y: y, width: w, height: h), blendMode: image.blendMode, alpha: image.alpha)
     }
     
     func saveSketch() {
