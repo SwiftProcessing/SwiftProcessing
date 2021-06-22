@@ -95,6 +95,7 @@
 
 /* Begin PBXFileReference section */
 		1F5F75A2268184E500AAE0A9 /* Sketch2DPrimitivesGenerics.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Sketch2DPrimitivesGenerics.swift; sourceTree = "<group>"; };
+		1F5F75AA2681898A00AAE0A9 /* Chapter 1 - Getting Started.playground */ = {isa = PBXFileReference; lastKnownFileType = file.playground; path = "Chapter 1 - Getting Started.playground"; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		OBJ_11 /* GifSwift.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GifSwift.swift; sourceTree = "<group>"; };
 		OBJ_12 /* Image.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Image.swift; sourceTree = "<group>"; };
 		OBJ_13 /* ImagePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePicker.swift; sourceTree = "<group>"; };
@@ -175,6 +176,7 @@
 		OBJ_5 = {
 			isa = PBXGroup;
 			children = (
+				1F5F75AA2681898A00AAE0A9 /* Chapter 1 - Getting Started.playground */,
 				OBJ_6 /* Package.swift */,
 				OBJ_7 /* Sources */,
 				OBJ_60 /* Tests */,
