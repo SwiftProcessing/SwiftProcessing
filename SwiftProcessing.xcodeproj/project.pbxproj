@@ -21,6 +21,7 @@
 /* End PBXAggregateTarget section */
 
 /* Begin PBXBuildFile section */
+		1F5F75A3268184E500AAE0A9 /* Sketch2DPrimitivesGenerics.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F5F75A2268184E500AAE0A9 /* Sketch2DPrimitivesGenerics.swift */; };
 		OBJ_100 /* SketchNotifications.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_36 /* SketchNotifications.swift */; };
 		OBJ_101 /* SketchPixels.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_37 /* SketchPixels.swift */; };
 		OBJ_102 /* SketchRandom.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_38 /* SketchRandom.swift */; };
@@ -93,6 +94,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		1F5F75A2268184E500AAE0A9 /* Sketch2DPrimitivesGenerics.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Sketch2DPrimitivesGenerics.swift; sourceTree = "<group>"; };
 		OBJ_11 /* GifSwift.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GifSwift.swift; sourceTree = "<group>"; };
 		OBJ_12 /* Image.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Image.swift; sourceTree = "<group>"; };
 		OBJ_13 /* ImagePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePicker.swift; sourceTree = "<group>"; };
@@ -233,6 +235,7 @@
 			children = (
 				OBJ_15 /* Sketch.swift */,
 				OBJ_16 /* Sketch2DPrimitives.swift */,
+				1F5F75A2268184E500AAE0A9 /* Sketch2DPrimitivesGenerics.swift */,
 				OBJ_29 /* SketchAttributes.swift */,
 				OBJ_30 /* SketchAugmentedReality.swift */,
 				OBJ_31 /* SketchCalculation.swift */,
@@ -398,6 +401,7 @@
 				OBJ_87 /* Sketch3DLight.swift in Sources */,
 				OBJ_88 /* Sketch3DModel.swift in Sources */,
 				OBJ_89 /* Sketch3DPrimitives.swift in Sources */,
+				1F5F75A3268184E500AAE0A9 /* Sketch2DPrimitivesGenerics.swift in Sources */,
 				OBJ_90 /* Sketch3DTexture.swift in Sources */,
 				OBJ_91 /* Sketch3DTransform.swift in Sources */,
 				OBJ_92 /* TransitionSCNNode.swift in Sources */,
