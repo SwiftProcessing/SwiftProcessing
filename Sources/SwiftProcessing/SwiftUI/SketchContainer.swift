@@ -18,21 +18,25 @@ public struct SketchContainer: View {
     
     public var body: some View {
         TimelineView(.animation(minimumInterval: sketch.targetFrameRate, paused: sketch.isPaused)) { timeline in
-            Canvas(renderer: { context, size in
-                print(sketch.operations.count, 1 / sketch.deltaTime, sketch.loadedText.count)
+            var x = sketch.loadedText
+            Canvas(
+                rendersAsynchronously: false,
+                   renderer: { context, size in
                 sketch.operations.forEach { $0(context) }
                 sketch.updateContext(
                     context,
                     size,
                     timeline.date.timeIntervalSinceReferenceDate
                 )
+                print(sketch.operations.count, 1 / sketch.deltaTime, sketch.loadedText.count)
                 sketch.display()
             }, symbols: {
                 ForEach(sketch.loadedImages) { image in
                     image.view
                 }
-                ForEach(sketch.loadedText) { text in
-                    text.text.tag(text.id)
+                
+                ForEach(Array(x)) { text in
+                    AnyView(text.text).tag(text.id)
                 }
             })
             .drawingGroup()

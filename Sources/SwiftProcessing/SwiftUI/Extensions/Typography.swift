@@ -45,6 +45,7 @@ extension SketchUI {
             textSize: textSize,
             operation: operations.count
         )
+        
         loadedText.append(
             text
         )

@@ -17,10 +17,8 @@ open class SketchUI: ObservableObject{
     @Published
     var targetFrameRate: Double = 1 / 60
     
-    @Published
     var loadedImages: [Image] = []
     
-    @Published
     var loadedText: [TextCachable] = []
     
     public var width: Double = 0
@@ -45,7 +43,7 @@ open class SketchUI: ObservableObject{
     var flattenImage: SwiftUI.Image?
     var isFlattening = false
     // TODO what is the best flatten threshhold... should it even be static?
-    let flattenTreshhold = 250
+    let flattenTreshhold = 25
     
     public init() {
         self.sketchDelegate = self as? SketchDelegateUI
@@ -77,9 +75,9 @@ open class SketchUI: ObservableObject{
                     }
                 ]
             )
-            
             flattenImage = nil
             isFlattening = false
+
         }
         sketchDelegate?.draw()
         frameCount += 1
@@ -95,9 +93,7 @@ open class SketchUI: ObservableObject{
                 image.view
             }
             ForEach(Array(self.loadedText)) { text in
-                if text.includeInSymbols {
-                    text.text.tag(text.id)
-                }
+                text.text.tag(text.id)
             }
         })
         .frame(width: self.width, height: self.height)
