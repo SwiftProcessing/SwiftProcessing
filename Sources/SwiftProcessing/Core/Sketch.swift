@@ -229,7 +229,9 @@ import SceneKit
         currentStack = []
         self.settingsStack = SketchSettingsStack()
         updateTimes()
-        updateTouches()
+        
+        // Moving this as it doesn't incorporate default transforms.
+        // updateTouches()
         
         push()
         scale(UIScreen.main.scale, UIScreen.main.scale)
@@ -239,6 +241,9 @@ import SceneKit
             sketchDelegate?.setup()
             isSetup = true
         }
+        
+        // Should happen right before draw and inside of the push() and pop().
+        updateTouches()
         
         sketchDelegate?.draw()
         

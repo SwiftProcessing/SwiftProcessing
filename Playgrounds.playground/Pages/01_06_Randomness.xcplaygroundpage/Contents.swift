@@ -89,6 +89,7 @@ class MySketch: Sketch, SketchDelegate {
     }
 }
 //: ## Can you change this code to add your own flair to our rainstorm?
-//: ## Bonus: Did you notice how repetitive this code was? Don't worry! Soon we'll be able to reduce all of this code to a few lines using some new coding skills for repetition! Stay tuned!
+//: ## Bonus: Did you notice how repetitive this code was?
+//: This is usually not a good idea because it doesn't adhere to an important rule of thumb in programming: don't repeat yourself. This is also known as DRY. Don't worry! Soon we'll be able to reduce all of this code to a few lines using some new coding skills for repetition and our raindrop code will be nice and DRY! Stay tuned!
 PlaygroundPage.current.setLiveView(MySketch())
 //: [Next](@next)

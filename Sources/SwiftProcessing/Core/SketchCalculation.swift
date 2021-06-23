@@ -68,6 +68,8 @@ public protocol Calculation {
     /// - Parameter array: Numbers to compare
     func min(_ array: [CGFloat]) -> CGFloat
     
+    func min<T: FloatingPoint>(_ array: [T]) -> T
+    
     /// Normalizes a number from another range into a value between 0 and 1.
     /// - Parameters:
     ///   - num: incoming value to be normalized
@@ -75,11 +77,14 @@ public protocol Calculation {
     ///   - stop: upper bound of the value's current range
     func norm(_ num: CGFloat, _ start: CGFloat, _ stop: CGFloat) -> CGFloat
     
+    func norm<T: FloatingPoint>(_ num: T, _ start: T, _ stop: T) -> T
+    
     /// Squares a number (multiplies a number by itself).
     /// - Parameter num: number to square
     /// - Returns: squared number
     func sq(_ num: CGFloat) -> CGFloat
     
+    func sq<T: Numeric>(_ num: T) -> Double
 }
 
 extension Sketch: Calculation {
@@ -156,13 +161,28 @@ extension Sketch: Calculation {
         return array.min() ?? 0
     }
     
-    
+    public func min<T: FloatingPoint>(_ array: [T]) -> T {
+        return array.min() ?? 0
+    }
     
     public func norm(_ num: CGFloat, _ start: CGFloat, _ stop: CGFloat) -> CGFloat {
         return self.map(num, start, stop, 0, 1)
     }
     
+    public func norm<T: FloatingPoint>(_ num: T, _ start: T, _ stop: T) -> T{
+       return self.map(num, start, stop, 0, 1)
+   }
+    
     public func sq(_ num: CGFloat) -> CGFloat {
         return pow(num, 2)
+    }
+    
+    // Relies upon conversion found in Sketch2DPrimitivesGenerics.Swift
+    // Returning a Double here because that is what will be required in most
+    // use cases for SwiftProcessing and using T creates ambiguity that
+    // can't be resolved. Maybe there's a better solution out there?
+    
+    public func sq<T: Numeric>(_ num: T) -> Double {
+        return pow(num.convert(), 2)
     }
 }
