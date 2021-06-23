@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<playground version='6.0' target-platform='ios' display-mode='raw' buildActiveScheme='true'>
+    <pages>
+        <page name='01_01_Getting_Started'/>
+        <page name='01_02_Basic_Shapes'/>
+        <page name='01_03_Color_and_Stroke'/>
+        <page name='01_04_Variables_Constants_and_Data'/>
+        <page name='01_05_Basic_Arithmetic_and_Print'/>
+        <page name='01_06_Randomness'/>
+        <page name='02_01_Touch_and_Animation'/>
+        <page name='02_02_Sliders'/>
+        <page name='02_03_Conditional_Logic'/>
+        <page name='02_04_For_Loops'/>
+        <page name='02_05_Arrays'/>
+    </pages>
+</playground>

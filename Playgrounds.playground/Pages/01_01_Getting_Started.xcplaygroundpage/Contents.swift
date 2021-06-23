@@ -19,7 +19,7 @@ class MySketch: Sketch, SketchDelegate {
     func setup() {
         // Set your background color
         // Try changing the color by double clicking it.
-        background(#colorLiteral(red: 0.9529411793, green: 0.6862745285, blue: 0.1333333403, alpha: 1))
+        background(#colorLiteral(red: 0.4745098054, green: 0.8392156959, blue: 0.9764705896, alpha: 1))
     }
 
     func draw() {
@@ -28,9 +28,18 @@ class MySketch: Sketch, SketchDelegate {
         // Try changing 25 to some other number and see what happens!
         circle(touchX, touchY, 25)
     }
-    
-    
 }
+//: ## Code Comments
+//: One thing you might have noticed in the code above is that I wrote comments in the code above. The comments are invisible to the computer.
+//: In Swift, you can comment using a couple of methods:
+//: 1. `//` - this is a single line comment.
+//: 1. `/* write comment here */` - this is a multi-line comment. Once you start your comment with `/*` the computer will ignore everything up until you close your comment with `*/`
+//: ## What is a function?
+//: Moving forward you'll definitely want to know what a ***function*** is, but luckily you've already used one!
+//: A function is a piece of code that does an action. You can think of them as the verbs of coding. We've used 3 functions in the code above.
+//: 1. `background()` - sets the background color.
+//: 1. `noStroke()` - makes shapes draw without an outline.
+//: 1. `circle()` - draws a circle.
 //: ## Hit the blue play button to the left and click around the live view to the right.
 //: ## Check out the little paint program we created!
 //: This last bit of code is to get things up and running in the playground.

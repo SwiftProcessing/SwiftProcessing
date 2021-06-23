@@ -118,6 +118,15 @@ public extension Sketch {
         fill(CGFloat(v1), CGFloat(v2), CGFloat(v3), CGFloat(a))
     }
     
+    func fill(_ v1: CGFloat, _ v2: CGFloat, _ v3: CGFloat) {
+        context?.setFillColor(red: v1 / 255, green: v2 / 255, blue: v3 / 255, alpha: 255)
+        settings.fill = Color(v1, v2, v3, 255)
+    }
+
+    func fill(_ v1: Double, _ v2: Double, _ v3: Double) {
+        fill(CGFloat(v1), CGFloat(v2), CGFloat(v3))
+    }
+    
     func fill(_ systemColorName: Color.SystemColor) {
         let systemColor = systemColorName.rawValue
         context?.setFillColor(red: systemColor.ciColor.red / 255, green: systemColor.ciColor.green / 255, blue: systemColor.ciColor.blue / 255, alpha: systemColor.ciColor.alpha / 255)
@@ -133,6 +142,15 @@ public extension Sketch {
     func fill(_ v1: Double,_ a: Double = 255) {
         fill(CGFloat(v1), CGFloat(a))
     }
+    
+    func fill(_ v1: CGFloat) {
+        context?.setFillColor(red: v1 / 255, green: v1 / 255, blue: v1 / 255, alpha: 255)
+        settings.fill = Color(v1, v1, v1, 255)
+    }
+    
+    func fill(_ v1: Double) {
+        fill(CGFloat(v1))
+    }
 
     func noFill() {
         fill(0.0, 0.0, 0.0, 0.0)
@@ -144,10 +162,10 @@ public extension Sketch {
     
     // For Playground Literal Color Support
     func stroke(_ color: UIColor) {
-        let red = color.rgba.red * 255.0
-        let green = color.rgba.green * 255.0
-        let blue = color.rgba.blue * 255.0
-        let alpha = color.rgba.alpha * 255.0
+        let red = color.rgba255.red
+        let green = color.rgba255.green
+        let blue = color.rgba255.blue
+        let alpha = color.rgba255.alpha
         stroke(red, green, blue, alpha)
     }
  
@@ -324,6 +342,13 @@ open class Color {
         self.green = CGFloat(v2)
         self.blue = CGFloat(v3)
         self.alpha = CGFloat(a)
+    }
+    
+    public init(_ color: UIColor) {
+        self.red = color.rgba255.red
+        self.green = color.rgba255.green
+        self.blue = color.rgba255.blue
+        self.alpha = color.rgba255.alpha
     }
  
     func setRed(_ red: CGFloat) {
