@@ -1,6 +1,6 @@
 //: [Previous](@previous)
 /*:
- # Touch and Map
+ # Touch
  ### by Masood Kamandy for GSoC 2021
  
  ## Introduction

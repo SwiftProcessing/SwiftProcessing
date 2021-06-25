@@ -37,9 +37,6 @@ extension Sketch: UIGestureRecognizerDelegate {
         var isTouchEnded: Bool = false
         touchRecongizer.cancelsTouchesInView = false
         
-        print("touchRecongizer.numberOfTouches: \(touchRecongizer.numberOfTouches)")
-        print("touches.count: \(touches.count)")
-        
         if touchRecongizer.numberOfTouches > touches.count {
             isTouchStarted = true
         }

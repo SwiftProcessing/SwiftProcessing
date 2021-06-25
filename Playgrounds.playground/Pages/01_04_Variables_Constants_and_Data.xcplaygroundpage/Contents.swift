@@ -47,15 +47,19 @@
  
  ## Data Types
  
- We can store a lot of different types of data in a variable or constant. We're going to explore 3 different data types.
+ We can store a lot of different types of data in a variable or constant. We're going to explore 4 different data types.
  
- ### Strings
+ ### Booleans
  
- Strings are words or sentences. You could the name of a city in a string. For example:
+ Booleans can either be `true` or `false`. They're the simplest data type and come in handy later on when we start testing whether things are true or false. They're also sometimes called **flags**. It's common practice to name booleans as if we're asking a quesiton.
  
- `var city = "Mexico City"`
+ var hasStarted = true
  
- Notice that the string is always surrounded by quotation marks. This tells the computer that it's a string and it also marks the beginning and the end of the string.
+ ### Integers
+ 
+ Integers are numbers that do not have decimal points. One of the most important things to learn about programming early on is that computers store decimal and non-decimal numbers differently. In Swift integer numbers are called `Int`'s.
+ 
+ `var numberOfApples = 15`
  
  ### Doubles
  
@@ -63,9 +67,25 @@
  
  `var rectangleWidth = 150.0`
 
- Swift guesses what kind of variable you have based on what is on the right side of the `=` sign. If it sees quotes, it'll know it's a string. If it sees a decimal point, it will assume it's a Double.
+ Swift guesses what kind of variable you have based on what is on the right side of the `=` sign. If it sees quotes, it'll know it's a string. If it sees a decimal point, it will assume it's a Double. In Swift, Doubles are called `Double`'s.
+ 
+ ### Strings
+ 
+ Strings are words or sentences. You could the name of a city in a string. For example:
+ 
+ `var city = "Mexico City"`
+ 
+ Notice that the string is always surrounded by quotation marks. This tells the computer that it's a string and it also marks the beginning and the end of the string. In Swift, strings are called, you guessed it, `String`'s.
  
  There are other data types too! But for now those two types are the most important for getting started with SwiftProcessing.
+ 
+ ### Declaring a Variable With Its Type
+ 
+ There are going to be some situations where you will want to declare a variable and tell the Swift compiler what type it is. Usually this is done when we declare a variable, but don't initialize it with any values. We do that with the `:` operator. Here's what that looks like:
+ 
+ `var age: Int!`
+ 
+ The ! indicates that the variable is an **Optional**. We'll go over this in more detail later, but it basically means there *may or may not be a value stored in this variable* and it's required in Swift if you want to separate declaring and inializing a variable.
  
 ## Let's play with some variables!
  
