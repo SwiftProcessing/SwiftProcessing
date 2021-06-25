@@ -5,176 +5,97 @@
  
  ## Introduction
  
- Conditional logic in coding helps us create branches in code. Basically it helps us say "If this happens, then do that!" It's essential to use conditional logic when creating rich experiences that always keep us guessing. These are called **branch statements**.
+ Earlier in the series we talked about DRY code, which stands for DON'T REPEAT YOURSELF. The goal of programming is to do as much as we can in the smallest amount of code. Up until now you've probably found that very difficult.
  
- In this playground we're going to combine randomness and conditional logic to create a dice program!
+ After you read through this playground, if you notice you are repeating yourself in code, you'll have the tools to shorten your code! Those tools come in the form of `for` and `while` loops.
  
- ## Logical Operators
+ Sometimes there are repetitive tasks where we're only changing one small thing. For example, what if I wanted to create hundreds or thousands of raindrops. It wouldn't make sense to inidividually code each raindrop, so that's where these new concepts help us out!
  
- ## If Statements
+ ## For Loops
  
- The simplest form of branching statement branches your code logic in two directions. That's the if statement! Here's the syntax of an if statement in Swift:
+ The `for` loop is the first structure you'll learn that allows you complete an action repeatedly. A for loop repeats going over a section of code as many times as you want to. It acts like a counter and you can set it up to count up to whatever number you would like.
+ 
+ Here is the structure of a for loop:
  
  ```
- if condition {
+ for index in start...end {
     statements
  }
  ```
- The code where `statements` is above only runs if the `condition` is true. But what happens if the `condition` is false? There's a statement for that too! We can use an **else clause**.
+ `start` and `end` are numbers. We're creating a range to count through. They must be `Int`'s
+ `...` is an inclusive range. It counts from `start` to `end` inclusively.
+ `index` is where you are currently in the count. It will start at `start` and repeat until it gets to `end`.
+ `statements` is whatever code you want to repeat.
+ 
+ Here is some real code:
  
  ```
- if condition {
-    statements to execute if condition is true
- } else {
-    statements to execute if condition is false
+ for index in 1...5 {
+    print("\(index) times 5 is \(index * 5)")
  }
  ```
- If you have multiple conditions you can use the pattern `if`, `else if`, `else` and you can have as many `else if`'s as you need.
+ 
+ The previous `for` loop increments by 1. There will be times you need to incrememnt by other intervals. For this we use the following syntax:
  
  ```
- if condition 1 {
-    statements to execute if condition 1 is true
- } else if condition 2 {
-    statements to execute if condition 2 is true
- } else {
-    statements to execute if both conditions are false
+ let interval = 5
+ for index in stride(from: 0, to: 50, by: interval) {
+    print(index) // prints 0, 5, 10, 15 ... 45, 50
+ }
+ 
+ ```
+ 
+ ## While Loops
+ 
+ Another way to loop is just to loop indefinitely until some condition is true. That's where the `while` loop comes in handy.
+ 
+ This is the syntax of a while loop:
+ 
+ ```
+ while condition {
+    statements
  }
  ```
- **NOTE:** It's possible to ***nest*** if statements. That means putting an if statement inside of an if statement. You'll see that we did that below in a simple way. It can lead to code that's difficult to read, so make sure you can follow the logic of your program when doing this.
  
- **XCODE TIP:** A good way to keep things clear is to properly indent your code. Xcode can automatically do this by going to Edit -> Select All and then Editor -> Structure -> Re-Indent. Or you can press command-a and then control-i.
+ ***Note:*** While loops can cause problems if you don't have a proper exit condition. Without an exit condition, the computer can get stuck in what's called an ***infinite loop.*** Print statements inside of while loops can help clarify what is happening to your variables inside of your while loop. Use them liberally.
  
- ## Switch Statements
- 
- Another useful strategy if you know there are going to be multiple branches is to use a **switch statement**.
- 
- ```
-switch control expression {
-case pattern 1:
-    statements
-case pattern 2:
-    statements
-case pattern 3:
-    statements
-default:
-    statements
-}
- 
- ```
- The `control expression` is usually a variable that holds an integer, but it can be other types also.
- 
- ## Let's use if statements and a switch to change the background depending on the dice roll!
- 
+ ## Let's use a for loop to draw a gradient of lines down the screen.
  */
+
 import SwiftProcessing
 import PlaygroundSupport
 import UIKit
 
 class MySketch: Sketch, SketchDelegate {
     
-    // A dice roll should be an integer because we don't need decimals.
-    var diceRoll: Int!
-    var useIf = false
+    var topColor = Color(#colorLiteral(red: 0.2196078449, green: 0.007843137719, blue: 0.8549019694, alpha: 1))
+    var bottomColor = Color(#colorLiteral(red: 0.4745098054, green: 0.8392156959, blue: 0.9764705896, alpha: 1))
+    
+    var increment = 32
     
     func setup() {
-        diceRoll = 0
-    }
-    
-    func draw() {
-        noStroke()
+        // Remember that the start and end of a for loop need to be both be integers.
+        // Height is a double, so we'll convert it to an integer.
         
-        if useIf {
+        for i in stride(from: increment/2, to: Int(height), by: increment) {
+            // To use i in SwiftProcessing functions it should be converted to a Double.
+            let double_i = Double(i)
             
-            // First let's try the approach with an if statement.
-            if diceRoll == 0 {
-                background(#colorLiteral(red: 1, green: 1, blue: 1, alpha: 1))
-            } else if diceRoll == 1 {
-                background(#colorLiteral(red: 0.4745098054, green: 0.8392156959, blue: 0.9764705896, alpha: 1))
-                circle(width/2, height/2, 100)
-            } else if diceRoll == 2 {
-                background(#colorLiteral(red: 0.5568627715, green: 0.3529411852, blue: 0.9686274529, alpha: 1))
-                circle(width/2 + 100, height/2 - 100, 100)
-                circle(width/2 - 100, height/2 + 100, 100)
-            } else if diceRoll == 3 {
-                background(#colorLiteral(red: 0.9098039269, green: 0.4784313738, blue: 0.6431372762, alpha: 1))
-                circle(width/2 + 100, height/2 - 100, 100)
-                circle(width/2, height/2, 100)
-                circle(width/2 - 100, height/2 + 100, 100)
-            } else if diceRoll == 4 {
-                background(#colorLiteral(red: 0.9568627477, green: 0.6588235497, blue: 0.5450980663, alpha: 1))
-                circle(width/2 + 100, height/2 - 100, 100)
-                circle(width/2 - 100, height/2 - 100, 100)
-                circle(width/2 - 100, height/2 + 100, 100)
-                circle(width/2 + 100, height/2 + 100, 100)
-            } else if diceRoll == 5 {
-                background(#colorLiteral(red: 0.9764705896, green: 0.850980401, blue: 0.5490196347, alpha: 1))
-                circle(width/2 + 100, height/2 - 100, 100)
-                circle(width/2 - 100, height/2 - 100, 100)
-                circle(width/2, height/2, 100)
-                circle(width/2 - 100, height/2 + 100, 100)
-                circle(width/2 + 100, height/2 + 100, 100)
-            } else { // 6 is the only other possibility, so we use else.
-                background(#colorLiteral(red: 0.721568644, green: 0.8862745166, blue: 0.5921568871, alpha: 1))
-                circle(width/2 - 100, height/2, 100)
-                circle(width/2 + 100, height/2, 100)
-                circle(width/2 - 100, height/2 - 125, 100)
-                circle(width/2 + 100, height/2 - 125, 100)
-                circle(width/2 - 100, height/2 + 125, 100)
-                circle(width/2 + 100, height/2 + 125, 100)
-            }
+            // Get mapped colors that fade from topColor to bottomColor
+            // Creating gradients involves mapping from one
+            // color's r,g,and b values to another.
+            let red = map(double_i, 0, height, topColor.red, bottomColor.red)
+            let green = map(double_i, 0, height, topColor.green, bottomColor.green)
+            let blue = map(double_i, 0, height, topColor.blue, bottomColor.blue)
             
-            
-        } else {
-            
-            // Next let's try it with a switch statement.
-            // To use this code, change the boolean useIf to false above.
-            
-            switch diceRoll {
-            case 1:
-                background(#colorLiteral(red: 0.2392156869, green: 0.6745098233, blue: 0.9686274529, alpha: 1))
-                circle(width/2, height/2, 100)
-            case 2:
-                background(#colorLiteral(red: 0.2196078449, green: 0.007843137719, blue: 0.8549019694, alpha: 1))
-                circle(width/2 + 100, height/2 - 100, 100)
-                circle(width/2 - 100, height/2 + 100, 100)
-            case 3:
-                background(#colorLiteral(red: 0.8078431487, green: 0.02745098062, blue: 0.3333333433, alpha: 1))
-                circle(width/2 + 100, height/2 - 100, 100)
-                circle(width/2, height/2, 100)
-                circle(width/2 - 100, height/2 + 100, 100)
-            case 4:
-                background(#colorLiteral(red: 0.9372549057, green: 0.3490196168, blue: 0.1921568662, alpha: 1))
-                circle(width/2 + 100, height/2 - 100, 100)
-                circle(width/2 - 100, height/2 - 100, 100)
-                circle(width/2 - 100, height/2 + 100, 100)
-                circle(width/2 + 100, height/2 + 100, 100)
-            case 5:
-                background(#colorLiteral(red: 0.9607843161, green: 0.7058823705, blue: 0.200000003, alpha: 1))
-                circle(width/2 + 100, height/2 - 100, 100)
-                circle(width/2 - 100, height/2 - 100, 100)
-                circle(width/2, height/2, 100)
-                circle(width/2 - 100, height/2 + 100, 100)
-                circle(width/2 + 100, height/2 + 100, 100)
-            case 6:
-                background(#colorLiteral(red: 0.4666666687, green: 0.7647058964, blue: 0.2666666806, alpha: 1))
-                circle(width/2 - 100, height/2, 100)
-                circle(width/2 + 100, height/2, 100)
-                circle(width/2 - 100, height/2 - 125, 100)
-                circle(width/2 + 100, height/2 - 125, 100)
-                circle(width/2 - 100, height/2 + 125, 100)
-                circle(width/2 + 100, height/2 + 125, 100)
-            default:
-                background(#colorLiteral(red: 0, green: 0, blue: 0, alpha: 1))
-            }
+            // Draw lines from the top of the screen to the bottom.
+            strokeWeight(Double(increment))
+            stroke(red, green, blue)
+            line(0, double_i, width, double_i)
         }
     }
     
-    func touchStarted() {
-        // The Int() function converts numbers to an integer by
-        // 'truncating' or chopping off the decimal portion.
-        // We use it here because random() returns a Double.
-        diceRoll = Int(random(6.0)) + 1
-        print("Dice rolled and lands on \(diceRoll ?? 0)")
+    func draw() {
     }
 }
 //: ## How will you use conditional logic for your programs? Challenge: Try to create a button using a rectangle with conditional logic.
