@@ -11,7 +11,7 @@ import SwiftUI
 @available(iOS 15.0, *)
 extension SketchUI {
     public func ellipse(x: Double, y: Double, width: Double, height: Double) {
-        let color = fillColor
+        let color = settings.color.fillColor
         operations.append( { context in
             var localContext = context
             

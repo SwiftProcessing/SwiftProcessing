@@ -34,16 +34,15 @@ open class SketchUI: ObservableObject{
     var prev: TimeInterval = Date().timeIntervalSinceReferenceDate
     var frameCount: Int = 0
     
-    // Organize into seperate struct
-    var fillColor: Color = Color.primary
-    var textSize: Double = 20
+    var settings = SketchUISettings()
+    
     
     // Organize into seperate struct
     var operations: [(GraphicsContext) -> Void] = []
     var flattenImage: SwiftUI.Image?
     var isFlattening = false
     // TODO what is the best flatten threshhold... should it even be static?
-    let flattenTreshhold = 25
+    let flattenTreshhold = 150
     
     public init() {
         self.sketchDelegate = self as? SketchDelegateUI

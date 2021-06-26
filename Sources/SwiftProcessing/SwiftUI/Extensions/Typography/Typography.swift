@@ -41,8 +41,8 @@ extension SketchUI {
     public func text(content: String, x: Double, y: Double) {
         let text = TextCachable(
             content: content,
-            fillColor: fillColor,
-            textSize: textSize,
+            fillColor: settings.color.fillColor,
+            textSize: settings.typography.textSize,
             operation: operations.count
         )
         
