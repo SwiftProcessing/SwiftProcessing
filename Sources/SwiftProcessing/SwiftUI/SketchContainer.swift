@@ -18,13 +18,11 @@ public struct SketchContainer: View {
     
     public var body: some View {
         TimelineView(.animation(minimumInterval: sketch.targetFrameRate, paused: sketch.isPaused)) { timeline in
-            var x = sketch.loadedText
             Canvas(
                 rendersAsynchronously: false,
                    renderer: { context, size in
                 sketch.operations.forEach { $0(context) }
                 sketch.updateContext(
-                    context,
                     size,
                     timeline.date.timeIntervalSinceReferenceDate
                 )
@@ -35,7 +33,7 @@ public struct SketchContainer: View {
                     image.view
                 }
                 
-                ForEach(Array(x)) { text in
+                ForEach(sketch.loadedText) { text in
                     AnyView(text.text).tag(text.id)
                 }
             })

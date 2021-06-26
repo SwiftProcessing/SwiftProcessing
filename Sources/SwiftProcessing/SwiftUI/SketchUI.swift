@@ -29,7 +29,6 @@ open class SketchUI: ObservableObject{
     public var touchX: Double = 0
     public var touchY: Double = 0
     
-    var context: GraphicsContext?
     var sketchDelegate: SketchDelegateUI?
     var prev: TimeInterval = Date().timeIntervalSinceReferenceDate
     var frameCount: Int = 0
@@ -48,8 +47,7 @@ open class SketchUI: ObservableObject{
         self.sketchDelegate = self as? SketchDelegateUI
     }
     
-    func updateContext(_ context: GraphicsContext, _ size: CGSize, _ time: TimeInterval) {
-        self.context = context
+    func updateContext(_ size: CGSize, _ time: TimeInterval) {
         self.width = size.width
         self.height = size.height
         self.deltaTime = time - prev
