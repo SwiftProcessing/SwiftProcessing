@@ -19,7 +19,7 @@
  
  ```
  for index in start...end {
-    statements
+ statements
  }
  ```
  `start` and `end` are numbers. We're creating a range to count through. They must be `Int`'s
@@ -31,7 +31,7 @@
  
  ```
  for index in 1...5 {
-    print("\(index) times 5 is \(index * 5)")
+ print("\(index) times 5 is \(index * 5)")
  }
  ```
  
@@ -40,7 +40,7 @@
  ```
  let interval = 5
  for index in stride(from: 0, to: 50, by: interval) {
-    print(index) // prints 0, 5, 10, 15 ... 45, 50
+ print(index) // prints 0, 5, 10, 15 ... 45, 50
  }
  
  ```
@@ -53,7 +53,7 @@
  
  ```
  while condition {
-    statements
+ statements
  }
  ```
  
@@ -74,6 +74,10 @@ class MySketch: Sketch, SketchDelegate {
     var increment = 32
     
     func setup() {
+        // Temporary code for performance testing and debugging is included here.
+        // https://stackoverflow.com/questions/24755558/measure-elapsed-time-in-swift
+        
+        let start = DispatchTime.now() // <<<<<<<<<< Start time
         // Remember that the start and end of a for loop need to be both be integers.
         // Height is a double, so we'll convert it to an integer.
         
@@ -93,6 +97,14 @@ class MySketch: Sketch, SketchDelegate {
             stroke(red, green, blue)
             line(0, double_i, width, double_i)
         }
+        
+        
+        let end = DispatchTime.now()
+        
+        let nanoTime = end.uptimeNanoseconds - start.uptimeNanoseconds // <<<<< Difference in nano seconds (UInt64)
+        let timeInterval = Double(nanoTime) / 1_000_000_000 // Technically could overflow for long running tests
+        
+        print("Time to display graphics: \(timeInterval) seconds")
     }
     
     func draw() {

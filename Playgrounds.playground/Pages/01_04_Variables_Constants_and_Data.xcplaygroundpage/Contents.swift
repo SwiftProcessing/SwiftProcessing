@@ -100,7 +100,7 @@ class MySketch: Sketch, SketchDelegate {
     // a lot of code at once. Try changing these variable values
     // to change all of the rectangle widths or heights!
     
-    var rectangleWidth = 50.0
+    var rectangleWidth = 100.0
     var rectangleHeight = 500.0
     
     func setup() {
