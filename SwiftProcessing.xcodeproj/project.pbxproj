@@ -22,6 +22,7 @@
 
 /* Begin PBXBuildFile section */
 		1F5F75A3268184E500AAE0A9 /* Sketch2DPrimitivesGenerics.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F5F75A2268184E500AAE0A9 /* Sketch2DPrimitivesGenerics.swift */; };
+		1FF44D892682F50400CD8D23 /* SketchOperatorOverloads.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FF44D882682F50400CD8D23 /* SketchOperatorOverloads.swift */; };
 		OBJ_100 /* SketchNotifications.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_36 /* SketchNotifications.swift */; };
 		OBJ_101 /* SketchPixels.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_37 /* SketchPixels.swift */; };
 		OBJ_102 /* SketchRandom.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_38 /* SketchRandom.swift */; };
@@ -95,7 +96,8 @@
 
 /* Begin PBXFileReference section */
 		1F5F75A2268184E500AAE0A9 /* Sketch2DPrimitivesGenerics.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Sketch2DPrimitivesGenerics.swift; sourceTree = "<group>"; };
-		1F5F75AA2681898A00AAE0A9 /* Chapter 1 - Getting Started.playground */ = {isa = PBXFileReference; lastKnownFileType = file.playground; path = "Chapter 1 - Getting Started.playground"; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
+		1F5F75AA2681898A00AAE0A9 /* Playgrounds.playground */ = {isa = PBXFileReference; lastKnownFileType = file.playground; path = Playgrounds.playground; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
+		1FF44D882682F50400CD8D23 /* SketchOperatorOverloads.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SketchOperatorOverloads.swift; sourceTree = "<group>"; };
 		OBJ_11 /* GifSwift.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GifSwift.swift; sourceTree = "<group>"; };
 		OBJ_12 /* Image.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Image.swift; sourceTree = "<group>"; };
 		OBJ_13 /* ImagePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePicker.swift; sourceTree = "<group>"; };
@@ -176,7 +178,7 @@
 		OBJ_5 = {
 			isa = PBXGroup;
 			children = (
-				1F5F75AA2681898A00AAE0A9 /* Chapter 1 - Getting Started.playground */,
+				1F5F75AA2681898A00AAE0A9 /* Playgrounds.playground */,
 				OBJ_6 /* Package.swift */,
 				OBJ_7 /* Sources */,
 				OBJ_60 /* Tests */,
@@ -236,6 +238,7 @@
 			isa = PBXGroup;
 			children = (
 				OBJ_15 /* Sketch.swift */,
+				1FF44D882682F50400CD8D23 /* SketchOperatorOverloads.swift */,
 				OBJ_16 /* Sketch2DPrimitives.swift */,
 				1F5F75A2268184E500AAE0A9 /* Sketch2DPrimitivesGenerics.swift */,
 				OBJ_29 /* SketchAttributes.swift */,
@@ -430,6 +433,7 @@
 				OBJ_113 /* Alert.swift in Sources */,
 				OBJ_114 /* Button.swift in Sources */,
 				OBJ_115 /* Capture.swift in Sources */,
+				1FF44D892682F50400CD8D23 /* SketchOperatorOverloads.swift in Sources */,
 				OBJ_116 /* Slider.swift in Sources */,
 				OBJ_117 /* Stepper.swift in Sources */,
 				OBJ_118 /* Switch.swift in Sources */,

@@ -23,11 +23,11 @@ import SceneKit
     // =======================================================================
     // MARK: - Processing Constants
     // =======================================================================
-
+    
     /*
-    * MARK: - TRIGONOMETRY CONSTANTS
-    */
-
+     * MARK: - TRIGONOMETRY CONSTANTS
+     */
+    
     public let HALF_PI = Double.pi / 2
     public let PI = Double.pi
     public let QUARTER_PI = Double.pi / 4
@@ -35,8 +35,8 @@ import SceneKit
     public let TAU = Double.pi * 2
     
     /*
-    * MARK: - KEYWORD CONSTANTS
-    */
+     * MARK: - KEYWORD CONSTANTS
+     */
     
     public let DEGREES = "degrees"
     public let RADIANS = "radians"
@@ -91,8 +91,8 @@ import SceneKit
     public let CAMERA_ROLL = "camera roll"
     
     /*
-    * MARK: - SCREEN / DISPLAY PROPERTIES
-    */
+     * MARK: - SCREEN / DISPLAY PROPERTIES
+     */
     
     public weak var sketchDelegate: SketchDelegate?
     public var width: Double = 0
@@ -111,7 +111,7 @@ import SceneKit
     var fps: Double = 60
     
     var fpsTimer: CADisplayLink?
-
+    
     var strokeWeight: Double = 1
     var isFill: Bool = true
     var isStroke: Bool = true
@@ -149,11 +149,11 @@ import SceneKit
     
     var isSetup: Bool = false
     open var context: CGContext?
-
+    
     /*
-    * MARK: - TRANSFORMATION PROPERTIES
-    */
-
+     * MARK: - TRANSFORMATION PROPERTIES
+     */
+    
     var scene: SCNScene = SCNScene()
     var lightNode: SCNNode = SCNNode()
     var ambientLightNode: SCNNode = SCNNode()
@@ -182,7 +182,7 @@ import SceneKit
     // =======================================================================
     // MARK: - INIT
     // =======================================================================
-
+    
     public init() {
         super.init(frame: CGRect())
         initHelper()
@@ -199,8 +199,28 @@ import SceneKit
         sketchDelegate = self as? SketchDelegate
         createCanvas(0, 0, UIScreen.main.bounds.width, UIScreen.main.bounds.height)
         self.layer.drawsAsynchronously = true
-        UIGraphicsBeginImageContext(CGSize(width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height))
-        self.context = UIGraphicsGetCurrentContext()
+        
+        // Possible resource here: https://nshipster.com/image-resizing/
+        // Using UIGraphicsImageRenderer instead of UIGraphicsBeginImageContextWithOptions might be better.s
+        
+        // UIGraphicsBeginImageContext(CGSize(width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height))
+        // Going to try to make the context opaque to see if it improves performance.
+                UIGraphicsBeginImageContextWithOptions(CGSize(width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height), true, 1.0)
+        
+                self.context = UIGraphicsGetCurrentContext()
+        
+        // https://stackoverflow.com/questions/24109149/i-am-getting-unsupported-parameter-combination-cgbitmap-error-with-swift
+        
+        // Trying to create a bitmap as opposed to an image to see if it improves performance.
+        // Leaving this commented out. The question is whether a bitmap approach will improve performance.
+        // It may not.
+        
+        /*
+        let colorSpace:CGColorSpace = CGColorSpaceCreateDeviceRGB()
+        let bitmapInfo = CGBitmapInfo(rawValue: CGImageAlphaInfo.premultipliedLast.rawValue)
+        self.context = CGContext(data: nil, width: Int(UIScreen.main.bounds.width), height: Int(UIScreen.main.bounds.height), bitsPerComponent: 8, bytesPerRow: 0, space: colorSpace, bitmapInfo: bitmapInfo.rawValue)
+         */
+        
         UIGraphicsEndImageContext()
         loop()
     }
@@ -208,20 +228,20 @@ import SceneKit
     // =======================================================================
     // MARK: - DRAW LOOP
     // =======================================================================
-
+    
     override public func draw(_ rect: CGRect) {
         // this override is not actually called
         // but required for the UIView to call the
         // display function
-            
+        
         // This is a reference to the UIView's draw,
         // not Processing's draw loop.
     }
     
     override public func display(_ layer: CALayer) {
-
+        
         preDraw3D()
-
+        
         updateDimensions()
         UIGraphicsPushContext(context!)
         
@@ -229,7 +249,6 @@ import SceneKit
         currentStack = []
         self.settingsStack = SketchSettingsStack()
         updateTimes()
-        updateTouches()
         
         push()
         scale(UIScreen.main.scale, UIScreen.main.scale)
@@ -240,17 +259,24 @@ import SceneKit
             isSetup = true
         }
         
-        sketchDelegate?.draw()
+        // Should happen right before draw and inside of the push() and pop().
+        updateTouches()
+        
+        sketchDelegate?.draw() // All instructions go into current context.
         
         pop()
-   
+        
         postDraw3D()
-
+        
         UIGraphicsPopContext()
         
         // This makes the background persist if the background isn't cleared.
-        let img = context!.makeImage()
+        let img = context!.makeImage() // CGImage <- This may be a speed bottleneck.
         layer.contents = img
+        
+        //layer.isOpaque = true // Attempting performance boost.
+        //layer.shouldRasterize = true // Attempting performance boost.
+        
         layer.contentsGravity = .resizeAspect
     }
     
@@ -261,7 +287,7 @@ import SceneKit
         self.nativeHeight = Double(self.frame.height) * Double(UIScreen.main.scale)
         //recreate the backing ImageContext when the native dimensions do not match the context dimensions
         if (self.context?.width != Int(nativeWidth)
-            || self.context?.height != Int(nativeHeight)) {
+                || self.context?.height != Int(nativeHeight)) {
             UIGraphicsBeginImageContext(CGSize(width: nativeWidth, height: nativeHeight))
             self.context = UIGraphicsGetCurrentContext()
             UIGraphicsEndImageContext()
@@ -274,7 +300,7 @@ import SceneKit
         deltaTime = newTime - lastTime
         lastTime = newTime
     }
-        
+    
     // =======================================================================
     // MARK: - FOR RETAINING GLOBAL PROCESSING STATES
     // =======================================================================
