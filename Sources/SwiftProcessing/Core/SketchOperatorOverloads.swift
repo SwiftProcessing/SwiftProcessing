@@ -15,9 +15,7 @@
 // =======================================================================
 // MARK: - % OPERATOR OVERLOAD
 // =======================================================================
-//infix operator %
 
 public func % (left: Double, right: Double) -> Double {
     return left.truncatingRemainder(dividingBy: right)
 }
-

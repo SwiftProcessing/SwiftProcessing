@@ -93,8 +93,7 @@ class MySketch: Sketch, SketchDelegate {
         xPos = (xPos + xSpeed) % width
         yPos = (yPos + ySpeed) % height
         
-        // Uncomment the print statement below to see xPos printed
-        // to the console as it increments and repeats.
+        // Uncomment the print statements below to see variable values printed to the console
         //print(xPos)
         
         gray = (gray + colorIncrement) % 255.0

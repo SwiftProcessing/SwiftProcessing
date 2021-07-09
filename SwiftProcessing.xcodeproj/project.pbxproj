@@ -21,7 +21,8 @@
 /* End PBXAggregateTarget section */
 
 /* Begin PBXBuildFile section */
-		1F5F75A3268184E500AAE0A9 /* Sketch2DPrimitivesGenerics.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F5F75A2268184E500AAE0A9 /* Sketch2DPrimitivesGenerics.swift */; };
+		1F5F75A3268184E500AAE0A9 /* Sketch2DPrimitives.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F5F75A2268184E500AAE0A9 /* Sketch2DPrimitives.swift */; };
+		1F665BF0269637110092D9A1 /* AudioIn.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F665BEF269637110092D9A1 /* AudioIn.swift */; };
 		1FF44D892682F50400CD8D23 /* SketchOperatorOverloads.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FF44D882682F50400CD8D23 /* SketchOperatorOverloads.swift */; };
 		OBJ_100 /* SketchNotifications.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_36 /* SketchNotifications.swift */; };
 		OBJ_101 /* SketchPixels.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_37 /* SketchPixels.swift */; };
@@ -56,7 +57,6 @@
 		OBJ_78 /* ImagePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_13 /* ImagePicker.swift */; };
 		OBJ_79 /* SketchImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_14 /* SketchImage.swift */; };
 		OBJ_80 /* Sketch.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_15 /* Sketch.swift */; };
-		OBJ_81 /* Sketch2DPrimitives.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_16 /* Sketch2DPrimitives.swift */; };
 		OBJ_82 /* Camera3D.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_18 /* Camera3D.swift */; };
 		OBJ_83 /* ModelNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_19 /* ModelNode.swift */; };
 		OBJ_84 /* Sketch3D.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_20 /* Sketch3D.swift */; };
@@ -95,15 +95,15 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		1F5F75A2268184E500AAE0A9 /* Sketch2DPrimitivesGenerics.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Sketch2DPrimitivesGenerics.swift; sourceTree = "<group>"; };
+		1F5F75A2268184E500AAE0A9 /* Sketch2DPrimitives.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Sketch2DPrimitives.swift; sourceTree = "<group>"; };
 		1F5F75AA2681898A00AAE0A9 /* Playgrounds.playground */ = {isa = PBXFileReference; lastKnownFileType = file.playground; path = Playgrounds.playground; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
+		1F665BEF269637110092D9A1 /* AudioIn.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioIn.swift; sourceTree = "<group>"; };
 		1FF44D882682F50400CD8D23 /* SketchOperatorOverloads.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SketchOperatorOverloads.swift; sourceTree = "<group>"; };
 		OBJ_11 /* GifSwift.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GifSwift.swift; sourceTree = "<group>"; };
 		OBJ_12 /* Image.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Image.swift; sourceTree = "<group>"; };
 		OBJ_13 /* ImagePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePicker.swift; sourceTree = "<group>"; };
 		OBJ_14 /* SketchImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SketchImage.swift; sourceTree = "<group>"; };
 		OBJ_15 /* Sketch.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sketch.swift; sourceTree = "<group>"; };
-		OBJ_16 /* Sketch2DPrimitives.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sketch2DPrimitives.swift; sourceTree = "<group>"; };
 		OBJ_18 /* Camera3D.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Camera3D.swift; sourceTree = "<group>"; };
 		OBJ_19 /* ModelNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModelNode.swift; sourceTree = "<group>"; };
 		OBJ_20 /* Sketch3D.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sketch3D.swift; sourceTree = "<group>"; };
@@ -239,8 +239,7 @@
 			children = (
 				OBJ_15 /* Sketch.swift */,
 				1FF44D882682F50400CD8D23 /* SketchOperatorOverloads.swift */,
-				OBJ_16 /* Sketch2DPrimitives.swift */,
-				1F5F75A2268184E500AAE0A9 /* Sketch2DPrimitivesGenerics.swift */,
+				1F5F75A2268184E500AAE0A9 /* Sketch2DPrimitives.swift */,
 				OBJ_29 /* SketchAttributes.swift */,
 				OBJ_30 /* SketchAugmentedReality.swift */,
 				OBJ_31 /* SketchCalculation.swift */,
@@ -283,6 +282,7 @@
 				OBJ_54 /* Stepper.swift */,
 				OBJ_55 /* Switch.swift */,
 				OBJ_56 /* TextField.swift */,
+				1F665BEF269637110092D9A1 /* AudioIn.swift */,
 				OBJ_57 /* UIApplicationExtensions.swift */,
 				OBJ_58 /* UIKitControlElement.swift */,
 				OBJ_59 /* UIKitViewElement.swift */,
@@ -397,7 +397,6 @@
 				OBJ_78 /* ImagePicker.swift in Sources */,
 				OBJ_79 /* SketchImage.swift in Sources */,
 				OBJ_80 /* Sketch.swift in Sources */,
-				OBJ_81 /* Sketch2DPrimitives.swift in Sources */,
 				OBJ_82 /* Camera3D.swift in Sources */,
 				OBJ_83 /* ModelNode.swift in Sources */,
 				OBJ_84 /* Sketch3D.swift in Sources */,
@@ -406,7 +405,7 @@
 				OBJ_87 /* Sketch3DLight.swift in Sources */,
 				OBJ_88 /* Sketch3DModel.swift in Sources */,
 				OBJ_89 /* Sketch3DPrimitives.swift in Sources */,
-				1F5F75A3268184E500AAE0A9 /* Sketch2DPrimitivesGenerics.swift in Sources */,
+				1F5F75A3268184E500AAE0A9 /* Sketch2DPrimitives.swift in Sources */,
 				OBJ_90 /* Sketch3DTexture.swift in Sources */,
 				OBJ_91 /* Sketch3DTransform.swift in Sources */,
 				OBJ_92 /* TransitionSCNNode.swift in Sources */,
@@ -428,6 +427,7 @@
 				OBJ_108 /* SketchTransform.swift in Sources */,
 				OBJ_109 /* SketchTypography.swift in Sources */,
 				OBJ_110 /* SketchVector.swift in Sources */,
+				1F665BF0269637110092D9A1 /* AudioIn.swift in Sources */,
 				OBJ_111 /* SketchVertex.swift in Sources */,
 				OBJ_112 /* SketchVisibility.swift in Sources */,
 				OBJ_113 /* Alert.swift in Sources */,

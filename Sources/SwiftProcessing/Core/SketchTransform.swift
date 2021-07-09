@@ -18,27 +18,15 @@ public extension Sketch {
         }
     }
     
-    func rotate(_ angle: CGFloat) {
-        context?.rotate(by: angle)
+    func rotate<T: Numeric>(_ angle: T) {
+        context?.rotate(by: angle.convert())
     }
     
-    func rotate(_ angle: Double) {
-        rotate(CGFloat(angle))
+    func translate<T: Numeric>(_ x: T, _ y: T) {
+        context?.translateBy(x: x.convert(), y: y.convert())
     }
     
-    func translate(_ x: CGFloat, _ y: CGFloat) {
-        context?.translateBy(x: x, y: y)
-    }
-    
-    func translate(_ x: Double, _ y: Double) {
-        translate(CGFloat(x), CGFloat(y))
-    }
-    
-    func scale(_ x: CGFloat, _ y: CGFloat) {
-        context?.scaleBy(x: x, y: y)
-    }
-    
-    func scale(_ x: Double, _ y: Double) {
-        scale(CGFloat(x), CGFloat(y))
+    func scale<T: Numeric>(_ x: T, _ y: T) {
+        context?.scaleBy(x: x.convert(), y: y.convert())
     }
 }

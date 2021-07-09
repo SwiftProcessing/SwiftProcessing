@@ -6,26 +6,26 @@ open class Image {
     open var pixels: [UInt8] = []
     
     var uiImage: [UIImage]
-    var delay: CGFloat = 0
+    var delay: Double = 0
     var curFrame: Int = 0
     var isPlaying = true
-    var lastFrameDrawn: CGFloat = -1
-    var deltaTime: CGFloat = 0
+    var lastFrameDrawn: Double = -1
+    var deltaTime: Double = 0
     
-    var width: CGFloat = 0
-    var height: CGFloat = 0
+    var width: Double = 0
+    var height: Double = 0
     
-    open var loop: CGFloat = 0
-    open var loopMax: CGFloat = -1
+    open var loop: Double = 0
+    open var loopMax: Double = -1
     
     open var blendMode: CGBlendMode = .normal
-    open var alpha: CGFloat = 1.0
+    open var alpha: Double = 1.0
     
     public init(_ image: UIImage) {
-        self.width = image.size.width
-        self.height = image.size.height
+        self.width = Double(image.size.width)
+        self.height = Double(image.size.height)
         self.uiImage = image.images != nil ? image.images! : [image]
-        self.delay = CGFloat(image.duration) / 100
+        self.delay = image.duration / 100
     }
     
     open func size() -> CGSize {
@@ -57,21 +57,22 @@ open class Image {
         return pixelData
     }
     
-    open func get(_ x: CGFloat, _ y: CGFloat, _ w: CGFloat, _ h: CGFloat) -> Image {
-        UIGraphicsBeginImageContextWithOptions(CGSize(width: w, height: h), false, 1.0)
-        let container = CGRect(x: -x, y: -y, width: self.width, height: self.height)
+    open func get<T: Numeric>(_ x: T, _ y: T, _ w: T, _ h: T) -> Image {
+        var cg_x, cg_y, cg_w, cg_h: CGFloat
+        cg_x = x.convert()
+        cg_y = y.convert()
+        cg_w = w.convert()
+        cg_h = h.convert()
+        
+        UIGraphicsBeginImageContextWithOptions(CGSize(width: cg_w, height: cg_h), false, 1.0)
+        let container = CGRect(x: -cg_x, y: -cg_y, width: CGFloat(self.width), height: CGFloat(self.height))
         UIGraphicsGetCurrentContext()!.clip(to: CGRect(x: 0, y: 0,
-                                                       width: w, height: h))
+                                                       width: cg_w, height: cg_h))
         self.uiImage[0].draw(in: container)
         let newImage = Image(UIGraphicsGetImageFromCurrentImageContext()!)
         UIGraphicsEndImageContext()
 
         return newImage
-    }
-    
-    open func get(_ x: Double, _ y: Double, _ w: Double, _ h: Double) -> Image {
-
-        return get(CGFloat(x), CGFloat(y), CGFloat(w), CGFloat(h))
     }
     
     @available(iOS 9.0, *)
@@ -80,15 +81,21 @@ open class Image {
     }
     
     @available(iOS 9.0, *)
-    open func updatePixels(_ x: CGFloat, _ y: CGFloat, _ w: CGFloat, _ h: CGFloat) {
+    open func updatePixels<T: Numeric>(_ x: T, _ y: T, _ w: T, _ h: T) {
         //retrieve the current image and apply the current pixels loaded into the pixels array using the x, y, w, h inputs
+        var cg_x, cg_y, cg_w, cg_h: CGFloat
+        cg_x = x.convert()
+        cg_y = y.convert()
+        cg_w = w.convert()
+        cg_h = h.convert()
+        
         var newImage = getPixelData()
         let curImage = self.uiImage[curFrame]
         let size = curImage.size
         let colorSpace = CGColorSpaceCreateDeviceRGB()
         
-        for dy in Int(y)..<Int(h) {
-            for dx in Int(x)..<Int(w) {
+        for dy in Int(cg_y)..<Int(cg_h) {
+            for dx in Int(cg_x)..<Int(cg_w) {
                 let pixelPos = (dx * 4) + (Int(dy) * 4 * Int(size.width))
                 newImage[pixelPos] = self.pixels[pixelPos]
                 newImage[pixelPos + 1] = self.pixels[pixelPos + 1]
@@ -106,6 +113,7 @@ open class Image {
                                 space: colorSpace,
                                 bitmapInfo: CGImageAlphaInfo.noneSkipLast.rawValue)!
         UIGraphicsPushContext(context)
+        
         //without this clip, the data fails to draw
         context.clip(to: CGRect())
         context.draw(curImage.cgImage!, in: CGRect(x: 0, y: 0, width: size.width, height: size.height))
@@ -116,10 +124,14 @@ open class Image {
         UIGraphicsPopContext()
     }
     
-    open func resize(_ width: CGFloat, _ height: CGFloat) {
-        self.width = width
-        self.height = height
-        let newSize = CGSize(width: width, height: height)
+    open func resize<T: Numeric>(_ width: T, _ height: T) {
+        self.width = width.convert()
+        self.height = height.convert()
+        
+        var cg_width, cg_height: CGFloat
+        cg_width = width.convert()
+        cg_height = height.convert()
+        let newSize = CGSize(width: cg_width, height: cg_height)
         
         self.uiImage = self.uiImage.map({
             UIGraphicsBeginImageContextWithOptions(newSize, false, 0.0)
@@ -131,12 +143,23 @@ open class Image {
         })
     }
     
-    open func copy(_ srcImage: Image, _ sx: CGFloat, _ sy: CGFloat, _ sw: CGFloat, _ sh: CGFloat, _ dx: CGFloat, _ dy: CGFloat, _ dw: CGFloat, _ dh: CGFloat) {
+    open func copy<T: Numeric>(_ srcImage: Image, _ sx: T, _ sy: T, _ sw: T, _ sh: T, _ dx: T, _ dy: T, _ dw: T, _ dh: T) {
+        
+        var cg_sx, cg_sy, cg_sw, cg_sh, cg_dx, cg_dy, cg_dw, cg_dh: CGFloat
+        cg_sx = sx.convert()
+        cg_sy = sy.convert()
+        cg_sw = sw.convert()
+        cg_sh = sh.convert()
+        cg_dx = dx.convert()
+        cg_dy = dy.convert()
+        cg_dw = dw.convert()
+        cg_dh = dh.convert()
+        
         UIGraphicsBeginImageContextWithOptions(CGSize(width: self.width, height: self.height), false, 2.0)
         UIGraphicsGetCurrentContext()!.interpolationQuality = .high
         
         self.uiImage[0].draw(in: CGRect(x: 0, y: 0, width: self.width, height: self.height))
-        srcImage.get(sx, sy, sw, sh).uiImage[0].draw(in: CGRect(x: dx, y: dy, width: dw, height: dh), blendMode: .normal, alpha: 1.0)
+        srcImage.get(cg_sx, cg_sy, cg_sw, cg_sh).uiImage[0].draw(in: CGRect(x: cg_dx, y: cg_dy, width: cg_dw, height: cg_dh), blendMode: .normal, alpha: 1.0)
         
         //set to self if nothing is found in the image context... possible when bad parameters are passed into this function
         self.uiImage[0] = UIGraphicsGetImageFromCurrentImageContext() ?? self.uiImage[0]
@@ -169,11 +192,11 @@ open class Image {
                             intent: cgImage.renderingIntent)
         
         context.saveGState()
-        context.translateBy(x: 0.0, y: self.height)
+        context.translateBy(x: 0.0, y: CGFloat(self.height))
         context.scaleBy(x: 1.0, y: -1.0)
         context.clip(to: CGRect(x: 0, y: 0, width: self.width, height: self.height), mask: mask!)
         context.scaleBy(x: 1.0, y: -1.0)
-        context.translateBy(x: 0.0, y: -self.height)
+        context.translateBy(x: 0.0, y: CGFloat(-self.height))
         self.uiImage[0].draw(in: CGRect(x: 0, y: 0, width: self.width, height: self.height))
         context.restoreGState()
         let image = UIGraphicsGetImageFromCurrentImageContext()!
@@ -182,8 +205,8 @@ open class Image {
         self.uiImage[0] = image
     }
     
-    open func delay(_ d: CGFloat) {
-        self.delay = d
+    open func delay<T: Numeric>(_ d: T) {
+        self.delay = d.convert()
     }
     
     open func numFrames() -> Int {
@@ -210,15 +233,19 @@ open class Image {
         self.isPlaying = false
     }
     
-    open func frame(_ deltaTime: CGFloat, _ frameCount: CGFloat) -> UIImage {
+    open func frame<T: Numeric>(_ deltaTime: T, _ frameCount: T) -> UIImage {
+        var d_deltaTime, d_frameCount: Double
+        d_deltaTime = deltaTime.convert()
+        d_frameCount = frameCount.convert()
+        
         if uiImage.count == 1 {
             return uiImage[0]
-        } else if !isPlaying || frameCount == lastFrameDrawn {
+        } else if !isPlaying || d_frameCount == lastFrameDrawn {
             return uiImage[curFrame]
         }
         
-        self.lastFrameDrawn = frameCount
-        self.deltaTime = self.deltaTime + deltaTime
+        self.lastFrameDrawn = d_frameCount
+        self.deltaTime = self.deltaTime + d_deltaTime
         if self.deltaTime > self.delay {
             curFrame = curFrame + Int(self.deltaTime / self.delay)
             self.deltaTime = 0

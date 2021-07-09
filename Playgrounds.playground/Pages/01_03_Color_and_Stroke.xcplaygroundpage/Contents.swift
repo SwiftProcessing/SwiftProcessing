@@ -61,16 +61,22 @@ class MySketch: Sketch, SketchDelegate {
     
     func setup() {
         stroke(127.0)
-        strokeWeight(1.0);  // Default
-        line(20, 20, width-20, 20);
+        strokeWeight(1.0)  // Default
+        line(0, 0, width, height/5)
         
         stroke(127.0, 255.0, 0)
-        strokeWeight(4.0);  // Thicker
-        line(20, 40, width-20, 40);
+        strokeWeight(4.0)  // Thicker
+        line(0, 0, width, height/5 * 2)
         
         stroke(#colorLiteral(red: 0.1720817685, green: 0.4515664577, blue: 1, alpha: 1))
-        strokeWeight(10.0);  // Beastly
-        line(20, 70, width-20, 70);
+        strokeWeight(10.0)  // Beastly
+        line(0, 0, width, height/5 * 3)
+        
+        stroke(#colorLiteral(red: 1, green: 0.4515664577, blue: 1, alpha: 1))
+        strokeWeight(20.0)  // Beastly
+        line(0, 0, width, height/5 * 4)
+        
+        // Notice that the last line drawn in code covers up the lines drawn before it. It's like a painting. Whatever you draw last gets drawn on top.
         
         // Try adding your own lines with different stroke weights and colors.
     }

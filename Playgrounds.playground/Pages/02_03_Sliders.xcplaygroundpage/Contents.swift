@@ -86,6 +86,7 @@ class MySketch: Sketch, SketchDelegate {
         fill(#colorLiteral(red: 1, green: 1, blue: 1, alpha: 1))
         circle(width/3, height/3, eyeSizeSlider.value) // Left Eye
         circle(width/3 * 2, height/3, eyeSizeSlider.value) // Right Eye
+        print(eyeSizeSlider.value)
         
         // Pupils
         fill(#colorLiteral(red: 0, green: 0, blue: 0, alpha: 1))
@@ -100,7 +101,7 @@ class MySketch: Sketch, SketchDelegate {
         fill(#colorLiteral(red: 1, green: 1, blue: 1, alpha: 1))
         rect(width/2, height/2 + 50.0, toothSizeSlider.value, toothSizeSlider.value)
         
-        print(frameRate())
+        //print(frameRate())
     }
 }
 //: ## Can you create your own face with variables you change with the sliders? Maybe create a hairdo or change the colors around. Or maybe some eyebrows can be used to express emotion!
