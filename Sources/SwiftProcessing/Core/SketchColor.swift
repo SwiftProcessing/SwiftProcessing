@@ -4,10 +4,10 @@
  * */
 
 import UIKit
- 
+
 /*
-* MARK: - UICOLOR EXTENSION FOR PLAYGROUND LITERAL COLOR SUPPORT
-*/
+ * MARK: - UICOLOR EXTENSION FOR PLAYGROUND LITERAL COLOR SUPPORT
+ */
 
 // Source: https://theswiftdev.com/uicolor-best-practices-in-swift/
 
@@ -66,119 +66,196 @@ public extension UIColor {
 // =======================================================================
 
 public extension Sketch {
- 
+    
+    /// Clears the background if there is a color.
+    ///
+
     func clear() {
         context?.clear(CGRect(x: 0, y: 0, width: self.frame.width, height: self.frame.height))
     }
     
     /*
-    * MARK: - BACKGROUND
-    */
+     * MARK: - BACKGROUND
+     */
     
-    // For Playground Literal Color Support
+    /// Sets the background color with a UIColor.
+    /// This enables Xcode and Swift Playground color literals.
+    ///
+    /// - Parameters:
+    ///     - color: A UIColor value.
     func background(_ color: UIColor) {
         background(color.rgba255.red, color.rgba255.green, color.rgba255.blue, color.rgba255.alpha)
     }
     
+    /// Sets the background color with a SketchProcessing Color object.
+    ///
+    /// - Parameters:
+    ///     - color: A Color value.
+    
     func background(_ color: Color) {
         background(color.red, color.green, color.blue, color.alpha)
     }
- 
-    func background(_ v1: CGFloat, _ v2: CGFloat, _ v3: CGFloat, _ a: CGFloat = 255) {
+    
+    /// Sets the background color with an RGB value.
+    ///
+    /// - Parameters:
+    ///     - v1: A red value from 0-255.
+    ///     - v2: A green value from 0-255.
+    ///     - v3: A blue value from 0-255.
+    ///     - a: An optional alpha value from 0-255. Defaults to 255.
+    
+    // Note: It's important to understand why we are *coercing* instead of
+    // *type casting* in our generics (eg, T(255) in this definition).
+    // Here is more information: https://stackoverflow.com/questions/33973724/typecasting-or-initialization-which-is-better-in-swift
+    // Type casting causes runtime errors and should be avoided in generics
+    // where integers and floating points are both accepted inputs.
+    func background<T: Numeric>(_ v1: T, _ v2: T, _ v3: T, _ a: T = T(255)){
         push()
         fill(v1, v2, v3, a)
-        rect(0, 0, width, height)
+        rect(0, 0, CGFloat(width), CGFloat(height))
         pop()
     }
     
-    func background(_ v1: Double, _ v2: Double, _ v3: Double, _ a: Double = 255) {
-        background(CGFloat(v1), CGFloat(v2), CGFloat(v3), CGFloat(a))
-    }
+    /// Sets the background color with a system color name.
+    ///
+    /// - Parameters:
+    ///     - systemColorName: A standard system color name, eg: .systemRed
     
     func background(_ systemColorName: Color.SystemColor) {
         let systemColor = systemColorName.rawValue
         push()
         fill(systemColor.ciColor.red, systemColor.ciColor.green, systemColor.ciColor.blue, systemColor.ciColor.alpha)
-        rect(0, 0, width, height)
+        rect(0, 0, CGFloat(width), CGFloat(height))
         pop()
     }
- 
-    func background(_ v1: CGFloat, _ a: CGFloat = 255) {
+    
+    /// Sets the background color with a single gray value.
+    ///
+    /// - Parameters:
+    ///     - v1: A gray value from 0-255.
+    ///     - a: An optional alpha value from 0-255. Defaults to 255.
+    
+    func background<T: Numeric>(_ v1: T, _ a: T = T(255)) {
         push()
         fill(v1, v1, v1, a)
-        rect(0, 0, width, height)
+        rect(0, 0, CGFloat(width), CGFloat(height))
         pop()
     }
     
-    func background(_ v1: Double, _ a: Double = 255) {
-        background(CGFloat(v1), CGFloat(a))
-    }
-
     /*
-    * MARK: FILL
-    */
+     * MARK: FILL
+     */
     
-    // For Playground Literal Color Support
+    /// Sets the fill color with a UIColor.
+    /// This enables Xcode and Swift Playground color literals.
+    ///
+    /// - Parameters:
+    ///     - color: A UIColor value.
+    
     func fill(_ color: UIColor) {
         fill(color.rgba255.red, color.rgba255.green, color.rgba255.blue, color.rgba255.alpha)
     }
     
+    /// Sets the fill color with a SwiftProcessing Color object.
+    ///
+    /// - Parameters:
+    ///     - color: A Color value.
+    
     func fill(_ color: Color) {
         fill(color.red, color.green, color.blue, color.alpha)
     }
- 
-    func fill(_ v1: CGFloat, _ v2: CGFloat, _ v3: CGFloat, _ a: CGFloat = 255) {
-        context?.setFillColor(red: v1 / 255, green: v2 / 255, blue: v3 / 255, alpha: a / 255)
-        settings.fill = Color(v1, v2, v3, a)
-    }
-
-    func fill(_ v1: Double, _ v2: Double, _ v3: Double, _ a: Double = 255) {
-        fill(CGFloat(v1), CGFloat(v2), CGFloat(v3), CGFloat(a))
+    
+    /// Sets the fill color with red, green, blue, and, optionally, alpha values.
+    ///
+    /// - Parameters:
+    ///     - v1: A red value from 0-255.
+    ///     - v2: A green value from 0-255.
+    ///     - v3: A blue value from 0-255.
+    ///     - a: An optional alpha value from 0-255. Defaults to 255.
+    
+    func fill<T: Numeric>(_ v1: T, _ v2: T, _ v3: T, _ a: T = T(255.0)) {
+        var cg_v1, cg_v2, cg_v3, cg_a: CGFloat
+        cg_v1 = v1.convert()
+        cg_v2 = v2.convert()
+        cg_v3 = v3.convert()
+        cg_a = a.convert()
+        
+        context?.setFillColor(red: cg_v1 / 255, green: cg_v2 / 255, blue: cg_v3 / 255, alpha: cg_a / 255)
+        settings.fill = Color(cg_v1, cg_v2, cg_v3, cg_a)
     }
     
-    func fill(_ v1: CGFloat, _ v2: CGFloat, _ v3: CGFloat) {
-        context?.setFillColor(red: v1 / 255, green: v2 / 255, blue: v3 / 255, alpha: 255)
-        settings.fill = Color(v1, v2, v3, 255)
+    /// Sets the fill color with red, green, and blue values.
+    ///
+    /// - Parameters:
+    ///     - v1: A red value from 0-255.
+    ///     - v2: A green value from 0-255.
+    ///     - v3: A blue value from 0-255.
+    
+    func fill<T: Numeric>(_ v1: T, _ v2: T, _ v3: T) {
+        var cg_v1, cg_v2, cg_v3: CGFloat
+        cg_v1 = v1.convert()
+        cg_v2 = v2.convert()
+        cg_v3 = v3.convert()
+        
+        context?.setFillColor(red: cg_v1 / 255, green: cg_v2 / 255, blue: cg_v3 / 255, alpha: 255)
+        settings.fill = Color(cg_v1, cg_v2, cg_v3, 255)
     }
-
-    func fill(_ v1: Double, _ v2: Double, _ v3: Double) {
-        fill(CGFloat(v1), CGFloat(v2), CGFloat(v3))
-    }
+    
+    /// Sets the fill color with a system color name.
+    ///
+    /// - Parameters:
+    ///     - systemColorName: A standard system color name, eg: .systemRed
     
     func fill(_ systemColorName: Color.SystemColor) {
         let systemColor = systemColorName.rawValue
         context?.setFillColor(red: systemColor.ciColor.red / 255, green: systemColor.ciColor.green / 255, blue: systemColor.ciColor.blue / 255, alpha: systemColor.ciColor.alpha / 255)
         settings.fill = Color(systemColor.ciColor.red, systemColor.ciColor.green, systemColor.ciColor.blue, systemColor.ciColor.alpha)
     }
- 
-
-    func fill(_ v1: CGFloat,_ a: CGFloat = 255) {
-        context?.setFillColor(red: v1 / 255, green: v1 / 255, blue: v1 / 255, alpha: a / 255)
-        settings.fill = Color(v1, v1, v1, a)
+    
+    /// Sets the fill color with a single gray value.
+    ///
+    /// - Parameters:
+    ///     - v1: A gray value from 0-255.
+    ///     - a: An optional alpha value from 0-255. Defaults to 255.
+    
+    func fill<T: Numeric>(_ v1: T,_ a: T = T(255.0)) {
+        var cg_v1, cg_a: CGFloat
+        cg_v1 = v1.convert()
+        cg_a = a.convert()
+        
+        context?.setFillColor(red: cg_v1 / 255, green: cg_v1 / 255, blue: cg_v1 / 255, alpha: cg_a / 255)
+        settings.fill = Color(cg_v1, cg_v1, cg_v1, cg_a)
     }
     
-    func fill(_ v1: Double,_ a: Double = 255) {
-        fill(CGFloat(v1), CGFloat(a))
+    /// Sets the background color with a single gray value.
+    ///
+    /// - Parameters:
+    ///     - v1: A gray value from 0-255.
+    
+    func fill<T: Numeric>(_ v1: T) {
+        var cg_v1: CGFloat
+        cg_v1 = v1.convert()
+        
+        context?.setFillColor(red: cg_v1 / 255, green: cg_v1 / 255, blue: cg_v1 / 255, alpha: 255)
+        settings.fill = Color(cg_v1, cg_v1, cg_v1, 255)
     }
     
-    func fill(_ v1: CGFloat) {
-        context?.setFillColor(red: v1 / 255, green: v1 / 255, blue: v1 / 255, alpha: 255)
-        settings.fill = Color(v1, v1, v1, 255)
-    }
+    /// Sets the fill to be completely clear.
     
-    func fill(_ v1: Double) {
-        fill(CGFloat(v1))
-    }
-
     func noFill() {
         fill(0.0, 0.0, 0.0, 0.0)
     }
     
     /*
-    * MARK: STROKE
-    */
+     * MARK: STROKE
+     */
     
-    // For Playground Literal Color Support
+    /// Sets the stroke color with a UIColor.
+    /// This enables Xcode and Swift Playground color literals.
+    ///
+    /// - Parameters:
+    ///     - color: A UIColor value.
+    
     func stroke(_ color: UIColor) {
         let red = color.rgba255.red
         let green = color.rgba255.green
@@ -186,148 +263,218 @@ public extension Sketch {
         let alpha = color.rgba255.alpha
         stroke(red, green, blue, alpha)
     }
- 
+    
+    /// Sets the stroke color with a SwiftProcessing Color object.
+    ///
+    /// - Parameters:
+    ///     - color: A Color value.
+    
     func stroke(_ color: Color) {
         stroke(color.red, color.green, color.blue, color.alpha)
     }
- 
-    func stroke(_ v1: CGFloat, _ v2: CGFloat, _ v3: CGFloat, _ a: CGFloat = 255) {
-        context?.setStrokeColor(red: v1 / 255, green: v2 / 255, blue: v3 / 255, alpha: a / 255)
-        settings.stroke = Color(v1, v2, v3, a)
+    
+    /// Sets the stroke color with red, green, blue, and, optionally, alpha values.
+    ///
+    /// - Parameters:
+    ///     - v1: A red value from 0-255.
+    ///     - v2: A green value from 0-255.
+    ///     - v3: A blue value from 0-255.
+    ///     - a: An optional alpha value from 0-255. Defaults to 255.
+    
+    func stroke<T:Numeric>(_ v1: T, _ v2: T, _ v3: T, _ a: T = T(255.0)) {
+        var cg_v1, cg_v2, cg_v3, cg_a: CGFloat
+        cg_v1 = v1.convert()
+        cg_v2 = v2.convert()
+        cg_v3 = v3.convert()
+        cg_a = a.convert()
+        
+        context?.setStrokeColor(red: cg_v1 / 255, green: cg_v2 / 255, blue: cg_v3 / 255, alpha: cg_a / 255)
+        settings.stroke = Color(cg_v1, cg_v2, cg_v3, cg_a)
     }
     
-    func stroke(_ v1: Double, _ v2: Double, _ v3: Double, _ a: Double = 255) {
-        stroke(CGFloat(v1), CGFloat(v2), CGFloat(v3), CGFloat(a))
-    }
-
+    /// Sets the stroke color with a system color name.
+    ///
+    /// - Parameters:
+    ///     - systemColorName: A standard system color name, eg: .systemRed
+    
     func stroke(_ systemColorName: Color.SystemColor) {
         let systemColor = systemColorName.rawValue
         context?.setStrokeColor(red: systemColor.ciColor.red / 255, green: systemColor.ciColor.green / 255, blue: systemColor.ciColor.blue / 255, alpha: systemColor.ciColor.alpha / 255)
         settings.stroke = Color(systemColor.ciColor.red, systemColor.ciColor.green, systemColor.ciColor.blue, systemColor.ciColor.alpha)
     }
- 
-    func stroke(_ v1: CGFloat,_ a: CGFloat = 255) {
-        context?.setStrokeColor(red: v1 / 255, green: v1 / 255, blue: v1 / 255, alpha: a / 255)
-        settings.stroke = Color(v1, v1, v1, a)
+    
+    /// Sets the stroke color with a single gray value.
+    ///
+    /// - Parameters:
+    ///     - v1: A gray value from 0-255.
+    ///     - a: An optional alpha value from 0-255. Defaults to 255.
+    
+    func stroke<T: Numeric>(_ v1: T,_ a: T = T(255.0)) {
+        var cg_v1, cg_a: CGFloat
+        cg_v1 = v1.convert()
+        cg_a = a.convert()
+        
+        context?.setStrokeColor(red: cg_v1 / 255, green: cg_v1 / 255, blue: cg_v1 / 255, alpha: cg_a / 255)
+        settings.stroke = Color(cg_v1, cg_v1, cg_v1, cg_a)
     }
-
-    func stroke(_ v1: Double,_ a: Double = 255) {
-        stroke(CGFloat(v1), CGFloat(a))
-    }
-
-
+    
+    /// Sets the stroke to be completely clear.
+    
     func noStroke() {
         stroke(0.0, 0.0, 0.0, 0.0)
     }
     
     /*
-    * MARK: ERASE
-    */
- 
+     * MARK: ERASE
+     */
+    
+    /// Sets subsequent shapes drawn to the screen to erase each other.
+    
     func erase() {
         context?.setBlendMode(CGBlendMode.clear)
     }
- 
+    
+    /// Sets the compositing mode to normal.
+    
     func noErase() {
         context?.setBlendMode(CGBlendMode.normal)
     }
     
     /*
-    * MARK: COLOR
-    */
+     * MARK: COLOR
+     */
     
-    // For Playground Literal Color Support
+    /// Returns a color object that can be stored in a variable.
+    ///
+    /// - Parameters:
+    ///     - color: A UIColor value.
+    
     func color(_ c: UIColor) -> Color {
         return Color(c.rgba255.red, c.rgba255.green, c.rgba255.blue, c.rgba255.alpha)
     }
     
-    func color(_ v1: CGFloat, _ v2: CGFloat, _ v3: CGFloat, _ a: CGFloat = 255) -> Color {
+    /// Returns a color object that can be stored in a variable.
+    ///
+    /// - Parameters:
+    ///     - v1: A red value from 0-255.
+    ///     - v2: A green value from 0-255.
+    ///     - v3: A blue value from 0-255.
+    ///     - a: An optional alpha value from 0-255. Defaults to 255.
+    
+    func color<T: Numeric>(_ v1: T, _ v2: T, _ v3: T, _ a: T = T(255.0)) -> Color {
         return Color(v1, v2, v3, a)
     }
     
-    func color(_ v1: Double, _ v2: Double, _ v3: Double, _ a: Double = 255) -> Color {
-        return Color(v1, v2, v3, a)
-    }
+    /// Returns a color object that can be stored in a variable.
+    ///
+    /// - Parameters:
+    ///     - v1: A gray value from 0-255.
+    ///     - a: An optional alpha value from 0-255. Defaults to 255.
     
-    func color(_ v1: CGFloat, _ a: CGFloat = 255) -> Color {
+    func color<T: Numeric>(_ v1: T, _ a: T = T(255.0)) -> Color {
         return Color(v1, v1, v1, a)
     }
     
-    func color(_ v1: Double, _ a: Double = 255) -> Color {
-        return Color(v1, v1, v1, a)
-    }
-
+    /// Returns a color object that can be stored in a variable.
+    ///
+    /// - Parameters:
+    ///     - value: hex string for a color.
+    
     func color(_ value: String) -> Color {
         return hexStringToUIColor(hex: value)
     }
     
     /*
-    * MARK: COMPONENT-WISE COLOR
-    */
- 
+     * MARK: COMPONENT-WISE COLOR
+     */
+    
+    /// Returns the red value of a SwiftProcessing color object.
+    ///
+    /// - Parameters:
+    ///     - color: A SwiftProcessing color object.
+    
     func red(_ color: Color) -> CGFloat {
         return red(color.toArray())
     }
- 
-    func red(_ color: [CGFloat]) -> CGFloat {
-        return color[0]
+    
+    /// Returns the red value of a color stored in an array
+    ///
+    /// - Parameters:
+    ///     - color: A color stored in an array, e.g. [R, G, B, A].
+    
+    func red<T: Numeric>(_ color: [T]) -> CGFloat {
+        return color[0].convert()
     }
     
-    func red(_ color: [Double]) -> Double {
-        return color[0]
-    }
- 
+    /// Returns the green value of a SwiftProcessing color object.
+    ///
+    /// - Parameters:
+    ///     - color: A SwiftProcessing color object.
+    
     func green(_ color: Color) -> CGFloat {
         return green(color.toArray())
     }
- 
-    func green(_ color: [CGFloat]) -> CGFloat {
-        return color[1]
+    
+    /// Returns the green value of a color stored in an array
+    ///
+    /// - Parameters:
+    ///     - color: A color stored in an array, e.g. [R, G, B, A].
+    
+    func green<T: Numeric>(_ color: [T]) -> CGFloat {
+        return color[1].convert()
     }
     
-    func green(_ color: [Double]) -> Double {
-        return color[1]
-    }
- 
+    /// Returns the blue value of a SwiftProcessing color object.
+    ///
+    /// - Parameters:
+    ///     - color: A SwiftProcessing color object.
+    
     func blue(_ color: Color) -> CGFloat {
         return blue(color.toArray())
     }
- 
-    func blue(_ color: [CGFloat]) -> CGFloat {
-        return color[2]
+    
+    /// Returns the blue value of a color stored in an array
+    ///
+    /// - Parameters:
+    ///     - color: A color stored in an array, e.g. [R, G, B, A].
+    
+    func blue<T: Numeric>(_ color: [T]) -> CGFloat {
+        return color[2].convert()
     }
     
-    func blue(_ color: [Double]) -> Double {
-        return color[2]
-    }
- 
+    /// Returns the alpha value of a SwiftProcessing color object.
+    ///
+    /// - Parameters:
+    ///     - color: A SwiftProcessing color object.
+    
     func alpha(_ color: Color) -> CGFloat {
         return alpha(color.toArray())
     }
- 
-    func alpha(_ color: [CGFloat]) -> CGFloat {
-        return color[3]
+    
+    /// Returns the alpha value of a color stored in an array
+    ///
+    /// - Parameters:
+    ///     - color: A color stored in an array, e.g. [R, G, B, A].
+    
+    func alpha<T: Numeric>(_ color: [T]) -> CGFloat {
+        return color[3].convert()
     }
     
-    func alpha(_ color: [Double]) -> Double {
-        return color[3]
-    }
- 
-    //credit https://stackoverflow.com/questions/24263007/how-to-use-hex-color-values
+    // Source: https://stackoverflow.com/questions/24263007/how-to-use-hex-color-values
     private func hexStringToUIColor (hex: String) -> Color {
         var cString: String = hex.trimmingCharacters(in: .whitespacesAndNewlines).uppercased()
- 
+        
         if cString.hasPrefix("#") {
             cString.remove(at: cString.startIndex)
         }
- 
+        
         if (cString.count) != 6 {
             assertionFailure("Invalid hex color")
         }
- 
+        
         var rgbValue: UInt64 = 0
         Scanner(string: cString).scanHexInt64(&rgbValue)
- 
+        
         return Color(
             CGFloat((rgbValue & 0xFF0000) >> 16),
             CGFloat((rgbValue & 0x00FF00) >> 8),
@@ -340,26 +487,19 @@ public extension Sketch {
 // =======================================================================
 // MARK: - CLASS: COLOR
 // =======================================================================
- 
+
 open class Color {
     
     public var red: Double
     public var green: Double
     public var blue: Double
     public var alpha: Double
- 
-    public init(_ v1: CGFloat, _ v2: CGFloat, _ v3: CGFloat, _ a: CGFloat = 255) {
-        self.red = Double(v1)
-        self.green = Double(v2)
-        self.blue = Double(v3)
-        self.alpha = Double(a)
-    }
     
-    public init(_ v1: Double, _ v2: Double, _ v3: Double, _ a: Double = 255) {
-        self.red = v1
-        self.green = v2
-        self.blue = v3
-        self.alpha = a
+    public init<T: Numeric>(_ v1: T, _ v2: T, _ v3: T, _ a: T = T(255.0)) {
+        self.red = v1.convert()
+        self.green = v2.convert()
+        self.blue = v3.convert()
+        self.alpha = a.convert()
     }
     
     public init(_ color: UIColor) {
@@ -368,49 +508,29 @@ open class Color {
         self.blue = color.double_rgba255.blue
         self.alpha = color.double_rgba255.alpha
     }
- 
-    func setRed(_ red: CGFloat) {
-        self.red = Double(red)
-    }
- 
-    func setGreen(_ green: CGFloat) {
-        self.green = Double(green)
-    }
- 
-    func setBlue(_ blue: CGFloat) {
-        self.blue = Double(blue)
-    }
- 
-    func setAlpha(_ alpha: CGFloat) {
-        self.alpha = Double(alpha)
+    
+    func setRed<T: Numeric>(_ red: T) {
+        self.red = red.convert()
     }
     
-    func setRed(_ red: Double) {
-        self.red = red
+    func setGreen<T: Numeric>(_ green: T) {
+        self.green = green.convert()
     }
     
-    func setGreen(_ green: Double) {
-        self.green = green
+    func setBlue<T: Numeric>(_ blue: T) {
+        self.blue = blue.convert()
     }
     
-    func setBlue(_ blue: Double) {
-        self.blue = blue
+    func setAlpha<T: Numeric>(_ alpha: T) {
+        self.alpha = alpha.convert()
     }
     
-    func setAlpha(_ alpha: Double) {
-        self.alpha = alpha
-    }
-
     func uiColor() -> UIColor {
-        return UIColor(red: CGFloat(self.red / 255.0), green: CGFloat(self.green / 255.0), blue: CGFloat(self.blue / 255.0), alpha: CGFloat(self.alpha / 255.0))
+        return UIColor(red: self.red.convert() / 255.0, green: self.green.convert() / 255.0, blue: self.blue.convert() / 255.0, alpha: self.alpha.convert() / 255.0)
     }
- 
+    
     func toString() -> String {
         return "rgba(\(self.red),\(self.green),\(self.blue),\(self.blue))"
-    }
- 
-    func toArray() -> [CGFloat] {
-        return [CGFloat(red), CGFloat(green), CGFloat(blue), CGFloat(alpha)]
     }
     
     func toArray() -> [Double] {
@@ -442,33 +562,33 @@ extension Color {
         case systemIndigo
     }
 }
- 
+
 extension Color.SystemColor: RawRepresentable {
     public typealias RawValue = UIColor
- 
+    
     public init?(rawValue: RawValue) {
         
         switch rawValue {
-            case UIColor.systemRed: self = .systemRed
-            case UIColor.systemBlue: self = .systemBlue
-            case UIColor.systemPink: self = .systemPink
-            case UIColor.systemTeal: self = .systemTeal
-            case UIColor.systemGreen: self = .systemGreen
-            case UIColor.systemGray: self = .systemGray
-            case UIColor.systemGray2: self = .systemGray2
-            case UIColor.systemGray3: self = .systemGray3
-            case UIColor.systemGray4: self = .systemGray4
-            case UIColor.systemGray5: self = .systemGray5
-            case UIColor.systemGray6: self = .systemGray6
-            case UIColor.systemOrange: self = .systemOrange
-            case UIColor.systemYellow: self = .systemYellow
-            case UIColor.systemPurple: self = .systemPurple
-            case UIColor.systemIndigo: self = .systemIndigo
+        case UIColor.systemRed: self = .systemRed
+        case UIColor.systemBlue: self = .systemBlue
+        case UIColor.systemPink: self = .systemPink
+        case UIColor.systemTeal: self = .systemTeal
+        case UIColor.systemGreen: self = .systemGreen
+        case UIColor.systemGray: self = .systemGray
+        case UIColor.systemGray2: self = .systemGray2
+        case UIColor.systemGray3: self = .systemGray3
+        case UIColor.systemGray4: self = .systemGray4
+        case UIColor.systemGray5: self = .systemGray5
+        case UIColor.systemGray6: self = .systemGray6
+        case UIColor.systemOrange: self = .systemOrange
+        case UIColor.systemYellow: self = .systemYellow
+        case UIColor.systemPurple: self = .systemPurple
+        case UIColor.systemIndigo: self = .systemIndigo
         default:
             return nil
         }
     }
- 
+    
     public var rawValue: RawValue {
         switch self {
         case .systemRed: return UIColor.systemRed

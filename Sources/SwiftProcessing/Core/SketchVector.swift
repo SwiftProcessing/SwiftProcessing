@@ -3,7 +3,7 @@ import UIKit
 
 public extension Sketch {
     
-    func createVector(_ x: CGFloat, _ y: CGFloat, _ z: CGFloat? = nil) -> Vector {
+    func createVector<T: Numeric>(_ x: T, _ y: T, _ z: T? = nil) -> Vector {
         return Vector(x, y, z)
     }
     
@@ -12,7 +12,7 @@ public extension Sketch {
 open class Vector: CustomStringConvertible {
     public var description: String {
         if z != nil{
-            return "(\(x), \(y), \(z))"
+            return "(\(x), \(y), \(String(describing: z)))"
         }else{
             return "(\(x), \(y))"
         }
@@ -22,16 +22,16 @@ open class Vector: CustomStringConvertible {
     open var y: CGFloat
     open var z: CGFloat?
     
-    public init(_ x: CGFloat, _ y: CGFloat, _ z: CGFloat? = nil) {
-        self.x = x
-        self.y = y
-        self.z = z
+    public init<T: Numeric>(_ x: T, _ y: T, _ z: T? = nil) {
+        self.x = x.convert()
+        self.y = y.convert()
+        self.z = z?.convert()
     }
     
-    open func set(_ x: CGFloat, _ y: CGFloat, _ z: CGFloat? = nil) {
-        self.x = x
-        self.y = y
-        self.z = z
+    open func set<T:Numeric>(_ x: T, _ y: T, _ z: T? = nil) {
+        self.x = x.convert()
+        self.y = y.convert()
+        self.z = z?.convert()
     }
     
     open func set(_ v: Vector) {

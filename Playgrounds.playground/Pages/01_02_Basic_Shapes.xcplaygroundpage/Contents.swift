@@ -35,34 +35,39 @@ class MySketch: Sketch, SketchDelegate {
     
     // We'll put everything in setup() so it only runs once.
     func setup() {
-        background(0.0)
-        
+        //background(UIColor.systemBlue)
+        //background(0.0)
+        background(0)
+        noStroke()
         // Try changing the numbers in the shapes
         // to see how that affects the sketch.
         
+        // The 'width' and 'height' variables you see below are special SwiftProcessing variables that return the width and height of your device's screen. These can be replaced by numbers if you'd like.
+        
         fill(#colorLiteral(red: 0.8078431487, green: 0.02745098062, blue: 0.3333333433, alpha: 1))
-        triangle(18.0, 18.0, 18.0, height, 101.0, height)
+        triangle(18, 18, 18, height, 81, height)
         
         fill(#colorLiteral(red: 0.2196078449, green: 0.007843137719, blue: 0.8549019694, alpha: 1))
-        rect(81.0, 81.0, 83.0, 83.0)
+        rect(81, 81, 83, 83)
         
         fill(#colorLiteral(red: 0.9098039269, green: 0.4784313738, blue: 0.6431372762, alpha: 1))
-        quad(189.0, 18.0, 216.0, 18.0, 216.0, height, 144.0, height)
+        quad(189, 18, 216, 18, 216, height, 144, height)
         
         fill(#colorLiteral(red: 0.521568656, green: 0.1098039225, blue: 0.05098039284, alpha: 1))
-        ellipse(252.0, 144.0, 72.0, 72.0)
+        ellipse(252, 144, 72, 72)
         
         fill(#colorLiteral(red: 0.4666666687, green: 0.7647058964, blue: 0.2666666806, alpha: 1))
-        triangle(288.0, 18.0, 351.0, height, 288.0, height)
+        triangle(288, 18, 351, height, 288, height)
         
         fill(#colorLiteral(red: 0.9764705896, green: 0.850980401, blue: 0.5490196347, alpha: 1))
-        arc(479.0, 300.0, 280.0, 280.0, PI, TWO_PI)
+        arc(479, 300, 280, 280, PI, TWO_PI)
     }
     
     // We only use draw() when we need things to animate.
     func draw() {
     }
 }
+//: This code is adapted from a [sketch on Processing.org](https://processing.org/examples/shapeprimitives.html).
 //: This last bit of code is to get things up and running in the playground.
 PlaygroundPage.current.setLiveView(MySketch())
 //: [Next](@next)

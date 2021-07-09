@@ -10,12 +10,18 @@ public extension Sketch {
         return Image(image!)
     }
 
-    func image(_ image: Image, _ x: CGFloat, _ y: CGFloat, _ width: CGFloat? = nil, _ height: CGFloat? = nil) {
-        let w = width == nil ? CGFloat(image.width) : width!
-        let h = height == nil ? CGFloat(image.height) : height!
-        image.width = w
-        image.height = h
-        image.frame(CGFloat(deltaTime), CGFloat(frameCount)).draw(in: CGRect(x: x, y: y, width: w, height: h), blendMode: image.blendMode, alpha: image.alpha)
+    func image<T: Numeric>(_ image: Image, _ x: T, _ y: T, _ width: T? = nil, _ height: T? = nil) {
+        var cg_x, cg_y: CGFloat
+        cg_x = x.convert()
+        cg_y = y.convert()
+        
+        let w:CGFloat = width == nil ? CGFloat(image.width) : width! as! CGFloat
+        let h:CGFloat = height == nil ? CGFloat(image.height) : height! as! CGFloat
+        
+        image.width = Double(w)
+        image.height = Double(h)
+        
+        image.frame(CGFloat(deltaTime), CGFloat(frameCount)).draw(in: CGRect(x: cg_x, y: cg_y, width: w, height: h), blendMode: image.blendMode, alpha: CGFloat(image.alpha))
     }
     
     func saveSketch() {

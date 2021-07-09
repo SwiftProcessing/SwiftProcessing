@@ -6,12 +6,8 @@ public extension Sketch {
         return fps
     }
 
-    func frameRate(fps: Double) {
-        self.fps = fps
-        fpsTimer?.preferredFramesPerSecond = Int(fps)
-    }
-    
-    func frameRate(fps: CGFloat) {
-        frameRate(fps: Double(fps))
+    func frameRate<T: Numeric>(fps: T) {
+        self.fps = fps.convert()
+        fpsTimer?.preferredFramesPerSecond = fps.convert()
     }
 }

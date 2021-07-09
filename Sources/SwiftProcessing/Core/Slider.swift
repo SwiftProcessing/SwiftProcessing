@@ -93,7 +93,7 @@ open class Slider {
     }
     
     open func thumbImage(_ i: Image, _ resize: Bool = true){
-        if resize && (i.width != THUMB_SIZE || i.height != THUMB_SIZE){
+        if resize && (i.width != Double(THUMB_SIZE) || i.height != Double(THUMB_SIZE)){
             i.resize(THUMB_SIZE, THUMB_SIZE)
         }
         (uiKitInterface.element as! UISlider).setThumbImage(i.currentFrame(), for: .normal)

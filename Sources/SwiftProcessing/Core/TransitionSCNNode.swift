@@ -76,7 +76,7 @@ class TransitionSCNNode: SCNNode {
     }
 
     func removeShapeNodes() {
-        for (key, arrayOfShapes) in self.availableShapeNodes {
+        for (_, arrayOfShapes) in self.availableShapeNodes {
             for shapes in arrayOfShapes {
                 shapes.cleanup()
                 shapes.removeFromParentNode()

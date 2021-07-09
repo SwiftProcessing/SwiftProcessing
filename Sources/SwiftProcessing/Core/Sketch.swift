@@ -20,6 +20,7 @@ import SceneKit
 }
 
 @IBDesignable open class Sketch: UIView {
+    
     // =======================================================================
     // MARK: - Processing Constants
     // =======================================================================
@@ -197,11 +198,11 @@ import SceneKit
         initTouch()
         initNotifications()
         sketchDelegate = self as? SketchDelegate
-        createCanvas(0, 0, UIScreen.main.bounds.width, UIScreen.main.bounds.height)
+        createCanvas(0.0, 0.0, UIScreen.main.bounds.width, UIScreen.main.bounds.height)
         self.layer.drawsAsynchronously = true
         
         // Possible resource here: https://nshipster.com/image-resizing/
-        // Using UIGraphicsImageRenderer instead of UIGraphicsBeginImageContextWithOptions might be better.s
+        // Using UIGraphicsImageRenderer instead of UIGraphicsBeginImageContextWithOptions might be better.
         
         // UIGraphicsBeginImageContext(CGSize(width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height))
         // Going to try to make the context opaque to see if it improves performance.
@@ -222,6 +223,9 @@ import SceneKit
          */
         
         UIGraphicsEndImageContext()
+        
+        self.clearsContextBeforeDrawing = false
+        
         loop()
     }
     

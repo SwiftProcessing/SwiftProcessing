@@ -68,8 +68,6 @@ class MySketch: Sketch, SketchDelegate {
     var bottomColor = Color(#colorLiteral(red: 0.2196078449, green: 0.007843137719, blue: 0.8549019694, alpha: 1))
     
     func setup() {
-        background(#colorLiteral(red: 0.2549019754, green: 0.2745098174, blue: 0.3019607961, alpha: 1))
-        
         // The default starting value for touchX and touchY is 0.0,
         // so it will draw in the corner if we don't change it before
         // draw is called.
@@ -80,6 +78,7 @@ class MySketch: Sketch, SketchDelegate {
     }
     
     func draw() {
+        background(#colorLiteral(red: 0.2549019754, green: 0.2745098174, blue: 0.3019607961, alpha: 1))
         // Lerp moves us toward our target of touchX and touchY, but slowly.
         x = lerp(x, touchX, lerpAmount)
         y = lerp(y, touchY, lerpAmount)
@@ -108,6 +107,6 @@ class MySketch: Sketch, SketchDelegate {
     
     
 }
-//: ## How will you make this sketch your own? Modify it to use different shapes or lines, or make the background refresh every frame. Change the color gradient.
+//: ## How will you make this sketch your own? Modify it to use different shapes or lines, or move `background()` to setup to see the lines you draw. Change the color gradient.
 PlaygroundPage.current.setLiveView(MySketch())
 //: [Next](@next)
