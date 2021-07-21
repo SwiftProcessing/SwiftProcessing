@@ -2,12 +2,8 @@ import UIKit
 
 public extension Sketch {
     
-    func textSize(_ theSize: CGFloat) {
-        settings.textSize = Double(theSize)
-    }
-    
-    func textSize(_ theSize: Double) {
-        settings.textSize = theSize
+    func textSize<T: Numeric>(_ theSize: T) {
+        settings.textSize = theSize.convert()
     }
     
     func textFont(_ name: String) {
@@ -18,8 +14,15 @@ public extension Sketch {
         settings.textAlignment = horizonalAlign
     }
     
-    func text(_ str: String, _ x: CGFloat, _ y: CGFloat, _ x2: CGFloat? = nil, _ y2: CGFloat? = nil) {
-        let fontSizeWidthRatio: CGFloat = 1.8
+    func text<T: Numeric>(_ str: String, _ x: T, _ y: T, _ x2: T? = nil, _ y2: T? = nil) {
+        var cg_x, cg_y: CGFloat
+        var cg_x2, cg_y2: CGFloat?
+        cg_x = x.convert()
+        cg_y = y.convert()
+        cg_x2 = x2?.convert()
+        cg_y2 = y2?.convert()
+        
+        //let fontSizeWidthRatio: CGFloat = 1.8
         let paragraphStyle = NSMutableParagraphStyle()
         
         var align: NSTextAlignment!
@@ -43,10 +46,10 @@ public extension Sketch {
             .strokeColor: settings.stroke.uiColor()
         ]
         
-        if x2 == nil {
-            str.draw(at: CGPoint(x: x, y: y), withAttributes: attributes)
+        if cg_x2 == nil {
+            str.draw(at: CGPoint(x: cg_x, y: cg_y), withAttributes: attributes)
         }else{
-            str.draw(with: CGRect(x: x, y: y, width: (x2 != nil) ? x2! : CGFloat(width), height: (y2 != nil) ? y2! : CGFloat(height)), options: .usesLineFragmentOrigin, attributes: attributes, context: nil)
+            str.draw(with: CGRect(x: cg_x, y: cg_y, width: (cg_x2 != nil) ? cg_x2! : CGFloat(width), height: (cg_y2 != nil) ? cg_y2! : CGFloat(height)), options: .usesLineFragmentOrigin, attributes: attributes, context: nil)
         }
     }
 }

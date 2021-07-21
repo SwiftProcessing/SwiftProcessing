@@ -7,20 +7,22 @@ import Foundation
 import UIKit
 
 public extension Sketch {
-    func random(_ low: CGFloat = 0, _ high: CGFloat = 1) -> CGFloat {
-        return CGFloat.random(in: low...high)
+    
+    /// Generate a random number from low and high value (inclusive).
+    /// - Parameters:
+    ///   - low: lower bound of random value
+    ///   - high: upper bound of the random value
+    
+    func random<T: Numeric>(_ low: T = 0 as! T, _ high: T = T(1)) -> T {
+        return T(CGFloat.random(in: low.convert()...high.convert()))
     }
     
-    func random(_ low: Double = 0, _ high: Double = 1) -> Double {
-        return Double.random(in: low...high)
-    }
+    /// Generate a random number from 0 and high value (inclusive).
+    /// - Parameters:
+    ///   - high: upper bound of the value's current range
     
-    func random(_ high: CGFloat = 1) -> CGFloat {
-        return CGFloat.random(in: 0.0...high)
-    }
-    
-    func random(_ high: Double = 1) -> Double {
-        return Double.random(in: 0.0...high)
+    func random<T: Numeric>(_ high: T = 1 as! T) -> T {
+        return T(CGFloat.random(in: 0.0...high.convert()))
     }
 }
 

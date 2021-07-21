@@ -15,18 +15,18 @@
         <page name='02_06_Arrays'/>
         <page name='02_07_Optionals'/>
         <page name='02_08_Images_and_Video'/>
-        <page name='02_09_Sound_and_Microphone'/>
+        <page name='02_09_Microphone_Input'/>
         <page name='03_01_Functions'/>
         <page name='03_02_Classes'/>
         <page name='03_03_A_Game_Using_Classes'/>
         <page name='03_04_PIxels'/>
+        <page name='03_05_Camera'/>
+        <page name='03_06_Augmented_Reality'/>
         <page name='04_01_2D_Physics_Bounce'/>
         <page name='04_02_2D_Physics_Gravity'/>
         <page name='04_03_2D_Physics_Aim_and_Inertia'/>
         <page name='04_04_2D_Physics_Autonomous_Agents'/>
         <page name='04_05_2D_Physics_Flocking'/>
         <page name='05_01_3D_Basic_Shapes'/>
-        <page name='03_05_Camera'/>
-        <page name='03_06_Augmented_Reality'/>
     </pages>
 </playground>

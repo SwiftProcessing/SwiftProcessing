@@ -103,7 +103,9 @@ class MySketch: Sketch, SketchDelegate {
     
     // A dice roll should be an integer because we don't need decimals.
     var diceRoll: Int!
-    var useIf = false
+    
+    // Change this to false if you want to see the switch statement instead of if.
+    var useIf = true
     
     func setup() {
         diceRoll = 0

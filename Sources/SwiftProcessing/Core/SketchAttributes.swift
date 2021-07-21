@@ -1,3 +1,8 @@
+/*
+ * SwiftProcessing: Attributes
+ *
+ * */
+
 import Foundation
 import UIKit
 
@@ -6,7 +11,7 @@ public protocol Attributes {
     
     /// Sets the width of the stroke used for lines, points and the border around shapes.
     /// - Parameter weight: the weight of the stroke
-    func strokeWeight(_ weight: CGFloat)
+    func strokeWeight<T: Numeric>(_ weight: T)
     
     /// Draws all geometry with smooth (anti-aliased) edges
     func smooth()
@@ -20,13 +25,9 @@ public protocol Attributes {
 }
 
 extension Sketch: Attributes {
-    public func strokeWeight(_ weight: CGFloat) {
-        context?.setLineWidth(weight)
-        settings.strokeWeight = Double(weight)
-    }
-
-    public func strokeWeight(_ weight: Double) {
-        strokeWeight(CGFloat(weight))
+    public func strokeWeight<T: Numeric>(_ weight: T) {
+        context?.setLineWidth(weight.convert())
+        settings.strokeWeight = weight.convert()
     }
     
     public func smooth() {
