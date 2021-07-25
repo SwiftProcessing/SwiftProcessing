@@ -25,6 +25,14 @@ import SceneKit
     // MARK: - Processing Constants
     // =======================================================================
     
+    // NOTE: Swift design guidelines implicitly discourage all-caps constants.
+    // This is very Java- or JavaScript-ey. A more Swift-ey way of doing this
+    // would be to create categorical enums. Enums would also leverage auto-
+    // complete in the same way that these constants would. For the constants
+    // that have values, another approach would be to create structs.
+    
+    // https://swift.org/documentation/api-design-guidelines/#conventions
+    
     /*
      * MARK: - TRIGONOMETRY CONSTANTS
      */
@@ -92,6 +100,17 @@ import SceneKit
     public let CAMERA_ROLL = "camera roll"
     
     /*
+     * MARK: - COLOR MODE ENUM / IN PROGRESS
+     */
+
+    // NOTE: Consider putting all SwiftProcessing enums in a separate .swift file.
+
+    public enum ColorMode {
+        case RGB
+        case HSB
+    }
+    
+    /*
      * MARK: - SCREEN / DISPLAY PROPERTIES
      */
     
@@ -152,6 +171,12 @@ import SceneKit
     open var context: CGContext?
     
     /*
+     * MARK: - COLOR MODE / IN PROGRESS
+     */
+
+    var colorMode: ColorMode = ColorMode.RGB
+    
+    /*
      * MARK: - TRANSFORMATION PROPERTIES
      */
     
@@ -201,26 +226,9 @@ import SceneKit
         createCanvas(0.0, 0.0, UIScreen.main.bounds.width, UIScreen.main.bounds.height)
         self.layer.drawsAsynchronously = true
         
-        // Possible resource here: https://nshipster.com/image-resizing/
-        // Using UIGraphicsImageRenderer instead of UIGraphicsBeginImageContextWithOptions might be better.
+        UIGraphicsBeginImageContextWithOptions(CGSize(width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height), true, 1.0)
         
-        // UIGraphicsBeginImageContext(CGSize(width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height))
-        // Going to try to make the context opaque to see if it improves performance.
-                UIGraphicsBeginImageContextWithOptions(CGSize(width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height), true, 1.0)
-        
-                self.context = UIGraphicsGetCurrentContext()
-        
-        // https://stackoverflow.com/questions/24109149/i-am-getting-unsupported-parameter-combination-cgbitmap-error-with-swift
-        
-        // Trying to create a bitmap as opposed to an image to see if it improves performance.
-        // Leaving this commented out. The question is whether a bitmap approach will improve performance.
-        // It may not.
-        
-        /*
-        let colorSpace:CGColorSpace = CGColorSpaceCreateDeviceRGB()
-        let bitmapInfo = CGBitmapInfo(rawValue: CGImageAlphaInfo.premultipliedLast.rawValue)
-        self.context = CGContext(data: nil, width: Int(UIScreen.main.bounds.width), height: Int(UIScreen.main.bounds.height), bitsPerComponent: 8, bytesPerRow: 0, space: colorSpace, bitmapInfo: bitmapInfo.rawValue)
-         */
+        self.context = UIGraphicsGetCurrentContext()
         
         UIGraphicsEndImageContext()
         
@@ -228,6 +236,36 @@ import SceneKit
         
         loop()
     }
+    
+    // The context needs to have all of the initial global states set up.
+    // **This is not hygenic code,** as it duplicates the initial settings
+    // found in the settings stack. A better approach may be to create
+    // constants that the initial settings are stored in within Sketch.swift.
+    // Then, when the settings stack is initialized, it uses an initalizer
+    // to pass those in. That way there is one location for the initial
+    // default settings.
+    
+    private func initializeGlobalContextStates() {
+        /*
+         Copied from SketchSettings class.
+         var textSize: Double = 32
+         var textFont: String = "HelveticaNeue-Thin"
+         var textAlignment: String = "left"
+         var ellipseMode: String = "center"
+         var fill: Color = Color(255.0, 255.0, 255.0)
+         var stroke: Color = Color(0.0, 0.0, 0.0)
+         var strokeWeight: Double = 1
+        */
+        textSize(32)
+        textFont("HelveticaNeue-Thin")
+        textAlign("left")
+        ellipseMode("center")
+        rectMode("corner")
+        fill(255)
+        stroke(0)
+        strokeWeight(1)
+    }
+    
     
     // =======================================================================
     // MARK: - DRAW LOOP
@@ -247,7 +285,6 @@ import SceneKit
         preDraw3D()
         
         updateDimensions()
-        UIGraphicsPushContext(context!)
         
         self.settingsStack.cleanup()
         currentStack = []
@@ -255,10 +292,14 @@ import SceneKit
         updateTimes()
         
         push()
+        // UIGraphicsPush and Pop are necessary for UIImages.
+        UIGraphicsPushContext(context!)
+
         scale(UIScreen.main.scale, UIScreen.main.scale)
         
         // To ensure setup only runs once.
         if !isSetup{
+            initializeGlobalContextStates()
             sketchDelegate?.setup()
             isSetup = true
         }
@@ -267,20 +308,16 @@ import SceneKit
         updateTouches()
         
         sketchDelegate?.draw() // All instructions go into current context.
-        
-        pop()
-        
+    
         postDraw3D()
         
+
         UIGraphicsPopContext()
+        pop()
         
         // This makes the background persist if the background isn't cleared.
-        let img = context!.makeImage() // CGImage <- This may be a speed bottleneck.
+        let img = context!.makeImage() // <- This may be a speed bottleneck.
         layer.contents = img
-        
-        //layer.isOpaque = true // Attempting performance boost.
-        //layer.shouldRasterize = true // Attempting performance boost.
-        
         layer.contentsGravity = .resizeAspect
     }
     
@@ -289,6 +326,7 @@ import SceneKit
         self.height = Double(self.frame.height)
         self.nativeWidth = Double(self.frame.width) * Double(UIScreen.main.scale)
         self.nativeHeight = Double(self.frame.height) * Double(UIScreen.main.scale)
+        
         //recreate the backing ImageContext when the native dimensions do not match the context dimensions
         if (self.context?.width != Int(nativeWidth)
                 || self.context?.height != Int(nativeHeight)) {
@@ -312,6 +350,7 @@ import SceneKit
     open func push() {
         context?.saveGState()
         settingsStack.push(settings: settings)
+        
         if (self.enable3DMode) {
             let rootTransformationNode = self.currentTransformationNode
             

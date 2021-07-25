@@ -8,6 +8,8 @@ public struct SketchSettings {
     var textFont: String = "HelveticaNeue-Thin"
     var textAlignment: String = "left"
     var ellipseMode: String = "center"
+    var rectMode: String = "corner"
+    var imageMode: String = "corner"
     var fill: Color = Color(255.0, 255.0, 255.0)
     var stroke: Color = Color(0.0, 0.0, 0.0)
     var strokeWeight: Double = 1
@@ -17,8 +19,24 @@ public struct SketchSettings {
         sketch.textSize(textSize)
         sketch.textFont(textFont)
         sketch.ellipseMode(ellipseMode)
+        sketch.rectMode(rectMode)
+        sketch.imageMode(imageMode)
         sketch.fill(fill)
         sketch.stroke(stroke)
-        sketch.strokeWeight(CGFloat(strokeWeight))
+        sketch.strokeWeight(strokeWeight)
     }
+    
+    func debugPrintSettings() {
+        print("""
+            textSize = \(textSize)
+            textFont = \(textFont)
+            textAlignment = \(textAlignment)
+            ellipseMode = \(ellipseMode)
+            fill = \(fill.toString())
+            stroke = \(stroke.toString())
+            strokeWeight = \(strokeWeight)
+            """
+        )
+    }
+    
 }
