@@ -67,9 +67,9 @@ extension Sketch: UIGestureRecognizerDelegate {
         }
         
         // Step 3: If the touch is moving, then execute touchMoved()
-        let moveThreshold: CGFloat = 1.0
+        let moveThreshold: Double = 1.0
         if newTouches.count == touches.count {
-            var totalDiff: CGFloat = 0
+            var totalDiff: Double = 0
             for (i, oldTouch) in touches.enumerated() {
                 totalDiff += oldTouch.dist(newTouches[i])
             }

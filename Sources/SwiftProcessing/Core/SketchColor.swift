@@ -66,6 +66,27 @@ public extension UIColor {
 // =======================================================================
 
 public extension Sketch {
+
+    /*
+     * MARK: - COLOR MODE
+     *
+     * NOTE: This is an ongoing project that will have multiple steps:
+     *
+     * STEP 1 – Create a global color mode that will enable users to choose between RGB and HSB modes. Ranges will be fixed at first. In the beginning, we'll start with 0-255 for RGB, 0-360 for H, and 0-100 for SB.
+     * STEP 2 — Expand Color class to have H, S, and B values and convert easily between HSV <-> RGB within the class.
+     * Algorithms to use: https://en.wikipedia.org/wiki/HSL_and_HSV#From_HSV
+     * STEP 3 – Allow users to set the desired ranges, as they can in Processing.
+     *
+     */
+    
+    private func colorModeHelper<V1: Numeric, V2: Numeric, V3: Numeric>(_ v1: V1, _ v2: V2, v3: V3) {
+        switch colorMode {
+        case ColorMode.RGB:
+            print("RGB")
+        case ColorMode.HSB:
+            print("HSB")
+        }
+    }
     
     /// Clears the background if there is a color.
     ///
@@ -527,6 +548,10 @@ open class Color {
     
     func uiColor() -> UIColor {
         return UIColor(red: self.red.convert() / 255.0, green: self.green.convert() / 255.0, blue: self.blue.convert() / 255.0, alpha: self.alpha.convert() / 255.0)
+    }
+    
+    func cgColor() -> CGColor {
+        return CGColor(red: self.red.convert(), green: self.green.convert(), blue: self.blue.convert(), alpha: self.alpha.convert())
     }
     
     func toString() -> String {

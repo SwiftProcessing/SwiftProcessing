@@ -21,60 +21,164 @@
 /* End PBXAggregateTarget section */
 
 /* Begin PBXBuildFile section */
-		1F5F75A3268184E500AAE0A9 /* Sketch2DPrimitives.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F5F75A2268184E500AAE0A9 /* Sketch2DPrimitives.swift */; };
-		1F665BF0269637110092D9A1 /* AudioIn.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F665BEF269637110092D9A1 /* AudioIn.swift */; };
-		1FF44D892682F50400CD8D23 /* SketchOperatorOverloads.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FF44D882682F50400CD8D23 /* SketchOperatorOverloads.swift */; };
-		OBJ_100 /* SketchNotifications.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_36 /* SketchNotifications.swift */; };
-		OBJ_101 /* SketchPixels.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_37 /* SketchPixels.swift */; };
-		OBJ_102 /* SketchRandom.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_38 /* SketchRandom.swift */; };
-		OBJ_103 /* SketchScroll.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_39 /* SketchScroll.swift */; };
-		OBJ_104 /* SketchSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_40 /* SketchSettings.swift */; };
-		OBJ_105 /* SketchSettingsStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_41 /* SketchSettingsStack.swift */; };
-		OBJ_106 /* SketchStructure.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_42 /* SketchStructure.swift */; };
-		OBJ_107 /* SketchTouch.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_43 /* SketchTouch.swift */; };
-		OBJ_108 /* SketchTransform.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_44 /* SketchTransform.swift */; };
-		OBJ_109 /* SketchTypography.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_45 /* SketchTypography.swift */; };
-		OBJ_110 /* SketchVector.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_46 /* SketchVector.swift */; };
-		OBJ_111 /* SketchVertex.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_47 /* SketchVertex.swift */; };
-		OBJ_112 /* SketchVisibility.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_48 /* SketchVisibility.swift */; };
-		OBJ_113 /* Alert.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_50 /* Alert.swift */; };
-		OBJ_114 /* Button.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_51 /* Button.swift */; };
-		OBJ_115 /* Capture.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_52 /* Capture.swift */; };
-		OBJ_116 /* Slider.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_53 /* Slider.swift */; };
-		OBJ_117 /* Stepper.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_54 /* Stepper.swift */; };
-		OBJ_118 /* Switch.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_55 /* Switch.swift */; };
-		OBJ_119 /* TextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_56 /* TextField.swift */; };
-		OBJ_120 /* UIApplicationExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_57 /* UIApplicationExtensions.swift */; };
-		OBJ_121 /* UIKitControlElement.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_58 /* UIKitControlElement.swift */; };
-		OBJ_122 /* UIKitViewElement.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_59 /* UIKitViewElement.swift */; };
+		1F1EF91626ACC7A200A943FF /* Label.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F1EF8E026ACC7A200A943FF /* Label.swift */; };
+		1F1EF91726ACC7A200A943FF /* Label.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F1EF8E026ACC7A200A943FF /* Label.swift */; };
+		1F1EF91826ACC7A200A943FF /* Label.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F1EF8E026ACC7A200A943FF /* Label.swift */; };
+		1F1EF91926ACC7A200A943FF /* Alert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F1EF8E126ACC7A200A943FF /* Alert.swift */; };
+		1F1EF91A26ACC7A200A943FF /* Alert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F1EF8E126ACC7A200A943FF /* Alert.swift */; };
+		1F1EF91B26ACC7A200A943FF /* Alert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F1EF8E126ACC7A200A943FF /* Alert.swift */; };
+		1F1EF91C26ACC7A200A943FF /* Capture.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F1EF8E226ACC7A200A943FF /* Capture.swift */; };
+		1F1EF91D26ACC7A200A943FF /* Capture.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F1EF8E226ACC7A200A943FF /* Capture.swift */; };
+		1F1EF91E26ACC7A200A943FF /* Capture.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F1EF8E226ACC7A200A943FF /* Capture.swift */; };
+		1F1EF91F26ACC7A200A943FF /* UIKitViewElement.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F1EF8E326ACC7A200A943FF /* UIKitViewElement.swift */; };
+		1F1EF92026ACC7A200A943FF /* UIKitViewElement.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F1EF8E326ACC7A200A943FF /* UIKitViewElement.swift */; };
+		1F1EF92126ACC7A200A943FF /* UIKitViewElement.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F1EF8E326ACC7A200A943FF /* UIKitViewElement.swift */; };
+		1F1EF92226ACC7A200A943FF /* Switch.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F1EF8E426ACC7A200A943FF /* Switch.swift */; };
+		1F1EF92326ACC7A200A943FF /* Switch.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F1EF8E426ACC7A200A943FF /* Switch.swift */; };
+		1F1EF92426ACC7A200A943FF /* Switch.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F1EF8E426ACC7A200A943FF /* Switch.swift */; };
+		1F1EF92526ACC7A200A943FF /* TextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F1EF8E526ACC7A200A943FF /* TextField.swift */; };
+		1F1EF92626ACC7A200A943FF /* TextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F1EF8E526ACC7A200A943FF /* TextField.swift */; };
+		1F1EF92726ACC7A200A943FF /* TextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F1EF8E526ACC7A200A943FF /* TextField.swift */; };
+		1F1EF92826ACC7A200A943FF /* Slider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F1EF8E626ACC7A200A943FF /* Slider.swift */; };
+		1F1EF92926ACC7A200A943FF /* Slider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F1EF8E626ACC7A200A943FF /* Slider.swift */; };
+		1F1EF92A26ACC7A200A943FF /* Slider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F1EF8E626ACC7A200A943FF /* Slider.swift */; };
+		1F1EF92B26ACC7A200A943FF /* Stepper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F1EF8E726ACC7A200A943FF /* Stepper.swift */; };
+		1F1EF92C26ACC7A200A943FF /* Stepper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F1EF8E726ACC7A200A943FF /* Stepper.swift */; };
+		1F1EF92D26ACC7A200A943FF /* Stepper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F1EF8E726ACC7A200A943FF /* Stepper.swift */; };
+		1F1EF92E26ACC7A200A943FF /* UIApplicationExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F1EF8E826ACC7A200A943FF /* UIApplicationExtensions.swift */; };
+		1F1EF92F26ACC7A200A943FF /* UIApplicationExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F1EF8E826ACC7A200A943FF /* UIApplicationExtensions.swift */; };
+		1F1EF93026ACC7A200A943FF /* UIApplicationExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F1EF8E826ACC7A200A943FF /* UIApplicationExtensions.swift */; };
+		1F1EF93126ACC7A200A943FF /* UIKitControlElement.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F1EF8E926ACC7A200A943FF /* UIKitControlElement.swift */; };
+		1F1EF93226ACC7A200A943FF /* UIKitControlElement.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F1EF8E926ACC7A200A943FF /* UIKitControlElement.swift */; };
+		1F1EF93326ACC7A200A943FF /* UIKitControlElement.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F1EF8E926ACC7A200A943FF /* UIKitControlElement.swift */; };
+		1F1EF93426ACC7A200A943FF /* Button.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F1EF8EA26ACC7A200A943FF /* Button.swift */; };
+		1F1EF93526ACC7A200A943FF /* Button.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F1EF8EA26ACC7A200A943FF /* Button.swift */; };
+		1F1EF93626ACC7A200A943FF /* Button.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F1EF8EA26ACC7A200A943FF /* Button.swift */; };
+		1F1EF93726ACC7A200A943FF /* SketchVertex.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F1EF8EB26ACC7A200A943FF /* SketchVertex.swift */; };
+		1F1EF93826ACC7A200A943FF /* SketchVertex.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F1EF8EB26ACC7A200A943FF /* SketchVertex.swift */; };
+		1F1EF93926ACC7A200A943FF /* SketchVertex.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F1EF8EB26ACC7A200A943FF /* SketchVertex.swift */; };
+		1F1EF93A26ACC7A200A943FF /* SketchAugmentedReality.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F1EF8EC26ACC7A200A943FF /* SketchAugmentedReality.swift */; };
+		1F1EF93B26ACC7A200A943FF /* SketchAugmentedReality.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F1EF8EC26ACC7A200A943FF /* SketchAugmentedReality.swift */; };
+		1F1EF93C26ACC7A200A943FF /* SketchAugmentedReality.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F1EF8EC26ACC7A200A943FF /* SketchAugmentedReality.swift */; };
+		1F1EF93D26ACC7A200A943FF /* SketchTransform.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F1EF8ED26ACC7A200A943FF /* SketchTransform.swift */; };
+		1F1EF93E26ACC7A200A943FF /* SketchTransform.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F1EF8ED26ACC7A200A943FF /* SketchTransform.swift */; };
+		1F1EF93F26ACC7A200A943FF /* SketchTransform.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F1EF8ED26ACC7A200A943FF /* SketchTransform.swift */; };
+		1F1EF94026ACC7A200A943FF /* SketchPixels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F1EF8EE26ACC7A200A943FF /* SketchPixels.swift */; };
+		1F1EF94126ACC7A200A943FF /* SketchPixels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F1EF8EE26ACC7A200A943FF /* SketchPixels.swift */; };
+		1F1EF94226ACC7A200A943FF /* SketchPixels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F1EF8EE26ACC7A200A943FF /* SketchPixels.swift */; };
+		1F1EF94326ACC7A200A943FF /* GifSwift.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F1EF8F026ACC7A200A943FF /* GifSwift.swift */; };
+		1F1EF94426ACC7A200A943FF /* GifSwift.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F1EF8F026ACC7A200A943FF /* GifSwift.swift */; };
+		1F1EF94526ACC7A200A943FF /* GifSwift.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F1EF8F026ACC7A200A943FF /* GifSwift.swift */; };
+		1F1EF94626ACC7A200A943FF /* Image.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F1EF8F126ACC7A200A943FF /* Image.swift */; };
+		1F1EF94726ACC7A200A943FF /* Image.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F1EF8F126ACC7A200A943FF /* Image.swift */; };
+		1F1EF94826ACC7A200A943FF /* Image.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F1EF8F126ACC7A200A943FF /* Image.swift */; };
+		1F1EF94926ACC7A200A943FF /* ImagePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F1EF8F226ACC7A200A943FF /* ImagePicker.swift */; };
+		1F1EF94A26ACC7A200A943FF /* ImagePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F1EF8F226ACC7A200A943FF /* ImagePicker.swift */; };
+		1F1EF94B26ACC7A200A943FF /* ImagePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F1EF8F226ACC7A200A943FF /* ImagePicker.swift */; };
+		1F1EF94C26ACC7A200A943FF /* SketchImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F1EF8F326ACC7A200A943FF /* SketchImage.swift */; };
+		1F1EF94D26ACC7A200A943FF /* SketchImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F1EF8F326ACC7A200A943FF /* SketchImage.swift */; };
+		1F1EF94E26ACC7A200A943FF /* SketchImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F1EF8F326ACC7A200A943FF /* SketchImage.swift */; };
+		1F1EF94F26ACC7A200A943FF /* SketchSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F1EF8F426ACC7A200A943FF /* SketchSettings.swift */; };
+		1F1EF95026ACC7A200A943FF /* SketchSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F1EF8F426ACC7A200A943FF /* SketchSettings.swift */; };
+		1F1EF95126ACC7A200A943FF /* SketchSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F1EF8F426ACC7A200A943FF /* SketchSettings.swift */; };
+		1F1EF95226ACC7A200A943FF /* Sketch2DPrimitives.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F1EF8F526ACC7A200A943FF /* Sketch2DPrimitives.swift */; };
+		1F1EF95326ACC7A200A943FF /* Sketch2DPrimitives.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F1EF8F526ACC7A200A943FF /* Sketch2DPrimitives.swift */; };
+		1F1EF95426ACC7A200A943FF /* Sketch2DPrimitives.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F1EF8F526ACC7A200A943FF /* Sketch2DPrimitives.swift */; };
+		1F1EF95526ACC7A200A943FF /* Sketch.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F1EF8F626ACC7A200A943FF /* Sketch.swift */; };
+		1F1EF95626ACC7A200A943FF /* Sketch.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F1EF8F626ACC7A200A943FF /* Sketch.swift */; };
+		1F1EF95726ACC7A200A943FF /* Sketch.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F1EF8F626ACC7A200A943FF /* Sketch.swift */; };
+		1F1EF95826ACC7A200A943FF /* SketchColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F1EF8F726ACC7A200A943FF /* SketchColor.swift */; };
+		1F1EF95926ACC7A200A943FF /* SketchColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F1EF8F726ACC7A200A943FF /* SketchColor.swift */; };
+		1F1EF95A26ACC7A200A943FF /* SketchColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F1EF8F726ACC7A200A943FF /* SketchColor.swift */; };
+		1F1EF95B26ACC7A200A943FF /* SketchVector.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F1EF8F826ACC7A200A943FF /* SketchVector.swift */; };
+		1F1EF95C26ACC7A200A943FF /* SketchVector.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F1EF8F826ACC7A200A943FF /* SketchVector.swift */; };
+		1F1EF95D26ACC7A200A943FF /* SketchVector.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F1EF8F826ACC7A200A943FF /* SketchVector.swift */; };
+		1F1EF95E26ACC7A200A943FF /* SketchTouch.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F1EF8F926ACC7A200A943FF /* SketchTouch.swift */; };
+		1F1EF95F26ACC7A200A943FF /* SketchTouch.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F1EF8F926ACC7A200A943FF /* SketchTouch.swift */; };
+		1F1EF96026ACC7A200A943FF /* SketchTouch.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F1EF8F926ACC7A200A943FF /* SketchTouch.swift */; };
+		1F1EF96126ACC7A200A943FF /* SketchSettingsStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F1EF8FA26ACC7A200A943FF /* SketchSettingsStack.swift */; };
+		1F1EF96226ACC7A200A943FF /* SketchSettingsStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F1EF8FA26ACC7A200A943FF /* SketchSettingsStack.swift */; };
+		1F1EF96326ACC7A200A943FF /* SketchSettingsStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F1EF8FA26ACC7A200A943FF /* SketchSettingsStack.swift */; };
+		1F1EF96426ACC7A200A943FF /* SketchCanvas.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F1EF8FB26ACC7A200A943FF /* SketchCanvas.swift */; };
+		1F1EF96526ACC7A200A943FF /* SketchCanvas.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F1EF8FB26ACC7A200A943FF /* SketchCanvas.swift */; };
+		1F1EF96626ACC7A200A943FF /* SketchCanvas.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F1EF8FB26ACC7A200A943FF /* SketchCanvas.swift */; };
+		1F1EF96726ACC7A200A943FF /* SketchEnvironment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F1EF8FC26ACC7A200A943FF /* SketchEnvironment.swift */; };
+		1F1EF96826ACC7A200A943FF /* SketchEnvironment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F1EF8FC26ACC7A200A943FF /* SketchEnvironment.swift */; };
+		1F1EF96926ACC7A200A943FF /* SketchEnvironment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F1EF8FC26ACC7A200A943FF /* SketchEnvironment.swift */; };
+		1F1EF96A26ACC7A200A943FF /* SketchAttributes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F1EF8FD26ACC7A200A943FF /* SketchAttributes.swift */; };
+		1F1EF96B26ACC7A200A943FF /* SketchAttributes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F1EF8FD26ACC7A200A943FF /* SketchAttributes.swift */; };
+		1F1EF96C26ACC7A200A943FF /* SketchAttributes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F1EF8FD26ACC7A200A943FF /* SketchAttributes.swift */; };
+		1F1EF96D26ACC7A200A943FF /* SketchOperatorOverloads.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F1EF8FE26ACC7A200A943FF /* SketchOperatorOverloads.swift */; };
+		1F1EF96E26ACC7A200A943FF /* SketchOperatorOverloads.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F1EF8FE26ACC7A200A943FF /* SketchOperatorOverloads.swift */; };
+		1F1EF96F26ACC7A200A943FF /* SketchOperatorOverloads.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F1EF8FE26ACC7A200A943FF /* SketchOperatorOverloads.swift */; };
+		1F1EF97026ACC7A200A943FF /* AudioIn.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F1EF90026ACC7A200A943FF /* AudioIn.swift */; };
+		1F1EF97126ACC7A200A943FF /* AudioIn.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F1EF90026ACC7A200A943FF /* AudioIn.swift */; };
+		1F1EF97226ACC7A200A943FF /* AudioIn.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F1EF90026ACC7A200A943FF /* AudioIn.swift */; };
+		1F1EF97326ACC7A200A943FF /* ModelNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F1EF90226ACC7A200A943FF /* ModelNode.swift */; };
+		1F1EF97426ACC7A200A943FF /* ModelNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F1EF90226ACC7A200A943FF /* ModelNode.swift */; };
+		1F1EF97526ACC7A200A943FF /* ModelNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F1EF90226ACC7A200A943FF /* ModelNode.swift */; };
+		1F1EF97626ACC7A200A943FF /* Sketch3D.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F1EF90326ACC7A200A943FF /* Sketch3D.swift */; };
+		1F1EF97726ACC7A200A943FF /* Sketch3D.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F1EF90326ACC7A200A943FF /* Sketch3D.swift */; };
+		1F1EF97826ACC7A200A943FF /* Sketch3D.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F1EF90326ACC7A200A943FF /* Sketch3D.swift */; };
+		1F1EF97926ACC7A200A943FF /* Sketch3DPrimitives.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F1EF90426ACC7A200A943FF /* Sketch3DPrimitives.swift */; };
+		1F1EF97A26ACC7A200A943FF /* Sketch3DPrimitives.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F1EF90426ACC7A200A943FF /* Sketch3DPrimitives.swift */; };
+		1F1EF97B26ACC7A200A943FF /* Sketch3DPrimitives.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F1EF90426ACC7A200A943FF /* Sketch3DPrimitives.swift */; };
+		1F1EF97C26ACC7A200A943FF /* Sketch3DTransform.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F1EF90526ACC7A200A943FF /* Sketch3DTransform.swift */; };
+		1F1EF97D26ACC7A200A943FF /* Sketch3DTransform.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F1EF90526ACC7A200A943FF /* Sketch3DTransform.swift */; };
+		1F1EF97E26ACC7A200A943FF /* Sketch3DTransform.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F1EF90526ACC7A200A943FF /* Sketch3DTransform.swift */; };
+		1F1EF97F26ACC7A200A943FF /* Sketch3DEnviroment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F1EF90626ACC7A200A943FF /* Sketch3DEnviroment.swift */; };
+		1F1EF98026ACC7A200A943FF /* Sketch3DEnviroment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F1EF90626ACC7A200A943FF /* Sketch3DEnviroment.swift */; };
+		1F1EF98126ACC7A200A943FF /* Sketch3DEnviroment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F1EF90626ACC7A200A943FF /* Sketch3DEnviroment.swift */; };
+		1F1EF98226ACC7A200A943FF /* Sketch3DCamera.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F1EF90726ACC7A200A943FF /* Sketch3DCamera.swift */; };
+		1F1EF98326ACC7A200A943FF /* Sketch3DCamera.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F1EF90726ACC7A200A943FF /* Sketch3DCamera.swift */; };
+		1F1EF98426ACC7A200A943FF /* Sketch3DCamera.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F1EF90726ACC7A200A943FF /* Sketch3DCamera.swift */; };
+		1F1EF98526ACC7A200A943FF /* Sketch3DTexture.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F1EF90826ACC7A200A943FF /* Sketch3DTexture.swift */; };
+		1F1EF98626ACC7A200A943FF /* Sketch3DTexture.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F1EF90826ACC7A200A943FF /* Sketch3DTexture.swift */; };
+		1F1EF98726ACC7A200A943FF /* Sketch3DTexture.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F1EF90826ACC7A200A943FF /* Sketch3DTexture.swift */; };
+		1F1EF98826ACC7A200A943FF /* Sketch3DModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F1EF90926ACC7A200A943FF /* Sketch3DModel.swift */; };
+		1F1EF98926ACC7A200A943FF /* Sketch3DModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F1EF90926ACC7A200A943FF /* Sketch3DModel.swift */; };
+		1F1EF98A26ACC7A200A943FF /* Sketch3DModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F1EF90926ACC7A200A943FF /* Sketch3DModel.swift */; };
+		1F1EF98B26ACC7A200A943FF /* TransitionSCNNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F1EF90A26ACC7A200A943FF /* TransitionSCNNode.swift */; };
+		1F1EF98C26ACC7A200A943FF /* TransitionSCNNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F1EF90A26ACC7A200A943FF /* TransitionSCNNode.swift */; };
+		1F1EF98D26ACC7A200A943FF /* TransitionSCNNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F1EF90A26ACC7A200A943FF /* TransitionSCNNode.swift */; };
+		1F1EF98E26ACC7A200A943FF /* Camera3D.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F1EF90B26ACC7A200A943FF /* Camera3D.swift */; };
+		1F1EF98F26ACC7A200A943FF /* Camera3D.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F1EF90B26ACC7A200A943FF /* Camera3D.swift */; };
+		1F1EF99026ACC7A200A943FF /* Camera3D.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F1EF90B26ACC7A200A943FF /* Camera3D.swift */; };
+		1F1EF99126ACC7A200A943FF /* Sketch3DLight.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F1EF90C26ACC7A200A943FF /* Sketch3DLight.swift */; };
+		1F1EF99226ACC7A200A943FF /* Sketch3DLight.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F1EF90C26ACC7A200A943FF /* Sketch3DLight.swift */; };
+		1F1EF99326ACC7A200A943FF /* Sketch3DLight.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F1EF90C26ACC7A200A943FF /* Sketch3DLight.swift */; };
+		1F1EF99426ACC7A200A943FF /* SketchNotifications.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F1EF90D26ACC7A200A943FF /* SketchNotifications.swift */; };
+		1F1EF99526ACC7A200A943FF /* SketchNotifications.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F1EF90D26ACC7A200A943FF /* SketchNotifications.swift */; };
+		1F1EF99626ACC7A200A943FF /* SketchNotifications.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F1EF90D26ACC7A200A943FF /* SketchNotifications.swift */; };
+		1F1EF99726ACC7A200A943FF /* SketchVisibility.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F1EF90E26ACC7A200A943FF /* SketchVisibility.swift */; };
+		1F1EF99826ACC7A200A943FF /* SketchVisibility.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F1EF90E26ACC7A200A943FF /* SketchVisibility.swift */; };
+		1F1EF99926ACC7A200A943FF /* SketchVisibility.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F1EF90E26ACC7A200A943FF /* SketchVisibility.swift */; };
+		1F1EF99A26ACC7A200A943FF /* NumericProtocolExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F1EF90F26ACC7A200A943FF /* NumericProtocolExtension.swift */; };
+		1F1EF99B26ACC7A200A943FF /* NumericProtocolExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F1EF90F26ACC7A200A943FF /* NumericProtocolExtension.swift */; };
+		1F1EF99C26ACC7A200A943FF /* NumericProtocolExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F1EF90F26ACC7A200A943FF /* NumericProtocolExtension.swift */; };
+		1F1EF99D26ACC7A200A943FF /* SketchTypography.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F1EF91026ACC7A200A943FF /* SketchTypography.swift */; };
+		1F1EF99E26ACC7A200A943FF /* SketchTypography.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F1EF91026ACC7A200A943FF /* SketchTypography.swift */; };
+		1F1EF99F26ACC7A200A943FF /* SketchTypography.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F1EF91026ACC7A200A943FF /* SketchTypography.swift */; };
+		1F1EF9A026ACC7A200A943FF /* SketchScroll.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F1EF91126ACC7A200A943FF /* SketchScroll.swift */; };
+		1F1EF9A126ACC7A200A943FF /* SketchScroll.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F1EF91126ACC7A200A943FF /* SketchScroll.swift */; };
+		1F1EF9A226ACC7A200A943FF /* SketchScroll.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F1EF91126ACC7A200A943FF /* SketchScroll.swift */; };
+		1F1EF9A326ACC7A200A943FF /* SketchCalculation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F1EF91226ACC7A200A943FF /* SketchCalculation.swift */; };
+		1F1EF9A426ACC7A200A943FF /* SketchCalculation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F1EF91226ACC7A200A943FF /* SketchCalculation.swift */; };
+		1F1EF9A526ACC7A200A943FF /* SketchCalculation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F1EF91226ACC7A200A943FF /* SketchCalculation.swift */; };
+		1F1EF9A626ACC7A200A943FF /* SketchStructure.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F1EF91326ACC7A200A943FF /* SketchStructure.swift */; };
+		1F1EF9A726ACC7A200A943FF /* SketchStructure.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F1EF91326ACC7A200A943FF /* SketchStructure.swift */; };
+		1F1EF9A826ACC7A200A943FF /* SketchStructure.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F1EF91326ACC7A200A943FF /* SketchStructure.swift */; };
+		1F1EF9A926ACC7A200A943FF /* SketchRandom.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F1EF91426ACC7A200A943FF /* SketchRandom.swift */; };
+		1F1EF9AA26ACC7A200A943FF /* SketchRandom.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F1EF91426ACC7A200A943FF /* SketchRandom.swift */; };
+		1F1EF9AB26ACC7A200A943FF /* SketchRandom.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F1EF91426ACC7A200A943FF /* SketchRandom.swift */; };
+		1F1EF9AC26ACC7A200A943FF /* SketchData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F1EF91526ACC7A200A943FF /* SketchData.swift */; };
+		1F1EF9AD26ACC7A200A943FF /* SketchData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F1EF91526ACC7A200A943FF /* SketchData.swift */; };
+		1F1EF9AE26ACC7A200A943FF /* SketchData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F1EF91526ACC7A200A943FF /* SketchData.swift */; };
 		OBJ_129 /* Package.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_6 /* Package.swift */; };
 		OBJ_140 /* SwiftProcessingTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_62 /* SwiftProcessingTests.swift */; };
 		OBJ_141 /* VectorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_63 /* VectorTests.swift */; };
 		OBJ_142 /* XCTestManifests.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_64 /* XCTestManifests.swift */; };
 		OBJ_144 /* SwiftProcessing.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = "SwiftProcessing::SwiftProcessing::Product" /* SwiftProcessing.framework */; };
-		OBJ_76 /* GifSwift.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_11 /* GifSwift.swift */; };
-		OBJ_77 /* Image.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_12 /* Image.swift */; };
-		OBJ_78 /* ImagePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_13 /* ImagePicker.swift */; };
-		OBJ_79 /* SketchImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_14 /* SketchImage.swift */; };
-		OBJ_80 /* Sketch.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_15 /* Sketch.swift */; };
-		OBJ_82 /* Camera3D.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_18 /* Camera3D.swift */; };
-		OBJ_83 /* ModelNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_19 /* ModelNode.swift */; };
-		OBJ_84 /* Sketch3D.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_20 /* Sketch3D.swift */; };
-		OBJ_85 /* Sketch3DCamera.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_21 /* Sketch3DCamera.swift */; };
-		OBJ_86 /* Sketch3DEnviroment.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_22 /* Sketch3DEnviroment.swift */; };
-		OBJ_87 /* Sketch3DLight.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_23 /* Sketch3DLight.swift */; };
-		OBJ_88 /* Sketch3DModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_24 /* Sketch3DModel.swift */; };
-		OBJ_89 /* Sketch3DPrimitives.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_25 /* Sketch3DPrimitives.swift */; };
-		OBJ_90 /* Sketch3DTexture.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_26 /* Sketch3DTexture.swift */; };
-		OBJ_91 /* Sketch3DTransform.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_27 /* Sketch3DTransform.swift */; };
-		OBJ_92 /* TransitionSCNNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_28 /* TransitionSCNNode.swift */; };
-		OBJ_93 /* SketchAttributes.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_29 /* SketchAttributes.swift */; };
-		OBJ_94 /* SketchAugmentedReality.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_30 /* SketchAugmentedReality.swift */; };
-		OBJ_95 /* SketchCalculation.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_31 /* SketchCalculation.swift */; };
-		OBJ_96 /* SketchCanvas.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_32 /* SketchCanvas.swift */; };
-		OBJ_97 /* SketchColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_33 /* SketchColor.swift */; };
-		OBJ_98 /* SketchData.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_34 /* SketchData.swift */; };
-		OBJ_99 /* SketchEnvironment.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_35 /* SketchEnvironment.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -95,56 +199,57 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		1F5F75A2268184E500AAE0A9 /* Sketch2DPrimitives.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Sketch2DPrimitives.swift; sourceTree = "<group>"; };
-		1F5F75AA2681898A00AAE0A9 /* Playgrounds.playground */ = {isa = PBXFileReference; lastKnownFileType = file.playground; path = Playgrounds.playground; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
-		1F665BEF269637110092D9A1 /* AudioIn.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioIn.swift; sourceTree = "<group>"; };
-		1FF44D882682F50400CD8D23 /* SketchOperatorOverloads.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SketchOperatorOverloads.swift; sourceTree = "<group>"; };
-		OBJ_11 /* GifSwift.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GifSwift.swift; sourceTree = "<group>"; };
-		OBJ_12 /* Image.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Image.swift; sourceTree = "<group>"; };
-		OBJ_13 /* ImagePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePicker.swift; sourceTree = "<group>"; };
-		OBJ_14 /* SketchImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SketchImage.swift; sourceTree = "<group>"; };
-		OBJ_15 /* Sketch.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sketch.swift; sourceTree = "<group>"; };
-		OBJ_18 /* Camera3D.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Camera3D.swift; sourceTree = "<group>"; };
-		OBJ_19 /* ModelNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModelNode.swift; sourceTree = "<group>"; };
-		OBJ_20 /* Sketch3D.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sketch3D.swift; sourceTree = "<group>"; };
-		OBJ_21 /* Sketch3DCamera.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sketch3DCamera.swift; sourceTree = "<group>"; };
-		OBJ_22 /* Sketch3DEnviroment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sketch3DEnviroment.swift; sourceTree = "<group>"; };
-		OBJ_23 /* Sketch3DLight.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sketch3DLight.swift; sourceTree = "<group>"; };
-		OBJ_24 /* Sketch3DModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sketch3DModel.swift; sourceTree = "<group>"; };
-		OBJ_25 /* Sketch3DPrimitives.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sketch3DPrimitives.swift; sourceTree = "<group>"; };
-		OBJ_26 /* Sketch3DTexture.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sketch3DTexture.swift; sourceTree = "<group>"; };
-		OBJ_27 /* Sketch3DTransform.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sketch3DTransform.swift; sourceTree = "<group>"; };
-		OBJ_28 /* TransitionSCNNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransitionSCNNode.swift; sourceTree = "<group>"; };
-		OBJ_29 /* SketchAttributes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SketchAttributes.swift; sourceTree = "<group>"; };
-		OBJ_30 /* SketchAugmentedReality.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SketchAugmentedReality.swift; sourceTree = "<group>"; };
-		OBJ_31 /* SketchCalculation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SketchCalculation.swift; sourceTree = "<group>"; };
-		OBJ_32 /* SketchCanvas.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SketchCanvas.swift; sourceTree = "<group>"; };
-		OBJ_33 /* SketchColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SketchColor.swift; sourceTree = "<group>"; };
-		OBJ_34 /* SketchData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SketchData.swift; sourceTree = "<group>"; };
-		OBJ_35 /* SketchEnvironment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SketchEnvironment.swift; sourceTree = "<group>"; };
-		OBJ_36 /* SketchNotifications.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SketchNotifications.swift; sourceTree = "<group>"; };
-		OBJ_37 /* SketchPixels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SketchPixels.swift; sourceTree = "<group>"; };
-		OBJ_38 /* SketchRandom.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SketchRandom.swift; sourceTree = "<group>"; };
-		OBJ_39 /* SketchScroll.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SketchScroll.swift; sourceTree = "<group>"; };
-		OBJ_40 /* SketchSettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SketchSettings.swift; sourceTree = "<group>"; };
-		OBJ_41 /* SketchSettingsStack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SketchSettingsStack.swift; sourceTree = "<group>"; };
-		OBJ_42 /* SketchStructure.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SketchStructure.swift; sourceTree = "<group>"; };
-		OBJ_43 /* SketchTouch.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SketchTouch.swift; sourceTree = "<group>"; };
-		OBJ_44 /* SketchTransform.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SketchTransform.swift; sourceTree = "<group>"; };
-		OBJ_45 /* SketchTypography.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SketchTypography.swift; sourceTree = "<group>"; };
-		OBJ_46 /* SketchVector.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SketchVector.swift; sourceTree = "<group>"; };
-		OBJ_47 /* SketchVertex.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SketchVertex.swift; sourceTree = "<group>"; };
-		OBJ_48 /* SketchVisibility.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SketchVisibility.swift; sourceTree = "<group>"; };
-		OBJ_50 /* Alert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Alert.swift; sourceTree = "<group>"; };
-		OBJ_51 /* Button.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Button.swift; sourceTree = "<group>"; };
-		OBJ_52 /* Capture.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Capture.swift; sourceTree = "<group>"; };
-		OBJ_53 /* Slider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Slider.swift; sourceTree = "<group>"; };
-		OBJ_54 /* Stepper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Stepper.swift; sourceTree = "<group>"; };
-		OBJ_55 /* Switch.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Switch.swift; sourceTree = "<group>"; };
-		OBJ_56 /* TextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextField.swift; sourceTree = "<group>"; };
-		OBJ_57 /* UIApplicationExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIApplicationExtensions.swift; sourceTree = "<group>"; };
-		OBJ_58 /* UIKitControlElement.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIKitControlElement.swift; sourceTree = "<group>"; };
-		OBJ_59 /* UIKitViewElement.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIKitViewElement.swift; sourceTree = "<group>"; };
+		1F1EF8E026ACC7A200A943FF /* Label.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Label.swift; sourceTree = "<group>"; };
+		1F1EF8E126ACC7A200A943FF /* Alert.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Alert.swift; sourceTree = "<group>"; };
+		1F1EF8E226ACC7A200A943FF /* Capture.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Capture.swift; sourceTree = "<group>"; };
+		1F1EF8E326ACC7A200A943FF /* UIKitViewElement.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIKitViewElement.swift; sourceTree = "<group>"; };
+		1F1EF8E426ACC7A200A943FF /* Switch.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Switch.swift; sourceTree = "<group>"; };
+		1F1EF8E526ACC7A200A943FF /* TextField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TextField.swift; sourceTree = "<group>"; };
+		1F1EF8E626ACC7A200A943FF /* Slider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Slider.swift; sourceTree = "<group>"; };
+		1F1EF8E726ACC7A200A943FF /* Stepper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Stepper.swift; sourceTree = "<group>"; };
+		1F1EF8E826ACC7A200A943FF /* UIApplicationExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIApplicationExtensions.swift; sourceTree = "<group>"; };
+		1F1EF8E926ACC7A200A943FF /* UIKitControlElement.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIKitControlElement.swift; sourceTree = "<group>"; };
+		1F1EF8EA26ACC7A200A943FF /* Button.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Button.swift; sourceTree = "<group>"; };
+		1F1EF8EB26ACC7A200A943FF /* SketchVertex.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SketchVertex.swift; sourceTree = "<group>"; };
+		1F1EF8EC26ACC7A200A943FF /* SketchAugmentedReality.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SketchAugmentedReality.swift; sourceTree = "<group>"; };
+		1F1EF8ED26ACC7A200A943FF /* SketchTransform.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SketchTransform.swift; sourceTree = "<group>"; };
+		1F1EF8EE26ACC7A200A943FF /* SketchPixels.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SketchPixels.swift; sourceTree = "<group>"; };
+		1F1EF8F026ACC7A200A943FF /* GifSwift.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GifSwift.swift; sourceTree = "<group>"; };
+		1F1EF8F126ACC7A200A943FF /* Image.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Image.swift; sourceTree = "<group>"; };
+		1F1EF8F226ACC7A200A943FF /* ImagePicker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImagePicker.swift; sourceTree = "<group>"; };
+		1F1EF8F326ACC7A200A943FF /* SketchImage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SketchImage.swift; sourceTree = "<group>"; };
+		1F1EF8F426ACC7A200A943FF /* SketchSettings.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SketchSettings.swift; sourceTree = "<group>"; };
+		1F1EF8F526ACC7A200A943FF /* Sketch2DPrimitives.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Sketch2DPrimitives.swift; sourceTree = "<group>"; };
+		1F1EF8F626ACC7A200A943FF /* Sketch.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Sketch.swift; sourceTree = "<group>"; };
+		1F1EF8F726ACC7A200A943FF /* SketchColor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SketchColor.swift; sourceTree = "<group>"; };
+		1F1EF8F826ACC7A200A943FF /* SketchVector.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SketchVector.swift; sourceTree = "<group>"; };
+		1F1EF8F926ACC7A200A943FF /* SketchTouch.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SketchTouch.swift; sourceTree = "<group>"; };
+		1F1EF8FA26ACC7A200A943FF /* SketchSettingsStack.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SketchSettingsStack.swift; sourceTree = "<group>"; };
+		1F1EF8FB26ACC7A200A943FF /* SketchCanvas.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SketchCanvas.swift; sourceTree = "<group>"; };
+		1F1EF8FC26ACC7A200A943FF /* SketchEnvironment.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SketchEnvironment.swift; sourceTree = "<group>"; };
+		1F1EF8FD26ACC7A200A943FF /* SketchAttributes.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SketchAttributes.swift; sourceTree = "<group>"; };
+		1F1EF8FE26ACC7A200A943FF /* SketchOperatorOverloads.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SketchOperatorOverloads.swift; sourceTree = "<group>"; };
+		1F1EF90026ACC7A200A943FF /* AudioIn.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AudioIn.swift; sourceTree = "<group>"; };
+		1F1EF90226ACC7A200A943FF /* ModelNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ModelNode.swift; sourceTree = "<group>"; };
+		1F1EF90326ACC7A200A943FF /* Sketch3D.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Sketch3D.swift; sourceTree = "<group>"; };
+		1F1EF90426ACC7A200A943FF /* Sketch3DPrimitives.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Sketch3DPrimitives.swift; sourceTree = "<group>"; };
+		1F1EF90526ACC7A200A943FF /* Sketch3DTransform.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Sketch3DTransform.swift; sourceTree = "<group>"; };
+		1F1EF90626ACC7A200A943FF /* Sketch3DEnviroment.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Sketch3DEnviroment.swift; sourceTree = "<group>"; };
+		1F1EF90726ACC7A200A943FF /* Sketch3DCamera.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Sketch3DCamera.swift; sourceTree = "<group>"; };
+		1F1EF90826ACC7A200A943FF /* Sketch3DTexture.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Sketch3DTexture.swift; sourceTree = "<group>"; };
+		1F1EF90926ACC7A200A943FF /* Sketch3DModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Sketch3DModel.swift; sourceTree = "<group>"; };
+		1F1EF90A26ACC7A200A943FF /* TransitionSCNNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TransitionSCNNode.swift; sourceTree = "<group>"; };
+		1F1EF90B26ACC7A200A943FF /* Camera3D.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Camera3D.swift; sourceTree = "<group>"; };
+		1F1EF90C26ACC7A200A943FF /* Sketch3DLight.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Sketch3DLight.swift; sourceTree = "<group>"; };
+		1F1EF90D26ACC7A200A943FF /* SketchNotifications.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SketchNotifications.swift; sourceTree = "<group>"; };
+		1F1EF90E26ACC7A200A943FF /* SketchVisibility.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SketchVisibility.swift; sourceTree = "<group>"; };
+		1F1EF90F26ACC7A200A943FF /* NumericProtocolExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NumericProtocolExtension.swift; sourceTree = "<group>"; };
+		1F1EF91026ACC7A200A943FF /* SketchTypography.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SketchTypography.swift; sourceTree = "<group>"; };
+		1F1EF91126ACC7A200A943FF /* SketchScroll.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SketchScroll.swift; sourceTree = "<group>"; };
+		1F1EF91226ACC7A200A943FF /* SketchCalculation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SketchCalculation.swift; sourceTree = "<group>"; };
+		1F1EF91326ACC7A200A943FF /* SketchStructure.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SketchStructure.swift; sourceTree = "<group>"; };
+		1F1EF91426ACC7A200A943FF /* SketchRandom.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SketchRandom.swift; sourceTree = "<group>"; };
+		1F1EF91526ACC7A200A943FF /* SketchData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SketchData.swift; sourceTree = "<group>"; };
 		OBJ_6 /* Package.swift */ = {isa = PBXFileReference; explicitFileType = sourcecode.swift; path = Package.swift; sourceTree = "<group>"; };
 		OBJ_62 /* SwiftProcessingTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftProcessingTests.swift; sourceTree = "<group>"; };
 		OBJ_63 /* VectorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VectorTests.swift; sourceTree = "<group>"; };
@@ -153,7 +258,7 @@
 		OBJ_69 /* _config.yml */ = {isa = PBXFileReference; lastKnownFileType = text.yaml; path = _config.yml; sourceTree = "<group>"; };
 		OBJ_70 /* install-swift-processing-template.command */ = {isa = PBXFileReference; lastKnownFileType = text; path = "install-swift-processing-template.command"; sourceTree = "<group>"; };
 		"SwiftProcessing::SwiftProcessing::Product" /* SwiftProcessing.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = SwiftProcessing.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		"SwiftProcessing::SwiftProcessingTests::Product" /* SwiftProcessingTests.xctest */ = {isa = PBXFileReference; lastKnownFileType = file; path = SwiftProcessingTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		"SwiftProcessing::SwiftProcessingTests::Product" /* SwiftProcessingTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; path = SwiftProcessingTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -175,10 +280,99 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		1F1EF8DE26ACC7A200A943FF /* Core */ = {
+			isa = PBXGroup;
+			children = (
+				1F1EF8FF26ACC7A200A943FF /* Audio */,
+				1F1EF8EF26ACC7A200A943FF /* Images */,
+				1F1EF90F26ACC7A200A943FF /* NumericProtocolExtension.swift */,
+				1F1EF8F626ACC7A200A943FF /* Sketch.swift */,
+				1F1EF8F526ACC7A200A943FF /* Sketch2DPrimitives.swift */,
+				1F1EF90126ACC7A200A943FF /* Sketch3D */,
+				1F1EF8FD26ACC7A200A943FF /* SketchAttributes.swift */,
+				1F1EF8EC26ACC7A200A943FF /* SketchAugmentedReality.swift */,
+				1F1EF91226ACC7A200A943FF /* SketchCalculation.swift */,
+				1F1EF8FB26ACC7A200A943FF /* SketchCanvas.swift */,
+				1F1EF8F726ACC7A200A943FF /* SketchColor.swift */,
+				1F1EF91526ACC7A200A943FF /* SketchData.swift */,
+				1F1EF8FC26ACC7A200A943FF /* SketchEnvironment.swift */,
+				1F1EF90D26ACC7A200A943FF /* SketchNotifications.swift */,
+				1F1EF8FE26ACC7A200A943FF /* SketchOperatorOverloads.swift */,
+				1F1EF8EE26ACC7A200A943FF /* SketchPixels.swift */,
+				1F1EF91426ACC7A200A943FF /* SketchRandom.swift */,
+				1F1EF91126ACC7A200A943FF /* SketchScroll.swift */,
+				1F1EF8F426ACC7A200A943FF /* SketchSettings.swift */,
+				1F1EF8FA26ACC7A200A943FF /* SketchSettingsStack.swift */,
+				1F1EF91326ACC7A200A943FF /* SketchStructure.swift */,
+				1F1EF8F926ACC7A200A943FF /* SketchTouch.swift */,
+				1F1EF8ED26ACC7A200A943FF /* SketchTransform.swift */,
+				1F1EF91026ACC7A200A943FF /* SketchTypography.swift */,
+				1F1EF8F826ACC7A200A943FF /* SketchVector.swift */,
+				1F1EF8EB26ACC7A200A943FF /* SketchVertex.swift */,
+				1F1EF90E26ACC7A200A943FF /* SketchVisibility.swift */,
+				1F1EF8DF26ACC7A200A943FF /* UIKitElements */,
+			);
+			path = Core;
+			sourceTree = "<group>";
+		};
+		1F1EF8DF26ACC7A200A943FF /* UIKitElements */ = {
+			isa = PBXGroup;
+			children = (
+				1F1EF8E026ACC7A200A943FF /* Label.swift */,
+				1F1EF8E126ACC7A200A943FF /* Alert.swift */,
+				1F1EF8E226ACC7A200A943FF /* Capture.swift */,
+				1F1EF8E326ACC7A200A943FF /* UIKitViewElement.swift */,
+				1F1EF8E426ACC7A200A943FF /* Switch.swift */,
+				1F1EF8E526ACC7A200A943FF /* TextField.swift */,
+				1F1EF8E626ACC7A200A943FF /* Slider.swift */,
+				1F1EF8E726ACC7A200A943FF /* Stepper.swift */,
+				1F1EF8E826ACC7A200A943FF /* UIApplicationExtensions.swift */,
+				1F1EF8E926ACC7A200A943FF /* UIKitControlElement.swift */,
+				1F1EF8EA26ACC7A200A943FF /* Button.swift */,
+			);
+			path = UIKitElements;
+			sourceTree = "<group>";
+		};
+		1F1EF8EF26ACC7A200A943FF /* Images */ = {
+			isa = PBXGroup;
+			children = (
+				1F1EF8F026ACC7A200A943FF /* GifSwift.swift */,
+				1F1EF8F126ACC7A200A943FF /* Image.swift */,
+				1F1EF8F226ACC7A200A943FF /* ImagePicker.swift */,
+				1F1EF8F326ACC7A200A943FF /* SketchImage.swift */,
+			);
+			path = Images;
+			sourceTree = "<group>";
+		};
+		1F1EF8FF26ACC7A200A943FF /* Audio */ = {
+			isa = PBXGroup;
+			children = (
+				1F1EF90026ACC7A200A943FF /* AudioIn.swift */,
+			);
+			path = Audio;
+			sourceTree = "<group>";
+		};
+		1F1EF90126ACC7A200A943FF /* Sketch3D */ = {
+			isa = PBXGroup;
+			children = (
+				1F1EF90226ACC7A200A943FF /* ModelNode.swift */,
+				1F1EF90326ACC7A200A943FF /* Sketch3D.swift */,
+				1F1EF90426ACC7A200A943FF /* Sketch3DPrimitives.swift */,
+				1F1EF90526ACC7A200A943FF /* Sketch3DTransform.swift */,
+				1F1EF90626ACC7A200A943FF /* Sketch3DEnviroment.swift */,
+				1F1EF90726ACC7A200A943FF /* Sketch3DCamera.swift */,
+				1F1EF90826ACC7A200A943FF /* Sketch3DTexture.swift */,
+				1F1EF90926ACC7A200A943FF /* Sketch3DModel.swift */,
+				1F1EF90A26ACC7A200A943FF /* TransitionSCNNode.swift */,
+				1F1EF90B26ACC7A200A943FF /* Camera3D.swift */,
+				1F1EF90C26ACC7A200A943FF /* Sketch3DLight.swift */,
+			);
+			path = Sketch3D;
+			sourceTree = "<group>";
+		};
 		OBJ_5 = {
 			isa = PBXGroup;
 			children = (
-				1F5F75AA2681898A00AAE0A9 /* Playgrounds.playground */,
 				OBJ_6 /* Package.swift */,
 				OBJ_7 /* Sources */,
 				OBJ_60 /* Tests */,
@@ -228,67 +422,11 @@
 		OBJ_8 /* SwiftProcessing */ = {
 			isa = PBXGroup;
 			children = (
-				OBJ_9 /* Core */,
+				1F1EF8DE26ACC7A200A943FF /* Core */,
 			);
 			name = SwiftProcessing;
 			path = Sources/SwiftProcessing;
 			sourceTree = SOURCE_ROOT;
-		};
-		OBJ_9 /* Core */ = {
-			isa = PBXGroup;
-			children = (
-				OBJ_15 /* Sketch.swift */,
-				1FF44D882682F50400CD8D23 /* SketchOperatorOverloads.swift */,
-				1F5F75A2268184E500AAE0A9 /* Sketch2DPrimitives.swift */,
-				OBJ_29 /* SketchAttributes.swift */,
-				OBJ_30 /* SketchAugmentedReality.swift */,
-				OBJ_31 /* SketchCalculation.swift */,
-				OBJ_32 /* SketchCanvas.swift */,
-				OBJ_33 /* SketchColor.swift */,
-				OBJ_34 /* SketchData.swift */,
-				OBJ_35 /* SketchEnvironment.swift */,
-				OBJ_36 /* SketchNotifications.swift */,
-				OBJ_37 /* SketchPixels.swift */,
-				OBJ_38 /* SketchRandom.swift */,
-				OBJ_39 /* SketchScroll.swift */,
-				OBJ_40 /* SketchSettings.swift */,
-				OBJ_41 /* SketchSettingsStack.swift */,
-				OBJ_42 /* SketchStructure.swift */,
-				OBJ_43 /* SketchTouch.swift */,
-				OBJ_44 /* SketchTransform.swift */,
-				OBJ_45 /* SketchTypography.swift */,
-				OBJ_46 /* SketchVector.swift */,
-				OBJ_47 /* SketchVertex.swift */,
-				OBJ_48 /* SketchVisibility.swift */,
-				OBJ_11 /* GifSwift.swift */,
-				OBJ_12 /* Image.swift */,
-				OBJ_13 /* ImagePicker.swift */,
-				OBJ_14 /* SketchImage.swift */,
-				OBJ_18 /* Camera3D.swift */,
-				OBJ_19 /* ModelNode.swift */,
-				OBJ_20 /* Sketch3D.swift */,
-				OBJ_21 /* Sketch3DCamera.swift */,
-				OBJ_22 /* Sketch3DEnviroment.swift */,
-				OBJ_23 /* Sketch3DLight.swift */,
-				OBJ_24 /* Sketch3DModel.swift */,
-				OBJ_25 /* Sketch3DPrimitives.swift */,
-				OBJ_26 /* Sketch3DTexture.swift */,
-				OBJ_27 /* Sketch3DTransform.swift */,
-				OBJ_28 /* TransitionSCNNode.swift */,
-				OBJ_50 /* Alert.swift */,
-				OBJ_51 /* Button.swift */,
-				OBJ_52 /* Capture.swift */,
-				OBJ_53 /* Slider.swift */,
-				OBJ_54 /* Stepper.swift */,
-				OBJ_55 /* Switch.swift */,
-				OBJ_56 /* TextField.swift */,
-				1F665BEF269637110092D9A1 /* AudioIn.swift */,
-				OBJ_57 /* UIApplicationExtensions.swift */,
-				OBJ_58 /* UIKitControlElement.swift */,
-				OBJ_59 /* UIKitViewElement.swift */,
-			);
-			path = Core;
-			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
 
@@ -374,7 +512,58 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 0;
 			files = (
+				1F1EF93E26ACC7A200A943FF /* SketchTransform.swift in Sources */,
+				1F1EF95F26ACC7A200A943FF /* SketchTouch.swift in Sources */,
+				1F1EF94726ACC7A200A943FF /* Image.swift in Sources */,
+				1F1EF93826ACC7A200A943FF /* SketchVertex.swift in Sources */,
+				1F1EF97A26ACC7A200A943FF /* Sketch3DPrimitives.swift in Sources */,
+				1F1EF95626ACC7A200A943FF /* Sketch.swift in Sources */,
+				1F1EF91D26ACC7A200A943FF /* Capture.swift in Sources */,
+				1F1EF91A26ACC7A200A943FF /* Alert.swift in Sources */,
+				1F1EF99526ACC7A200A943FF /* SketchNotifications.swift in Sources */,
+				1F1EF96E26ACC7A200A943FF /* SketchOperatorOverloads.swift in Sources */,
+				1F1EF99E26ACC7A200A943FF /* SketchTypography.swift in Sources */,
+				1F1EF98626ACC7A200A943FF /* Sketch3DTexture.swift in Sources */,
+				1F1EF95326ACC7A200A943FF /* Sketch2DPrimitives.swift in Sources */,
+				1F1EF94126ACC7A200A943FF /* SketchPixels.swift in Sources */,
+				1F1EF9A126ACC7A200A943FF /* SketchScroll.swift in Sources */,
+				1F1EF95026ACC7A200A943FF /* SketchSettings.swift in Sources */,
+				1F1EF98F26ACC7A200A943FF /* Camera3D.swift in Sources */,
+				1F1EF92926ACC7A200A943FF /* Slider.swift in Sources */,
+				1F1EF98C26ACC7A200A943FF /* TransitionSCNNode.swift in Sources */,
+				1F1EF94A26ACC7A200A943FF /* ImagePicker.swift in Sources */,
+				1F1EF9AA26ACC7A200A943FF /* SketchRandom.swift in Sources */,
+				1F1EF91726ACC7A200A943FF /* Label.swift in Sources */,
+				1F1EF9A726ACC7A200A943FF /* SketchStructure.swift in Sources */,
+				1F1EF94D26ACC7A200A943FF /* SketchImage.swift in Sources */,
+				1F1EF95926ACC7A200A943FF /* SketchColor.swift in Sources */,
+				1F1EF96526ACC7A200A943FF /* SketchCanvas.swift in Sources */,
+				1F1EF97126ACC7A200A943FF /* AudioIn.swift in Sources */,
+				1F1EF92626ACC7A200A943FF /* TextField.swift in Sources */,
+				1F1EF92326ACC7A200A943FF /* Switch.swift in Sources */,
+				1F1EF92F26ACC7A200A943FF /* UIApplicationExtensions.swift in Sources */,
+				1F1EF96226ACC7A200A943FF /* SketchSettingsStack.swift in Sources */,
+				1F1EF99826ACC7A200A943FF /* SketchVisibility.swift in Sources */,
+				1F1EF97D26ACC7A200A943FF /* Sketch3DTransform.swift in Sources */,
+				1F1EF93526ACC7A200A943FF /* Button.swift in Sources */,
+				1F1EF95C26ACC7A200A943FF /* SketchVector.swift in Sources */,
+				1F1EF96B26ACC7A200A943FF /* SketchAttributes.swift in Sources */,
+				1F1EF98026ACC7A200A943FF /* Sketch3DEnviroment.swift in Sources */,
+				1F1EF99226ACC7A200A943FF /* Sketch3DLight.swift in Sources */,
 				OBJ_129 /* Package.swift in Sources */,
+				1F1EF9AD26ACC7A200A943FF /* SketchData.swift in Sources */,
+				1F1EF97426ACC7A200A943FF /* ModelNode.swift in Sources */,
+				1F1EF92C26ACC7A200A943FF /* Stepper.swift in Sources */,
+				1F1EF98926ACC7A200A943FF /* Sketch3DModel.swift in Sources */,
+				1F1EF94426ACC7A200A943FF /* GifSwift.swift in Sources */,
+				1F1EF93B26ACC7A200A943FF /* SketchAugmentedReality.swift in Sources */,
+				1F1EF92026ACC7A200A943FF /* UIKitViewElement.swift in Sources */,
+				1F1EF96826ACC7A200A943FF /* SketchEnvironment.swift in Sources */,
+				1F1EF98326ACC7A200A943FF /* Sketch3DCamera.swift in Sources */,
+				1F1EF97726ACC7A200A943FF /* Sketch3D.swift in Sources */,
+				1F1EF9A426ACC7A200A943FF /* SketchCalculation.swift in Sources */,
+				1F1EF93226ACC7A200A943FF /* UIKitControlElement.swift in Sources */,
+				1F1EF99B26ACC7A200A943FF /* NumericProtocolExtension.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -382,9 +571,60 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 0;
 			files = (
+				1F1EF95D26ACC7A200A943FF /* SketchVector.swift in Sources */,
+				1F1EF98426ACC7A200A943FF /* Sketch3DCamera.swift in Sources */,
+				1F1EF91E26ACC7A200A943FF /* Capture.swift in Sources */,
+				1F1EF93926ACC7A200A943FF /* SketchVertex.swift in Sources */,
+				1F1EF93326ACC7A200A943FF /* UIKitControlElement.swift in Sources */,
+				1F1EF96926ACC7A200A943FF /* SketchEnvironment.swift in Sources */,
+				1F1EF94B26ACC7A200A943FF /* ImagePicker.swift in Sources */,
+				1F1EF92426ACC7A200A943FF /* Switch.swift in Sources */,
+				1F1EF9A526ACC7A200A943FF /* SketchCalculation.swift in Sources */,
+				1F1EF98A26ACC7A200A943FF /* Sketch3DModel.swift in Sources */,
+				1F1EF9AB26ACC7A200A943FF /* SketchRandom.swift in Sources */,
+				1F1EF97E26ACC7A200A943FF /* Sketch3DTransform.swift in Sources */,
 				OBJ_140 /* SwiftProcessingTests.swift in Sources */,
+				1F1EF99C26ACC7A200A943FF /* NumericProtocolExtension.swift in Sources */,
+				1F1EF97B26ACC7A200A943FF /* Sketch3DPrimitives.swift in Sources */,
+				1F1EF96326ACC7A200A943FF /* SketchSettingsStack.swift in Sources */,
 				OBJ_141 /* VectorTests.swift in Sources */,
+				1F1EF95426ACC7A200A943FF /* Sketch2DPrimitives.swift in Sources */,
+				1F1EF96026ACC7A200A943FF /* SketchTouch.swift in Sources */,
+				1F1EF93F26ACC7A200A943FF /* SketchTransform.swift in Sources */,
+				1F1EF94526ACC7A200A943FF /* GifSwift.swift in Sources */,
+				1F1EF99626ACC7A200A943FF /* SketchNotifications.swift in Sources */,
+				1F1EF94E26ACC7A200A943FF /* SketchImage.swift in Sources */,
+				1F1EF92A26ACC7A200A943FF /* Slider.swift in Sources */,
+				1F1EF94826ACC7A200A943FF /* Image.swift in Sources */,
+				1F1EF9AE26ACC7A200A943FF /* SketchData.swift in Sources */,
+				1F1EF99026ACC7A200A943FF /* Camera3D.swift in Sources */,
+				1F1EF94226ACC7A200A943FF /* SketchPixels.swift in Sources */,
+				1F1EF91826ACC7A200A943FF /* Label.swift in Sources */,
+				1F1EF97526ACC7A200A943FF /* ModelNode.swift in Sources */,
+				1F1EF99926ACC7A200A943FF /* SketchVisibility.swift in Sources */,
+				1F1EF95A26ACC7A200A943FF /* SketchColor.swift in Sources */,
+				1F1EF98726ACC7A200A943FF /* Sketch3DTexture.swift in Sources */,
+				1F1EF93626ACC7A200A943FF /* Button.swift in Sources */,
+				1F1EF93026ACC7A200A943FF /* UIApplicationExtensions.swift in Sources */,
+				1F1EF99F26ACC7A200A943FF /* SketchTypography.swift in Sources */,
+				1F1EF95726ACC7A200A943FF /* Sketch.swift in Sources */,
+				1F1EF9A226ACC7A200A943FF /* SketchScroll.swift in Sources */,
+				1F1EF98D26ACC7A200A943FF /* TransitionSCNNode.swift in Sources */,
+				1F1EF95126ACC7A200A943FF /* SketchSettings.swift in Sources */,
+				1F1EF96626ACC7A200A943FF /* SketchCanvas.swift in Sources */,
+				1F1EF9A826ACC7A200A943FF /* SketchStructure.swift in Sources */,
+				1F1EF97826ACC7A200A943FF /* Sketch3D.swift in Sources */,
+				1F1EF92126ACC7A200A943FF /* UIKitViewElement.swift in Sources */,
+				1F1EF98126ACC7A200A943FF /* Sketch3DEnviroment.swift in Sources */,
+				1F1EF96C26ACC7A200A943FF /* SketchAttributes.swift in Sources */,
+				1F1EF92726ACC7A200A943FF /* TextField.swift in Sources */,
+				1F1EF92D26ACC7A200A943FF /* Stepper.swift in Sources */,
+				1F1EF93C26ACC7A200A943FF /* SketchAugmentedReality.swift in Sources */,
+				1F1EF91B26ACC7A200A943FF /* Alert.swift in Sources */,
+				1F1EF97226ACC7A200A943FF /* AudioIn.swift in Sources */,
+				1F1EF99326ACC7A200A943FF /* Sketch3DLight.swift in Sources */,
 				OBJ_142 /* XCTestManifests.swift in Sources */,
+				1F1EF96F26ACC7A200A943FF /* SketchOperatorOverloads.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -392,55 +632,57 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 0;
 			files = (
-				OBJ_76 /* GifSwift.swift in Sources */,
-				OBJ_77 /* Image.swift in Sources */,
-				OBJ_78 /* ImagePicker.swift in Sources */,
-				OBJ_79 /* SketchImage.swift in Sources */,
-				OBJ_80 /* Sketch.swift in Sources */,
-				OBJ_82 /* Camera3D.swift in Sources */,
-				OBJ_83 /* ModelNode.swift in Sources */,
-				OBJ_84 /* Sketch3D.swift in Sources */,
-				OBJ_85 /* Sketch3DCamera.swift in Sources */,
-				OBJ_86 /* Sketch3DEnviroment.swift in Sources */,
-				OBJ_87 /* Sketch3DLight.swift in Sources */,
-				OBJ_88 /* Sketch3DModel.swift in Sources */,
-				OBJ_89 /* Sketch3DPrimitives.swift in Sources */,
-				1F5F75A3268184E500AAE0A9 /* Sketch2DPrimitives.swift in Sources */,
-				OBJ_90 /* Sketch3DTexture.swift in Sources */,
-				OBJ_91 /* Sketch3DTransform.swift in Sources */,
-				OBJ_92 /* TransitionSCNNode.swift in Sources */,
-				OBJ_93 /* SketchAttributes.swift in Sources */,
-				OBJ_94 /* SketchAugmentedReality.swift in Sources */,
-				OBJ_95 /* SketchCalculation.swift in Sources */,
-				OBJ_96 /* SketchCanvas.swift in Sources */,
-				OBJ_97 /* SketchColor.swift in Sources */,
-				OBJ_98 /* SketchData.swift in Sources */,
-				OBJ_99 /* SketchEnvironment.swift in Sources */,
-				OBJ_100 /* SketchNotifications.swift in Sources */,
-				OBJ_101 /* SketchPixels.swift in Sources */,
-				OBJ_102 /* SketchRandom.swift in Sources */,
-				OBJ_103 /* SketchScroll.swift in Sources */,
-				OBJ_104 /* SketchSettings.swift in Sources */,
-				OBJ_105 /* SketchSettingsStack.swift in Sources */,
-				OBJ_106 /* SketchStructure.swift in Sources */,
-				OBJ_107 /* SketchTouch.swift in Sources */,
-				OBJ_108 /* SketchTransform.swift in Sources */,
-				OBJ_109 /* SketchTypography.swift in Sources */,
-				OBJ_110 /* SketchVector.swift in Sources */,
-				1F665BF0269637110092D9A1 /* AudioIn.swift in Sources */,
-				OBJ_111 /* SketchVertex.swift in Sources */,
-				OBJ_112 /* SketchVisibility.swift in Sources */,
-				OBJ_113 /* Alert.swift in Sources */,
-				OBJ_114 /* Button.swift in Sources */,
-				OBJ_115 /* Capture.swift in Sources */,
-				1FF44D892682F50400CD8D23 /* SketchOperatorOverloads.swift in Sources */,
-				OBJ_116 /* Slider.swift in Sources */,
-				OBJ_117 /* Stepper.swift in Sources */,
-				OBJ_118 /* Switch.swift in Sources */,
-				OBJ_119 /* TextField.swift in Sources */,
-				OBJ_120 /* UIApplicationExtensions.swift in Sources */,
-				OBJ_121 /* UIKitControlElement.swift in Sources */,
-				OBJ_122 /* UIKitViewElement.swift in Sources */,
+				1F1EF9A026ACC7A200A943FF /* SketchScroll.swift in Sources */,
+				1F1EF92E26ACC7A200A943FF /* UIApplicationExtensions.swift in Sources */,
+				1F1EF98E26ACC7A200A943FF /* Camera3D.swift in Sources */,
+				1F1EF97326ACC7A200A943FF /* ModelNode.swift in Sources */,
+				1F1EF93726ACC7A200A943FF /* SketchVertex.swift in Sources */,
+				1F1EF91F26ACC7A200A943FF /* UIKitViewElement.swift in Sources */,
+				1F1EF97C26ACC7A200A943FF /* Sketch3DTransform.swift in Sources */,
+				1F1EF97026ACC7A200A943FF /* AudioIn.swift in Sources */,
+				1F1EF94926ACC7A200A943FF /* ImagePicker.swift in Sources */,
+				1F1EF98226ACC7A200A943FF /* Sketch3DCamera.swift in Sources */,
+				1F1EF98526ACC7A200A943FF /* Sketch3DTexture.swift in Sources */,
+				1F1EF96A26ACC7A200A943FF /* SketchAttributes.swift in Sources */,
+				1F1EF99726ACC7A200A943FF /* SketchVisibility.swift in Sources */,
+				1F1EF9AC26ACC7A200A943FF /* SketchData.swift in Sources */,
+				1F1EF95E26ACC7A200A943FF /* SketchTouch.swift in Sources */,
+				1F1EF95226ACC7A200A943FF /* Sketch2DPrimitives.swift in Sources */,
+				1F1EF91C26ACC7A200A943FF /* Capture.swift in Sources */,
+				1F1EF93D26ACC7A200A943FF /* SketchTransform.swift in Sources */,
+				1F1EF94F26ACC7A200A943FF /* SketchSettings.swift in Sources */,
+				1F1EF91926ACC7A200A943FF /* Alert.swift in Sources */,
+				1F1EF96D26ACC7A200A943FF /* SketchOperatorOverloads.swift in Sources */,
+				1F1EF95526ACC7A200A943FF /* Sketch.swift in Sources */,
+				1F1EF93A26ACC7A200A943FF /* SketchAugmentedReality.swift in Sources */,
+				1F1EF97926ACC7A200A943FF /* Sketch3DPrimitives.swift in Sources */,
+				1F1EF99126ACC7A200A943FF /* Sketch3DLight.swift in Sources */,
+				1F1EF92B26ACC7A200A943FF /* Stepper.swift in Sources */,
+				1F1EF94C26ACC7A200A943FF /* SketchImage.swift in Sources */,
+				1F1EF93126ACC7A200A943FF /* UIKitControlElement.swift in Sources */,
+				1F1EF98B26ACC7A200A943FF /* TransitionSCNNode.swift in Sources */,
+				1F1EF92526ACC7A200A943FF /* TextField.swift in Sources */,
+				1F1EF91626ACC7A200A943FF /* Label.swift in Sources */,
+				1F1EF96726ACC7A200A943FF /* SketchEnvironment.swift in Sources */,
+				1F1EF96126ACC7A200A943FF /* SketchSettingsStack.swift in Sources */,
+				1F1EF94626ACC7A200A943FF /* Image.swift in Sources */,
+				1F1EF92226ACC7A200A943FF /* Switch.swift in Sources */,
+				1F1EF97F26ACC7A200A943FF /* Sketch3DEnviroment.swift in Sources */,
+				1F1EF9A326ACC7A200A943FF /* SketchCalculation.swift in Sources */,
+				1F1EF95B26ACC7A200A943FF /* SketchVector.swift in Sources */,
+				1F1EF95826ACC7A200A943FF /* SketchColor.swift in Sources */,
+				1F1EF94326ACC7A200A943FF /* GifSwift.swift in Sources */,
+				1F1EF96426ACC7A200A943FF /* SketchCanvas.swift in Sources */,
+				1F1EF99A26ACC7A200A943FF /* NumericProtocolExtension.swift in Sources */,
+				1F1EF92826ACC7A200A943FF /* Slider.swift in Sources */,
+				1F1EF9A926ACC7A200A943FF /* SketchRandom.swift in Sources */,
+				1F1EF98826ACC7A200A943FF /* Sketch3DModel.swift in Sources */,
+				1F1EF93426ACC7A200A943FF /* Button.swift in Sources */,
+				1F1EF99D26ACC7A200A943FF /* SketchTypography.swift in Sources */,
+				1F1EF94026ACC7A200A943FF /* SketchPixels.swift in Sources */,
+				1F1EF9A626ACC7A200A943FF /* SketchStructure.swift in Sources */,
+				1F1EF97626ACC7A200A943FF /* Sketch3D.swift in Sources */,
+				1F1EF99426ACC7A200A943FF /* SketchNotifications.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -493,6 +735,7 @@
 		OBJ_137 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CLANG_ENABLE_MODULES = YES;
 				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -518,6 +761,7 @@
 		OBJ_138 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CLANG_ENABLE_MODULES = YES;
 				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
 				FRAMEWORK_SEARCH_PATHS = (

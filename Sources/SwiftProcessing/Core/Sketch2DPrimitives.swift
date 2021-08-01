@@ -17,81 +17,6 @@ import UIKit
 import CoreGraphics
 
 // =======================================================================
-// MARK: - NUMERIC MODIFICATION
-// =======================================================================
-
-// Source: https://stackoverflow.com/questions/39486362/how-to-cast-generic-number-type-t-to-cgfloat
-
-public protocol Numeric {
-    //
-    init(_ v:Float)
-    init(_ v:Double)
-    init(_ v:Int)
-    init(_ v:UInt)
-    init(_ v:Int8)
-    init(_ v:UInt8)
-    init(_ v:Int16)
-    init(_ v:UInt16)
-    init(_ v:Int32)
-    init(_ v:UInt32)
-    init(_ v:Int64)
-    init(_ v:UInt64)
-    init(_ v: CGFloat)
-}
-
-extension Float   : Numeric {func _asOther<T:Numeric>() -> T { return T(self) }}
-extension Double  : Numeric {func _asOther<T:Numeric>() -> T { return T(self) }}
-extension CGFloat : Numeric {func _asOther<T:Numeric>() -> T { return T(self) }}
-extension Int     : Numeric {func _asOther<T:Numeric>() -> T { return T(self) }}
-extension Int8    : Numeric {func _asOther<T:Numeric>() -> T { return T(self) }}
-extension Int16   : Numeric {func _asOther<T:Numeric>() -> T { return T(self) }}
-extension Int32   : Numeric {func _asOther<T:Numeric>() -> T { return T(self) }}
-extension Int64   : Numeric {func _asOther<T:Numeric>() -> T { return T(self) }}
-extension UInt    : Numeric {func _asOther<T:Numeric>() -> T { return T(self) }}
-extension UInt8   : Numeric {func _asOther<T:Numeric>() -> T { return T(self) }}
-extension UInt16  : Numeric {func _asOther<T:Numeric>() -> T { return T(self) }}
-extension UInt32  : Numeric {func _asOther<T:Numeric>() -> T { return T(self) }}
-extension UInt64  : Numeric {func _asOther<T:Numeric>() -> T { return T(self) }}
-
-
-extension Numeric {
-
-    func convert<T: Numeric>() -> T {
-        switch self {
-        case let x as CGFloat:
-            return T(x) //T.init(x)
-        case let x as Float:
-            return T(x)
-        case let x as Double:
-            return T(x)
-        case let x as Int:
-            return T(x)
-        case let x as UInt:
-            return T(x)
-        case let x as Int8:
-            return T(x)
-        case let x as UInt8:
-            return T(x)
-        case let x as Int16:
-            return T(x)
-        case let x as UInt16:
-            return T(x)
-        case let x as Int32:
-            return T(x)
-        case let x as UInt32:
-            return T(x)
-        case let x as Int64:
-            return T(x)
-        case let x as UInt64:
-            return T(x)
-        default:
-            assert(false, "Numeric convert cast failed!")
-            return T(0)
-        }
-    }
-}
-
-// =======================================================================
 // MARK: - GENERIC SHAPES PROTOCOL
 // =======================================================================
 
@@ -102,27 +27,27 @@ public protocol ShapesGeneric {
     /// - Parameters:
     ///   - x: x-coordinate of the arc's ellipse
     ///   - y:  y-coordinate of the arc's ellipse
-    ///   - w: width of the arc's ellipse by default
-    ///   - h: height of the arc's ellipse by default
+    ///   - width: width of the arc's ellipse by default
+    ///   - height: height of the arc's ellipse by default
     ///   - start: angle to start the arc, specified in radians
     ///   - stop: angle to stop the arc, specified in radians
     ///   - mode:  optional parameter to determine the way of drawing the arc. either CHORD, PIE or OPEN
-    func arc<T: Numeric>(_ x: T, _ y: T, _ w: T, _ h: T, _ start: T, _ stop: T, _ mode: String)
+    func arc<X: Numeric, Y: Numeric, W: Numeric, H: Numeric, S1: Numeric, S2: Numeric>(_ x: X, _ y: Y, _ width: W, _ height: H, _ start: S1, _ stop: S2, _ mode: String)
     
     /// Draw an ellipse to the screen.
     /// - Parameters:
     ///   - x: x-coordinate of the center of ellipse.
     ///   - y: y-coordinate of the center of ellipse.
-    ///   - w: width of the ellipse.
-    ///   - h: height of the ellipse. (optional)
-    func ellipse<T: Numeric>(_ x: T, _ y: T, _ w: T, _ h: T)
+    ///   - width: width of the ellipse.
+    ///   - height: height of the ellipse. (optional)
+    func ellipse<X: Numeric, Y: Numeric, W: Numeric, H: Numeric>(_ x: X, _ y: Y, _ width: W, _ height: H)
 
     /// Draw a circle to the screen
     /// - Parameters:
     ///   - x: x-coordinate of the centre of the circle.
     ///   - y: y-coordinate of the centre of the circle.
-    ///   - d: diameter of the circle.
-    func circle<T: Numeric>(_ x: T, _ y: T, _ d: T)
+    ///   - diameter: diameter of the circle.
+    func circle<X: Numeric, Y: Numeric, D: Numeric>(_ x: X, _ y: Y, _ diameter: D)
     
     /// Draw a line to the screen.
     /// - Parameters:
@@ -131,28 +56,28 @@ public protocol ShapesGeneric {
     ///   - x2: the x-coordinate of the second point
     ///   - y2: the y-coordinate of the second point
     
-    func line<T: Numeric>(_ x1: T, _ y1: T, _ x2: T, _ y2: T)
+    func line<X1: Numeric, Y1: Numeric, X2: Numeric, Y2: Numeric>(_ x1: X1, _ y1: Y1, _ x2: X2, _ y2: Y2)
     
     /// Draws a single point on the screen using the current stroke weight.
     /// - Parameters:
     ///   - x: the x-coordinate
     ///   - y: the y-coordinate
-    func point<T: Numeric>(_ x: T, _ y: T)
+    func point<X: Numeric, Y: Numeric>(_ x: X, _ y: Y)
     
     /// Draws a rectangle on the screen
     /// - Parameters:
     ///   - x: x-coordinate of the rectangle.
     ///   - y: y-coordinate of the rectangle.
-    ///   - w: width of the rectangle.
-    ///   - h: height of the rectangle. (Optional)
-    func rect<T: Numeric>(_ x: T, _ y: T, _ w: T, _ h: T)
+    ///   - width: width of the rectangle.
+    ///   - height: height of the rectangle. (Optional)
+    func rect<X: Numeric, Y: Numeric, W: Numeric, H: Numeric>(_ x: X, _ y: Y, _ width: W, _ height: H)
 
     /// Draws a square to the screen.
     /// - Parameters:
     ///   - x: x-coordinate of the square.
     ///   - y: y-coordinate of the square.
-    ///   - s: size of the square.
-    func square<T: Numeric>(_ x: T, _ y: T, _ s: T)
+    ///   - size: size of the square.
+    func square<X: Numeric, Y: Numeric, S: Numeric>(_ x: X, _ y: Y, _ size: S)
     
     /// Draws a trangle to the screen.
     /// - Parameters:
@@ -162,7 +87,7 @@ public protocol ShapesGeneric {
     ///   - y2: y-coordinate of the second point
     ///   - x3: x-coordinate of the third point
     ///   - y3: y-coordinate of the third point
-    func triangle<T: Numeric>(_ x1: T, _ y1: T, _ x2: T, _ y2: T, _ x3: T, _ y3: T)
+    func triangle<X1: Numeric, Y1: Numeric, X2: Numeric, Y2: Numeric, X3: Numeric, Y3: Numeric>(_ x1: X1, _ y1: Y1, _ x2: X2, _ y2: Y2, _ x3: X3, _ y3: Y3)
     
     /// Draws a quad to the screen.
     /// - Parameters:
@@ -173,7 +98,7 @@ public protocol ShapesGeneric {
     ///   - x3: x-coordinate of the third point
     ///   - y3: y-coordinate of the third point
     ///   - x4: x-coordinate of the fourth point
-    func quad<T: Numeric>(_ x1: T, _ y1: T, _ x2: T, _ y2: T, _ x3: T, _ y3: T, _ x4: T, _ y4: T)
+    func quad<X1: Numeric, Y1: Numeric, X2: Numeric, Y2: Numeric, X3: Numeric, Y3: Numeric, X4: Numeric, Y4: Numeric>(_ x1: X1, _ y1: Y1, _ x2: X2, _ y2: Y2, _ x3: X3, _ y3: Y3, _ x4: X4, _ y4: Y4)
 }
 
 // =======================================================================
@@ -182,12 +107,12 @@ public protocol ShapesGeneric {
 
 extension Sketch: ShapesGeneric {
     
-    public func arc<T: Numeric>(_ x: T, _ y: T, _ w: T, _ h: T, _ start: T, _ stop: T, _ mode: String = "PIE") {
+    public func arc<X: Numeric, Y: Numeric, W: Numeric, H: Numeric, S1: Numeric, S2: Numeric>(_ x: X, _ y: Y, _ width: W, _ height: H, _ start: S1, _ stop: S2, _ mode: String = "PIE") {
         var cg_x, cg_y, cg_w, cg_h, cg_start, cg_stop: CGFloat
         cg_x = x.convert()
         cg_y = y.convert()
-        cg_w = w.convert()
-        cg_h = h.convert()
+        cg_w = width.convert()
+        cg_h = height.convert()
         cg_start = start.convert()
         cg_stop = stop.convert()
         
@@ -212,12 +137,12 @@ extension Sketch: ShapesGeneric {
         context?.drawPath(using: .eoFillStroke)
     }
     
-    public func ellipse<T: Numeric>(_ x: T, _ y: T, _ w: T, _ h: T = -1 as! T ) {
+    public func ellipse<X: Numeric, Y: Numeric, W: Numeric, H: Numeric>(_ x: X, _ y: Y, _ width: W, _ height: H = -1 as! H ) {
         var cg_x, cg_y, cg_w, cg_h: CGFloat
         cg_x = x.convert()
         cg_y = y.convert()
-        cg_w = w.convert()
-        cg_h = h.convert()
+        cg_w = width.convert()
+        cg_h = height.convert()
         
         var height = cg_h
         if cg_h == -1 {
@@ -239,15 +164,15 @@ extension Sketch: ShapesGeneric {
         pop()
     }
     
-    public func circle<T: Numeric>(_ x: T, _ y: T, _ d: T) {
-        ellipse(x, y, d, d)
+    public func circle<X: Numeric, Y: Numeric, D: Numeric>(_ x: X, _ y: Y, _ diameter: D) {
+        ellipse(x, y, diameter, diameter)
     }
     
     // Private methods remain CGFloat.
-    private func ellipseModeHelper(_ x: CGFloat, _ y: CGFloat, _ w: CGFloat, _ h: CGFloat) {
+    private func ellipseModeHelper(_ x: CGFloat, _ y: CGFloat, _ width: CGFloat, _ height: CGFloat) {
         switch settings.ellipseMode {
         case CENTER:
-            translate(-w * 0.5, -h * 0.5)
+            translate(-width * 0.5, -height * 0.5)
         case RADIUS:
             scale(0.5, 0.5)
         case CORNER:
@@ -259,7 +184,7 @@ extension Sketch: ShapesGeneric {
         }
     }
     
-    public func line<T: Numeric>(_ x1: T, _ y1: T, _ x2: T, _ y2: T) {
+    public func line<X1: Numeric, Y1: Numeric, X2: Numeric, Y2: Numeric>(_ x1: X1, _ y1: Y1, _ x2: X2, _ y2: Y2) {
         var cg_x1, cg_y1, cg_x2, cg_y2: CGFloat
         cg_x1 = x1.convert()
         cg_y1 = y1.convert()
@@ -271,7 +196,7 @@ extension Sketch: ShapesGeneric {
         context?.strokePath()
     }
     
-    public func point<T: Numeric>(_ x: T, _ y: T) {
+    public func point<X: Numeric, Y: Numeric>(_ x: X, _ y: Y) {
         var cg_x, cg_y: CGFloat
         cg_x = x.convert()
         cg_y = y.convert()
@@ -281,23 +206,43 @@ extension Sketch: ShapesGeneric {
         context?.setLineCap(.square)
     }
     
-    public func rect<T: Numeric>(_ x: T, _ y: T, _ w: T, _ h: T) {
+    public func rect<X: Numeric, Y: Numeric, W: Numeric, H: Numeric>(_ x: X, _ y: Y, _ width: W, _ height: H) {
         var cg_x, cg_y, cg_w, cg_h: CGFloat
         cg_x = x.convert()
         cg_y = y.convert()
-        cg_w = w.convert()
-        cg_h = h.convert()
+        cg_w = width.convert()
+        cg_h = height.convert()
         
-        // Double check this. Stroke and fill are in the opposite order that Apple recommends.
-        context?.stroke(CGRect(x: cg_x, y: cg_y, width: cg_w, height: cg_h))
+        // Apple recommends doing fill before stroke. This is consistent with how
+        // Processing works as well. Using the painting metaphor we imagine that
+        // we fill the shape, before stroking it's outline and stroke weights behave
+        // and appear how we would expect them to.
+        
         context?.fill(CGRect(x: cg_x, y: cg_y, width: cg_w, height: cg_h))
+        context?.stroke(CGRect(x: cg_x, y: cg_y, width: cg_w, height: cg_h))
+        
     }
     
-    public func square<T: Numeric>(_ x: T, _ y: T, _ s: T) {
-        rect(x, y, s, s)
+    private func rectModeHelper(_ x: CGFloat, _ y: CGFloat, _ width: CGFloat, _ height: CGFloat) {
+        switch settings.rectMode {
+        case CENTER:
+            translate(-width * 0.5, -height * 0.5)
+        case RADIUS:
+            scale(0.5, 0.5)
+        case CORNER:
+            return
+        case CORNERS:
+            return
+        default:
+            print("invalid rectModeValue")
+        }
     }
     
-    public func triangle<T: Numeric>(_ x1: T, _ y1: T, _ x2: T, _ y2: T, _ x3: T, _ y3: T) {
+    public func square<X: Numeric, Y: Numeric, S: Numeric>(_ x: X, _ y: Y, _ start: S) {
+        rect(x, y, start, start)
+    }
+    
+    public func triangle<X1: Numeric, Y1: Numeric, X2: Numeric, Y2: Numeric, X3: Numeric, Y3: Numeric>(_ x1: X1, _ y1: Y1, _ x2: X2, _ y2: Y2, _ x3: X3, _ y3: Y3) {
         var cg_x1, cg_y1, cg_x2, cg_y2, cg_x3, cg_y3: CGFloat
         cg_x1 = x1.convert()
         cg_y1 = y1.convert()
@@ -314,7 +259,7 @@ extension Sketch: ShapesGeneric {
         context?.drawPath(using: .eoFillStroke)
     }
     
-    public func quad<T: Numeric>(_ x1: T, _ y1: T, _ x2: T, _ y2: T, _ x3: T, _ y3: T, _ x4: T, _ y4: T) {
+    public func quad<X1: Numeric, Y1: Numeric, X2: Numeric, Y2: Numeric, X3: Numeric, Y3: Numeric, X4: Numeric, Y4: Numeric>(_ x1: X1, _ y1: Y1, _ x2: X2, _ y2: Y2, _ x3: X3, _ y3: Y3, _ x4: X4, _ y4: Y4) {
         var cg_x1, cg_y1, cg_x2, cg_y2, cg_x3, cg_y3, cg_x4, cg_y4: CGFloat
         cg_x1 = x1.convert()
         cg_y1 = y1.convert()
