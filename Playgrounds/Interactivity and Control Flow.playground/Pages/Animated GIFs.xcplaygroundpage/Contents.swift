@@ -1,7 +1,7 @@
 //: [Previous](@previous)
 /*:
  # Animated GIFs
- ### by Masood Kamandy for GSoC 2021
+ ### by Masood Kamandy
  
  ## Introduction
  
@@ -24,6 +24,8 @@ import SwiftProcessing
 import PlaygroundSupport
 import UIKit
 
+// Note: This sketch is being sped up by the use of parentheses around each statement.
+
 class MySketch: Sketch, SketchDelegate {
     
     var playing = true
@@ -45,16 +47,16 @@ class MySketch: Sketch, SketchDelegate {
     
     func draw() {
         if playing {
-            background(bgHue, 50, 75)
+            (background(bgHue, 50, 75))
         } else {
-            background(bgHue, 50, 50)
+            (background(bgHue, 50, 50))
         }
         
-        image(dance01, width/3, height/3)
-        image(dance02, width/3 * 2, height/3*2)
+        (image(dance01, width/3, height/3),
+        image(dance02, width/3 * 2, height/3*2))
         
         if playing {
-            bgHue = (bgHue + 1) % 360
+            (bgHue = (bgHue + 1) % 360)
         }
     }
     
@@ -75,5 +77,5 @@ class MySketch: Sketch, SketchDelegate {
 PlaygroundPage.current.needsIndefiniteExecution = true
 PlaygroundPage.current.setLiveView(MySketch())
 //:  ### Credit for image used in Tutorial
-//: Source: [Dansa Serpentina, Gaumont (1900)](https://solarsystem.nasa.gov/resources/795/the-rich-color-variations-of-pluto/?category=planets/dwarf-planets_pluto)
+//: Source: [Dansa Serpentina, Gaumont (1900)](https://solarsystem.nasa.gov/resources/795/the-rich-color-variations-of-pluto/?category=planets/dwarf-planets_pluto)\
 //: [Next](@next)

@@ -1,3 +1,8 @@
+/*
+ * SwiftProcessing: Switch
+ *
+ *
+ * */
 
 import Foundation
 import UIKit

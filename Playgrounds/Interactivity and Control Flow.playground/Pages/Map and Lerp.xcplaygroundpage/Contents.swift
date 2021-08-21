@@ -1,7 +1,7 @@
 //: [Previous](@previous)
 /*:
  # Map and Lerp
- ### by Masood Kamandy for GSoC 2021
+ ### by Masood Kamandy
  
  ## Introduction
  
@@ -45,7 +45,7 @@
  * `stop` - your target number
  * `amount` - how fast you'd like to get there. Between 0.0 to 1.0. Lower is slower and smoother.
  
- ## Let's try out some mapping and lerping!
+ ## Let's try out some mapping and lerping! Click and drag around the sketch.
  
  */
 import SwiftProcessing
@@ -67,41 +67,44 @@ class MySketch: Sketch, SketchDelegate {
     var topColor = Color(#colorLiteral(red: 0.4745098054, green: 0.8392156959, blue: 0.9764705896, alpha: 1))
     var bottomColor = Color(#colorLiteral(red: 0.2196078449, green: 0.007843137719, blue: 0.8549019694, alpha: 1))
     
+    var backgroundTop = Color(#colorLiteral(red: 0.8078431487, green: 0.02745098062, blue: 0.3333333433, alpha: 1))
+    var backgroundBottom = Color(#colorLiteral(red: 0.9686274529, green: 0.78039217, blue: 0.3450980484, alpha: 1))
+    
     func setup() {
-        // The default starting value for touchX and touchY is 0.0,
-        // so it will draw in the corner if we don't change it before
-        // draw is called.
+        // The default starting value for touchX and touchY is 0.0, so it will draw in the corner if we don't change it before draw is called.
         
         // Comment these out and see how the sketch changes.
-        touchX = -diameter * 2
-        touchY = -diameter * 2
+        touchX = width/2
+        touchY = height/2
     }
     
     func draw() {
-        background(#colorLiteral(red: 0.2549019754, green: 0.2745098174, blue: 0.3019607961, alpha: 1))
+        (background(
+            map(y, 0, height, backgroundTop.red, backgroundBottom.red), /* red */
+            map(y, 0, height, backgroundTop.green, backgroundBottom.green), /* green */
+            map(y, 0, height, backgroundTop.blue, backgroundBottom.blue)  /* blue */
+        ))
+        
         // Lerp moves us toward our target of touchX and touchY, but slowly.
-        x = lerp(x, touchX, lerpAmount)
-        y = lerp(y, touchY, lerpAmount)
         
-        noStroke()
+        (x = lerp(x, touchX, lerpAmount))
+        (y = lerp(y, touchY, lerpAmount))
         
-        // Because map returns a number, you can use it inside of other functions.
-        // Since it can be hard to read, it's OK to separate things over a few
-        // lines to make it easier to read. Comments can also help make things
-        // more clear.
+        (noStroke(),
+        
+        // Because map returns a number, you can use it inside of other functions. Since it can be hard to read, it's OK to separate things over a few lines to make it easier to read. Comments can also help make things more clear.
         
         fill(
-            map(touchY, 0, height, topColor.red, bottomColor.red), /* red */
-            map(touchY, 0, height, topColor.green, bottomColor.green), /* green */
-            map(touchY, 0, height, topColor.blue, bottomColor.blue)  /* blue */
-        )
+            map(y, 0, height, topColor.red, bottomColor.red), /* red */
+            map(y, 0, height, topColor.green, bottomColor.green), /* green */
+            map(y, 0, height, topColor.blue, bottomColor.blue)  /* blue */
+        ),
         
-        // We feed in our lerped x and y to the circle position.
-        // Notice how smooth the motion is.
+        // We feed in our lerped x and y to the circle position. Notice how smooth the motion is.
         
-        // Try replacing the x and y with just touchX and touchY
-        // to feel the difference.
-        circle(x, y, diameter)
+        // Try replacing the x and y with just touchX and touchY to feel the difference.
+        
+        circle(x, y, diameter))
         
     }
     

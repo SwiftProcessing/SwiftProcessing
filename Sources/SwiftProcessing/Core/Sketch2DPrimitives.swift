@@ -22,7 +22,8 @@ import CoreGraphics
 
 
 /// Draw 2D Primitives to the screen
-public protocol ShapesGeneric {
+public protocol Shapes: Sketch {
+    
     /// Draw an arc to the screen.
     /// - Parameters:
     ///   - x: x-coordinate of the arc's ellipse
@@ -32,7 +33,7 @@ public protocol ShapesGeneric {
     ///   - start: angle to start the arc, specified in radians
     ///   - stop: angle to stop the arc, specified in radians
     ///   - mode:  optional parameter to determine the way of drawing the arc. either CHORD, PIE or OPEN
-    func arc<X: Numeric, Y: Numeric, W: Numeric, H: Numeric, S1: Numeric, S2: Numeric>(_ x: X, _ y: Y, _ width: W, _ height: H, _ start: S1, _ stop: S2, _ mode: String)
+    func arc<X: Numeric, Y: Numeric, W: Numeric, H: Numeric, S1: Numeric, S2: Numeric>(_ x: X, _ y: Y, _ width: W, _ height: H, _ start: S1, _ stop: S2, _ mode: ArcMode)
     
     /// Draw an ellipse to the screen.
     /// - Parameters:
@@ -41,7 +42,7 @@ public protocol ShapesGeneric {
     ///   - width: width of the ellipse.
     ///   - height: height of the ellipse. (optional)
     func ellipse<X: Numeric, Y: Numeric, W: Numeric, H: Numeric>(_ x: X, _ y: Y, _ width: W, _ height: H)
-
+    
     /// Draw a circle to the screen
     /// - Parameters:
     ///   - x: x-coordinate of the centre of the circle.
@@ -71,7 +72,7 @@ public protocol ShapesGeneric {
     ///   - width: width of the rectangle.
     ///   - height: height of the rectangle. (Optional)
     func rect<X: Numeric, Y: Numeric, W: Numeric, H: Numeric>(_ x: X, _ y: Y, _ width: W, _ height: H)
-
+    
     /// Draws a square to the screen.
     /// - Parameters:
     ///   - x: x-coordinate of the square.
@@ -105,9 +106,9 @@ public protocol ShapesGeneric {
 // MARK: - GENERIC SHAPES EXTENSION
 // =======================================================================
 
-extension Sketch: ShapesGeneric {
+extension Sketch: Shapes {
     
-    public func arc<X: Numeric, Y: Numeric, W: Numeric, H: Numeric, S1: Numeric, S2: Numeric>(_ x: X, _ y: Y, _ width: W, _ height: H, _ start: S1, _ stop: S2, _ mode: String = "PIE") {
+    public func arc<X: Numeric, Y: Numeric, W: Numeric, H: Numeric, S1: Numeric, S2: Numeric>(_ x: X, _ y: Y, _ width: W, _ height: H, _ start: S1, _ stop: S2, _ mode: ArcMode = .pie) {
         var cg_x, cg_y, cg_w, cg_h, cg_start, cg_stop: CGFloat
         cg_x = x.convert()
         cg_y = y.convert()
@@ -123,15 +124,14 @@ extension Sketch: ShapesGeneric {
         let path: CGMutablePath = CGMutablePath()
         path.addArc(center: CGPoint(x: cg_x, y: cg_y / t.d), radius: r, startAngle: cg_start, endAngle: cg_stop, clockwise: false, transform: t)
         switch mode{
-            case PIE:
-                path.addLine(to: CGPoint(x: cg_x, y: cg_y))
-                path.closeSubpath()
-            case CHORD:
-                path.closeSubpath()
-            case OPEN:
-                break
-            default:
-                break
+        case ArcMode.pie:
+            path.addLine(to: CGPoint(x: cg_x, y: cg_y))
+            path.closeSubpath()
+        case ArcMode.chord:
+            path.closeSubpath()
+        case ArcMode.open:
+            // NEEDS TESTING
+            break
         }
         context?.addPath(path)
         context?.drawPath(using: .eoFillStroke)
@@ -144,24 +144,23 @@ extension Sketch: ShapesGeneric {
         cg_w = width.convert()
         cg_h = height.convert()
         
-        var height = cg_h
-        if cg_h == -1 {
-            height = cg_w
-        }
-        push()
-        ellipseModeHelper(cg_x, cg_y, cg_w, height)
-
+        // We're going to manipulate the coordinate matrix, so we need to freeze everything.
+        context?.saveGState()
+        ellipseModeHelper(cg_x, cg_y, cg_w, cg_h)
+        
+        // Corners adjustment
         var newW = cg_w
-        var newH = height
-        if settings.ellipseMode == CORNERS {
+        var newH = cg_h
+        if settings.ellipseMode == ShapeMode.corners {
             newW = cg_w - cg_x
             newH = cg_h - cg_y
         }
-
-        context?.strokeEllipse(in: CGRect(x: cg_x, y: cg_y, width: newW, height: newH))
+        
         context?.fillEllipse(in: CGRect(x: cg_x, y: cg_y, width: newW, height: newH))
-
-        pop()
+        context?.strokeEllipse(in: CGRect(x: cg_x, y: cg_y, width: newW, height: newH))
+        
+        // We're going to restore the matrix to the previous state.
+        context?.restoreGState()
     }
     
     public func circle<X: Numeric, Y: Numeric, D: Numeric>(_ x: X, _ y: Y, _ diameter: D) {
@@ -171,16 +170,14 @@ extension Sketch: ShapesGeneric {
     // Private methods remain CGFloat.
     private func ellipseModeHelper(_ x: CGFloat, _ y: CGFloat, _ width: CGFloat, _ height: CGFloat) {
         switch settings.ellipseMode {
-        case CENTER:
+        case .center:
             translate(-width * 0.5, -height * 0.5)
-        case RADIUS:
+        case .radius:
             scale(0.5, 0.5)
-        case CORNER:
+        case .corner:
             return
-        case CORNERS:
+        case .corners:
             return
-        default:
-            print("invalid ellipseModeValue")
         }
     }
     
@@ -202,7 +199,7 @@ extension Sketch: ShapesGeneric {
         cg_y = y.convert()
         
         context?.setLineCap(.round)
-        line(cg_x, cg_y, cg_x + CGFloat(strokeWeight), cg_y)
+        line(cg_x, cg_y, cg_x + CGFloat(settings.strokeWeight), cg_y)
         context?.setLineCap(.square)
     }
     
@@ -213,29 +210,53 @@ extension Sketch: ShapesGeneric {
         cg_w = width.convert()
         cg_h = height.convert()
         
+        // We're going to manipulate the coordinate matrix, so we need to freeze everything.
+        context?.saveGState()
+        
+        rectModeHelper(cg_x, cg_y, cg_w, cg_h)
+        
+        var newW = cg_w
+        var newH = cg_h
+        if settings.rectMode == .corners {
+            newW = cg_w - cg_x
+            newH = cg_h - cg_y
+        }
+        
         // Apple recommends doing fill before stroke. This is consistent with how
         // Processing works as well. Using the painting metaphor we imagine that
         // we fill the shape, before stroking it's outline and stroke weights behave
         // and appear how we would expect them to.
         
-        context?.fill(CGRect(x: cg_x, y: cg_y, width: cg_w, height: cg_h))
-        context?.stroke(CGRect(x: cg_x, y: cg_y, width: cg_w, height: cg_h))
+        context?.fill(CGRect(x: cg_x, y: cg_y, width: newW, height: newH))
+        context?.stroke(CGRect(x: cg_x, y: cg_y, width: newW, height: newH))
         
+        // We're going to restore the matrix to the previous state.
+        context?.restoreGState()
     }
     
     private func rectModeHelper(_ x: CGFloat, _ y: CGFloat, _ width: CGFloat, _ height: CGFloat) {
         switch settings.rectMode {
-        case CENTER:
+        case .center:
             translate(-width * 0.5, -height * 0.5)
-        case RADIUS:
+        case .radius:
             scale(0.5, 0.5)
-        case CORNER:
+        case .corner:
             return
-        case CORNERS:
+        case .corners:
             return
-        default:
-            print("invalid rectModeValue")
         }
+    }
+    
+    // A function for use internally. Setting backgroundColor of the view does not seem to work, so we are forced to draw a rectangle to set the background color. That's fine, except that the rect function reads from the Processing graphics state, which is not what we want. We want consistent behavior no matter what API users are setting the state to.
+    
+    public func internalRect<X: Numeric, Y: Numeric, W: Numeric, H: Numeric>(_ x: X, _ y: Y, _ width: W, _ height: H) {
+        var cg_x, cg_y, cg_w, cg_h: CGFloat
+        cg_x = x.convert()
+        cg_y = y.convert()
+        cg_w = width.convert()
+        cg_h = height.convert()
+        
+        context?.fill(CGRect(x: cg_x, y: cg_y, width: cg_w, height: cg_h))
     }
     
     public func square<X: Numeric, Y: Numeric, S: Numeric>(_ x: X, _ y: Y, _ start: S) {
@@ -279,3 +300,4 @@ extension Sketch: ShapesGeneric {
         context?.drawPath(using: .eoFillStroke)
     }
 }
+

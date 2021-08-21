@@ -1,7 +1,7 @@
 //: [Previous](@previous)
 /*:
  # Color and Stroke
- ### by Masood Kamandy for GSoC 2021
+ ### by Masood Kamandy
  
  ## Color
  
@@ -58,12 +58,12 @@
  `weight` can be any number with a decimal point and is the thickness of the line. 1.0 is 1 pixel thick. 10.0 is 10 pixels thick.
  
  
- ## Import Modules
+ ## Let's use some stroke colors and weights!
  */
 import SwiftProcessing
 import PlaygroundSupport
 import UIKit
-//: ## SwiftProcessing Sketch Code
+
 class MySketch: Sketch, SketchDelegate {
     
     func setup() {

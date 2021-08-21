@@ -96,9 +96,6 @@
 		1F1EF95E26ACC7A200A943FF /* SketchTouch.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F1EF8F926ACC7A200A943FF /* SketchTouch.swift */; };
 		1F1EF95F26ACC7A200A943FF /* SketchTouch.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F1EF8F926ACC7A200A943FF /* SketchTouch.swift */; };
 		1F1EF96026ACC7A200A943FF /* SketchTouch.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F1EF8F926ACC7A200A943FF /* SketchTouch.swift */; };
-		1F1EF96126ACC7A200A943FF /* SketchSettingsStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F1EF8FA26ACC7A200A943FF /* SketchSettingsStack.swift */; };
-		1F1EF96226ACC7A200A943FF /* SketchSettingsStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F1EF8FA26ACC7A200A943FF /* SketchSettingsStack.swift */; };
-		1F1EF96326ACC7A200A943FF /* SketchSettingsStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F1EF8FA26ACC7A200A943FF /* SketchSettingsStack.swift */; };
 		1F1EF96426ACC7A200A943FF /* SketchCanvas.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F1EF8FB26ACC7A200A943FF /* SketchCanvas.swift */; };
 		1F1EF96526ACC7A200A943FF /* SketchCanvas.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F1EF8FB26ACC7A200A943FF /* SketchCanvas.swift */; };
 		1F1EF96626ACC7A200A943FF /* SketchCanvas.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F1EF8FB26ACC7A200A943FF /* SketchCanvas.swift */; };
@@ -174,6 +171,15 @@
 		1F1EF9AC26ACC7A200A943FF /* SketchData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F1EF91526ACC7A200A943FF /* SketchData.swift */; };
 		1F1EF9AD26ACC7A200A943FF /* SketchData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F1EF91526ACC7A200A943FF /* SketchData.swift */; };
 		1F1EF9AE26ACC7A200A943FF /* SketchData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F1EF91526ACC7A200A943FF /* SketchData.swift */; };
+		1F9EB3DB26D1526500FF3AE5 /* SketchStacks.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F9EB3DA26D1526500FF3AE5 /* SketchStacks.swift */; };
+		1F9EB3DC26D1526500FF3AE5 /* SketchStacks.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F9EB3DA26D1526500FF3AE5 /* SketchStacks.swift */; };
+		1F9EB3DD26D1526500FF3AE5 /* SketchStacks.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F9EB3DA26D1526500FF3AE5 /* SketchStacks.swift */; };
+		1F9EB3DF26D152EC00FF3AE5 /* SketchEnums.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F9EB3DE26D152EC00FF3AE5 /* SketchEnums.swift */; };
+		1F9EB3E026D152EC00FF3AE5 /* SketchEnums.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F9EB3DE26D152EC00FF3AE5 /* SketchEnums.swift */; };
+		1F9EB3E126D152EC00FF3AE5 /* SketchEnums.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F9EB3DE26D152EC00FF3AE5 /* SketchEnums.swift */; };
+		1F9EB3E326D152FE00FF3AE5 /* SketchPushPop.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F9EB3E226D152FE00FF3AE5 /* SketchPushPop.swift */; };
+		1F9EB3E426D152FE00FF3AE5 /* SketchPushPop.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F9EB3E226D152FE00FF3AE5 /* SketchPushPop.swift */; };
+		1F9EB3E526D152FE00FF3AE5 /* SketchPushPop.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F9EB3E226D152FE00FF3AE5 /* SketchPushPop.swift */; };
 		OBJ_129 /* Package.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_6 /* Package.swift */; };
 		OBJ_140 /* SwiftProcessingTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_62 /* SwiftProcessingTests.swift */; };
 		OBJ_141 /* VectorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_63 /* VectorTests.swift */; };
@@ -224,7 +230,6 @@
 		1F1EF8F726ACC7A200A943FF /* SketchColor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SketchColor.swift; sourceTree = "<group>"; };
 		1F1EF8F826ACC7A200A943FF /* SketchVector.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SketchVector.swift; sourceTree = "<group>"; };
 		1F1EF8F926ACC7A200A943FF /* SketchTouch.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SketchTouch.swift; sourceTree = "<group>"; };
-		1F1EF8FA26ACC7A200A943FF /* SketchSettingsStack.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SketchSettingsStack.swift; sourceTree = "<group>"; };
 		1F1EF8FB26ACC7A200A943FF /* SketchCanvas.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SketchCanvas.swift; sourceTree = "<group>"; };
 		1F1EF8FC26ACC7A200A943FF /* SketchEnvironment.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SketchEnvironment.swift; sourceTree = "<group>"; };
 		1F1EF8FD26ACC7A200A943FF /* SketchAttributes.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SketchAttributes.swift; sourceTree = "<group>"; };
@@ -250,6 +255,12 @@
 		1F1EF91326ACC7A200A943FF /* SketchStructure.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SketchStructure.swift; sourceTree = "<group>"; };
 		1F1EF91426ACC7A200A943FF /* SketchRandom.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SketchRandom.swift; sourceTree = "<group>"; };
 		1F1EF91526ACC7A200A943FF /* SketchData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SketchData.swift; sourceTree = "<group>"; };
+		1F22588F26D1595F0029B7C6 /* Interactivity and Control Flow.playground */ = {isa = PBXFileReference; lastKnownFileType = file.playground; path = "Interactivity and Control Flow.playground"; sourceTree = "<group>"; };
+		1F91C79026D1840100C7A2E9 /* Modularity.playground */ = {isa = PBXFileReference; lastKnownFileType = file.playground; path = Modularity.playground; sourceTree = "<group>"; };
+		1F9EB3DA26D1526500FF3AE5 /* SketchStacks.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SketchStacks.swift; sourceTree = "<group>"; };
+		1F9EB3DE26D152EC00FF3AE5 /* SketchEnums.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SketchEnums.swift; sourceTree = "<group>"; };
+		1F9EB3E226D152FE00FF3AE5 /* SketchPushPop.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SketchPushPop.swift; sourceTree = "<group>"; };
+		1F9EB3FC26D153F000FF3AE5 /* Basics.playground */ = {isa = PBXFileReference; lastKnownFileType = file.playground; path = Basics.playground; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		OBJ_6 /* Package.swift */ = {isa = PBXFileReference; explicitFileType = sourcecode.swift; path = Package.swift; sourceTree = "<group>"; };
 		OBJ_62 /* SwiftProcessingTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftProcessingTests.swift; sourceTree = "<group>"; };
 		OBJ_63 /* VectorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VectorTests.swift; sourceTree = "<group>"; };
@@ -295,14 +306,16 @@
 				1F1EF8FB26ACC7A200A943FF /* SketchCanvas.swift */,
 				1F1EF8F726ACC7A200A943FF /* SketchColor.swift */,
 				1F1EF91526ACC7A200A943FF /* SketchData.swift */,
+				1F9EB3DE26D152EC00FF3AE5 /* SketchEnums.swift */,
 				1F1EF8FC26ACC7A200A943FF /* SketchEnvironment.swift */,
 				1F1EF90D26ACC7A200A943FF /* SketchNotifications.swift */,
 				1F1EF8FE26ACC7A200A943FF /* SketchOperatorOverloads.swift */,
 				1F1EF8EE26ACC7A200A943FF /* SketchPixels.swift */,
+				1F9EB3E226D152FE00FF3AE5 /* SketchPushPop.swift */,
 				1F1EF91426ACC7A200A943FF /* SketchRandom.swift */,
 				1F1EF91126ACC7A200A943FF /* SketchScroll.swift */,
 				1F1EF8F426ACC7A200A943FF /* SketchSettings.swift */,
-				1F1EF8FA26ACC7A200A943FF /* SketchSettingsStack.swift */,
+				1F9EB3DA26D1526500FF3AE5 /* SketchStacks.swift */,
 				1F1EF91326ACC7A200A943FF /* SketchStructure.swift */,
 				1F1EF8F926ACC7A200A943FF /* SketchTouch.swift */,
 				1F1EF8ED26ACC7A200A943FF /* SketchTransform.swift */,
@@ -370,9 +383,20 @@
 			path = Sketch3D;
 			sourceTree = "<group>";
 		};
+		1F9EB3FB26D153B300FF3AE5 /* Playgrounds */ = {
+			isa = PBXGroup;
+			children = (
+				1F9EB3FC26D153F000FF3AE5 /* Basics.playground */,
+				1F22588F26D1595F0029B7C6 /* Interactivity and Control Flow.playground */,
+				1F91C79026D1840100C7A2E9 /* Modularity.playground */,
+			);
+			path = Playgrounds;
+			sourceTree = "<group>";
+		};
 		OBJ_5 = {
 			isa = PBXGroup;
 			children = (
+				1F9EB3FB26D153B300FF3AE5 /* Playgrounds */,
 				OBJ_6 /* Package.swift */,
 				OBJ_7 /* Sources */,
 				OBJ_60 /* Tests */,
@@ -517,6 +541,7 @@
 				1F1EF94726ACC7A200A943FF /* Image.swift in Sources */,
 				1F1EF93826ACC7A200A943FF /* SketchVertex.swift in Sources */,
 				1F1EF97A26ACC7A200A943FF /* Sketch3DPrimitives.swift in Sources */,
+				1F9EB3E426D152FE00FF3AE5 /* SketchPushPop.swift in Sources */,
 				1F1EF95626ACC7A200A943FF /* Sketch.swift in Sources */,
 				1F1EF91D26ACC7A200A943FF /* Capture.swift in Sources */,
 				1F1EF91A26ACC7A200A943FF /* Alert.swift in Sources */,
@@ -542,7 +567,6 @@
 				1F1EF92626ACC7A200A943FF /* TextField.swift in Sources */,
 				1F1EF92326ACC7A200A943FF /* Switch.swift in Sources */,
 				1F1EF92F26ACC7A200A943FF /* UIApplicationExtensions.swift in Sources */,
-				1F1EF96226ACC7A200A943FF /* SketchSettingsStack.swift in Sources */,
 				1F1EF99826ACC7A200A943FF /* SketchVisibility.swift in Sources */,
 				1F1EF97D26ACC7A200A943FF /* Sketch3DTransform.swift in Sources */,
 				1F1EF93526ACC7A200A943FF /* Button.swift in Sources */,
@@ -563,6 +587,8 @@
 				1F1EF97726ACC7A200A943FF /* Sketch3D.swift in Sources */,
 				1F1EF9A426ACC7A200A943FF /* SketchCalculation.swift in Sources */,
 				1F1EF93226ACC7A200A943FF /* UIKitControlElement.swift in Sources */,
+				1F9EB3E026D152EC00FF3AE5 /* SketchEnums.swift in Sources */,
+				1F9EB3DC26D1526500FF3AE5 /* SketchStacks.swift in Sources */,
 				1F1EF99B26ACC7A200A943FF /* NumericProtocolExtension.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -586,7 +612,6 @@
 				OBJ_140 /* SwiftProcessingTests.swift in Sources */,
 				1F1EF99C26ACC7A200A943FF /* NumericProtocolExtension.swift in Sources */,
 				1F1EF97B26ACC7A200A943FF /* Sketch3DPrimitives.swift in Sources */,
-				1F1EF96326ACC7A200A943FF /* SketchSettingsStack.swift in Sources */,
 				OBJ_141 /* VectorTests.swift in Sources */,
 				1F1EF95426ACC7A200A943FF /* Sketch2DPrimitives.swift in Sources */,
 				1F1EF96026ACC7A200A943FF /* SketchTouch.swift in Sources */,
@@ -595,6 +620,7 @@
 				1F1EF99626ACC7A200A943FF /* SketchNotifications.swift in Sources */,
 				1F1EF94E26ACC7A200A943FF /* SketchImage.swift in Sources */,
 				1F1EF92A26ACC7A200A943FF /* Slider.swift in Sources */,
+				1F9EB3E526D152FE00FF3AE5 /* SketchPushPop.swift in Sources */,
 				1F1EF94826ACC7A200A943FF /* Image.swift in Sources */,
 				1F1EF9AE26ACC7A200A943FF /* SketchData.swift in Sources */,
 				1F1EF99026ACC7A200A943FF /* Camera3D.swift in Sources */,
@@ -618,10 +644,12 @@
 				1F1EF98126ACC7A200A943FF /* Sketch3DEnviroment.swift in Sources */,
 				1F1EF96C26ACC7A200A943FF /* SketchAttributes.swift in Sources */,
 				1F1EF92726ACC7A200A943FF /* TextField.swift in Sources */,
+				1F9EB3DD26D1526500FF3AE5 /* SketchStacks.swift in Sources */,
 				1F1EF92D26ACC7A200A943FF /* Stepper.swift in Sources */,
 				1F1EF93C26ACC7A200A943FF /* SketchAugmentedReality.swift in Sources */,
 				1F1EF91B26ACC7A200A943FF /* Alert.swift in Sources */,
 				1F1EF97226ACC7A200A943FF /* AudioIn.swift in Sources */,
+				1F9EB3E126D152EC00FF3AE5 /* SketchEnums.swift in Sources */,
 				1F1EF99326ACC7A200A943FF /* Sketch3DLight.swift in Sources */,
 				OBJ_142 /* XCTestManifests.swift in Sources */,
 				1F1EF96F26ACC7A200A943FF /* SketchOperatorOverloads.swift in Sources */,
@@ -634,6 +662,7 @@
 			files = (
 				1F1EF9A026ACC7A200A943FF /* SketchScroll.swift in Sources */,
 				1F1EF92E26ACC7A200A943FF /* UIApplicationExtensions.swift in Sources */,
+				1F9EB3DF26D152EC00FF3AE5 /* SketchEnums.swift in Sources */,
 				1F1EF98E26ACC7A200A943FF /* Camera3D.swift in Sources */,
 				1F1EF97326ACC7A200A943FF /* ModelNode.swift in Sources */,
 				1F1EF93726ACC7A200A943FF /* SketchVertex.swift in Sources */,
@@ -656,15 +685,16 @@
 				1F1EF95526ACC7A200A943FF /* Sketch.swift in Sources */,
 				1F1EF93A26ACC7A200A943FF /* SketchAugmentedReality.swift in Sources */,
 				1F1EF97926ACC7A200A943FF /* Sketch3DPrimitives.swift in Sources */,
+				1F9EB3DB26D1526500FF3AE5 /* SketchStacks.swift in Sources */,
 				1F1EF99126ACC7A200A943FF /* Sketch3DLight.swift in Sources */,
 				1F1EF92B26ACC7A200A943FF /* Stepper.swift in Sources */,
+				1F9EB3E326D152FE00FF3AE5 /* SketchPushPop.swift in Sources */,
 				1F1EF94C26ACC7A200A943FF /* SketchImage.swift in Sources */,
 				1F1EF93126ACC7A200A943FF /* UIKitControlElement.swift in Sources */,
 				1F1EF98B26ACC7A200A943FF /* TransitionSCNNode.swift in Sources */,
 				1F1EF92526ACC7A200A943FF /* TextField.swift in Sources */,
 				1F1EF91626ACC7A200A943FF /* Label.swift in Sources */,
 				1F1EF96726ACC7A200A943FF /* SketchEnvironment.swift in Sources */,
-				1F1EF96126ACC7A200A943FF /* SketchSettingsStack.swift in Sources */,
 				1F1EF94626ACC7A200A943FF /* Image.swift in Sources */,
 				1F1EF92226ACC7A200A943FF /* Switch.swift in Sources */,
 				1F1EF97F26ACC7A200A943FF /* Sketch3DEnviroment.swift in Sources */,

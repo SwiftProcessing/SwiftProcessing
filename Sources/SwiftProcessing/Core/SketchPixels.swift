@@ -1,11 +1,23 @@
+/*
+ * SwiftProcessing: Pixels
+ *
+ * */
+
 import Foundation
 import UIKit
 
-//currently broken
 @available(iOS 10.0, *)
 public extension Sketch {
 
-    func updatePixels<T: Numeric>(_ x: T, _ y: T, _ w: T, _ h: T) {
+    // FUTURE CONTRIBUTORS: Verify that load and update pixels works.
+    
+    ///  Refreshes the current SwiftProcessing pixel buffer.
+    ///  ````
+    ///  loadPixels()
+    ///  ````
+    /// - parameter at: a CGPoint.
+    
+    func updatePixels<X: Numeric, Y: Numeric, W: Numeric, H: Numeric>(_ x: X, _ y: Y, _ w: W, _ h: H) {
         var cg_x, cg_y, cg_w, cg_h: CGFloat
         cg_x = x.convert()
         cg_y = y.convert()
@@ -20,6 +32,12 @@ public extension Sketch {
         image(curImage, 0, 0, CGFloat(self.width), CGFloat(self.height))
     }
 
+    ///  Loads current screen into SwiftProcessing's pixels buffer.
+    ///  ````
+    ///  loadPixels()
+    ///  ````
+    /// - parameter at: a CGPoint.
+    
     func loadPixels() {
         let image = get()
         image.loadPixels()
@@ -67,7 +85,7 @@ public extension Sketch {
         cg_x = x.convert()
         cg_y = y.convert()
         
-        var point = CGPoint(x: cg_x, y: cg_y)
+        let point = CGPoint(x: cg_x, y: cg_y)
         
         guard bounds.contains(point) else {
             // print("Point is outside the image bounds")
@@ -89,11 +107,25 @@ public extension Sketch {
                      data[0])
     }
     
+    ///  Initializes and returns a new image.
+    ///  ````
+    ///  let image = get()
+    ///  ````
+    
     func get() -> Image {
         get(0, 0, CGFloat(self.width), CGFloat(self.height))
     }
+    
+    ///  Initializes and returns a new image from a rectangular portion of the screen.
+    ///  ````
+    ///  let color = img.color(at: Point())
+    ///  ````
+    /// - parameter x: x-position
+    /// - parameter y: y-position
+    /// - parameter w: width
+    /// - parameter H: height
 
-    func get<T: Numeric>(_ x: T, _ y: T, _ w: T, _ h: T) -> Image {
+    func get<X: Numeric, Y: Numeric, W: Numeric, H: Numeric>(_ x: X, _ y: Y, _ w: W, _ h: H) -> Image {
         var cg_x, cg_y, cg_w, cg_h: CGFloat
         cg_x = x.convert()
         cg_y = y.convert()
@@ -105,9 +137,4 @@ public extension Sketch {
         image = image?.cropping(to: CGRect(x: cg_x * CGFloat(self.scale.x) * screenScale, y: cg_y * CGFloat(self.scale.y) * screenScale, width: cg_w * CGFloat(self.scale.x) * screenScale, height: cg_h * CGFloat(self.scale.y) * screenScale))
         return Image(UIImage(cgImage: image!))
     }
-
-//    func getPixels<T: Numeric>(_ x: T, _ y: T) -> Image {
-//        getPixels(x, y, self.width as! T, self.height as! T)
-//    }
-
 }

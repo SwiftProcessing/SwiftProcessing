@@ -1,7 +1,7 @@
 //: [Previous](@previous)
 /*:
  # Polygons and Curves
- ### by Masood Kamandy for GSoC 2021
+ ### by Masood Kamandy
  
  ## Introduction
  

@@ -1,67 +1,81 @@
-//
-//  ImagePicker.swift
-//
-//
-//  Created by Jonathan Kaufman on 9/6/20.
-//  Adapted from https://theswiftdev.com/picking-images-with-uiimagepickercontroller-in-swift-5/
+/*
+ * SwiftProcessing: Image Picker
+ *
+ * Adapted from https://theswiftdev.com/picking-images-with-uiimagepickercontroller-in-swift-5/
+ *
+ * */
 
 import UIKit
 
-open class ImagePicker: NSObject {
+public extension Sketch {
     
-    private let pickerController: UIImagePickerController
-    private weak var presentationController: UIViewController?
-    
-    private var sketch: Sketch!
-    open var pickedAction: (Image) -> Void = {image in }
-    
-    
-    public init(_ sketch: Sketch, _ presentationController: UIViewController) {
-        self.pickerController = UIImagePickerController()
-        self.sketch = sketch
+    class ImagePicker: NSObject {
         
-        super.init()
+        private let pickerController: UIImagePickerController
+        private weak var presentationController: UIViewController?
         
-        self.presentationController = presentationController
+        private var sketch: Sketch!
+        open var pickedAction: (Image) -> Void = {image in }
         
-        self.pickerController.delegate = self
         
-        self.pickerController.mediaTypes = ["public.image"]
-    }
-    
-    public func show(_ type: String = "camera roll", _ picked: @escaping (Image) -> Void) {
-        var pickType: UIImagePickerController.SourceType = .photoLibrary
-        switch type{
-        case sketch.CAMERA: pickType = .camera
-        case sketch.CAMERA_ROLL: pickType = .savedPhotosAlbum
-        case sketch.PHOTO_LIBRARY: pickType = .photoLibrary
-        default: pickType = .photoLibrary
+        public init(_ sketch: Sketch, _ presentationController: UIViewController) {
+            self.pickerController = UIImagePickerController()
+            self.sketch = sketch
+            
+            super.init()
+            
+            self.presentationController = presentationController
+            
+            self.pickerController.delegate = self
+            
+            self.pickerController.mediaTypes = ["public.image"]
         }
         
-        guard UIImagePickerController.isSourceTypeAvailable(pickType) else {
-            return
+        // TO FUTURE CONTRIBUTORS: Add example use case here for docs.
+        
+        /// Shows an image picker.
+        /// ```
+        /// //
+        /// ```
+        /// - Parameters:
+        ///      - type: Image Pcker type. Options are `.camera`, `.photo_library` and `.camera_roll`
+        ///      - picked: A completion handler telling SwiftProcessing what to do with the image once it's selected.
+        
+        public func show(_ type: ImagePickerType = .camera_roll, _ picked: @escaping (Image) -> Void) {
+            var pickType: UIImagePickerController.SourceType = .photoLibrary
+            switch type{
+            case ImagePickerType.camera: pickType = .camera
+            case ImagePickerType.camera_roll: pickType = .savedPhotosAlbum
+            case ImagePickerType.photo_library: pickType = .photoLibrary
+            }
+            
+            guard UIImagePickerController.isSourceTypeAvailable(pickType) else {
+                return
+            }
+            
+            pickedAction = picked
+            
+            self.pickerController.sourceType = pickType
+            self.presentationController?.present(self.pickerController, animated: true)
         }
         
-        pickedAction = picked
-        
-        self.pickerController.sourceType = pickType
-        self.presentationController?.present(self.pickerController, animated: true)
-    }
-    
-    private func pickerController(_ controller: UIImagePickerController, didSelect image: UIImage?) {
-        controller.dismiss(animated: true, completion: nil)
-        if let i = image {
-            UIGraphicsPushContext(sketch.context!)
-            sketch.push()
-            sketch.scale(UIScreen.main.scale, UIScreen.main.scale)
-            pickedAction(Image(i))
-            sketch.pop()
-            UIGraphicsPopContext()
+        private func pickerController(_ controller: UIImagePickerController, didSelect image: UIImage?) {
+            controller.dismiss(animated: true, completion: nil)
+            if let i = image {
+                UIGraphicsPushContext(sketch.context!)
+                sketch.push()
+                sketch.scale(UIScreen.main.scale, UIScreen.main.scale)
+                pickedAction(Image(i))
+                sketch.pop()
+                UIGraphicsPopContext()
+            }
         }
     }
 }
 
-extension ImagePicker: UIImagePickerControllerDelegate {
+extension Sketch.ImagePicker: UIImagePickerControllerDelegate {
+
+    // Image picker overrides.
     
     public func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
         self.pickerController(picker, didSelect: nil)
@@ -76,7 +90,7 @@ extension ImagePicker: UIImagePickerControllerDelegate {
     }
 }
 
-extension ImagePicker: UINavigationControllerDelegate {
+extension Sketch.ImagePicker: UINavigationControllerDelegate {
 }
 
 extension UIView {
@@ -92,6 +106,13 @@ extension UIView {
     }
 }
 extension Sketch{
+    
+    /// Creates an image picker object.
+    /// ```
+    /// // Creates a new image picker object and stores it in picker
+    /// let picker = createImagePicker()
+    /// ```
+    
     open func createImagePicker() -> ImagePicker{
         return ImagePicker(self, self.parentViewController!)
     }

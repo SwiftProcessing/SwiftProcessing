@@ -1,6 +1,12 @@
+/*
+ * SwiftProcessing: Scroll
+ *
+ * */
+
 import UIKit
 
-// Scroll logic is too glitchy. Commenting out for now as it is experimental 
+// FOR FUTURE CONTRIBUTORS:
+// Scroll logic is too glitchy. Commenting out for now as it is experimental
 
 //public extension Sketch {
 //

@@ -1,4 +1,18 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<playground version='5.0' target-platform='ios' buildActiveScheme='true' executeOnSourceChanges='false' importAppTypes='true'>
-    <timeline fileName='timeline.xctimeline'/>
+<playground version='6.0' target-platform='ios' display-mode='rendered' buildActiveScheme='true' importAppTypes='true'>
+    <pages>
+        <page name='Table of Contents'/>
+        <page name='Conditional Logic'/>
+        <page name='For and While Loops'/>
+        <page name='Synthesis—Loops and Rotate'/>
+        <page name='Arrays'/>
+        <page name='Map and Lerp'/>
+        <page name='Synthesis—Loops, Curves, and Map'/>
+        <page name='Touch and Animation'/>
+        <page name='Sliders'/>
+        <page name='Optionals'/>
+        <page name='Images'/>
+        <page name='Animated GIFs'/>
+        <page name='Microphone Input'/>
+    </pages>
 </playground>

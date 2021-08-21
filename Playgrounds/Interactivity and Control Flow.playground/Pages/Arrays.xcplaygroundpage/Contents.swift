@@ -1,7 +1,7 @@
 //: [Previous](@previous)
 /*:
  # Arrays
- ### by Masood Kamandy for GSoC 2021
+ ### by Masood Kamandy
  
  ## Introduction
  
@@ -61,9 +61,8 @@
  
  The code example counts from 0 to 99, generates a random number up to 1000, and stores the value at the end of the array.
  
- ## Let's use an array to draw a .
+ ## Let's use an array to draw a row of expanding circles.
  */
-
 import SwiftProcessing
 import PlaygroundSupport
 import UIKit
@@ -72,14 +71,14 @@ class MySketch: Sketch, SketchDelegate {
     
     let howManyCircles = 30
     let spacer = 25.0
-    let maxSize = 100.0
+    let maxSize = 500.0
     
     // Initialize an empty array of Doubles.
     var circleSizes = [Double]()
     
     func setup() {
         for _ in 0..<howManyCircles {
-            circleSizes.append(random(50.0))
+            circleSizes.append(random(500.0))
         }
     }
     
@@ -100,7 +99,6 @@ class MySketch: Sketch, SketchDelegate {
         }
     }
 }
-//: ## How will you use conditional logic for your programs? Challenge: Try to create a button using a rectangle with conditional logic.
-
+//: ## In this program we precomputed the sizes of the circles using arrays. What can you precompute to create unique behaviors when using for loops?
 PlaygroundPage.current.setLiveView(MySketch())
 //: [Next](@next)

@@ -1,6 +1,6 @@
 /*:
  # Getting Started with SwiftProcessing
- ### by Masood Kamandy for GSoC 2021
+ ### by Masood Kamandy
  
  Welcome to SwiftProcessing and the world of creative coding. In the following tutorials you will learn the basics of learning to code creatively to produce artworks of your own.
  
@@ -37,9 +37,10 @@
  }
  ```
  
- To bypass the counter and make this code run much more quickly, you can wrap each function call in `()`:
+ To bypass the counter and make this code run much more quickly, you can wrap each function call in `()` or use the `(,)` pattern for consecutive statements:
  
  ```
+ // Each statement wrapped.
  (translate(144, 144))
  for x in 0..<20 {
      for y in 0..<20 {
@@ -47,21 +48,36 @@
          (circle(x * 25, y * 25, 5))
      }
  }
+ 
+ // Using the (,) pattern for consecutive statements in the for loop.
+ (translate(144, 144))
+ for x in 0..<20 {
+     for y in 0..<20 {
+         (fill(random(255)),
+         (circle(x * 25, y * 25, 5))
+     }
+ }
  ```
+ In this text we've used the `()` or `(,)` formatting to speed up code where it benefits from it. In code that runs once or doesn't benefit, we've left it alone.
+ 
+ ## Quick Help
+ 
+ In SwiftProcessing you can **use quick help on any keyword** if you forget how to use it or need more information. To use this, just hover your mouse over a SwiftProcessing keyword, hold down the command key, and click. You'll see the cursor change into a question mark.
  
  ## Code Example
  
- Before we get started, we'll need to use an import statement to bring SwiftProcessing's code into our playground. You'll see this on every playground in this series.
+ ### Import Modules
  
- ## Import Modules
+ Before we get started, we'll need to use an import statement to bring SwiftProcessing's code into our playground. You'll see this on every playground in this series.
  */
 import SwiftProcessing
 import PlaygroundSupport
-//: ## Your first Processing Sketch
+//: ### Your first Processing Sketch
 //: Code runs from top to bottom. Learning how to follow the steps of your code is one of the most important skills you'll learn!
 //: Functions are chunks of code that do actions. Eventually you'll write your own functions, but for now Processing sketch's are made up of two fundamental functions.
 //: 1. `func setup()` - This happens once at the very beginning of your sketch. Whatever commands you write in here will be called when your program launches. That's why it's called setup! It's for settin things up.
 //:  2. `func draw()` - The draw function gets called in a loop. By default it runs at 60 frames per second.
+// Note: This sketch is being sped up by the use of parentheses around each statement.
 
 class MySketch: Sketch, SketchDelegate {
     
@@ -72,18 +88,15 @@ class MySketch: Sketch, SketchDelegate {
     }
 
     func draw() {
-        noStroke()
+        (noStroke(),
         // Draw a circle wherever the screen is touched.
         // Try changing 25 to some other number and see what happens!
-        circle(touchX, touchY, 25)
+        circle(touchX, touchY, 25))
     }
     
 }
-
-
 //: ## Hit the blue play button to the left and click around the live view to the right.
 //: ## Check out the little paint program we created!
-//: This last bit of code is to get things up and running in the playground.
-
+//: This last bit of code is to get things up and running in the Playground.
 PlaygroundPage.current.setLiveView(MySketch())
 //: [Next](@next)

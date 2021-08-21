@@ -1,7 +1,7 @@
 //: [Previous](@previous)
 /*:
  # Coordinates and Basic Shapes
- ### by Masood Kamandy for GSoC 2021
+ ### by Masood Kamandy
  
  Getting started drawing on a computer means we have to learn how to place things with a ***coordinate system*** and a few basic shapes. In this lesson we'll learn about 6 basic shapes. We call these shapes ***primitives***.
  
@@ -30,7 +30,7 @@
 import SwiftProcessing
 import PlaygroundSupport
 import UIKit
-//: ## SwiftProcessing Sketch Code
+
 class MySketch: Sketch, SketchDelegate {
     
     // We'll put everything in setup() so it only runs once.
@@ -44,7 +44,7 @@ class MySketch: Sketch, SketchDelegate {
         
         // The 'width' and 'height' variables you see below are special SwiftProcessing variables that return the width and height of your device's screen. These can be replaced by numbers if you'd like.
         
-        fill(#colorLiteral(red: 0.5568627715, green: 0.3529411852, blue: 0.9686274529, alpha: 1))
+        fill(#colorLiteral(red: 0.8078431487, green: 0.02745098062, blue: 0.3333333433, alpha: 1))
         triangle(18, 18, 18, height, 81, height)
         
         fill(#colorLiteral(red: 0.2196078449, green: 0.007843137719, blue: 0.8549019694, alpha: 1))

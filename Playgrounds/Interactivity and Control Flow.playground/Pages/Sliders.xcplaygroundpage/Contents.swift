@@ -1,7 +1,7 @@
 //: [Previous](@previous)
 /*:
  # Sliders
- ### by Masood Kamandy for GSoC 2021
+ ### by Masood Kamandy
  
  ## Introduction
 
@@ -32,6 +32,8 @@ import SwiftProcessing
 import PlaygroundSupport
 import UIKit
 
+// Note: This sketch is being sped up by the use of parentheses around each statement.
+
 class MySketch: Sketch, SketchDelegate {
 
     var eyeSize = 100.0
@@ -39,8 +41,9 @@ class MySketch: Sketch, SketchDelegate {
     var mouthWidth = 200.0
     var mouthHeight = 50.0
     var toothSize = 10.0
-
-//:  When variables are created that aren't initialized with a value you have to tell Swift what data type it is. In this case we're saying that these variables are of type Slider with the : symbol. The ! tells Swift that it may be empty at run time and that it's OK. More on that soon. But we'll make sure to initialize the sliders in setup().
+    
+    //When variables are created that aren't initialized with a value you have to tell Swift what data type it is. In this case we're saying that these variables are of type Slider with the : symbol. The ! tells Swift that it may be empty at run time and that it's OK. More on that soon. But we'll make sure to initialize the sliders in setup().
+    
     // Declare sliders
     var eyeSizeSlider: Slider!
     var pupilSizeSlider: Slider!
@@ -95,29 +98,29 @@ class MySketch: Sketch, SketchDelegate {
     }
     
     func draw() {
-        background(#colorLiteral(red: 0.2392156869, green: 0.6745098233, blue: 0.9686274529, alpha: 1))
-        stroke(#colorLiteral(red: 1, green: 1, blue: 1, alpha: 1))
+        (background(#colorLiteral(red: 0.2392156869, green: 0.6745098233, blue: 0.9686274529, alpha: 1)),
+        stroke(#colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)),
         
-        noStroke()
+        noStroke(),
         
         // Whites of eyes
-        fill(#colorLiteral(red: 1, green: 1, blue: 1, alpha: 1))
-        circle(width/3, height/3, eyeSizeSlider.value()) // Left Eye
-        circle(width/3 * 2, height/3, eyeSizeSlider.value()) // Right Eye
+        fill(#colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)),
+        circle(width/3, height/3, eyeSizeSlider.value()), // Left Eye
+        circle(width/3 * 2, height/3, eyeSizeSlider.value()), // Right Eye
 
         
         // Pupils
-        fill(#colorLiteral(red: 0, green: 0, blue: 0, alpha: 1))
-        circle(width/3, height/3 + 25, pupilSizeSlider.value()) // Left Eye
-        circle(width/3 * 2, height/3 + 25, pupilSizeSlider.value()) // Right Eye
+        fill(#colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)),
+        circle(width/3, height/3 + 25, pupilSizeSlider.value()), // Left Eye
+        circle(width/3 * 2, height/3 + 25, pupilSizeSlider.value()), // Right Eye
         
         // Mouth
-        fill(#colorLiteral(red: 0.7707275748, green: 0, blue: 0, alpha: 1))
-        arc(width/2, height/2 + 50.0, mouthWidthSlider.value(), mouthHeightSlider.value(), 0.0, -Math.pi)
+        fill(#colorLiteral(red: 0.7707275748, green: 0, blue: 0, alpha: 1)),
+        arc(width/2, height/2 + 50.0, mouthWidthSlider.value(), mouthHeightSlider.value(), 0.0, -Math.pi),
         
         // Tooth
-        fill(#colorLiteral(red: 1, green: 1, blue: 1, alpha: 1))
-        rect(width/2, height/2 + 50.0, toothSizeSlider.value(), toothSizeSlider.value())
+        fill(#colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)),
+        rect(width/2, height/2 + 50.0, toothSizeSlider.value(), toothSizeSlider.value()))
     }
 }
 //: ## Can you create your own face with variables you change with the sliders? Maybe create a hairdo or change the colors around. Or maybe some eyebrows can be used to express emotion!

@@ -1,7 +1,7 @@
 //: [Previous](@previous)
 /*:
  # Randomness
- ### by Masood Kamandy for GSoC 2021
+ ### by Masood Kamandy
  
  ## Introduction
  
@@ -39,16 +39,18 @@
  // You get the idea! Pretty simple!
  ```
  
-## Let's roll the dice and play with some random numbers!
- 
+ ## Let's roll the dice and play with some random numbers!
  */
 import SwiftProcessing
 import PlaygroundSupport
 import UIKit
 
+// Note: This sketch is being sped up by the use of parentheses around each statement.
+
 class MySketch: Sketch, SketchDelegate {
     
-    // It's possible to declare multiple variables with the same value in a single line!
+    // It's possible to declare multiple variables in a single line!
+    
     var xPos0 = 0.0, xPos1 = 0.0, xPos2 = 0.0, xPos3 = 0.0, xPos4 = 0.0
     var yPos0 = 0.0, yPos1 = 0.0, yPos2 = 0.0, yPos3 = 0.0, yPos4 = 0.0
     
@@ -57,6 +59,7 @@ class MySketch: Sketch, SketchDelegate {
 
     // This is a partially transparent gray color.
     // This is what gives our raindrops trails.
+    
     var skyColor = Color(#colorLiteral(red: 0.2549019754, green: 0.2745098174, blue: 0.3019607961, alpha: 0.1))
     var raindropColor = Color(#colorLiteral(red: 0.4745098054, green: 0.8392156959, blue: 0.9764705896, alpha: 1))
     
@@ -64,6 +67,7 @@ class MySketch: Sketch, SketchDelegate {
     var maxDiameter = 50.0
 
     // We're going to generate our random numbers once at the beginning.
+    
     func setup() {
         xPos0 = random(width)
         xPos1 = random(width)
@@ -91,23 +95,24 @@ class MySketch: Sketch, SketchDelegate {
     }
     
     // The draw loop is going to make our randomized raindrops fall down the screen.
+    
     func draw() {
-        background(skyColor)
-        noStroke()
+        (background(skyColor),
+        noStroke(),
         
-        fill(raindropColor)
+        fill(raindropColor),
 
-        circle(xPos0, yPos0, diameter0)
-        circle(xPos1, yPos1, diameter1)
-        circle(xPos2, yPos2, diameter2)
-        circle(xPos3, yPos3, diameter3)
-        circle(xPos4, yPos4, diameter4)
+        circle(xPos0, yPos0, diameter0),
+        circle(xPos1, yPos1, diameter1),
+        circle(xPos2, yPos2, diameter2),
+        circle(xPos3, yPos3, diameter3),
+        circle(xPos4, yPos4, diameter4),
         
-        yPos0 = (yPos0 + ySpeed0) % height
-        yPos1 = (yPos1 + ySpeed1) % height
-        yPos2 = (yPos2 + ySpeed2) % height
-        yPos3 = (yPos3 + ySpeed3) % height
-        yPos4 = (yPos4 + ySpeed4) % height
+        yPos0 = (yPos0 + ySpeed0) % height,
+        yPos1 = (yPos1 + ySpeed1) % height,
+        yPos2 = (yPos2 + ySpeed2) % height,
+        yPos3 = (yPos3 + ySpeed3) % height,
+        yPos4 = (yPos4 + ySpeed4) % height)
     }
 }
 //: ## Can you change this code to add your own flair to our rainstorm?

@@ -1,7 +1,7 @@
 //: [Previous](@previous)
 /*:
  # Optionals: What does the ?, !, and ?? mean?!
- ### by Masood Kamandy for GSoC 2021
+ ### by Masood Kamandy
  
  ## Introduction
 
@@ -118,7 +118,7 @@
 
  By default, `numberToUse` will always return `0` until the `userDefinedNumber` has a value stored in it. This is good code that prevents crashes when you are relying on users to input data.
  
- ## Let's use an array to draw a .
+ ## Let's use an array to draw a shape using positions that we declare at the top level, initialize in setup() and use in draw(). This is a common pattern for optionals.
  */
 import SwiftProcessing
 import PlaygroundSupport
@@ -127,7 +127,9 @@ import UIKit
 class MySketch: Sketch, SketchDelegate {
     
     // The SwiftProcessing Vector class can store x and y values for screen coordinates.
-    // These Vectors are declared as optionals.
+    
+    // These Vectors are declared as optionals at the *top level* of our sketch class (outside of setup() or draw()). We do that so that we can use them throughout our program in both setup() and draw().
+    
     var corner1: Vector?
     var corner2: Vector?
     var corner3: Vector?
@@ -142,6 +144,7 @@ class MySketch: Sketch, SketchDelegate {
         corner4 = Vector(width - inset, height - inset)
         
         // In order to print them we need to force unwrap them.
+    
         print(corner1!)
         print(corner2!)
         print(corner3!)
@@ -149,12 +152,14 @@ class MySketch: Sketch, SketchDelegate {
     }
     
     func draw() {
+        
         // In order to use them as arguments in the quad() funtion, we need to force unwrap them with !
+        
         quad(corner1!.x, corner1!.y, corner2!.x, corner2!.y, corner3!.x, corner3!.y, corner4!.x, corner4!.y)
     }
 }
 //: ## Can you alter this sketch to use an array instead of numbered variables?
 //: ## Can you explain why it's an hourglass shape instead of a rectangle?
-//: ## Can you incorporate touch to move each of the corners when they are touched? (Hint: use the distance() function.)
+//: ## Can you incorporate touch to move each of the corners when they are touched? (Hint: use the distance() function combined with an if statement to test how far your touch is from the point.)
 PlaygroundPage.current.setLiveView(MySketch())
 //: [Next](@next)

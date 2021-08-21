@@ -1,7 +1,7 @@
 //: [Previous](@previous)
 /*:
  # Variables, Constants, and Data
- ### by Masood Kamandy for GSoC 2021
+ ### by Masood Kamandy
  
  ## Introduction
  
@@ -94,9 +94,8 @@
  1. **Pascal Casing**— This style is reserved for creating **classes** which we'll get into later. In this style we capitalize the first letter and all letters at the beginning of words. For example: `Firefly`, `SmileyFace`, or `SpaceShip`.
  You haven't learned how to create functions or objects, but you'll be using a lot of them so be on the look out for these different styles of capitalization! You'll learn how to make your own functions and classes soon!
  
-## Let's play with some variables!
- 
- */
+ ## Let's play with some variables!
+*/
 import SwiftProcessing
 import PlaygroundSupport
 import UIKit

@@ -1,7 +1,7 @@
 //: [Previous](@previous)
 /*:
  # Basic Arithmetic and Print
- ### by Masood Kamandy for GSoC 2021
+ ### by Masood Kamandy
  
  ## Introduction
  
@@ -55,12 +55,13 @@
  
  `print("The x position of the player is \(playerXpos).")`
  
-## Let's play with some basic arithmetic!
- 
+ ## Let's play with some basic arithmetic!
  */
 import SwiftProcessing
 import PlaygroundSupport
 import UIKit
+
+// Note: This sketch is being sped up by the use of parentheses around each statement.
 
 class MySketch: Sketch, SketchDelegate {
     
@@ -81,24 +82,25 @@ class MySketch: Sketch, SketchDelegate {
     }
     
     // This time we're going to use the draw loop, which repeats itself at 60 frames per second by default. This allows us to do some animation!
+    
     func draw() {
         
         // Shape drawing functions
-        noStroke()
-        fill(gray)
-        circle(xPos, yPos, diameter)
+        (noStroke(),
+        fill(gray),
+        circle(xPos, yPos, diameter),
         
         // Incrementing variables with a limit using % (Modulo).
         // It will increment up to the width/height and then go
         // back to zero.
         
-        xPos = (xPos + xSpeed) % width
-        yPos = (yPos + ySpeed) % height
+        xPos = (xPos + xSpeed) % width,
+        yPos = (yPos + ySpeed) % height,
         
         // Uncomment the print statements below to see variable values printed to the console
         //print(xPos)
         
-        gray = (gray + colorIncrement) % 255.0
+        gray = (gray + colorIncrement) % 255.0)
         //print(gray)
     }
 }

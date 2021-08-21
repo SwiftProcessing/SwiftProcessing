@@ -1,7 +1,7 @@
 //: [Previous](@previous)
 /*:
  # Touch
- ### by Masood Kamandy for GSoC 2021
+ ### by Masood Kamandy
  
  ## Introduction
  
@@ -35,6 +35,8 @@ import SwiftProcessing
 import PlaygroundSupport
 import UIKit
 
+// Note: This sketch is being sped up by the use of parentheses around each statement.
+
 class MySketch: Sketch, SketchDelegate {
     
     var rotation = 0.0
@@ -49,36 +51,42 @@ class MySketch: Sketch, SketchDelegate {
     }
     
     func touchStarted() {
-        background(random(255.0), random(255.0), random(255.0))
-        print("touch started")
+        (background(random(255.0), random(255.0), random(255.0)),
+        print("touch started"))
     }
     
     func touchMoved() {
-        noStroke()
+        (noStroke(),
         
-        rotation = (rotation + rotationIncrement) % 360.0
-        fill(random(255.0), random(255.0), random(255.0))
+        rotation = (rotation + rotationIncrement) % 360.0,
+        fill(random(255.0), random(255.0), random(255.0)),
         
         // The translate() function moves the origin.
+        
         // Step 1: Move the origin to wherever I'm touching
-        translate(touchX, touchY)
+        
+        translate(touchX, touchY),
         
         // Step 2: Rotate the coordinate system around the origin.
-        rotate(rotation)
+        
+        rotate(rotation),
         
         // Step 3: Draw a rectangle with its center on the origin.
-        rect(-squareSize/2, -squareSize/2, squareSize, squareSize)
+        
+        rect(-squareSize/2, -squareSize/2, squareSize, squareSize))
     }
     
     func touchEnded() {
+        
         // Draw bullseye shape.
-        fill(#colorLiteral(red: 0, green: 0, blue: 0, alpha: 1))
-        circle(touchX, touchY, squareSize)
-        fill(#colorLiteral(red: 1, green: 1, blue: 1, alpha: 1))
-        circle(touchX, touchY, squareSize * 0.66) // Reduce size of circle to 2/3
-        fill(#colorLiteral(red: 0, green: 0, blue: 0, alpha: 1))
-        circle(touchX, touchY, squareSize * 0.33) // Reduce size of circle to 1/3
-        print("touch ended")
+        
+        (fill(#colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)),
+        circle(touchX, touchY, squareSize),
+        fill(#colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)),
+        circle(touchX, touchY, squareSize * 0.66), // Reduce size of circle to 2/3
+        fill(#colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)),
+        circle(touchX, touchY, squareSize * 0.33), // Reduce size of circle to 1/3
+        print("touch ended"))
     }
 }
 //: ## Can you change the code so that your color palette is not just random? Try making the worm all shades of pink! Or try making the background simply gray! Maybe instead of a square you can use different shapes!

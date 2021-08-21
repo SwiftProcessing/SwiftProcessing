@@ -1,3 +1,10 @@
+/*
+ * SwiftProcessing: UIApplication Extensions
+ *
+ *
+ * */
+
+
 import Foundation
 import UIKit
 

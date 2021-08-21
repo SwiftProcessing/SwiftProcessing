@@ -1,7 +1,7 @@
 //: [Previous](@previous)
 /*:
  # Rotate, Translate, and Scale
- ### by Masood Kamandy for GSoC 2021
+ ### by Masood Kamandy
  
  ### Introduction
  
@@ -52,12 +52,14 @@
  
  The `scale()` function scales from the origin. You
  
- ## Import Modules
+ ## Let's rotate some squares!
  */
 import SwiftProcessing
 import PlaygroundSupport
 import UIKit
-//: ## SwiftProcessing Sketch Code
+
+// Note: This sketch is being sped up by the use of parentheses around each statement.
+
 class MySketch: Sketch, SketchDelegate {
     
     var rotation = 0.0

@@ -1,7 +1,7 @@
 //: [Previous](@previous)
 /*:
  # Microphone Input
- ### by Masood Kamandy for GSoC 2021
+ ### by Masood Kamandy
  
  ## Before we start
  

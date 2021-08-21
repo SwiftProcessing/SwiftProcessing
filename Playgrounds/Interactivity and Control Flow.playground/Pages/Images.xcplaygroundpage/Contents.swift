@@ -1,7 +1,7 @@
 //: [Previous](@previous)
 /*:
  # Images
- ### by Masood Kamandy for GSoC 2021
+ ### by Masood Kamandy
  
  ## Introduction
  
@@ -85,7 +85,6 @@ class MySketch: Sketch, SketchDelegate {
         background(get(touchX, touchY))
     }
 }
-
 //: ## Can you create a program that samples different areas randomly and sets of color palettes?
 PlaygroundPage.current.needsIndefiniteExecution = true
 PlaygroundPage.current.setLiveView(MySketch())

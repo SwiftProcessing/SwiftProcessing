@@ -1,11 +1,11 @@
 //: [Previous](@previous)
 /*:
  # Functions
- ### by Masood Kamandy for GSoC 2021
+ ### by Masood Kamandy
  
  ## Introduction
  
- Don't let the word *function* scare you. You've been using functions this entire time! Let's think back. Do you remember writing any code that ended in parentheses? Maybe` rect()` or `background()`? Well those are functions! You're practically a pro at using them, but it's also useful do make them yourself!
+ Don't let the word *function* scare you. You've been using functions this entire time! Let's think back. Do you remember writing any code that ended in parentheses? Maybe ` rect()` or `background()`? Well those are functions! You're practically a pro at using them, but it's also useful do make them yourself!
  
  One way to think about functions is that they are like the verbs of programming. They perform actions.
  
@@ -94,13 +94,15 @@ import SwiftProcessing
 import PlaygroundSupport
 import UIKit
 
+// Note: This sketch is being sped up by the use of parentheses around each statement.
+
 class MySketch: Sketch, SketchDelegate {
     
     func setup() {
-        background(#colorLiteral(red: 0.4745098054, green: 0.8392156959, blue: 0.9764705896, alpha: 1))
+        (background(#colorLiteral(red: 0.4745098054, green: 0.8392156959, blue: 0.9764705896, alpha: 1)))
         
         for _ in 0...25 {
-            drawSmiley(x: random(width), y: random(height))
+            (drawSmiley(x: random(width), y: random(height)))
         }
     }
     
@@ -108,7 +110,9 @@ class MySketch: Sketch, SketchDelegate {
     }
     
     func touchStarted() {
-        setup()
+        // You can manually call setup() if you ever need to! This can be convenient if you are trying not to repeat code and if setup() works the way you like already.
+        
+        (setup())
     }
     
     func drawSmiley(x: Double, y: Double) {
@@ -117,25 +121,25 @@ class MySketch: Sketch, SketchDelegate {
         let pupilSize = 10
         let smileSize = 25
         
-        pushMatrix()
+        (pushMatrix(),
         
-        translate(x, y)
-        rotate(random(Math.two_pi))
+        translate(x, y),
+        rotate(random(Math.two_pi)),
         
-        stroke(#colorLiteral(red: 0.3411764801, green: 0.6235294342, blue: 0.1686274558, alpha: 1))
-        fill(#colorLiteral(red: 0.4666666687, green: 0.7647058964, blue: 0.2666666806, alpha: 1))
-        circle(0, 0, faceSize)
-        noStroke()
-        fill(255)
-        circle(-faceSize/5, -faceSize/7, eyeSize)
-        circle(faceSize/5, -faceSize/7, eyeSize)
-        fill(0)
-        circle(-faceSize/5, -faceSize/7, pupilSize)
-        circle(faceSize/5, -faceSize/7, pupilSize)
-        fill(#colorLiteral(red: 0.8549019694, green: 0.250980407, blue: 0.4784313738, alpha: 1))
-        arc(0, faceSize/6, faceSize/6*2, smileSize, 0.0, Math.pi)
+        stroke(#colorLiteral(red: 0.3411764801, green: 0.6235294342, blue: 0.1686274558, alpha: 1)),
+        fill(#colorLiteral(red: 0.4666666687, green: 0.7647058964, blue: 0.2666666806, alpha: 1)),
+        circle(0, 0, faceSize),
+        noStroke(),
+        fill(255),
+        circle(-faceSize/5, -faceSize/7, eyeSize),
+        circle(faceSize/5, -faceSize/7, eyeSize),
+        fill(0),
+        circle(-faceSize/5, -faceSize/7, pupilSize),
+        circle(faceSize/5, -faceSize/7, pupilSize),
+        fill(#colorLiteral(red: 0.8549019694, green: 0.250980407, blue: 0.4784313738, alpha: 1)),
+        arc(0, faceSize/6, faceSize/6*2, smileSize, 0.0, Math.pi),
         
-        popMatrix()
+        popMatrix())
     }
 }
 

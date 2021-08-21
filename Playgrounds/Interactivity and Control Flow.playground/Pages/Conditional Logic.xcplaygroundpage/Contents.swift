@@ -1,7 +1,7 @@
 //: [Previous](@previous)
 /*:
  # Conditional Logic
- ### by Masood Kamandy for GSoC 2021
+ ### by Masood Kamandy
  
  ## Introduction
  
@@ -94,7 +94,6 @@ default:
  
  ## Let's use if statements and a switch to change the background depending on the dice roll! Hit play and tap the screen.
  */
-
 import SwiftProcessing
 import PlaygroundSupport
 import UIKit
@@ -102,13 +101,16 @@ import UIKit
 class MySketch: Sketch, SketchDelegate {
     
     // A dice roll should be an integer because we don't need decimals.
+    
     var diceRoll: Int!
     
     // Change this to false if you want to see the switch statement instead of if.
+    
     var useIf = true
     
     func setup() {
-        diceRoll = 0
+        diceRoll = Int(random(6.0)) + 1
+        print("Dice rolled and lands on \(diceRoll ?? 0). Click screen to roll again.")
     }
     
     func draw() {
@@ -117,6 +119,7 @@ class MySketch: Sketch, SketchDelegate {
         if useIf {
             
             // First let's try the approach with an if statement.
+            
             if diceRoll == 0 {
                 background(#colorLiteral(red: 1, green: 1, blue: 1, alpha: 1))
             } else if diceRoll == 1 {
@@ -200,14 +203,16 @@ class MySketch: Sketch, SketchDelegate {
         }
     }
     
+    // touchStarted() is an optional function we can use to capture taps or clicks on the screen. We'll go over it in more detail in a future chapter.
+    
     func touchStarted() {
-        // The Int() function converts numbers to an integer by
-        // 'truncating' or chopping off the decimal portion.
-        // We use it here because random() returns a Double.
+        
+        // The Int() function converts numbers to an integer by 'truncating' or chopping off the decimal portion. We use it here because random() returns a Double.
+        
         diceRoll = Int(random(6.0)) + 1
-        print("Dice rolled and lands on \(diceRoll ?? 0)")
+        print("Dice rolled and lands on \(diceRoll ?? 0). Click screen to roll again.")
     }
 }
-//: ## How will you use conditional logic for your programs? Challenge: Try to create a button using a rectangle with conditional logic.
+//: ## How will you use conditional logic for your programs? Challenge: Can you use touchStarted() to create a button using a rectangle with conditional logic.
 PlaygroundPage.current.setLiveView(MySketch())
 //: [Next](@next)

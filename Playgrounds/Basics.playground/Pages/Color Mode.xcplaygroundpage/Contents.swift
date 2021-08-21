@@ -1,7 +1,7 @@
 //: [Previous](@previous)
 /*:
  # Color Mode
- ### by Masood Kamandy for GSoC 2021
+ ### by Masood Kamandy
  
  ## Introduction
  
@@ -43,13 +43,13 @@
  ```
  
  ## In this example we create a series of circles that shrink and incrementally shift the colors as we draw over the previous circles.
- 
- ## Import Modules
  */
 import SwiftProcessing
 import PlaygroundSupport
 import UIKit
-//: ## SwiftProcessing Sketch Code
+
+// Note: This sketch is being sped up by the use of parentheses around each statement.
+
 class MySketch: Sketch, SketchDelegate {
     
     // Create a couple of Double variables that we can manipulate later.
@@ -75,6 +75,9 @@ class MySketch: Sketch, SketchDelegate {
         (hue = (hue + 0.25) % 360)
         
         (size -= 1.0)
+        
+        // Below is your first if statement. We'll go over this in the next chapter, but if statements test conditions and execute what's inside of them if their test is true.
+        
         if size < 0 {
             (size = width-50)
             (hue = random(360))

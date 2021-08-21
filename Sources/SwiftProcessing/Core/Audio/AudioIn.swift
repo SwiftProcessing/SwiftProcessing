@@ -54,50 +54,39 @@ open class AudioIn {
     /// AudioIn() is a singleton object that is associated with the microphone.
     /// Singleton's ensure that only one object is created. They're often used when
     /// they are associated with a single piece of hardware, like a camera or a
-    /// microphone. You can refer direclty to AudioIn().shared to access audio input.
+    /// microphone. This is private, but you can refer direclty to
+    /// `AudioIn.getLevel()` to access audio input.
     
     private static let shared = AudioIn()
     
     private init() {
-        print("Creating audio in object")
+        // print("Creating audio in object")
         // Set up the microphone to start listening.
-        
-        // Original code. Replaced with Apple's suggested workflow.
-        
-        /*
-         let audioSession = AVAudioSession.sharedInstance()
-         do {
-         try audioSession.setCategory(AVAudioSession.Category.playAndRecord)
-         } catch let error as NSError {
-         print(error.description)
-         }
-         */
         
         setupAudioSession()
         enableBuiltInMic()
         
+        // Create the recorder object.
         do {
             let url = URL(string: NSTemporaryDirectory().appending("tmp.caf"))!
-            print("recording to")
-            print(url)
             try recorder = AVAudioRecorder(url: url, settings: settings)
         } catch {
-            print("error!")
+            print("Error occured when attempting to initialize the audio microphone.")
         }
         
         switch AVAudioSession.sharedInstance().recordPermission {
         case AVAudioSession.RecordPermission.granted:
-            print("Permission granted")
+            // print("Permission granted")
+        break
         case AVAudioSession.RecordPermission.denied:
-            print("Pemission denied")
+            print("Pemission to use the microphone has been denied.")
         case AVAudioSession.RecordPermission.undetermined:
-            print("Request permission here")
             AVAudioSession.sharedInstance().requestRecordPermission({ (granted) in
-                // Handle granted
+                // Handle granted if need be.
             })
             
         @unknown default:
-            fatalError()
+            print("Failed to configure and activate microphone. Make sure you have properly set up your info.plist file in your project to include microphone privacy permissions. If you have not, click the + sign to add a key and look for this key: Privacy - Microphone Usage Description. Then enter a string that explains why you are using the microphone. If that has been done, then make sure you give your program access to your microphone when prompted by iOS or the iOS Simulator.")
         }
     }
     
@@ -109,7 +98,6 @@ open class AudioIn {
             try session.setCategory(.playAndRecord, options: [.defaultToSpeaker, .allowBluetooth])
             try session.setActive(true)
         } catch {
-            //fatalError("Failed to configure and activate session.")
             print("Failed to configure and activate microphone. Make sure you have properly set up your info.plist file in your project to include microphone privacy permissions. If you have not, click the + sign to add a key and look for this key: Privacy - Microphone Usage Description. Then enter a string that explains why you are using the microphone. If that has been done, then make sure you give your program access to your microphone when prompted by iOS or the iOS Simulator.")
         }
     }
@@ -140,6 +128,12 @@ open class AudioIn {
     
     /// Starts the input from the micrphone. This should be run once before input is expected.
     /// `setup()` would be a good place for this function. Do not place it in `draw()`.
+    /// ```
+    /// // Starts the microphone
+    /// func setup() {
+    ///   AudioIn.start()
+    /// }
+    /// ```
     
     public static func start() {
         // Start the microphone.
@@ -152,8 +146,14 @@ open class AudioIn {
     
     /// Returns the level of the input coming into the microphone. This can be done on a
     /// frame by frame basis to control shapes or other objects within your sketch.
-    
-    // Included for parity with p5.js.
+    /// ```
+    /// // Draws a circle using the input level of the mic.
+    /// func draw() {
+    ///   AudioIn.update()
+    ///   circle(width/2, height/2, AudioIn.getLevel())
+    /// }
+    /// ```
+
     public static func getLevel() -> Double {
         return shared.level
     }
@@ -179,8 +179,7 @@ open class AudioIn {
         let amp = powf(10, 0.05 * decibels)
         let adjAmp = (amp - minAmp) * inverseAmpRange
         
-        return sqrtf(adjAmp)
-        
+        return sqrtf(Float(adjAmp))
     }
     
     private var pos: Float {
@@ -191,6 +190,15 @@ open class AudioIn {
     /*
      * MARK: - SAMPLE THE MICROPHONE AND CALL THE CHANGE SHAPE FUNCTION
      */
+    
+    /// Updates the microphone. This should be done in the `draw()` function.
+    /// ```
+    /// // Draws a circle using the input level of the mic.
+    /// func draw() {
+    ///   AudioIn.update()
+    ///   circle(width/2, height/2, AudioIn.getLevel())
+    /// }
+    /// ```
     
     public static func update() {
         self.shared.updateMeter()
@@ -204,39 +212,3 @@ open class AudioIn {
     }
     
 }
-
-// FOR REFERENCE
-// Source: https://p5js.org/examples/sound-mic-input.html
-
-// The one modification here is that we are including an update for the
-// microphone, which is somewhat different than Processing and p5.js.
-
-/* p5.js example:
- 
- let mic;
- 
- function setup() {
- createCanvas(710, 200);
- 
- // Create an Audio input
- mic = new p5.AudioIn();
- 
- // start the Audio Input.
- // By default, it does not .connect() (to the computer speakers)
- mic.start();
- }
- 
- function draw() {
- background(200);
- 
- // Get the overall volume (between 0 and 1.0)
- let vol = mic.getLevel();
- fill(127);
- stroke(0);
- 
- // Draw an ellipse with height based on volume
- let h = map(vol, 0, 1, height, 0);
- ellipse(width / 2, h - 25, 50, 50);
- }
- 
- */

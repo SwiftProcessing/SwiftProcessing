@@ -1,16 +1,14 @@
-//
-//  SketchTouch.swift
-//  
-//
-//  Created by Jonathan Kaufman on 4/13/20.
-//
+/*
+ * SwiftProcessing: Touch
+ *
+ * */
 
 import Foundation
 import UIKit
 
 extension Sketch: UIGestureRecognizerDelegate {
     
-    open func touchMode(_ mode: String) {
+    open func touchMode(_ mode: TouchMode) {
         self.touchMode = mode
     }
     
@@ -22,8 +20,10 @@ extension Sketch: UIGestureRecognizerDelegate {
         addGestureRecognizer(touchRecongizer)
     }
     
+    // This helps distinguish between touches on the sketch and ui elements.
+    
     public func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldReceive touch: UITouch) -> Bool {
-        if touchMode == SELF {
+        if touchMode == .sketch {
             return touch.view == gestureRecognizer.view
         } else if (touch.view as? UIControl) != nil {
             return false

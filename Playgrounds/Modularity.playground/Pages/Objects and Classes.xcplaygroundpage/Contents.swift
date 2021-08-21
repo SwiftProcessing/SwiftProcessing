@@ -1,7 +1,7 @@
 //: [Previous](@previous)
 /*:
  # Objects and Classes
- ### by Masood Kamandy for GSoC 2021
+ ### by Masood Kamandy
  
  ## Introduction
  
@@ -83,10 +83,11 @@
  
  Every class requires an initializer called `init()`. This piece of code runs once and prepares our code for use. In the case of our Firefly class the first line of our `init()` looks like this:
  
- `init(color: String, location: Vector) {`
+ `init(color: String, location: Vector, sketch: Sketch) {`
  
  The `init()` fills several purposes:
  1. It tells programmers who use your Firefly class what data is required to initialize an instance of your class. That's what `color: String` and `location: Vector` means and Xcode will automatically tell coders that Firefly requires these pieces of information to be created.
+ 1. It also allows us to pass in our `Sketch`, so that we have access to all of SwiftProcessing's functionality within our class.
  1. It's a place to assign the passed in information from the initializer to the instance's properties. We do this by referring to the outer properties with the prefix `self`. For example, the line: `self.color = color` assigns the passed in color to the Firefly instance's color property. This is a point of confusion for many, but just remember that when the object is created it needs to have values placed in its properties. The `init()` is where you do that.
  1. It does any other work that you'd like to happen at the "birth" of your class instance. This is a good place to put print statements for verification that the object is successfully being created when debugging.
  
@@ -102,12 +103,14 @@
 
  `print(Firefly.count())`
  
- ## Let's create some fireflies using a class and watch them fly around!
+ ## Let's create some fireflies using a class and watch them fly around! Try clicking on the screen to see what happens!
  
  */
 import SwiftProcessing
 import PlaygroundSupport
 import UIKit
+
+// Note: This sketch is being sped up by the use of parentheses around each statement.
 
 class MySketch: Sketch, SketchDelegate {
     
@@ -174,14 +177,22 @@ open class Firefly {
         (sketch.translate(location.x, location.y))
         (sketch.rotate(rotation))
         
+        // Glow
         
         if isOn {
-            (sketch.fill(#colorLiteral(red: 0.9764705896, green: 0.850980401, blue: 0.5490196347, alpha: 0.3032388245)),
+            (sketch.fill(#colorLiteral(red: 0.9764705896, green: 0.850980401, blue: 0.5490196347, alpha: 0.09792060094)),
              sketch.noStroke(),
-             sketch.circle(0, 0, 150))
+             sketch.pushMatrix(),
+             sketch.translate(0, 20),
+             sketch.circle(0, 0, 60),
+             sketch.circle(0, 0, 85),
+             sketch.circle(0, 0, 110),
+             sketch.popMatrix())
         }
         
         (sketch.strokeWeight(30))
+        
+        // Body
         
         if isOn {
             (sketch.stroke(#colorLiteral(red: 0.9764705896, green: 0.850980401, blue: 0.5490196347, alpha: 1)),
@@ -193,6 +204,7 @@ open class Firefly {
             sketch.line(0, 20, 0, -20))
         }
         
+        // Wings
         (sketch.noStroke(),
         sketch.fill(#colorLiteral(red: 0.6642242074, green: 0.6642400622, blue: 0.6642315388, alpha: 0.5)),
         sketch.arc(0, 0, 100, 100, 0+0.1, Sketch.Math.pi/4),
@@ -205,17 +217,17 @@ open class Firefly {
     
     public func move() {
         // X random walk
-        location.x += sketch.random(-walkSpeed, walkSpeed)
-        if location.x > sketch.width + 75 { location.x = 0 }
-        if location.x < -75{ location.x = sketch.width }
+        (location.x += sketch.random(-walkSpeed, walkSpeed))
+        if location.x > sketch.width + 75 { (location.x = 0) }
+        if location.x < -75{ (location.x = sketch.width) }
         
         // Y random walk
-        location.y += sketch.random(-walkSpeed, walkSpeed)
-        if location.y > sketch.height + 75 { location.y = 0 }
-        if location.y < -75 { location.y = sketch.height }
+        (location.y += sketch.random(-walkSpeed, walkSpeed))
+        if location.y > sketch.height + 75 { (location.y = 0) }
+        if location.y < -75 { (location.y = sketch.height) }
         
         // rotation random walk
-        rotation += sketch.random(-0.25, 0.25)
+        (rotation += sketch.random(-0.25, 0.25))
         if rotation > Sketch.Math.two_pi { (rotation = 0) }
         if rotation < 0 { (rotation = Sketch.Math.two_pi) }
     }
@@ -225,7 +237,6 @@ open class Firefly {
     }
 }
 //: ## Try clicking on the screen to see what happens!
-//: ##What kinds of objects can you make?
 PlaygroundPage.current.needsIndefiniteExecution = true
 PlaygroundPage.current.setLiveView(MySketch())
 //: [Next](@next)

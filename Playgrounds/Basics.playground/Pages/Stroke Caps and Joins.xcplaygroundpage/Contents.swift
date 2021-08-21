@@ -1,7 +1,7 @@
 //: [Previous](@previous)
 /*:
  # Stroke Caps and Joins
- ### by Masood Kamandy for GSoC 2021
+ ### by Masood Kamandy
  
  ## Stroke Joins and Caps
  
@@ -47,8 +47,7 @@
  
  ![An image showing the 90-degree corner of a line with a rounded joint.](strokeCap.png)
  
- ## Let's create a closed curve with control points that bounce around the screen.
- 
+ ## Let's see some examples of different stroke joins and caps.
  */
 import SwiftProcessing
 import PlaygroundSupport

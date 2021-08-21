@@ -1,7 +1,7 @@
 //: [Previous](@previous)
 /*:
  # Synthesis—A Game Using Classes
- ### by Masood Kamandy for GSoC 2021
+ ### by Masood Kamandy
  
  ## Introduction
  
@@ -39,31 +39,34 @@ import SwiftProcessing
 import PlaygroundSupport
 import UIKit
 
+// Note: This sketch is being sped up by the use of parentheses around each statement.
+
 class MySketch: Sketch, SketchDelegate {
     
     var ball: Ball!
     var paddle: Paddle!
     
     func setup() {
+        background(0)
         ball = Ball(sketch: self)
         paddle = Paddle(sketch: self)
     }
     
     func draw() {
-        background(0)
-        ball.display()
-        paddle.display()
+        (background(0, 80),
+        ball.display(),
+        paddle.display())
         if collision(ball: ball, paddle: paddle) {
-            ball.reverseY()
+            (ball.reverseY())
         }
     }
     
     func touchStarted() {
-        paddle.moveTo(target: touchX)
+        (paddle.moveTo(target: touchX))
     }
     
     func touchMoved() {
-        paddle.moveTo(target: touchX)
+        (paddle.moveTo(target: touchX))
     }
     
     func collision(ball: Ball, paddle: Paddle) -> Bool {
@@ -99,29 +102,29 @@ class Ball {
     }
     
     func display() {
-        sketch.fill(255)
-        sketch.noStroke()
-        sketch.circle(x, y, size)
-        move()
-        checkForWalls()
+        (sketch.fill(255),
+        sketch.noStroke(),
+        sketch.circle(x, y, size),
+        move(),
+        checkForWalls())
     }
     
     func move() {
-        x += speed.x
-        y += speed.y
+        (x += speed.x)
+        (y += speed.y)
     }
     
     func reverseY() {
-        speed.y *= -1
+        (speed.y *= -1)
     }
     
     func checkForWalls() {
         if x > sketch.width - size/2 || x < size/2 {
-            speed.x *= -1
+            (speed.x *= -1)
         }
         
         if y > sketch.height - size/2 || y < size/2 {
-            speed.y *= -1
+            (speed.y *= -1)
         }
     }
     
@@ -148,15 +151,15 @@ class Paddle {
     }
     
     func display() {
-        x = sketch.constrain(sketch.lerp(x, targetX, lerpAmount), width/2, sketch.width - width/2)
-        sketch.fill(127)
-        sketch.noStroke()
-        sketch.rectMode(.center)
-        sketch.rect(x,y, width, height)
+        (x = sketch.constrain(sketch.lerp(x, targetX, lerpAmount), width/2, sketch.width - width/2))
+        (sketch.fill(127),
+        sketch.noStroke(),
+        sketch.rectMode(.center),
+        sketch.rect(x,y, width, height))
     }
     
     func moveTo(target: Double) {
-        self.targetX = target
+        (self.targetX = target)
     }
     
 }

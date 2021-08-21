@@ -34,80 +34,50 @@ import SceneKit
     // https://swift.org/documentation/api-design-guidelines/#conventions
     
     /*
-     * MARK: - TRIGONOMETRY CONSTANTS
+     * MARK: - MATH CONSTANTS
      */
     
-    public let HALF_PI = Double.pi / 2
-    public let PI = Double.pi
-    public let QUARTER_PI = Double.pi / 4
-    public let TWO_PI = Double.pi * 2
-    public let TAU = Double.pi * 2
+    /// The `Math` struct contains all of the constant values that can be used in SwiftProcessing for mathematics. **Note:** Values are returned as Doubles.
+    
+    public struct Math {
+        public static let half_pi = Double.pi / 2
+        public static let pi = Double.pi
+        public static let quarter_pi = Double.pi / 4
+        public static let two_pi = Double.pi * 2
+        public static let tau = Double.pi * 2
+        public static let e = M_E
+    }
     
     /*
      * MARK: - KEYWORD CONSTANTS
      */
     
-    public let DEGREES = "degrees"
-    public let RADIANS = "radians"
+    /// The `Default` struct contains the defaults for the style states that SwiftProcessing keeps track of.
     
-    public let RADIUS = "radius"
-    public let CORNER = "corner"
-    public let CORNERS = "corners"
-    public let CENTER = "center"
+    public struct Default {
+        public static let colorMode = ColorMode.rgb
+        public static let fill = Color(255)
+        public static let stroke = Color(0.0)
+        public static let tint = Color(0.0, 0.0)
+        public static let strokeWeight = 1.0
+        public static let strokeJoin = StrokeJoin.miter
+        public static let strokeCap = StrokeCap.round
+        public static let rectMode = ShapeMode.corner
+        public static let ellipseMode = ShapeMode.center
+        public static let imageMode = ShapeMode.corner
+        public static let textFont = "HelveticaNeue-Thin"
+        public static let textSize = 32.0 // Processing is 12, so let's test this out.
+        public static let textLeading = 37.0 // Processing is 14. This is a similar increase.
+        public static let textAlign = Alignment.left
+        public static let textAlignY = AlignmentY.baseline
+        public static let blendMode = CGBlendMode.normal
+    }
     
-    public let PIE = "pie"
-    public let CHORD = "chord"
-    public let OPEN = "open"
-    public let CLOSE = "close"
-    public let NORMAL_VERTEX = "normal"
-    public let CURVE_VERTEX = "curve"
-    public let BEZIER_VERTEX = "bezier"
     
-    public static let PIXELLATE = "pixellate"
-    public let PIXELLATE = "pixellate"
-    public static let HUE_ROTATE = "hue_rotate"
-    public let HUE_ROTATE = "hue_rotate"
-    public static let SEPIA_TONE = "sepia_tone"
-    public let SEPIA_TONE = "sepia_tone"
-    public static let TONAL = "tonal"
-    public let TONAL = "tonal"
-    public static let MONOCHROME = "monochrome"
-    public let MONOCHROME = "monochrome"
-    public static let INVERT = "invert"
-    public let INVERT = "invert"
+    /// The `colorMode()` function enables SwiftProcessing users to switch between
     
-    public let LEFT = "left"
-    public let RIGHT = "right"
-    public let TOP = "top"
-    public let BOTTOM = "bottom"
-    public let BASELINE = "baseline"
-    
-    public let FRONT = "front"
-    public let BACK = "back"
-    
-    public let HIGH = "high"
-    public let MEDIUM = "medium"
-    public let LOW = "low"
-    public let VGA = "vga"
-    public let HD = "hd"
-    public let QHD = "qhd"
-    
-    public let UP = "up"
-    public let UPSIDEDOWN = "upsidedown"
-    
-    public let CAMERA = "camera"
-    public let PHOTO_LIBRARY = "photo library"
-    public let CAMERA_ROLL = "camera roll"
-    
-    /*
-     * MARK: - COLOR MODE ENUM / IN PROGRESS
-     */
-
-    // NOTE: Consider putting all SwiftProcessing enums in a separate .swift file.
-
-    public enum ColorMode {
-        case RGB
-        case HSB
+    open func colorMode(_ mode: ColorMode) {
+        settings.colorMode = mode
     }
     
     /*
@@ -128,11 +98,11 @@ import SceneKit
     public var frameCount: Double = 0
     public var deltaTime: Double = 1/60
     private var lastTime: Double = CACurrentMediaTime()
+    
     var fps: Double = 60
     
     var fpsTimer: CADisplayLink?
     
-    var strokeWeight: Double = 1
     var isFill: Bool = true
     var isStroke: Bool = true
     var isErase: Bool = false
@@ -144,13 +114,9 @@ import SceneKit
     var minY: Double = 0
     var maxY: Double = 0
     
-    var settingsStack: SketchSettingsStack = SketchSettingsStack()
-    var settings: SketchSettings = SketchSettings()
-    
-    var vertexMode: String = "normal"
-    var isContourStarted: Bool = false
-    var contourPoints: [CGPoint] = []
-    var shapePoints: [CGPoint] = []
+    public var settingsStack: SketchSettingsStack = SketchSettingsStack()
+    public var matrixStack: SketchMatrixStack = SketchMatrixStack()
+    public var settings: SketchSettings = SketchSettings()
     
     open var pixels: [UInt8] = []
     
@@ -159,9 +125,8 @@ import SceneKit
     open var touchX: Double = -1
     open var touchY: Double = -1
     
-    var touchMode: String = "self"
-    open var SELF: String = "self"
-    open var ALL: String = "all"
+    // This is the last string-based constant in SwiftProcessing. Leaving this here for future contributors. It needs to be converted to an enum but .self cannot be the name of a member of an enum.
+    var touchMode: TouchMode = .sketch
     var touchRecongizer: UIGestureRecognizer!
     
     var notificationActionsWithData: [String: (_ data: [AnyHashable : Any]) -> Void] = [:]
@@ -171,10 +136,16 @@ import SceneKit
     open var context: CGContext?
     
     /*
-     * MARK: - COLOR MODE / IN PROGRESS
+     * MARK: - VERTICES
      */
 
-    var colorMode: ColorMode = ColorMode.RGB
+    var vertexMode: VertexMode = .normal
+    var isContourStarted: Bool = false
+    var contourPoints: [CGPoint] = []
+    var shapePoints: [CGPoint] = []
+    
+    private var curveVertices = [[CGFloat]]()
+    private var curveVertexCount: Int = 0
     
     /*
      * MARK: - TRANSFORMATION PROPERTIES
@@ -201,8 +172,8 @@ import SceneKit
     var scnmat: SCNMaterial = SCNMaterial()
     var enable3DMode: Bool = false
     
-    // used to store references to UIKitViewElements created using SwiftProcessing. Storing references avoids
-    // the elements being deallocated from memory. This is needed to have the touch events continue to function
+    // Used to store references to UIKitViewElements created using SwiftProcessing. Storing references avoids the elements being deallocated from memory. This is needed to have the touch events continue to function
+    
     open var viewRefs: [String: UIKitViewElement?] = [:]
     
     // =======================================================================
@@ -237,69 +208,44 @@ import SceneKit
         loop()
     }
     
-    // The context needs to have all of the initial global states set up.
-    // **This is not hygenic code,** as it duplicates the initial settings
-    // found in the settings stack. A better approach may be to create
-    // constants that the initial settings are stored in within Sketch.swift.
-    // Then, when the settings stack is initialized, it uses an initalizer
-    // to pass those in. That way there is one location for the initial
-    // default settings.
+    // The graphics context also needs to have all of the initial global states set up. Restore was created to mimic Core Graphics restore function, but it also works perfectly to sync up our default SwiftProcessing global states with Core Graphics' states.
     
     private func initializeGlobalContextStates() {
-        /*
-         Copied from SketchSettings class.
-         var textSize: Double = 32
-         var textFont: String = "HelveticaNeue-Thin"
-         var textAlignment: String = "left"
-         var ellipseMode: String = "center"
-         var fill: Color = Color(255.0, 255.0, 255.0)
-         var stroke: Color = Color(0.0, 0.0, 0.0)
-         var strokeWeight: Double = 1
-        */
-        textSize(32)
-        textFont("HelveticaNeue-Thin")
-        textAlign("left")
-        ellipseMode("center")
-        rectMode("corner")
-        fill(255)
-        stroke(0)
-        strokeWeight(1)
+        Sketch.SketchSettings.defaultSettings(self)
     }
     
     
-    // =======================================================================
+    // ========================================================
     // MARK: - DRAW LOOP
-    // =======================================================================
+    // ========================================================
+    
+    /// `beginDraw()` sets the global state. It ensures that the Core Graphics context and SwiftProcessing's global settings start out in sync. Overridable if anything needs to be done before `setup()` is run.
+    
+    open func beginDraw() {
+        initializeGlobalContextStates()
+    }
     
     override public func draw(_ rect: CGRect) {
-        // this override is not actually called
-        // but required for the UIView to call the
-        // display function
-        
-        // This is a reference to the UIView's draw,
-        // not Processing's draw loop.
+        // This override is not actually called but required for the UIView to call the display function. This is a reference to the UIView's draw, not Processing's draw loop.
     }
     
     override public func display(_ layer: CALayer) {
-        
         preDraw3D()
         
         updateDimensions()
-        
-        self.settingsStack.cleanup()
-        currentStack = []
-        self.settingsStack = SketchSettingsStack()
         updateTimes()
+
+        // Refresh all of the settings just in case to maintain state. At some point, we might be able to remove this. It is here as a precaution for now.
+        settings.reapplySettings(self)
+        context?.saveGState()
         
-        push()
-        // UIGraphicsPush and Pop are necessary for UIImages.
+        // Having two pushes (.saveGState() and below) might seem redundant, but UIGraphicsPush is necessary for UIImages.
         UIGraphicsPushContext(context!)
 
         scale(UIScreen.main.scale, UIScreen.main.scale)
         
         // To ensure setup only runs once.
         if !isSetup{
-            initializeGlobalContextStates()
             sketchDelegate?.setup()
             isSetup = true
         }
@@ -308,12 +254,11 @@ import SceneKit
         updateTouches()
         
         sketchDelegate?.draw() // All instructions go into current context.
-    
+        
         postDraw3D()
         
-
         UIGraphicsPopContext()
-        pop()
+        context?.restoreGState()
         
         // This makes the background persist if the background isn't cleared.
         let img = context!.makeImage() // <- This may be a speed bottleneck.
@@ -343,33 +288,10 @@ import SceneKit
         lastTime = newTime
     }
     
-    // =======================================================================
-    // MARK: - FOR RETAINING GLOBAL PROCESSING STATES
-    // =======================================================================
+    /// `endDraw()` is an overridable function that runs after `noLoop()` is run. It can be used for any last minute cleanup after the last `draw()` loop has executed.
     
-    open func push() {
-        context?.saveGState()
-        settingsStack.push(settings: settings)
-        
-        if (self.enable3DMode) {
-            let rootTransformationNode = self.currentTransformationNode
-            
-            let newTransformationNode = rootTransformationNode.addNewTransitionNode()
-            
-            self.currentStack.append(newTransformationNode)
-            self.stackOfTransformationNodes.append(newTransformationNode)
-            
-            self.translationNode(SCNVector3(0,0,0), "position", false)
-        }
+    open func endDraw() {
     }
     
-    open func pop() {
-        context?.restoreGState()
-        settings = settingsStack.pop()!
-        settings.restore(sketch: self)
-        
-        if(self.enable3DMode){
-            self.currentTransformationNode = self.currentStack.popLast()!
-        }
-    }
+ 
 }

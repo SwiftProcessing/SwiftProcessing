@@ -1,3 +1,8 @@
+/*
+ * SwiftProcessing: Notifications
+ *
+ * */
+
 import Foundation
 
 extension Notification.Name{
