@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<playground version='6.0' target-platform='ios' display-mode='raw' buildActiveScheme='true' importAppTypes='true'>
+    <pages>
+        <page name='Table of Contents'/>
+        <page name='Getting Started'/>
+        <page name='Coordinates and Basic Shapes'/>
+        <page name='Polygons and Curves'/>
+        <page name='Stroke Caps and Joins'/>
+        <page name='Color and Stroke'/>
+        <page name='Color Mode'/>
+        <page name='Rotate, Translate, Scale'/>
+        <page name='Variables and Constants'/>
+        <page name='Basic Arithmetic and Print'/>
+        <page name='Randomness'/>
+    </pages>
+</playground>

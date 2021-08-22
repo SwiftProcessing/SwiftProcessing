@@ -7,25 +7,6 @@
 import Foundation
 import UIKit
 
-/*
- * MARK: - SIMPLIFIED ENUM
- */
-
-// NOTE: Consider putting all SwiftProcessing enums in their own .swift file.
-
-// This deviates from Processing because of a difference in the Java, JavaScript, and Swift design guidelines. Regarding naming conventions for enums and constants.
-// Although it's different, the thought here is to honor Swift's design guidelines.
-// Strings could also be used, but they are prone to error and don't give new learners access to auto-complete.
-// Source: https://stackoverflow.com/questions/24244326/swift-global-constant-naming-convention
-
-public enum TextAlignment {
-    case natural
-    case left
-    case center
-    case right
-    case justified
-}
-
 // =======================================================================
 // MARK: - Label Class
 // =======================================================================

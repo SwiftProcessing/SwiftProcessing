@@ -1,3 +1,8 @@
+/*
+ * SwiftProcessing: Data
+ *
+ * */
+
 import Foundation
 
 public extension Sketch {

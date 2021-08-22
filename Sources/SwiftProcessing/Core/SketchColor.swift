@@ -58,6 +58,24 @@ public extension UIColor {
         self.getHue(&h, saturation: &s, brightness: &b, alpha: &a)
         return (h, s, b, a)
     }
+    
+    var hsba360: (hue: CGFloat, saturation: CGFloat, brightness: CGFloat, alpha: CGFloat) {
+        var h: CGFloat = 0
+        var s: CGFloat = 0
+        var b: CGFloat = 0
+        var a: CGFloat = 0
+        self.getHue(&h, saturation: &s, brightness: &b, alpha: &a)
+        return (h * 360, s * 100, b * 100, a * 100)
+    }
+    
+    var double_hsba360: (hue: Double, saturation: Double, brightness: Double, alpha: Double) {
+        var h: CGFloat = 0
+        var s: CGFloat = 0
+        var b: CGFloat = 0
+        var a: CGFloat = 0
+        self.getHue(&h, saturation: &s, brightness: &b, alpha: &a)
+        return (Double(h * 360), Double(s * 100), Double(b * 100), Double(a * 100))
+    }
 }
 
 
@@ -66,31 +84,34 @@ public extension UIColor {
 // =======================================================================
 
 public extension Sketch {
-
+    
     /*
      * MARK: - COLOR MODE
      *
      * NOTE: This is an ongoing project that will have multiple steps:
      *
-     * STEP 1 – Create a global color mode that will enable users to choose between RGB and HSB modes. Ranges will be fixed at first. In the beginning, we'll start with 0-255 for RGB, 0-360 for H, and 0-100 for SB.
-     * STEP 2 — Expand Color class to have H, S, and B values and convert easily between HSV <-> RGB within the class.
+     * STEP 1 – Create a global color mode that will enable users to choose between RGB and HSB modes. Ranges will be fixed at first. In the beginning, we'll start with 0-255 for RGB, 0-360 for H, and 0-100 for SB. [COMPLETE]
+     * STEP 2 — Expand Color class to have H, S, and B values and convert easily between HSV <-> RGB within the class. [COMPLETE]
      * Algorithms to use: https://en.wikipedia.org/wiki/HSL_and_HSV#From_HSV
-     * STEP 3 – Allow users to set the desired ranges, as they can in Processing.
+     * STEP 3 – Allow users to set the desired ranges, as they can in Processing. [TO DO]
      *
      */
     
-    private func colorModeHelper<V1: Numeric, V2: Numeric, V3: Numeric>(_ v1: V1, _ v2: V2, v3: V3) {
-        switch colorMode {
-        case ColorMode.RGB:
-            print("RGB")
-        case ColorMode.HSB:
-            print("HSB")
+    private func colorModeHelper<V1: Numeric, V2: Numeric, V3: Numeric, A: Numeric>(_ v1: V1, _ v2: V2, _ v3: V3, _ a: A) -> Color {
+        let cg_v1, cg_v2, cg_v3, cg_a: CGFloat
+        cg_v1 = v1.convert(); cg_v2 = v2.convert(); cg_v3 = v3.convert(); cg_a = a.convert()
+        
+        switch settings.colorMode {
+        case .rgb:
+            return Color(cg_v1, cg_v2, cg_v3, cg_a, .rgb)
+        case .hsb:
+            return Color(cg_v1, cg_v2, cg_v3, cg_a, .hsb)
         }
     }
     
     /// Clears the background if there is a color.
     ///
-
+    
     func clear() {
         context?.clear(CGRect(x: 0, y: 0, width: self.frame.width, height: self.frame.height))
     }
@@ -105,7 +126,13 @@ public extension Sketch {
     /// - Parameters:
     ///     - color: A UIColor value.
     func background(_ color: UIColor) {
-        background(color.rgba255.red, color.rgba255.green, color.rgba255.blue, color.rgba255.alpha)
+        switch settings.colorMode {
+        case .rgb:
+            background(color.rgba255.red, color.rgba255.green, color.rgba255.blue, color.rgba255.alpha)
+        case .hsb:
+            background(color.hsba360.hue, color.hsba360.saturation, color.hsba360.brightness, color.hsba360.alpha)
+        }
+        
     }
     
     /// Sets the background color with a SketchProcessing Color object.
@@ -114,27 +141,52 @@ public extension Sketch {
     ///     - color: A Color value.
     
     func background(_ color: Color) {
-        background(color.red, color.green, color.blue, color.alpha)
+        switch settings.colorMode {
+        case .rgb:
+            background(color.red, color.green, color.blue, color.alpha)
+        case .hsb:
+            background(color.hue, color.saturation, color.brightness, color.alpha)
+        }
     }
     
-    /// Sets the background color with an RGB value.
+    /// Sets the background color with an RGB or HSB value. RGB is the default color mode.
     ///
     /// - Parameters:
-    ///     - v1: A red value from 0-255.
-    ///     - v2: A green value from 0-255.
-    ///     - v3: A blue value from 0-255.
-    ///     - a: An optional alpha value from 0-255. Defaults to 255.
+    ///     - v1: A red value from 0-255 (RGB). A hue value from 0-360 (HSB).
+    ///     - v2: A green value from 0-255 (RGB). A saturation value from 0-100 (HSB).
+    ///     - v3: A blue value from 0-255 (RGB). A brightness value from 0-100 (HSB).
+    ///     - a: An optional alpha value from 0-255. Defaults to 255 (RGB). An alpha value from 0-100. Defaults to 255 (HSB). Defaults to 255.
     
     // Note: It's important to understand why we are *coercing* instead of
     // *type casting* in our generics (eg, T(255) in this definition).
     // Here is more information: https://stackoverflow.com/questions/33973724/typecasting-or-initialization-which-is-better-in-swift
     // Type casting causes runtime errors and should be avoided in generics
     // where integers and floating points are both accepted inputs.
-    func background<T: Numeric>(_ v1: T, _ v2: T, _ v3: T, _ a: T = T(255)){
-        push()
-        fill(v1, v2, v3, a)
-        rect(0, 0, CGFloat(width), CGFloat(height))
-        pop()
+    func background<V1: Numeric, V2: Numeric, V3: Numeric, A: Numeric>(_ v1: V1, _ v2: V2, _ v3: V3, _ a: A){
+        let cg_v1, cg_v2, cg_v3, cg_a: CGFloat
+        cg_v1 = v1.convert()
+        cg_v2 = v2.convert()
+        cg_v3 = v3.convert()
+        cg_a = a.convert()
+        
+        // Internal operations should never affect the user-facing SwiftProcessing settings state. Only API users should be able to change the settings state. And if we touch Core Graphics, we need to save and restore the state.
+        // fill(v1, v2, v3, a) - Leaving this as a reminder. Avoid this approach and manipulate Core Graphics context directly when inside the API.
+        context?.saveGState()
+        context?.setFillColor(colorModeHelper(cg_v1, cg_v2, cg_v3, cg_a).cgColor())
+        internalRect(0, 0, CGFloat(width), CGFloat(height))
+        context?.restoreGState()
+    }
+    
+    /// Sets the background color with an RGB or HSB value. RGB is the default color mode.
+    ///
+    /// - Parameters:
+    ///     - v1: A red value from 0-255 (RGB). A hue value from 0-360 (HSB).
+    ///     - v2: A green value from 0-255 (RGB). A saturation value from 0-100 (HSB).
+    ///     - v3: A blue value from 0-255 (RGB). A brightness value from 0-100 (HSB).
+    ///     - a: An optional alpha value from 0-255. Defaults to 255 (RGB). An alpha value from 0-100. Defaults to 255 (HSB). Defaults to 255.
+    
+    func background<V1: Numeric, V2: Numeric, V3: Numeric>(_ v1: V1, _ v2: V2, _ v3: V3){
+        background(v1, v2, v3, 255.0)
     }
     
     /// Sets the background color with a system color name.
@@ -144,23 +196,31 @@ public extension Sketch {
     
     func background(_ systemColorName: Color.SystemColor) {
         let systemColor = systemColorName.rawValue
-        push()
-        fill(systemColor.ciColor.red, systemColor.ciColor.green, systemColor.ciColor.blue, systemColor.ciColor.alpha)
-        rect(0, 0, CGFloat(width), CGFloat(height))
-        pop()
+        switch settings.colorMode {
+        case .rgb:
+            background(systemColor.rgba255.red, systemColor.rgba255.green, systemColor.rgba255.blue, systemColor.rgba255.alpha)
+        case .hsb:
+            background(systemColor.hsba360.hue, systemColor.hsba360.saturation, systemColor.hsba360.brightness, systemColor.hsba360.alpha)
+        }
+    }
+    
+    /// Sets the background color with gray and alpha values.
+    ///
+    /// - Parameters:
+    ///     - v1: A gray value from 0-255.
+    ///     - a: An optional alpha value from 0-255. Defaults to 255.
+    
+    func background<V1: Numeric, A: Numeric>(_ v1: V1, _ a: A) {
+        background(v1, v1, v1, a)
     }
     
     /// Sets the background color with a single gray value.
     ///
     /// - Parameters:
     ///     - v1: A gray value from 0-255.
-    ///     - a: An optional alpha value from 0-255. Defaults to 255.
     
-    func background<T: Numeric>(_ v1: T, _ a: T = T(255)) {
-        push()
-        fill(v1, v1, v1, a)
-        rect(0, 0, CGFloat(width), CGFloat(height))
-        pop()
+    func background<V1: Numeric>(_ v1: V1) {
+        background(v1, v1, v1, 255.0)
     }
     
     /*
@@ -174,7 +234,12 @@ public extension Sketch {
     ///     - color: A UIColor value.
     
     func fill(_ color: UIColor) {
-        fill(color.rgba255.red, color.rgba255.green, color.rgba255.blue, color.rgba255.alpha)
+        switch settings.colorMode {
+        case .rgb:
+            fill(color.rgba255.red, color.rgba255.green, color.rgba255.blue, color.rgba255.alpha)
+        case .hsb:
+            fill(color.hsba360.hue, color.hsba360.saturation, color.hsba360.brightness, color.hsba360.alpha)
+        }
     }
     
     /// Sets the fill color with a SwiftProcessing Color object.
@@ -183,43 +248,42 @@ public extension Sketch {
     ///     - color: A Color value.
     
     func fill(_ color: Color) {
-        fill(color.red, color.green, color.blue, color.alpha)
+        switch settings.colorMode {
+        case .rgb:
+            fill(color.red, color.green, color.blue, color.alpha)
+        case .hsb:
+            fill(color.hue, color.saturation, color.brightness, color.alpha)
+        }
     }
     
-    /// Sets the fill color with red, green, blue, and, optionally, alpha values.
+    /// Sets the fill color with an RGB or HSB value. RGB is the default color mode.
     ///
     /// - Parameters:
-    ///     - v1: A red value from 0-255.
-    ///     - v2: A green value from 0-255.
-    ///     - v3: A blue value from 0-255.
-    ///     - a: An optional alpha value from 0-255. Defaults to 255.
+    ///     - v1: A red value from 0-255 (RGB). A hue value from 0-360 (HSB).
+    ///     - v2: A green value from 0-255 (RGB). A saturation value from 0-100 (HSB).
+    ///     - v3: A blue value from 0-255 (RGB). A brightness value from 0-100 (HSB).
+    ///     - a: An optional alpha value from 0-255. Defaults to 255 (RGB). An alpha value from 0-100. Defaults to 255 (HSB). Defaults to 255.
     
-    func fill<T: Numeric>(_ v1: T, _ v2: T, _ v3: T, _ a: T = T(255.0)) {
+    func fill<V1: Numeric, V2: Numeric, V3: Numeric, A: Numeric>(_ v1: V1, _ v2: V2, _ v3: V3, _ a: A) {
         var cg_v1, cg_v2, cg_v3, cg_a: CGFloat
         cg_v1 = v1.convert()
         cg_v2 = v2.convert()
         cg_v3 = v3.convert()
         cg_a = a.convert()
         
-        context?.setFillColor(red: cg_v1 / 255, green: cg_v2 / 255, blue: cg_v3 / 255, alpha: cg_a / 255)
-        settings.fill = Color(cg_v1, cg_v2, cg_v3, cg_a)
+        context?.setFillColor(colorModeHelper(cg_v1, cg_v2, cg_v3, cg_a).cgColor())
+        settings.fill = Color(cg_v1, cg_v2, cg_v3, cg_a, settings.colorMode)
     }
     
-    /// Sets the fill color with red, green, and blue values.
+    /// Sets the fill color with an RGB or HSB value. RGB is the default color mode.
     ///
     /// - Parameters:
-    ///     - v1: A red value from 0-255.
-    ///     - v2: A green value from 0-255.
-    ///     - v3: A blue value from 0-255.
+    ///     - v1: A red value from 0-255 (RGB). A hue value from 0-360 (HSB).
+    ///     - v2: A green value from 0-255 (RGB). A saturation value from 0-100 (HSB).
+    ///     - v3: A blue value from 0-255 (RGB). A brightness value from 0-100 (HSB).
     
-    func fill<T: Numeric>(_ v1: T, _ v2: T, _ v3: T) {
-        var cg_v1, cg_v2, cg_v3: CGFloat
-        cg_v1 = v1.convert()
-        cg_v2 = v2.convert()
-        cg_v3 = v3.convert()
-        
-        context?.setFillColor(red: cg_v1 / 255, green: cg_v2 / 255, blue: cg_v3 / 255, alpha: 255)
-        settings.fill = Color(cg_v1, cg_v2, cg_v3, 255)
+    func fill<V1: Numeric, V2: Numeric, V3: Numeric>(_ v1: V1, _ v2: V2, _ v3: V3) {
+        fill(v1, v2, v3, 255.0)
     }
     
     /// Sets the fill color with a system color name.
@@ -229,42 +293,40 @@ public extension Sketch {
     
     func fill(_ systemColorName: Color.SystemColor) {
         let systemColor = systemColorName.rawValue
-        context?.setFillColor(red: systemColor.ciColor.red / 255, green: systemColor.ciColor.green / 255, blue: systemColor.ciColor.blue / 255, alpha: systemColor.ciColor.alpha / 255)
-        settings.fill = Color(systemColor.ciColor.red, systemColor.ciColor.green, systemColor.ciColor.blue, systemColor.ciColor.alpha)
+        
+        context?.setFillColor(red: systemColor.rgba255.red, green: systemColor.rgba255.green, blue: systemColor.rgba255.blue, alpha: systemColor.rgba255.alpha)
+        settings.fill = Color(systemColor.rgba255.red, systemColor.rgba255.green, systemColor.rgba255.blue, systemColor.rgba255.alpha, .rgb)
+    }
+    
+    /// Sets the fill color with a gray and alpha values.
+    ///
+    /// - Parameters:
+    ///     - v1: A gray value from 0-255.
+    ///     - a: An optional alpha value from 0-255. Defaults to 255.
+    
+    func fill<V1: Numeric, A: Numeric>(_ v1: V1,_ a: A) {
+        var cg_v1, cg_a: CGFloat
+        cg_v1 = v1.convert()
+        cg_a = a.convert()
+        
+        context?.setFillColor(red: cg_v1 / 255, green: cg_v1 / 255, blue: cg_v1 / 255, alpha: cg_a / 255)
+        settings.fill = Color(cg_v1, cg_v1, cg_v1, cg_a, .rgb) // Single arguments always use .rgb range.
     }
     
     /// Sets the fill color with a single gray value.
     ///
     /// - Parameters:
     ///     - v1: A gray value from 0-255.
-    ///     - a: An optional alpha value from 0-255. Defaults to 255.
     
-    func fill<T: Numeric>(_ v1: T,_ a: T = T(255.0)) {
-        var cg_v1, cg_a: CGFloat
-        cg_v1 = v1.convert()
-        cg_a = a.convert()
-        
-        context?.setFillColor(red: cg_v1 / 255, green: cg_v1 / 255, blue: cg_v1 / 255, alpha: cg_a / 255)
-        settings.fill = Color(cg_v1, cg_v1, cg_v1, cg_a)
-    }
-    
-    /// Sets the background color with a single gray value.
-    ///
-    /// - Parameters:
-    ///     - v1: A gray value from 0-255.
-    
-    func fill<T: Numeric>(_ v1: T) {
-        var cg_v1: CGFloat
-        cg_v1 = v1.convert()
-        
-        context?.setFillColor(red: cg_v1 / 255, green: cg_v1 / 255, blue: cg_v1 / 255, alpha: 255)
-        settings.fill = Color(cg_v1, cg_v1, cg_v1, 255)
+    func fill<V1: Numeric>(_ v1: V1) {
+        fill(v1, 255.0)
     }
     
     /// Sets the fill to be completely clear.
     
     func noFill() {
-        fill(0.0, 0.0, 0.0, 0.0)
+        fill(0.0, 0.0, 0.0, 0.0) // Same in .rgb or .hsb mode
+        // For future contributors: Question here about whether to just toggle the fill on or off rather than changing the state of the fill variable.
     }
     
     /*
@@ -278,11 +340,12 @@ public extension Sketch {
     ///     - color: A UIColor value.
     
     func stroke(_ color: UIColor) {
-        let red = color.rgba255.red
-        let green = color.rgba255.green
-        let blue = color.rgba255.blue
-        let alpha = color.rgba255.alpha
-        stroke(red, green, blue, alpha)
+        switch settings.colorMode {
+        case .rgb:
+            stroke(color.rgba255.red, color.rgba255.green, color.rgba255.blue, color.rgba255.alpha)
+        case .hsb:
+            stroke(color.hsba360.hue, color.hsba360.saturation, color.hsba360.brightness, color.hsba360.alpha)
+        }
     }
     
     /// Sets the stroke color with a SwiftProcessing Color object.
@@ -291,26 +354,42 @@ public extension Sketch {
     ///     - color: A Color value.
     
     func stroke(_ color: Color) {
-        stroke(color.red, color.green, color.blue, color.alpha)
+        switch settings.colorMode {
+        case .rgb:
+            stroke(color.red, color.green, color.blue, color.alpha)
+        case .hsb:
+            stroke(color.hue, color.saturation, color.brightness, color.alpha)
+        }
     }
     
-    /// Sets the stroke color with red, green, blue, and, optionally, alpha values.
+    /// Sets the stroke color with an RGB or HSB value. RGB is the default color mode.
     ///
     /// - Parameters:
-    ///     - v1: A red value from 0-255.
-    ///     - v2: A green value from 0-255.
-    ///     - v3: A blue value from 0-255.
-    ///     - a: An optional alpha value from 0-255. Defaults to 255.
+    ///     - v1: A red value from 0-255 (RGB). A hue value from 0-360 (HSB).
+    ///     - v2: A green value from 0-255 (RGB). A saturation value from 0-100 (HSB).
+    ///     - v3: A blue value from 0-255 (RGB). A brightness value from 0-100 (HSB).
+    ///     - a: An optional alpha value from 0-255. Defaults to 255 (RGB). An alpha value from 0-100. Defaults to 255 (HSB). Defaults to 255.
     
-    func stroke<T:Numeric>(_ v1: T, _ v2: T, _ v3: T, _ a: T = T(255.0)) {
+    func stroke<V1: Numeric, V2: Numeric, V3: Numeric, A: Numeric>(_ v1: V1, _ v2: V2, _ v3: V3, _ a: A) {
         var cg_v1, cg_v2, cg_v3, cg_a: CGFloat
         cg_v1 = v1.convert()
         cg_v2 = v2.convert()
         cg_v3 = v3.convert()
         cg_a = a.convert()
         
-        context?.setStrokeColor(red: cg_v1 / 255, green: cg_v2 / 255, blue: cg_v3 / 255, alpha: cg_a / 255)
-        settings.stroke = Color(cg_v1, cg_v2, cg_v3, cg_a)
+        context?.setStrokeColor(colorModeHelper(cg_v1, cg_v2, cg_v3, cg_a).cgColor())
+        settings.stroke = Color(cg_v1, cg_v2, cg_v3, cg_a, settings.colorMode)
+    }
+    
+    /// Sets the stroke color with an RGB or HSB value. RGB is the default color mode.
+    ///
+    /// - Parameters:
+    ///     - v1: A red value from 0-255 (RGB). A hue value from 0-360 (HSB).
+    ///     - v2: A green value from 0-255 (RGB). A saturation value from 0-100 (HSB).
+    ///     - v3: A blue value from 0-255 (RGB). A brightness value from 0-100 (HSB).
+    
+    func stroke<V1: Numeric, V2: Numeric, V3: Numeric>(_ v1: V1, _ v2: V2, _ v3: V3) {
+        stroke(v1, v2, v3, 255.0)
     }
     
     /// Sets the stroke color with a system color name.
@@ -320,29 +399,39 @@ public extension Sketch {
     
     func stroke(_ systemColorName: Color.SystemColor) {
         let systemColor = systemColorName.rawValue
-        context?.setStrokeColor(red: systemColor.ciColor.red / 255, green: systemColor.ciColor.green / 255, blue: systemColor.ciColor.blue / 255, alpha: systemColor.ciColor.alpha / 255)
-        settings.stroke = Color(systemColor.ciColor.red, systemColor.ciColor.green, systemColor.ciColor.blue, systemColor.ciColor.alpha)
+        context?.setStrokeColor(red: systemColor.rgba255.red, green: systemColor.rgba255.green / 255, blue: systemColor.rgba255.blue / 255, alpha: systemColor.rgba255.alpha / 255)
+        settings.stroke = Color(systemColor.rgba255.red, systemColor.rgba255.green, systemColor.rgba255.blue, systemColor.rgba255.alpha, .rgb)
+    }
+    
+    /// Sets the fill color with a gray and alpha values.
+    ///
+    /// - Parameters:
+    ///     - v1: A gray value from 0-255.
+    ///     - a: An optional alpha value from 0-255. Defaults to 255.
+    
+    func stroke<V1: Numeric, A: Numeric>(_ v1: V1,_ a: A) {
+        var cg_v1, cg_a: CGFloat
+        cg_v1 = v1.convert()
+        cg_a = a.convert()
+        
+        context?.setStrokeColor(red: cg_v1 / 255, green: cg_v1 / 255, blue: cg_v1 / 255, alpha: cg_a / 255)
+        settings.stroke = Color(cg_v1, cg_v1, cg_v1, cg_a, .rgb) // Single arguments always use .rgb range.
     }
     
     /// Sets the stroke color with a single gray value.
     ///
     /// - Parameters:
     ///     - v1: A gray value from 0-255.
-    ///     - a: An optional alpha value from 0-255. Defaults to 255.
     
-    func stroke<T: Numeric>(_ v1: T,_ a: T = T(255.0)) {
-        var cg_v1, cg_a: CGFloat
-        cg_v1 = v1.convert()
-        cg_a = a.convert()
-        
-        context?.setStrokeColor(red: cg_v1 / 255, green: cg_v1 / 255, blue: cg_v1 / 255, alpha: cg_a / 255)
-        settings.stroke = Color(cg_v1, cg_v1, cg_v1, cg_a)
+    func stroke<V1: Numeric>(_ v1: V1) {
+        stroke(v1, 255.0)
     }
     
     /// Sets the stroke to be completely clear.
     
     func noStroke() {
         stroke(0.0, 0.0, 0.0, 0.0)
+        // Same question as noFill()
     }
     
     /*
@@ -371,19 +460,35 @@ public extension Sketch {
     ///     - color: A UIColor value.
     
     func color(_ c: UIColor) -> Color {
-        return Color(c.rgba255.red, c.rgba255.green, c.rgba255.blue, c.rgba255.alpha)
+        switch settings.colorMode {
+        case .rgb:
+            return Color(c.rgba255.red, c.rgba255.green, c.rgba255.blue, c.rgba255.alpha, .rgb)
+        case .hsb:
+            return Color(c.hsba360.hue, c.hsba360.saturation, c.hsba360.brightness, c.hsba360.alpha, .hsb)
+        }
     }
     
-    /// Returns a color object that can be stored in a variable.
+    /// Returns a color object that can be stored in a variable using RGB or HSB values. RGB is the default color mode.
     ///
     /// - Parameters:
-    ///     - v1: A red value from 0-255.
-    ///     - v2: A green value from 0-255.
-    ///     - v3: A blue value from 0-255.
-    ///     - a: An optional alpha value from 0-255. Defaults to 255.
+    ///     - v1: A red value from 0-255 (RGB). A hue value from 0-360 (HSB).
+    ///     - v2: A green value from 0-255 (RGB). A saturation value from 0-100 (HSB).
+    ///     - v3: A blue value from 0-255 (RGB). A brightness value from 0-100 (HSB).
+    ///     - a: An optional alpha value from 0-255. Defaults to 255 (RGB). An alpha value from 0-100. Defaults to 255 (HSB). Defaults to 255.
     
-    func color<T: Numeric>(_ v1: T, _ v2: T, _ v3: T, _ a: T = T(255.0)) -> Color {
-        return Color(v1, v2, v3, a)
+    func color<V1: Numeric, V2: Numeric, V3: Numeric, A: Numeric>(_ v1: V1, _ v2: V2, _ v3: V3, _ a: A) -> Color {
+        return Color(v1, v2, v3, a, settings.colorMode)
+    }
+    
+    /// Returns a color object that can be stored in a variable using RGB or HSB values. RGB is the default color mode.
+    ///
+    /// - Parameters:
+    ///     - v1: A red value from 0-255 (RGB). A hue value from 0-360 (HSB).
+    ///     - v2: A green value from 0-255 (RGB). A saturation value from 0-100 (HSB).
+    ///     - v3: A blue value from 0-255 (RGB). A brightness value from 0-100 (HSB).
+    
+    func color<V1: Numeric, V2: Numeric, V3: Numeric>(_ v1: V1, _ v2: V2, _ v3: V3) -> Color {
+        return Color(v1, v2, v3, 255.0, settings.colorMode)
     }
     
     /// Returns a color object that can be stored in a variable.
@@ -392,8 +497,17 @@ public extension Sketch {
     ///     - v1: A gray value from 0-255.
     ///     - a: An optional alpha value from 0-255. Defaults to 255.
     
-    func color<T: Numeric>(_ v1: T, _ a: T = T(255.0)) -> Color {
-        return Color(v1, v1, v1, a)
+    func color<V1: Numeric, A: Numeric>(_ v1: V1, _ a: A) -> Color {
+        return Color(v1, v1, v1, a, .rgb) // Single arguments always use .rgb range.
+    }
+    
+    /// Returns a color object that can be stored in a variable.
+    ///
+    /// - Parameters:
+    ///     - v1: A gray value from 0-255.
+    
+    func color<V1: Numeric>(_ v1: V1) -> Color {
+        return Color(v1, v1, v1, 255.0, .rgb) // Single arguments always use .rgb range.
     }
     
     /// Returns a color object that can be stored in a variable.
@@ -414,8 +528,8 @@ public extension Sketch {
     /// - Parameters:
     ///     - color: A SwiftProcessing color object.
     
-    func red(_ color: Color) -> CGFloat {
-        return red(color.toArray())
+    func red(_ color: Color) -> Double {
+        return color.red
     }
     
     /// Returns the red value of a color stored in an array
@@ -423,7 +537,7 @@ public extension Sketch {
     /// - Parameters:
     ///     - color: A color stored in an array, e.g. [R, G, B, A].
     
-    func red<T: Numeric>(_ color: [T]) -> CGFloat {
+    func red<T: Numeric>(_ color: [T]) -> Double {
         return color[0].convert()
     }
     
@@ -432,8 +546,8 @@ public extension Sketch {
     /// - Parameters:
     ///     - color: A SwiftProcessing color object.
     
-    func green(_ color: Color) -> CGFloat {
-        return green(color.toArray())
+    func green(_ color: Color) -> Double {
+        return color.green
     }
     
     /// Returns the green value of a color stored in an array
@@ -441,7 +555,7 @@ public extension Sketch {
     /// - Parameters:
     ///     - color: A color stored in an array, e.g. [R, G, B, A].
     
-    func green<T: Numeric>(_ color: [T]) -> CGFloat {
+    func green<T: Numeric>(_ color: [T]) -> Double {
         return color[1].convert()
     }
     
@@ -450,8 +564,8 @@ public extension Sketch {
     /// - Parameters:
     ///     - color: A SwiftProcessing color object.
     
-    func blue(_ color: Color) -> CGFloat {
-        return blue(color.toArray())
+    func blue(_ color: Color) -> Double {
+        return color.blue
     }
     
     /// Returns the blue value of a color stored in an array
@@ -459,7 +573,7 @@ public extension Sketch {
     /// - Parameters:
     ///     - color: A color stored in an array, e.g. [R, G, B, A].
     
-    func blue<T: Numeric>(_ color: [T]) -> CGFloat {
+    func blue<T: Numeric>(_ color: [T]) -> Double {
         return color[2].convert()
     }
     
@@ -468,17 +582,71 @@ public extension Sketch {
     /// - Parameters:
     ///     - color: A SwiftProcessing color object.
     
-    func alpha(_ color: Color) -> CGFloat {
-        return alpha(color.toArray())
+    func alpha(_ color: Color) -> Double {
+        return color.alpha
     }
     
     /// Returns the alpha value of a color stored in an array
     ///
     /// - Parameters:
-    ///     - color: A color stored in an array, e.g. [R, G, B, A].
+    ///     - color: A color stored in an array, e.g. [R, G, B, A] or [H, S, B, A].
     
-    func alpha<T: Numeric>(_ color: [T]) -> CGFloat {
+    func alpha<T: Numeric>(_ color: [T]) -> Double {
         return color[3].convert()
+    }
+    
+    /// Returns the hue value of a SwiftProcessing color object.
+    ///
+    /// - Parameters:
+    ///     - color: A SwiftProcessing color object.
+    
+    func hue(_ color: Color) -> Double {
+        return color.hue
+    }
+    
+    /// Returns the hue value of a color stored in an array
+    ///
+    /// - Parameters:
+    ///     - color: A color stored in an array, e.g. [H, S, B, A].
+    
+    func hue<T: Numeric>(_ color: [T]) -> Double {
+        return color[0].convert()
+    }
+    
+    /// Returns the saturation value of a SwiftProcessing color object.
+    ///
+    /// - Parameters:
+    ///     - color: A SwiftProcessing color object.
+    
+    func saturation(_ color: Color) -> Double {
+        return color.saturation
+    }
+    
+    /// Returns the saturation value of a color stored in an array
+    ///
+    /// - Parameters:
+    ///     - color: A color stored in an array, e.g. [H, S, B, A].
+    
+    func saturation<T: Numeric>(_ color: [T]) -> Double {
+        return color[1].convert()
+    }
+    
+    /// Returns the brightness value of a SwiftProcessing color object.
+    ///
+    /// - Parameters:
+    ///     - color: A SwiftProcessing color object.
+    
+    func brightness(_ color: Color) -> Double {
+        return color.brightness
+    }
+    
+    /// Returns the brightness value of a color stored in an array
+    ///
+    /// - Parameters:
+    ///     - color: A color stored in an array, e.g. [H, S, B, A].
+    
+    func brightness<T: Numeric>(_ color: [T]) -> Double {
+        return color[2].convert()
     }
     
     // Source: https://stackoverflow.com/questions/24263007/how-to-use-hex-color-values
@@ -500,7 +668,8 @@ public extension Sketch {
             CGFloat((rgbValue & 0xFF0000) >> 16),
             CGFloat((rgbValue & 0x00FF00) >> 8),
             CGFloat(rgbValue & 0x0000FF),
-            CGFloat(1.0)
+            CGFloat(1.0),
+            .rgb
         )
     }
 }
@@ -509,65 +678,175 @@ public extension Sketch {
 // MARK: - CLASS: COLOR
 // =======================================================================
 
-open class Color {
-    
-    public var red: Double
-    public var green: Double
-    public var blue: Double
-    public var alpha: Double
-    
-    public init<T: Numeric>(_ v1: T, _ v2: T, _ v3: T, _ a: T = T(255.0)) {
-        self.red = v1.convert()
-        self.green = v2.convert()
-        self.blue = v3.convert()
-        self.alpha = a.convert()
+public extension Sketch {
+    class Color {
+        
+        public var red: Double
+        public var green: Double
+        public var blue: Double
+        
+        public var hue: Double
+        public var saturation: Double
+        public var brightness: Double
+        
+        public var alpha: Double
+        
+        private var mode: ColorMode
+        
+        convenience init<V1: Numeric, A: Numeric>(_ v1: V1, _ a: A) {
+            self.init(v1, v1, v1, a, .rgb)
+        }
+        
+        convenience init<V1: Numeric>(_ v1: V1) {
+            self.init(v1, v1, v1, 255.0, .rgb)
+        }
+        
+        convenience init<V1: Numeric, V2: Numeric, V3: Numeric>(_ v1: V1, _ v2: V2, _ v3: V3) {
+            self.init(v1, v2, v3, 255.0, .rgb)
+        }
+        
+        public init<V1: Numeric, V2: Numeric, V3: Numeric, A: Numeric>(_ v1: V1, _ v2: V2, _ v3: V3, _ a: A, _ mode: ColorMode = .rgb) {
+            self.mode = mode
+            
+            var d_v1, d_v2, d_v3, d_a: Double
+            d_v1 = v1.convert(); d_v2 = v2.convert(); d_v3 = v3.convert(); d_a = a.convert()
+            
+            // Set everything to zero so we have access to self to use clamp.
+            // There may be a more optimized way of doing this.
+            self.red = 0; self.green = 0; self.blue = 0; self.alpha = 0; self.hue = 0.0; self.saturation = 0.0; self.brightness = 0.0
+            
+            switch mode {
+            case .rgb:
+                // Set RGB
+                self.red = clamp(value: d_v1, minimum: 0.0, maximum: 255.0)
+                self.green = clamp(value: d_v2, minimum: 0.0, maximum: 255.0)
+                self.blue = clamp(value: d_v3, minimum: 0.0, maximum: 255.0)
+                self.alpha = clamp(value: d_a, minimum: 0.0, maximum: 255.0)
+                
+                // Extract and Set HSB
+                // Doesn't feel right to create a temporary UIColor here.
+                // For future contributors: Is further optimization necessary/possible here?
+                let temp = UIColor(red: CGFloat(self.red / 255), green: CGFloat(self.green) / 255, blue: CGFloat(self.blue / 255), alpha: CGFloat(self.alpha / 255))
+
+                self.hue = temp.double_hsba360.hue
+                self.saturation = temp.double_hsba360.saturation
+                self.brightness = temp.double_hsba360.brightness
+            case .hsb:
+                // Set HSB
+                self.hue = clamp(value: d_v1, minimum: 0.0, maximum: 360.0)
+                self.saturation = clamp(value: d_v2, minimum: 0.0, maximum: 100)
+                self.brightness = clamp(value: d_v3, minimum: 0.0, maximum: 100)
+                self.alpha = clamp(value: d_a, minimum: 0.0, maximum: 100)
+                
+                // Extract and Set RGB
+                // Doesn't feel right to create a temporary UIColor here.
+                // For future contributors: Is further optimization necessary/possible here?
+                let temp = UIColor(hue: CGFloat(self.hue / 360), saturation: CGFloat(self.saturation / 100), brightness: CGFloat(self.brightness / 100), alpha: CGFloat(self.alpha / 100))
+
+                // Extract and Set RGB
+                self.red = temp.double_rgba255.red
+                self.green = temp.double_rgba255.green
+                self.blue = temp.double_rgba255.blue
+            }
+        }
+
+        
+        public init(_ color: UIColor) {
+            self.mode = .rgb // RGB will be the default value here. It matters because alpha will range from 0-255.
+            
+            self.red = color.double_rgba255.red
+            self.green = color.double_rgba255.green
+            self.blue = color.double_rgba255.blue
+            self.alpha = color.double_rgba255.alpha
+            
+            self.hue = Double(color.hsba360.hue)
+            self.saturation = Double(color.hsba.saturation)
+            self.brightness = Double(color.hsba.brightness)
+        }
+        
+        func setRed<T: Numeric>(_ red: T) {
+            self.red = red.convert()
+        }
+        
+        func setGreen<T: Numeric>(_ green: T) {
+            self.green = green.convert()
+        }
+        
+        func setBlue<T: Numeric>(_ blue: T) {
+            self.blue = blue.convert()
+        }
+        
+        func setAlpha<T: Numeric>(_ alpha: T) {
+            self.alpha = alpha.convert()
+        }
+        
+        func setHue<T: Numeric>(_ hue: T) {
+            self.hue = hue.convert()
+        }
+        
+        func setSaturation<T: Numeric>(_ saturation: T) {
+            self.saturation = saturation.convert()
+        }
+        
+        func setBrightness<T: Numeric>(_ brightness: T) {
+            self.brightness = brightness.convert()
+        }
+        
+        func uiColor() -> UIColor {
+            switch mode {
+            case .rgb:
+                return UIColor(red: self.red.convert() / 255.0, green: self.green.convert() / 255.0, blue: self.blue.convert() / 255.0, alpha: self.alpha.convert() / 255.0)
+            case .hsb:
+                return UIColor(red: self.red.convert() / 255.0, green: self.green.convert() / 255.0, blue: self.blue.convert() / 255.0, alpha: self.alpha.convert() / 100.0)
+            }
+        }
+        
+        func cgColor() -> CGColor {
+            switch mode {
+            case .rgb:
+                return CGColor(red: self.red.convert() / 255.0, green: self.green.convert() / 255.0, blue: self.blue.convert() / 255.0, alpha: self.alpha.convert() / 255.0)
+            case .hsb:
+                return CGColor(red: self.red.convert() / 255.0, green: self.green.convert() / 255.0, blue: self.blue.convert() / 255.0, alpha: self.alpha.convert() / 100.0)
+            }
+        }
+        
+        func toString() -> String {
+            return """
+                rgba: (\(self.red),\(self.green),\(self.blue),\(self.alpha))
+                hsba: (\(self.hue),\(self.saturation),\(self.brightness),\(self.alpha))
+                """
+        }
+        
+        func toArrayRGB() -> [Double] {
+            return [red, green, blue, alpha]
+        }
+        
+        func toArrayHSB() -> [Double] {
+            return [hue, saturation, brightness, alpha]
+        }
+        
+        // https://developer.apple.com/library/archive/samplecode/AppChat/Listings/AppChat_MathUtilities_swift.html#//apple_ref/doc/uid/TP40017298-AppChat_MathUtilities_swift-DontLinkElementID_18
+        private func clamp<T: Comparable>(value: T, minimum: T, maximum: T) -> T {
+            return Swift.min(Swift.max(value, minimum), maximum)
+        }
+        
+        open func debugPrint() {
+            if mode == .rgb {
+            print("initialized rgb:\r\n" + self.toString())
+            } else {
+                print("initialized hsb:\r\n" + self.toString())
+            }
+        }
+
     }
     
-    public init(_ color: UIColor) {
-        self.red = color.double_rgba255.red
-        self.green = color.double_rgba255.green
-        self.blue = color.double_rgba255.blue
-        self.alpha = color.double_rgba255.alpha
-    }
-    
-    func setRed<T: Numeric>(_ red: T) {
-        self.red = red.convert()
-    }
-    
-    func setGreen<T: Numeric>(_ green: T) {
-        self.green = green.convert()
-    }
-    
-    func setBlue<T: Numeric>(_ blue: T) {
-        self.blue = blue.convert()
-    }
-    
-    func setAlpha<T: Numeric>(_ alpha: T) {
-        self.alpha = alpha.convert()
-    }
-    
-    func uiColor() -> UIColor {
-        return UIColor(red: self.red.convert() / 255.0, green: self.green.convert() / 255.0, blue: self.blue.convert() / 255.0, alpha: self.alpha.convert() / 255.0)
-    }
-    
-    func cgColor() -> CGColor {
-        return CGColor(red: self.red.convert(), green: self.green.convert(), blue: self.blue.convert(), alpha: self.alpha.convert())
-    }
-    
-    func toString() -> String {
-        return "rgba(\(self.red),\(self.green),\(self.blue),\(self.blue))"
-    }
-    
-    func toArray() -> [Double] {
-        return [red, green, blue, alpha]
-    }
 }
 
 // =======================================================================
 // MARK: - COLOR EXTENSION FOR CONSTANTS
 // =======================================================================
 
-extension Color {
+extension Sketch.Color {
     
     public enum SystemColor {
         case systemRed
@@ -588,7 +867,7 @@ extension Color {
     }
 }
 
-extension Color.SystemColor: RawRepresentable {
+extension Sketch.Color.SystemColor: RawRepresentable {
     public typealias RawValue = UIColor
     
     public init?(rawValue: RawValue) {

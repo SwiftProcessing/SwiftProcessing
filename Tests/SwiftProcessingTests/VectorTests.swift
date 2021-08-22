@@ -58,7 +58,7 @@ final class VectorTests: XCTestCase {
         let sketch = Sketch()
         let v1 = sketch.createVector(1, 13)
         let v2 = v1.copy()
-        let result = Vector.add(v1, v2)
+        let result = Sketch.Vector.add(v1, v2)
         XCTAssertEqual(v1.x, 1)
         XCTAssertEqual(v1.y, 13)
         XCTAssertEqual(result.x, 2)
@@ -69,7 +69,7 @@ final class VectorTests: XCTestCase {
         let sketch = Sketch()
         let v1 = sketch.createVector(1, 13, 2017)
         let v2 = v1.copy()
-        let result = Vector.add(v1, v2)
+        let result = Sketch.Vector.add(v1, v2)
         XCTAssertEqual(v1.x, 1)
         XCTAssertEqual(v1.y, 13)
         XCTAssertEqual(v1.z, 2017)
@@ -126,7 +126,7 @@ final class VectorTests: XCTestCase {
         let sketch = Sketch()
         let v1 = sketch.createVector(1, 13)
         let v2 = v1.copy()
-        let result = Vector.sub(v1, v2)
+        let result = Sketch.Vector.sub(v1, v2)
         XCTAssertEqual(v1.x, 1)
         XCTAssertEqual(v1.y, 13)
         XCTAssertEqual(result.x, 0)
@@ -137,7 +137,7 @@ final class VectorTests: XCTestCase {
         let sketch = Sketch()
         let v1 = sketch.createVector(1, 13, 2017)
         let v2 = v1.copy()
-        let result = Vector.sub(v1, v2)
+        let result = Sketch.Vector.sub(v1, v2)
         XCTAssertEqual(v1.x, 1)
         XCTAssertEqual(v1.y, 13)
         XCTAssertEqual(v1.z, 2017)
@@ -191,7 +191,7 @@ final class VectorTests: XCTestCase {
     func testStaticMult2D(){
         let sketch = Sketch()
         let v1 = sketch.createVector(1, 13)
-        let result = Vector.mult(v1, 2)
+        let result = Sketch.Vector.mult(v1, 2)
         XCTAssertEqual(v1.x, 1)
         XCTAssertEqual(v1.y, 13)
         XCTAssertEqual(result.x, 2)
@@ -201,7 +201,7 @@ final class VectorTests: XCTestCase {
     func testStaticMult3D(){
         let sketch = Sketch()
         let v1 = sketch.createVector(1, 13, 2017)
-        let result = Vector.mult(v1, 2)
+        let result = Sketch.Vector.mult(v1, 2)
         XCTAssertEqual(v1.x, 1)
         XCTAssertEqual(v1.y, 13)
         XCTAssertEqual(v1.z, 2017)
@@ -253,7 +253,7 @@ final class VectorTests: XCTestCase {
     func testStaticDiv2D(){
         let sketch = Sketch()
         let v1 = sketch.createVector(1, 13)
-        let result = Vector.div(v1, 2)
+        let result = Sketch.Vector.div(v1, 2)
         XCTAssertEqual(v1.x, 1)
         XCTAssertEqual(v1.y, 13)
         XCTAssertEqual(result.x, 0.5)
@@ -263,7 +263,7 @@ final class VectorTests: XCTestCase {
     func testStaticDiv3D(){
         let sketch = Sketch()
         let v1 = sketch.createVector(1, 13, 2017)
-        let result = Vector.div(v1, 2)
+        let result = Sketch.Vector.div(v1, 2)
         XCTAssertEqual(v1.x, 1)
         XCTAssertEqual(v1.y, 13)
         XCTAssertEqual(v1.z, 2017)
@@ -335,7 +335,7 @@ final class VectorTests: XCTestCase {
     func testNormalize(){
         let sketch = Sketch()
         let v = sketch.createVector(5, 0)
-        v.normalize()
-        XCTAssertEqual(v.x, 1)
+        let normalized = v.normalize()
+        XCTAssertEqual(normalized.mag(), 1)
     }
 }

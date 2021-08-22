@@ -1,3 +1,12 @@
+/*
+ * SwiftProcessing: UIKitControlElement
+ *
+ * This SwiftProcessing class consolidates many operations of
+ * UIKit view elements and simplifies access to them.
+ *
+ * */
+
+
 import Foundation
 import UIKit
 

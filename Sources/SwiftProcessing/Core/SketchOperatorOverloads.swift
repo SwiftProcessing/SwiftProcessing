@@ -9,13 +9,71 @@
  *
  * We are choosing to go with Swift's static
  * truncating remainder method, which gives the
- * behavior we would expect for modulo.
+ * behavior we would expect for modulo in Processing.
  * */
 
 // =======================================================================
 // MARK: - % OPERATOR OVERLOAD
 // =======================================================================
 
-public func % (left: Double, right: Double) -> Double {
-    return left.truncatingRemainder(dividingBy: right)
+public func % <L: Numeric, R: Numeric>(left: L, right: R) -> Double {
+    let d_left: Double = left.convert()
+    let d_right: Double = right.convert()
+    return d_left.truncatingRemainder(dividingBy: d_right)
+}
+
+// =======================================================================
+// MARK: - ARITHMETIC OPERATOR OVERLOADS
+// =======================================================================
+
+public func - <L: Numeric, R: Numeric>(left: L, right: R) -> Double {
+    let d_left: Double = left.convert()
+    let d_right: Double = right.convert()
+    return d_left - d_right
+}
+
+public func + <L: Numeric, R: Numeric>(left: L, right: R) -> Double {
+    let d_left: Double = left.convert()
+    let d_right: Double = right.convert()
+    return d_left + d_right
+}
+
+public func * <L: Numeric, R: Numeric>(left: L, right: R) -> Double {
+    let d_left: Double = left.convert()
+    let d_right: Double = right.convert()
+    return d_left * d_right
+}
+
+public func / <L: Numeric, R: Numeric>(left: L, right: R) -> Double {
+    let d_left: Double = left.convert()
+    let d_right: Double = right.convert()
+    return d_left / d_right
+}
+
+// =======================================================================
+// MARK: - COMPARISON OPERATOR OVERLOADS
+// =======================================================================
+
+public func < <L: Numeric, R: Numeric>(left: L, right: R) -> Bool {
+    let d_left: Double = left.convert()
+    let d_right: Double = right.convert()
+    return d_left < d_right
+}
+
+public func <= <L: Numeric, R: Numeric>(left: L, right: R) -> Bool {
+    let d_left: Double = left.convert()
+    let d_right: Double = right.convert()
+    return d_left <= d_right
+}
+
+public func > <L: Numeric, R: Numeric>(left: L, right: R) -> Bool {
+    let d_left: Double = left.convert()
+    let d_right: Double = right.convert()
+    return d_left > d_right
+}
+
+public func >= <L: Numeric, R: Numeric>(left: L, right: R) -> Bool {
+    let d_left: Double = left.convert()
+    let d_right: Double = right.convert()
+    return d_left >= d_right
 }
