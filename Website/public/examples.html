@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<head>
+    <style>
+
+ @media only screen and (orientation:portrait){
+    .phone {
+            margin-top: 5vh;
+            width: 45vh;
+            height: 80vh;
+            margin-left: calc(50vw - 22.5vh);
+        }
+
+        .phone-screen {
+            width: 96%;
+            height: 78vh;
+            overflow: scroll;
+            margin: auto;
+            margin-top: 1vh
+        }
+
+        .notch {
+            position: absolute;
+            top: .8vh;
+            left: 12.25vh;
+            width: 20vh;
+            z-index: 9999999;
+        }
+
+        .phone-content {
+            padding: 2em;
+        }
+
+        #title {
+            font-size: 1.5em;
+            font-weight: bold;
+        }
+
+        body {
+            font-family: 'Courier New', Courier, monospace;
+            background: aquamarine;
+        }
+
+        .main-images {
+            width: 30%;
+        }
+    }
+    @media only screen and (orientation:landscape){
+        .phone {
+            margin-top: 27.5vh;
+            height: 45vh;
+            width: 80vh;
+            left: calc(50vw - 40vh)
+        }
+
+        .phone-screen {
+            margin: auto;
+            width: 98%;
+            height: 43vh;
+            overflow: scroll;
+            margin-top: 1vh;
+        }
+
+        .notch {
+            position: absolute;
+            right: -7.3vh;
+            top: 20.25vh;
+            width: 20vh;
+            z-index: 9999999;
+            transform-origin: 50% 50%;
+            transform: rotate(90deg)
+        }
+
+        .phone-content {
+            padding: 1em!important;
+        }
+
+        #title {
+            font-size: 1.5em;
+            font-weight: bold;
+        }
+
+        body {
+            font-family: 'Courier New', Courier, monospace;
+            background: aquamarine;
+        }
+
+        .main-images {
+            width: 30%;
+        }
+    }
+   
+
+
+
+
+        .phone{
+            background: black;
+            top: 0;
+            position: fixed;
+            border-radius: 5%;
+        }
+
+        .phone-screen {
+            overflow: scroll;
+            background: white;
+            border-radius: 5%;
+        }
+
+        .notch {
+            position: absolute;
+            z-index: 9999999;
+        }
+
+        .phone-content {
+            padding: 1em;
+            padding-top: 3em;
+        }
+
+        #title {
+            font-size: 1.5em;
+            font-weight: bold;
+        }
+
+        body {
+            font-family: 'Courier New', Courier, monospace;
+            background: aquamarine;
+            
+        }
+        #examples-link{
+            float:right;
+            margin-right: 5%;
+        }
+        .main-images {
+            width: 31%;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="phone" data-wiv-speed=".55" data-wiv-height="3" data-wiv-tightness="6" data-wiv-thickness="1"
+        data-wiv-color="#000000" data-wiv-fill="#000000">
+        <img class="notch" src="notch.png">
+        <div class="phone-screen" data-wiv-speed=".55" data-wiv-height="3" data-wiv-tightness="6"
+            data-wiv-thickness="1" data-wiv-color="#FFFFFF" data-wiv-fill="#FFFFFF">
+            <div class="phone-content">
+                <span id="title">Swift Processing Examples</span>
+                <br> <br>
+                <h4> <spill>Camera</spill> </h4>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://jjkaufman.github.io/ModernWordSolutions.js/ModernWordSolutions.js">
+    </script>
+    <script src="https://jjkaufman.github.io/wiv.js/dist/wiv.js"></script>
+    <script>
+        //initial wivs and call initial frame render
+        let w = wiv.wiv();
+        w.initWivs();
+        
+
+        
+    </script>    
+    <!-- The core Firebase JS SDK is always required and must be listed first -->
+<script src="/__/firebase/7.4.0/firebase-app.js"></script>
+
+<!-- TODO: Add SDKs for Firebase products that you want to use
+     https://firebase.google.com/docs/web/setup#available-libraries -->
+<script src="/__/firebase/7.4.0/firebase-analytics.js"></script>
+
+<!-- Initialize Firebase -->
+<script src="/__/firebase/init.js"></script>
+</body>
+
+</html>
