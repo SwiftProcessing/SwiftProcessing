@@ -89,5 +89,5 @@ class MySketch: Sketch, SketchDelegate {
 PlaygroundPage.current.needsIndefiniteExecution = true
 PlaygroundPage.current.setLiveView(MySketch())
 //:  ### Credit for image used in Tutorial
-//: Source: [NASA/JHUAPL/SwRI](https://solarsystem.nasa.gov/resources/795/the-rich-color-variations-of-pluto/?category=planets/dwarf-planets_pluto)
+//: Source: [NASA/JHUAPL/SwRI](https://solarsystem.nasa.gov/resources/795/the-rich-color-variations-of-pluto/?category=planets/dwarf-planets_pluto)\
 //: [Next](@next)
