@@ -1,4 +1,4 @@
-//: # Mudularity and Camera
+//: # Modularity
 //:
 //: ## Modular Code
 //:

@@ -84,5 +84,4 @@
  */
 
 //: ## Can you use SwiftProcessing's AudioIn class to control your sketch with sound?
-//: [Next](@next)
 //: ## Congratulations! You've completed the Interactivity and Control Flow chapter. Move on to the next section for more!
