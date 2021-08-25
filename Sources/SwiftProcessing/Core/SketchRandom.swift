@@ -16,9 +16,9 @@ public extension Sketch {
      * MARK: - RANDOM
      */
     
-    /// Generate a random number from low and high value (inclusive).
+    /// Generate a random floating point number from low and high value (inclusive).
     ///  ```
-    ///  // Below generates a random number between 10 and 100.
+    ///  // Below generates a random number between 10.0 and 100.0.
     ///  let number = random(10, 100)
     ///  ```
     /// - Parameters:
@@ -29,9 +29,9 @@ public extension Sketch {
         return Double.random(in: low.convert()...high.convert())
     }
     
-    /// Generate a random number from 0 and high value (inclusive).
+    /// Generate a random floating point number from 0 and high value (inclusive).
     ///  ```
-    ///  // Below generates a random number up to and including 100.
+    ///  // Below generates a random number up to and including 100.0.
     ///  let number = random(100)
     ///  // Below generates a random number up to 1.0.
     ///  let newNumber = random()
@@ -39,8 +39,8 @@ public extension Sketch {
     /// - Parameters:
     ///   - high: upper bound of the value's current range
     
-    func random<T: Numeric>(_ high: T = T(1)) -> T {
-        return T(CGFloat.random(in: 0.0...high.convert()))
+    func random<T: Numeric>(_ high: T = T(1)) -> Double {
+        return Double.random(in: 0.0...high.convert())
     }
     
     /*
