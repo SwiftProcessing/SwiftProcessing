@@ -2,7 +2,14 @@
 
 Welcome to the beautiful world of Swift Processing. 
 
-Swift Processing is being developed to enable students, artists, designers, and programmers of all skill levels to create creative iOS App and Augmented Reality experiences. 
+Swift Processing is being developed to enable students, artists, designers, and programmers of all skill levels to create creative iOS  experiences. 
+
+## Playgrounds
+
+Learn how to creative code with Swift Processing in the fully interfactive Swift Processing Xcode playgrounds. 
+
+1. [Download Xcode !](https://apps.apple.com/us/app/xcode/id497799835?mt=12)
+2. [Download Playgrounds!](https://swiftprocessing.org/SwiftProcessingPlaygrounds.zip)
 
 ## Video Guide
 
