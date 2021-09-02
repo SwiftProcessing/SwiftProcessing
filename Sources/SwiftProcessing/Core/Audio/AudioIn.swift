@@ -60,7 +60,6 @@ open class AudioIn {
     private static let shared = AudioIn()
     
     private init() {
-        // print("Creating audio in object")
         // Set up the microphone to start listening.
         
         setupAudioSession()
@@ -136,12 +135,8 @@ open class AudioIn {
     /// ```
     
     public static func start() {
-        // Start the microphone.
-        print("Starting microphone")
-        
         shared.recorder.prepareToRecord()
         shared.recorder.isMeteringEnabled = true
-        print(shared.recorder.record())
     }
     
     /// Returns the level of the input coming into the microphone. This can be done on a
@@ -207,7 +202,6 @@ open class AudioIn {
     @objc private func updateMeter() {
         recorder.updateMeters()
         updated?(pos)
-        print(pos)
         level = Double(self.pos)/2.0*AudioIn.multiplier
     }
     
