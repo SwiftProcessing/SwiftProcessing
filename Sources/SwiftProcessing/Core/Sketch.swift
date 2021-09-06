@@ -97,7 +97,8 @@ import SceneKit
     
     public var frameCount: Double = 0
     public var deltaTime: Double = 1/60
-    private var lastTime: Double = CACurrentMediaTime()
+    var lastTime: Double = CACurrentMediaTime()
+    var millsOffset: Int = Int(NSDate().timeIntervalSince1970 * 1000)
     
     var fps: Double = 60
     
@@ -204,6 +205,7 @@ import SceneKit
         UIGraphicsEndImageContext()
         
         self.clearsContextBeforeDrawing = false
+        self.isOpaque = true
         
         loop()
     }
@@ -279,13 +281,6 @@ import SceneKit
             self.context = UIGraphicsGetCurrentContext()
             UIGraphicsEndImageContext()
         }
-    }
-    
-    private func updateTimes() {
-        frameCount =  frameCount + 1
-        let newTime = CACurrentMediaTime()
-        deltaTime = newTime - lastTime
-        lastTime = newTime
     }
     
     /// `endDraw()` is an overridable function that runs after `noLoop()` is run. It can be used for any last minute cleanup after the last `draw()` loop has executed.

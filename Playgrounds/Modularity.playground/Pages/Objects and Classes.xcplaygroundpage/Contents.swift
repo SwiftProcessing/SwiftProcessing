@@ -5,7 +5,7 @@
  
  ## Introduction
  
- In Swift, you may not have noticed it, but we've been working with objects from the very first lesson. The creators of programming languages in the late 1970s and 80s envisioned a way of engaging with coding that mimicked real life interactions. They called this Object oriented programming, or OOP for short.
+ In Swift, you may not have noticed it, but we've been working with objects from the very first lesson. The creators of programming languages in the late 1970s and 80s envisioned a way of engaging with coding that mimicked real life interactions. They called this object oriented programming, or OOP for short.
  
  Object oriented programming allows us to create objects that have certain capabilities and can store certain types of information. The image above will be your introduction to this concept.
  

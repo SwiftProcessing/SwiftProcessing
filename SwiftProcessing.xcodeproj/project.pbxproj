@@ -180,6 +180,7 @@
 		1F9EB3E326D152FE00FF3AE5 /* SketchPushPop.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F9EB3E226D152FE00FF3AE5 /* SketchPushPop.swift */; };
 		1F9EB3E426D152FE00FF3AE5 /* SketchPushPop.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F9EB3E226D152FE00FF3AE5 /* SketchPushPop.swift */; };
 		1F9EB3E526D152FE00FF3AE5 /* SketchPushPop.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F9EB3E226D152FE00FF3AE5 /* SketchPushPop.swift */; };
+		1FEBB17426DF3194001F29E3 /* SketchTime.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FEBB17326DF3194001F29E3 /* SketchTime.swift */; };
 		OBJ_129 /* Package.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_6 /* Package.swift */; };
 		OBJ_140 /* SwiftProcessingTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_62 /* SwiftProcessingTests.swift */; };
 		OBJ_141 /* VectorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_63 /* VectorTests.swift */; };
@@ -261,6 +262,7 @@
 		1F9EB3DE26D152EC00FF3AE5 /* SketchEnums.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SketchEnums.swift; sourceTree = "<group>"; };
 		1F9EB3E226D152FE00FF3AE5 /* SketchPushPop.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SketchPushPop.swift; sourceTree = "<group>"; };
 		1F9EB3FC26D153F000FF3AE5 /* Basics.playground */ = {isa = PBXFileReference; lastKnownFileType = file.playground; path = Basics.playground; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
+		1FEBB17326DF3194001F29E3 /* SketchTime.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SketchTime.swift; sourceTree = "<group>"; };
 		OBJ_6 /* Package.swift */ = {isa = PBXFileReference; explicitFileType = sourcecode.swift; path = Package.swift; sourceTree = "<group>"; };
 		OBJ_62 /* SwiftProcessingTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftProcessingTests.swift; sourceTree = "<group>"; };
 		OBJ_63 /* VectorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VectorTests.swift; sourceTree = "<group>"; };
@@ -317,6 +319,7 @@
 				1F1EF8F426ACC7A200A943FF /* SketchSettings.swift */,
 				1F9EB3DA26D1526500FF3AE5 /* SketchStacks.swift */,
 				1F1EF91326ACC7A200A943FF /* SketchStructure.swift */,
+				1FEBB17326DF3194001F29E3 /* SketchTime.swift */,
 				1F1EF8F926ACC7A200A943FF /* SketchTouch.swift */,
 				1F1EF8ED26ACC7A200A943FF /* SketchTransform.swift */,
 				1F1EF91026ACC7A200A943FF /* SketchTypography.swift */,
@@ -672,6 +675,7 @@
 				1F1EF94926ACC7A200A943FF /* ImagePicker.swift in Sources */,
 				1F1EF98226ACC7A200A943FF /* Sketch3DCamera.swift in Sources */,
 				1F1EF98526ACC7A200A943FF /* Sketch3DTexture.swift in Sources */,
+				1FEBB17426DF3194001F29E3 /* SketchTime.swift in Sources */,
 				1F1EF96A26ACC7A200A943FF /* SketchAttributes.swift in Sources */,
 				1F1EF99726ACC7A200A943FF /* SketchVisibility.swift in Sources */,
 				1F1EF9AC26ACC7A200A943FF /* SketchData.swift in Sources */,
