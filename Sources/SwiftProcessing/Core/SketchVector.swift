@@ -35,29 +35,25 @@ public extension Sketch {
         return Vector(x, y)
     }
     
-    open class Vector: CustomStringConvertible {
+    class Vector: CustomStringConvertible {
         public var description: String {
-            if z != nil{
-                return "(\(x), \(y), \(String(describing: z)))"
-            }else{
-                return "(\(x), \(y))"
-            }
+            return "(\(x), \(y), \(z)))"
         }
         
         open var x: Double
         open var y: Double
-        open var z: Double?
+        open var z: Double
         
         public init<X: Numeric, Y: Numeric>(_ x: X, _ y: Y) {
             self.x = x.convert()
             self.y = y.convert()
-            self.z = nil as Double?
+            self.z = 0.0
         }
         
-        public init<X: Numeric, Y: Numeric, Z: Numeric>(_ x: X, _ y: Y, _ z: Z?) {
+        public init<X: Numeric, Y: Numeric, Z: Numeric>(_ x: X, _ y: Y, _ z: Z) {
             self.x = x.convert()
             self.y = y.convert()
-            self.z = z?.convert()
+            self.z = z.convert()
         }
         
         /// Sets the vector object to a 2-dimensional vector with x and y values.
@@ -72,7 +68,7 @@ public extension Sketch {
         open func set<X:Numeric, Y: Numeric>(_ x: X, _ y: Y) {
             self.x = x.convert()
             self.y = y.convert()
-            self.z = nil as Double?
+            self.z = 0.0
         }
         
         /// Sets the vector object to a 3-dimensional vector with x, y, and z values.
@@ -85,10 +81,10 @@ public extension Sketch {
         ///     - y: y-position
         ///     - z: z-position
         
-        open func set<X:Numeric, Y: Numeric, Z: Numeric>(_ x: X, _ y: Y, _ z: Z?) {
+        open func set<X:Numeric, Y: Numeric, Z: Numeric>(_ x: X, _ y: Y, _ z: Z) {
             self.x = x.convert()
             self.y = y.convert()
-            self.z = z?.convert()
+            self.z = z.convert()
         }
         
         /// Sets the vector object to be a copy of another vector object.
@@ -125,7 +121,7 @@ public extension Sketch {
         ///      - right: right operand
         
         public static func + (left: Vector, right: Vector) -> Vector {
-            return Vector(left.x + right.x, left.y + right.y, left.z != nil ? (left.z! + right.z!) : nil)
+            return Vector(left.x + right.x, left.y + right.y, left.z  + right.z)
         }
         
         /// Adds two vectors together.
@@ -138,8 +134,12 @@ public extension Sketch {
         ///      - v2: vector 2
         
         public static func add (_ v1: Vector, _ v2: Vector) -> Vector {
-            return Vector(v1.x + v2.x, v1.y + v2.y,  v1.z != nil ? (v1.z! + v2.z!) : nil)
+            return Vector(v1.x + v2.x, v1.y + v2.y,  v1.z + v2.z)
         }
+        
+        // Anything that modifies the self **and** returns it should be appended with the @discardableResult to minimize compile warnings. We are modifying the self **and** we can assign the result to another variable. That is the source of the error.
+        
+        // Sometime to consider is whether we want these functions to return anything at all. That would also silence the error.
         
         /// Adds two vectors together.
         /// ```
@@ -149,7 +149,7 @@ public extension Sketch {
         /// - Parameters:
         ///      - v: vector  to add
         
-        open func add(_ v: Vector) -> Vector {
+        @discardableResult open func add(_ v: Vector) -> Vector {
             let result = Vector.add(self, v)
             self.set(result)
             return self
@@ -165,7 +165,7 @@ public extension Sketch {
         ///      - y: y  to add
         ///      - z: z  to add
         
-        open func add<X: Numeric, Y: Numeric, Z: Numeric>(_ x: X, _ y: Y, _ z: Z?) -> Vector {
+        open func add<X: Numeric, Y: Numeric, Z: Numeric>(_ x: X, _ y: Y, _ z: Z) -> Vector {
             return Vector.add(self, Vector(x, y, z))
         }
         
@@ -192,7 +192,7 @@ public extension Sketch {
         ///      - right: right operand
         
         public static func - (left: Vector, right: Vector) -> Vector {
-            return Vector(left.x - right.x, left.y - right.y, left.z != nil ? (left.z! - right.z!) : nil)
+            return Vector(left.x - right.x, left.y - right.y, left.z - right.z)
         }
         
         /// Subtracts two vectors from each other.
@@ -205,7 +205,7 @@ public extension Sketch {
         ///      - v2: vector 2
         
         public static func sub (_ v1: Vector, _ v2: Vector) -> Vector {
-            return Vector(v1.x - v2.x, v1.y - v2.y, v1.z != nil ? (v1.z! - v2.z!) : nil)
+            return Vector(v1.x - v2.x, v1.y - v2.y, v1.z - v2.z)
         }
         
         /// Subtracts one vector from another.
@@ -216,7 +216,7 @@ public extension Sketch {
         /// - Parameters:
         ///      - v: vector  to add
         
-        open func sub(_ v: Vector) -> Vector {
+        @discardableResult open func sub(_ v: Vector) -> Vector {
             let result = Vector.sub(self, v)
             self.set(result)
             return self
@@ -258,7 +258,7 @@ public extension Sketch {
         ///      - factor: factor to multiply the vector by
         
         public static func mult<F: Numeric>(_ vector: Vector, _ factor: F) -> Vector {
-            return Vector(vector.x * factor.convert(), vector.y * factor.convert(), vector.z != nil ? (vector.z! * factor.convert()) : nil)
+            return Vector(vector.x * factor.convert(), vector.y * factor.convert(), vector.z * factor.convert())
         }
         
         /// Multiplies a vector by a factor.
@@ -270,7 +270,7 @@ public extension Sketch {
         ///      - vector: vector to be multiplied
         ///      - factor: factor to multiply the vector by
         
-        open func mult<F: Numeric>(_ factor: F) -> Vector {
+        @discardableResult open func mult<F: Numeric>(_ factor: F) -> Vector {
             let result = Vector.mult(self, factor)
             self.set(result)
             return self
@@ -299,7 +299,7 @@ public extension Sketch {
         ///      - divisor: divisor to divide the vector by
         
         public static func div<D: Numeric>(_ vector: Vector, _ divisor: D) -> Vector {
-            return Vector(vector.x / divisor.convert(), vector.y / divisor.convert(), vector.z != nil ? (vector.z! / divisor.convert()) : nil)
+            return Vector(vector.x / divisor.convert(), vector.y / divisor.convert(), vector.z / divisor.convert())
         }
         
         /// Divides a vector by a divisor.
@@ -310,7 +310,7 @@ public extension Sketch {
         /// - Parameters:
         ///      - divisor: factor to multiply the vector by
         
-        open func div<D: Numeric>(_ divisor: D) -> Vector {
+        @discardableResult open func div<D: Numeric>(_ divisor: D) -> Vector {
             let result = Vector.div(self, divisor)
             self.set(result)
             return self
@@ -333,7 +333,7 @@ public extension Sketch {
         /// ```
         
         open func magSq() -> Double  {
-            return x * x + y * y + (z != nil ? z! * z! : 0)
+            return x * x + y * y + z * z
         }
         
         /// Returns the dot product of two vectors.
@@ -346,7 +346,7 @@ public extension Sketch {
         ///      - v2: vector 2
         
         public static func dot(_ v1: Vector, _ v2: Vector) -> Double {
-            return v1.x * v2.x + v2.y * v2.y + (v1.z != nil ? (v1.z! * v2.z!) : 0)
+            return v1.x * v2.x + v2.y * v2.y + v1.z * v2.z
         }
         
         /// Returns the dot product of a vector with itself, which is the square of its magnitude.
@@ -372,7 +372,7 @@ public extension Sketch {
         ///      - v2: vector 2
         
         public static func dist(_ v1: Vector, _ v2: Vector) -> Double {
-            return sqrt(pow(v2.x - v1.x, 2) + pow(v2.y - v1.y, 2) + (v1.z != nil ? pow(v2.z! - v1.z!, 2) : 0))
+            return sqrt(pow(v2.x - v1.x, 2) + pow(v2.y - v1.y, 2) + pow(v2.z - v1.z, 2))
         }
         
         /// Returns the distance betwen two vectors.
@@ -396,7 +396,7 @@ public extension Sketch {
         ///      - v1: vector 1
         ///      - v2: vector 2
         
-        open func normalize() -> Vector {
+        @discardableResult open func normalize() -> Vector {
             let len = self.mag()
             if (len != 0){
                 return self.mult(1 / len)
@@ -427,13 +427,30 @@ public extension Sketch {
         ///      - v1: vector 1
         ///      - v2: vector 2
         
-        open func rotate<T: Numeric>(_ theta: T) -> Vector {
+        @discardableResult open func rotate<T: Numeric>(_ theta: T) -> Vector {
             var newHeading = self.heading()
             newHeading += theta.convert();
             let mag = self.mag();
             self.x = cos(newHeading) * mag;
             self.y = sin(newHeading) * mag;
             return self;
+        }
+        
+        /// Limits the magnitude of a vector.
+        /// ```
+        /// // Assigns the vector created by rotating myVector by Math.pi
+        /// let rotated = myVector.rotate(Math.pi)
+        /// ```
+        /// - Parameters:
+        ///      - v1: vector 1
+        ///      - v2: vector 2
+        
+        @discardableResult open func limit<T: Numeric>(_ max: T) -> Vector {
+            if (magSq() > max*max) {
+                normalize()
+                mult(max)
+            }
+            return self
         }
     }
 }
