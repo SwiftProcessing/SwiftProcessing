@@ -6,6 +6,7 @@
 
 import UIKit
 import SceneKit
+import GameplayKit
 
 // =======================================================================
 // MARK: - Delegate/Protocol
@@ -173,6 +174,13 @@ import SceneKit
     var scnmat: SCNMaterial = SCNMaterial()
     var enable3DMode: Bool = false
     
+    /*
+     * MARK: - NOISE
+     */
+    
+    let noiseSource = GKPerlinNoiseSource()
+    var noise = GKNoise()
+    
     // Used to store references to UIKitViewElements created using SwiftProcessing. Storing references avoids the elements being deallocated from memory. This is needed to have the touch events continue to function
     
     open var viewRefs: [String: UIKitViewElement?] = [:]
@@ -213,6 +221,7 @@ import SceneKit
     // The graphics context also needs to have all of the initial global states set up. Restore was created to mimic Core Graphics restore function, but it also works perfectly to sync up our default SwiftProcessing global states with Core Graphics' states.
     
     private func initializeGlobalContextStates() {
+        noise = GKNoise(noiseSource)
         Sketch.SketchSettings.defaultSettings(self)
     }
     

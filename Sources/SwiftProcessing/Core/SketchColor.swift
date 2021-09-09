@@ -211,7 +211,8 @@ public extension Sketch {
     ///     - a: An optional alpha value from 0-255. Defaults to 255.
     
     func background<V1: Numeric, A: Numeric>(_ v1: V1, _ a: A) {
-        background(v1, v1, v1, a)
+        let bg = Color(v1, v1, v1, a, .rgb)
+        background(bg)
     }
     
     /// Sets the background color with a single gray value.
@@ -220,7 +221,8 @@ public extension Sketch {
     ///     - v1: A gray value from 0-255.
     
     func background<V1: Numeric>(_ v1: V1) {
-        background(v1, v1, v1, 255.0)
+        let bg = Color(v1, v1, v1, 255, .rgb)
+        background(bg)
     }
     
     /*
@@ -450,6 +452,123 @@ public extension Sketch {
         context?.setBlendMode(CGBlendMode.normal)
     }
     
+    /*
+     * MARK: LERP
+     */
+    
+    /// Blends two colors to find a third color at a point you define between them.
+    /// ```
+    /// func setup() {
+    ///    colorMode(.hsb)
+    ///    stroke(255)
+    ///    background(51)
+    ///    let from = color(218, 165, 32)
+    ///    let to = color(72, 61, 139)
+    ///    colorMode(.hsb) // Try changing to HSB.
+    ///    let interA = lerpColor(from, to, 0.33)
+    ///    let interB = lerpColor(from, to, 0.66)
+    ///    fill(from)
+    ///    rect(10, 20, 20, 60)
+    ///    fill(interA)
+    ///    rect(30, 20, 20, 60)
+    ///    fill(interB)
+    ///    rect(50, 20, 20, 60)
+    ///    fill(to)
+    ///    rect(70, 20, 20, 60)
+    /// }
+    /// ```
+    /// - Parameters:
+    ///     - c1: First color. Should be a SwiftProcessing Color type.
+    ///     - c2: Second color. Should be a SwiftProcessing Color type.
+    ///     - amt: The amoutn to interpolate between two values where 0.0 is the first color and 1.0 is the second color.
+    
+    func lerpColor<T: Numeric>(_ c1: Color, _ c2: Color, _ amt: T) -> Color {
+        
+        let newColor: Color?
+        
+        switch settings.colorMode {
+        case .rgb:
+            let c1_r = c1.red
+            let c1_g = c1.green
+            let c1_b = c1.blue
+            let c1_a = c1.alpha
+            
+            let c2_r = c2.red
+            let c2_g = c2.green
+            let c2_b = c2.blue
+            let c2_a = c2.alpha
+            
+            let cg_amt: CGFloat = amt.convert()
+            
+            let cnst_amt = constrain(cg_amt, 0.0, 1.0)
+            
+            newColor = Color(
+                lerp(c1_r, c2_r, cnst_amt),
+                lerp(c1_g, c2_g, cnst_amt),
+                lerp(c1_b, c2_b, cnst_amt),
+                lerp(c1_a, c2_a, cnst_amt),
+                .rgb
+            )
+        case .hsb:
+            let c1_h = c1.hue
+            let c1_s = c1.saturation
+            let c1_b = c1.brightness
+            let c1_a = c1.alpha
+            
+            let c2_h = c2.hue
+            let c2_s = c2.saturation
+            let c2_b = c2.brightness
+            let c2_a = c2.alpha
+            
+            let cg_amt: CGFloat = amt.convert()
+            
+            let cnst_amt = constrain(cg_amt, 0.0, 1.0)
+            
+            newColor = Color(
+                lerp(c1_h, c2_h, cnst_amt),
+                lerp(c1_s, c2_s, cnst_amt),
+                lerp(c1_b, c2_b, cnst_amt),
+                lerp(c1_a, c2_a, cnst_amt),
+                .hsb
+            )
+        }
+        
+        return newColor ?? Color(0)
+    }
+    
+    /// Blends two colors using color literals to find a third color at a point you define between them. **Note:** Color literals only work in Playgrounds.
+    /// ```
+    /// // Note: This example will only work in a Playground.
+    ///
+    /// func setup() {
+    ///     colorMode(.rgb)
+    ///     stroke(255)
+    ///     background(51)
+    ///     let from = color(#colorLiteral(red: 0.8549019608, green: 0.6470588235, blue: 0.1254901961, alpha: 1))
+    ///     let to = color(72, 61, 139)
+    ///     let to = color(#colorLiteral(red: 0.2823529412, green: 0.2392156863, blue: 0.5450980392, alpha: 1))
+    ///     colorMode(.rgb) // Try changing to HSB.
+    ///     let interA = lerpColor(from, to, 0.33)
+    ///     let interB = lerpColor(from, to, 0.66)
+    ///     fill(from)
+    ///     rect(10, 20, 20, 60)
+    ///     fill(interA)
+    ///     rect(30, 20, 20, 60)
+    ///     fill(interB)
+    ///     rect(50, 20, 20, 60)
+    ///     fill(to)
+    ///     rect(70, 20, 20, 60)
+    /// }
+    /// ```
+    /// - Parameters:
+    ///     - c1: First color. Should be a Playground color literal or a UIColor.
+    ///     - c2: Second color. Should be a Playground color literal or a UIColor.
+    ///     - amt: The amoutn to interpolate between two values where 0.0 is the first color and 1.0 is the second color.
+    
+    func lerpColor<T: Numeric>(_ c1: UIColor, _ c2: UIColor, _ amt: T) -> Color {
+        return lerpColor(Color(c1), Color(c2), amt)
+    }
+
     /*
      * MARK: COLOR
      */
