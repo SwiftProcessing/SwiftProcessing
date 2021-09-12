@@ -130,8 +130,7 @@ import GameplayKit
     open var touched: Bool = false
     open var touchX: Double = -1
     open var touchY: Double = -1
-    
-    // This is the last string-based constant in SwiftProcessing. Leaving this here for future contributors. It needs to be converted to an enum but .self cannot be the name of a member of an enum.
+ 
     var touchMode: TouchMode = .sketch
     var touchRecongizer: UIGestureRecognizer!
     
@@ -184,14 +183,12 @@ import GameplayKit
     
     var noiseSource = GKPerlinNoiseSource()
     var noise = GKNoise()
-//    var noiseMap = GKNoiseMap()
     
     func initNoise(_ size: Int = Default.perlinSize, _ detail: Int = Default.perlinOctaves, _ falloff: Double = Default.perlinFalloff) {
         noiseSource = GKPerlinNoiseSource()
         noiseSource.octaveCount = detail
         noiseSource.persistence = falloff
         noise = GKNoise(noiseSource)
-//        noiseMap = GKNoiseMap(noise, size: vector_double2(Double(size), Double(size)), origin: vector_double2(0.0, 0.0), sampleCount: vector_int2(Int32(size), Int32(size)), seamless: true)
     }
     
     // Used to store references to UIKitViewElements created using SwiftProcessing. Storing references avoids the elements being deallocated from memory. This is needed to have the touch events continue to function
@@ -214,6 +211,7 @@ import GameplayKit
     
     private func initHelper(){
         initTouch()
+        initNoise()
         initNotifications()
         sketchDelegate = self as? SketchDelegate
         createCanvas(0.0, 0.0, UIScreen.main.bounds.width, UIScreen.main.bounds.height)
@@ -233,7 +231,6 @@ import GameplayKit
     private func initializeGlobalContextStates() {
         Sketch.SketchSettings.defaultSettings(self)
     }
-    
     
     // ========================================================
     // MARK: - DRAW LOOP

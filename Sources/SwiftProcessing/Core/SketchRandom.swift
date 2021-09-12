@@ -56,12 +56,18 @@ public extension Sketch {
      2 — computing the dot product between the gradient vectors and their offsets
      3 — and interpolation between these values.
      
-     To create Processing-style Perlin noise, we're going to leverage Apple's GameplayKit as a stopgap measure. This has a major drawback: Once you set the noise parameters, it does not seem easy to change them. That means that noiseDetail() is fixed and cannot be changed.
+     To create Processing-style Perlin noise, we're going to leverage Apple's GameplayKit as a stopgap measure before implementing our own noise method.
      
-     Source: https://academy.realm.io/posts/tryswift-natalia-berdy-random-talk-consistent-world-noise-swift-gamekit-ios/
-     Source: https://developer.apple.com/documentation/gameplaykit/gknoisemap
-     Source: https://www.hackingwithswift.com/example-code/games/how-to-create-a-random-terrain-tile-map-using-sktilemapnode-and-gkperlinnoisesource
-     Source: https://rtouti.github.io/graphics/perlin-noise-algorithm
+     This currently has two major drawbacks looking for a solution:
+     1 - Once you set the noise parameters, it does not seem easy to change them in the same frame. That means that noiseDetail() is fixed and cannot be changed.
+     2 - It isn't clear to me how to gain access to the 3rd dimension of Perlin noise with GKPerlinNoiseSource().
+     
+     Sources:
+     https://academy.realm.io/posts/tryswift-natalia-berdy-random-talk-consistent-world-noise-swift-gamekit-ios/
+     https://developer.apple.com/documentation/gameplaykit/gknoisemap
+     https://www.hackingwithswift.com/example-code/games/how-to-create-a-random-terrain-tile-map-using-sktilemapnode-and-gkperlinnoisesource
+     https://rtouti.github.io/graphics/perlin-noise-algorithm
+     https://mrl.cs.nyu.edu/~perlin/doc/oscar.html
      
      GameplayKit's GKPerlinNoiseSource() has several properties we can manipulate. Here's how they map to Processing's ecosystem:
      
@@ -91,6 +97,9 @@ public extension Sketch {
     /// - Parameters:
     ///    - detail: number of octaves to be used by the noise
     
+    // To be implemented later.
+    
+    /*
     func noiseDetail<D: Numeric>(_ detail: D) {
         let i_detail: Int = detail.convert()
         noiseSource = GKPerlinNoiseSource()
@@ -99,6 +108,7 @@ public extension Sketch {
             settings.perlinOctaves = i_detail
         }
     }
+    */
     
     /// Adjusts the character and level of detail produced by the Perlin noise function. Similar to harmonics in physics, noise is computed over several octaves. Lower octaves contribute more to the output signal and as such define the overall intensity of the noise, whereas higher octaves create finer-grained details in the noise sequence.
     /// By default, noise is computed over 6 octaves with each octave contributing exactly half than its predecessor, starting at 50% strength for the first octave. This falloff amount can be changed by adding an additional function parameter. For example, a falloff factor of 0.75 means each octave will now have 75% impact (25% less) of the previous lower octave. While any number between 0.0 and 1.0 is valid, note that values greater than 0.5 may result in `noise()` returning values greater than 1.0.
@@ -110,6 +120,8 @@ public extension Sketch {
     ///   - detail: number of octaves to be used by the noise
     ///   - falloff: falloff factor for each octave
     
+    // To be implemented later.
+    /*
     func noiseDetail<D: Numeric, F: Numeric>(_ detail: D, _ falloff: F) {
         let i_detail: Int = detail.convert()
         let d_falloff: Double = falloff.convert()
@@ -120,6 +132,7 @@ public extension Sketch {
             settings.perlinFalloff = d_falloff
         }
     }
+    */
     
     /// Returns the Perlin noise value at specified coordinates. Perlin noise is a random sequence generator producing a more natural, harmonic succession of numbers than that of the standard `random()` function. It was developed by Ken Perlin in the 1980s and has been used in graphical applications to generate procedural textures, shapes, terrains, and other seemingly organic forms.
     /// In contrast to the `random()` function, Perlin noise is defined in an infinite n-dimensional space, in which each pair of coordinates corresponds to a fixed semi-random value (fixed only for the lifespan of the program). The resulting value will always be between 0.0 and 1.0. SwiftProcessing can compute 1D, 2D and 3D noise, depending on the number of coordinates given. The noise value can be animated by moving through the noise space, as demonstrated in the first example above. The 2nd and 3rd dimensions can also be interpreted as time.
@@ -174,7 +187,9 @@ public extension Sketch {
         let f_x: Float = x.convert()
         let f_y: Float = y.convert()
         
-        return noise(f_x, f_y, 0.0)
+        let result = noise.value(atPosition: vector_float2(f_x, f_y))
+        
+        return Double(map(result, -1, 1, 0, 1))
     }
     
     /// Returns the Perlin noise value at specified coordinates. Perlin noise is a random sequence generator producing a more natural, harmonic succession of numbers than that of the standard `random()` function. It was developed by Ken Perlin in the 1980s and has been used in graphical applications to generate procedural textures, shapes, terrains, and other seemingly organic forms.
@@ -201,6 +216,8 @@ public extension Sketch {
     ///   - y: y-coordinate in noise space
     ///   - z: z-coordinate in noise space
     
+    // To be implemented later.
+    /*
     func noise<X: Numeric, Y: Numeric, Z: Numeric>(_ x: X, _ y: Y, _ z: Z) -> Double {
         let f_x: Float = x.convert()
         let f_y: Float = y.convert()
@@ -217,4 +234,5 @@ public extension Sketch {
         
         return Double(map(result, -1, 1, 0, 1))
     }
+    */
 }
