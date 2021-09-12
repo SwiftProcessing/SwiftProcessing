@@ -225,10 +225,6 @@ import GameplayKit
         
         UIGraphicsEndImageContext()
         
-        self.clearsContextBeforeDrawing = false
-        self.isOpaque = true
-        self.backgroundColor = Default.backgroundColor.uiColor()
-        
         loop()
     }
     
@@ -270,6 +266,7 @@ import GameplayKit
         
         // To ensure setup only runs once.
         if !isSetup{
+            background(Default.backgroundColor)
             sketchDelegate?.setup()
             isSetup = true
         }
