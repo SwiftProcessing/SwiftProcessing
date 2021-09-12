@@ -245,7 +245,6 @@ import GameplayKit
     /// `beginDraw()` sets the global state. It ensures that the Core Graphics context and SwiftProcessing's global settings start out in sync. Overridable if anything needs to be done before `setup()` is run.
     
     open func beginDraw() {
-        background(Default.backgroundColor)
         initializeGlobalContextStates()
     }
     
@@ -267,6 +266,8 @@ import GameplayKit
         UIGraphicsPushContext(context!)
 
         scale(UIScreen.main.scale, UIScreen.main.scale)
+        
+        background(Default.backgroundColor)
         
         // To ensure setup only runs once.
         if !isSetup{
