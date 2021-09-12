@@ -19,6 +19,7 @@ extension Sketch{
         cg_height = height.convert()
         // Changing to true. isOpaque can improve performance.
         self.isOpaque = true
+        self.backgroundColor = Default.backgroundColor.uiColor()
         self.frame = CGRect(x: cg_x, y: cg_y, width: cg_width, height: cg_height)
     }
     
