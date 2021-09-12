@@ -56,6 +56,7 @@ import GameplayKit
     /// The `Default` struct contains the defaults for the style states that SwiftProcessing keeps track of.
     
     public struct Default {
+        public static let backgroundColor = Color(204)
         public static let colorMode = ColorMode.rgb
         public static let fill = Color(255)
         public static let stroke = Color(0.0)
@@ -72,6 +73,9 @@ import GameplayKit
         public static let textAlign = Alignment.left
         public static let textAlignY = AlignmentY.baseline
         public static let blendMode = CGBlendMode.normal
+        public static let perlinSize = 4096
+        public static let perlinOctaves = 4
+        public static let perlinFalloff = 0.5
     }
     
     
@@ -178,8 +182,17 @@ import GameplayKit
      * MARK: - NOISE
      */
     
-    let noiseSource = GKPerlinNoiseSource()
+    var noiseSource = GKPerlinNoiseSource()
     var noise = GKNoise()
+//    var noiseMap = GKNoiseMap()
+    
+    func initNoise(_ size: Int = Default.perlinSize, _ detail: Int = Default.perlinOctaves, _ falloff: Double = Default.perlinFalloff) {
+        noiseSource = GKPerlinNoiseSource()
+        noiseSource.octaveCount = detail
+        noiseSource.persistence = falloff
+        noise = GKNoise(noiseSource)
+//        noiseMap = GKNoiseMap(noise, size: vector_double2(Double(size), Double(size)), origin: vector_double2(0.0, 0.0), sampleCount: vector_int2(Int32(size), Int32(size)), seamless: true)
+    }
     
     // Used to store references to UIKitViewElements created using SwiftProcessing. Storing references avoids the elements being deallocated from memory. This is needed to have the touch events continue to function
     
@@ -221,7 +234,6 @@ import GameplayKit
     // The graphics context also needs to have all of the initial global states set up. Restore was created to mimic Core Graphics restore function, but it also works perfectly to sync up our default SwiftProcessing global states with Core Graphics' states.
     
     private func initializeGlobalContextStates() {
-        noise = GKNoise(noiseSource)
         Sketch.SketchSettings.defaultSettings(self)
     }
     
@@ -233,6 +245,7 @@ import GameplayKit
     /// `beginDraw()` sets the global state. It ensures that the Core Graphics context and SwiftProcessing's global settings start out in sync. Overridable if anything needs to be done before `setup()` is run.
     
     open func beginDraw() {
+        background(Default.backgroundColor)
         initializeGlobalContextStates()
     }
     

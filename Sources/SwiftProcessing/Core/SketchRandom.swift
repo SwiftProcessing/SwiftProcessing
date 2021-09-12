@@ -56,9 +56,12 @@ public extension Sketch {
      2 — computing the dot product between the gradient vectors and their offsets
      3 — and interpolation between these values.
      
-     To create Processing-style Perlin noise, we're going to leverage Apple's GameplayKit.
+     To create Processing-style Perlin noise, we're going to leverage Apple's GameplayKit as a stopgap measure. This has a major drawback: Once you set the noise parameters, it does not seem easy to change them. That means that noiseDetail() is fixed and cannot be changed.
+     
      Source: https://academy.realm.io/posts/tryswift-natalia-berdy-random-talk-consistent-world-noise-swift-gamekit-ios/
      Source: https://developer.apple.com/documentation/gameplaykit/gknoisemap
+     Source: https://www.hackingwithswift.com/example-code/games/how-to-create-a-random-terrain-tile-map-using-sktilemapnode-and-gkperlinnoisesource
+     Source: https://rtouti.github.io/graphics/perlin-noise-algorithm
      
      GameplayKit's GKPerlinNoiseSource() has several properties we can manipulate. Here's how they map to Processing's ecosystem:
      
@@ -90,8 +93,10 @@ public extension Sketch {
     
     func noiseDetail<D: Numeric>(_ detail: D) {
         let i_detail: Int = detail.convert()
+        noiseSource = GKPerlinNoiseSource()
+        
         if i_detail > 0 {
-            noiseSource.octaveCount = i_detail
+            settings.perlinOctaves = i_detail
         }
     }
     
@@ -108,11 +113,11 @@ public extension Sketch {
     func noiseDetail<D: Numeric, F: Numeric>(_ detail: D, _ falloff: F) {
         let i_detail: Int = detail.convert()
         let d_falloff: Double = falloff.convert()
-        if i_detail > 0 {
-            noiseSource.octaveCount = i_detail
-        }
-        if d_falloff > 0.0 {
-            noiseSource.persistence = d_falloff
+        noiseSource = GKPerlinNoiseSource()
+        
+        if i_detail > 0 && d_falloff > 0.0 {
+            settings.perlinOctaves = i_detail
+            settings.perlinFalloff = d_falloff
         }
     }
     
@@ -201,10 +206,14 @@ public extension Sketch {
         let f_y: Float = y.convert()
         let d_z: Double = z.convert()
         
+        let perlin = GKPerlinNoiseSource(frequency: 1.0, octaveCount: settings.perlinOctaves, persistence: settings.perlinFalloff, lacunarity: 2, seed: 0)
+        let perlinNoise = GKNoise(perlin)
+        
         // Because there's no push or pop, I'm going to move it and then move it back to get the third dimension. Not sure what this does to performance since we'll be doing this every frame.
-        noise.move(by: vector_double3(0.0, 0.0, d_z))
-        let result = noise.value(atPosition: vector_float2(f_x, f_y))
-        noise.move(by: vector_double3(0.0, 0.0, -d_z))
+        //noise.move(by: vector_double3(0.0, 0.0, d_z))
+        //let result = noiseMap.value(at: vector_int2(Int32(Int(f_x)), Int32(Int(f_y))))
+        let result = perlinNoise.value(atPosition: vector_float2(f_x, f_y))
+        //noise.move(by: vector_double3(0.0, 0.0, -d_z))
         
         return Double(map(result, -1, 1, 0, 1))
     }
