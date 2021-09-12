@@ -63,12 +63,16 @@ extension Sketch: UIGestureRecognizerDelegate {
         
         print(newTouches)
         
-        // Step 2: If a touch started, then execute touchStarted()
+        // Step 2: If a touch started, then execute touchStarted(), update touchX and touchY, and add it to the touches array so it's accurately collecting all touches.
         if isTouchStarted {
-            sketchDelegate?.touchStarted?()
             let startTouch = touchRecongizer.location(ofTouch: 0, in: self)
+            print("touchStarted at \(startTouch)")
+            touchX = Double(startTouch.x)
+            touchY = Double(startTouch.y)
             let startTouchV = createVector(startTouch.x, startTouch.y)
-            newTouches.insert(startTouchV, at: 0)
+            touches.insert(startTouchV, at: 0)
+            
+            sketchDelegate?.touchStarted?()
         }
         
         // Step 3: If the touch is moving, then execute touchMoved()
