@@ -227,6 +227,7 @@ import GameplayKit
         
         self.clearsContextBeforeDrawing = false
         self.isOpaque = true
+        self.backgroundColor = Default.backgroundColor.uiColor()
         
         loop()
     }
@@ -266,8 +267,6 @@ import GameplayKit
         UIGraphicsPushContext(context!)
 
         scale(UIScreen.main.scale, UIScreen.main.scale)
-        
-        background(Default.backgroundColor)
         
         // To ensure setup only runs once.
         if !isSetup{
