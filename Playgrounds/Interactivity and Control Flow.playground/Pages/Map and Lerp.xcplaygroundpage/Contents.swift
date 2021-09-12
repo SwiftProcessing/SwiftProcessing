@@ -41,9 +41,19 @@
  
  `lerp(start, stop, amount)`
  
- * `start` - the number you are starting with
- * `stop` - your target number
- * `amount` - how fast you'd like to get there. Between 0.0 to 1.0. Lower is slower and smoother.
+ * `start` - The number you are starting with
+ * `stop` - Your target number
+ * `amount` - How fast you'd like to get there. Between 0.0 to 1.0. Lower is slower and smoother.
+ 
+ ## LerpColor
+ 
+ It's also sometimes useful to be able to interpolate between colors. SwiftProcessing has a convenient function called `lerpColor()` that works in this way. `lerpColor()` has the following syntax:
+ 
+ `lerpColor(color1, color2, amount)`
+ 
+ * `color1` - First color. Color can be either a UIColor, Color Literal, or a SwiftProcessing Color.
+ * `color2` - Second color.
+ * `amount` - A number from 0.0 to 1.0. The closer you are to 0.0, the closer you'll be to `color1`. The closer you are to 1.0, the closer you'll be to `color2`.
  
  ## Let's try out some mapping and lerping! Click and drag around the sketch.
  
@@ -63,12 +73,12 @@ class MySketch: Sketch, SketchDelegate {
     var targetY = 0.0
     
     // We're going to map between two colors from the
-    // top of the screen to the bottom.
-    var topColor = Color(#colorLiteral(red: 0.4745098054, green: 0.8392156959, blue: 0.9764705896, alpha: 1))
-    var bottomColor = Color(#colorLiteral(red: 0.2196078449, green: 0.007843137719, blue: 0.8549019694, alpha: 1))
+    // top of the screen to the bottom to mimic sunset and sunrise.
+    var topColor = Color(#colorLiteral(red: 0.9686274529, green: 0.78039217, blue: 0.3450980484, alpha: 1))
+    var bottomColor = Color(#colorLiteral(red: 0.7450980544, green: 0.1568627506, blue: 0.07450980693, alpha: 1))
     
-    var backgroundTop = Color(#colorLiteral(red: 0.8078431487, green: 0.02745098062, blue: 0.3333333433, alpha: 1))
-    var backgroundBottom = Color(#colorLiteral(red: 0.9686274529, green: 0.78039217, blue: 0.3450980484, alpha: 1))
+    var backgroundTop = Color(#colorLiteral(red: 0.2392156869, green: 0.6745098233, blue: 0.9686274529, alpha: 1))
+    var backgroundBottom = Color(#colorLiteral(red: 0.009056979678, green: 0, blue: 0.5434187807, alpha: 1))
     
     func setup() {
         // The default starting value for touchX and touchY is 0.0, so it will draw in the corner if we don't change it before draw is called.
@@ -79,11 +89,7 @@ class MySketch: Sketch, SketchDelegate {
     }
     
     func draw() {
-        (background(
-            map(y, 0, height, backgroundTop.red, backgroundBottom.red), /* red */
-            map(y, 0, height, backgroundTop.green, backgroundBottom.green), /* green */
-            map(y, 0, height, backgroundTop.blue, backgroundBottom.blue)  /* blue */
-        ))
+        (background(lerpColor(backgroundTop, backgroundBottom, y/height)))
         
         // Lerp moves us toward our target of touchX and touchY, but slowly.
         
@@ -94,11 +100,7 @@ class MySketch: Sketch, SketchDelegate {
         
         // Because map returns a number, you can use it inside of other functions. Since it can be hard to read, it's OK to separate things over a few lines to make it easier to read. Comments can also help make things more clear.
         
-        fill(
-            map(y, 0, height, topColor.red, bottomColor.red), /* red */
-            map(y, 0, height, topColor.green, bottomColor.green), /* green */
-            map(y, 0, height, topColor.blue, bottomColor.blue)  /* blue */
-        ),
+        fill(lerpColor(topColor, bottomColor, y/height)),
         
         // We feed in our lerped x and y to the circle position. Notice how smooth the motion is.
         

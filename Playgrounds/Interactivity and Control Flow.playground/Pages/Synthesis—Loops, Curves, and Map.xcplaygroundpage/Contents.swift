@@ -20,16 +20,13 @@ import UIKit
 class MySketch: Sketch, SketchDelegate {
     
     let numPoints = 25
-    var randomPoints = [CGPoint]()
+    var randomPoints = [Vector]()
     
-    var xSpeed = [CGFloat]()
-    var ySpeed = [CGFloat]()
+    var xSpeed = [Double]()
+    var ySpeed = [Double]()
     
-    var xDir = [CGFloat]()
-    var yDir = [CGFloat]()
-    
-    // Curve function for quality
-    // or an enum.
+    var xDir = [Double]()
+    var yDir = [Double]()
     
     func setup() {
         
@@ -61,35 +58,34 @@ class MySketch: Sketch, SketchDelegate {
         }
         (endShape(.close))
         
-        // Draw control points as red circles.
+        // Draw control points as rainbow colored circles.
         (fill(255, 0, 0))
         (noStroke())
         for p in randomPoints {
             (fill((map(p.y, 0, height, 0, 360)), 100, 100, 100))
-//            (fill(360, 100, 100))
             (circle(p.x, p.y, 15))
         }
 
         // Move the points according to speed and direction until they hit an edge and then reverse.
         for i in 0..<randomPoints.count {
-            (randomPoints[i].x += (xSpeed[i] * xDir[i]))
-            (randomPoints[i].y += (ySpeed[i] * yDir[i]))
-            if randomPoints[i].x < 0 || randomPoints[i].x > CGFloat(width) {
+            (randomPoints[i].x += xSpeed[i] * xDir[i])
+            (randomPoints[i].y += ySpeed[i] * yDir[i])
+            if randomPoints[i].x < 0 || randomPoints[i].x > width {
                 (xDir[i] *= -1)
             }
             
-            if randomPoints[i].y < 0 || randomPoints[i].y > CGFloat(height) {
+            if randomPoints[i].y < 0 || randomPoints[i].y > height {
                 (yDir[i] *= -1)
             }
         }
     }
     
     // A custom function that returns an array of random points. We'll learn to write our own functions in a future playground!
-    func randomPoints(_ number: Int) -> [CGPoint] {
-        var points = [CGPoint]()
+    func randomPoints(_ number: Int) -> [Vector] {
+        var points = [Vector]()
         
         for _ in 0..<number {
-            (points.append(CGPoint(x: random(width), y: random(height))))
+            (points.append(createVector(random(width), random(height))))
         }
         return points
     }

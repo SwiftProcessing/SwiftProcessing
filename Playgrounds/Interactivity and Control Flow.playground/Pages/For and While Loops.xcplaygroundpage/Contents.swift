@@ -85,7 +85,7 @@ import UIKit
 
 class MySketch: Sketch, SketchDelegate {
     
-    var topColor = Color(#colorLiteral(red: 0.9686274529, green: 0.78039217, blue: 0.3450980484, alpha: 1))
+    var topColor = Color(#colorLiteral(red: 0.9607843161, green: 0.7058823705, blue: 0.200000003, alpha: 1))
     var bottomColor = Color(#colorLiteral(red: 0.8078431487, green: 0.02745098062, blue: 0.3333333433, alpha: 1))
 
     var increment = 1.0 // Try increasing this increment to see what happens!
