@@ -77,5 +77,5 @@ class MySketch: Sketch, SketchDelegate {
 PlaygroundPage.current.needsIndefiniteExecution = true
 PlaygroundPage.current.setLiveView(MySketch())
 //:  ### Credit for image used in Tutorial
-//: Source: [Dansa Serpentina, Gaumont (1900)](https://solarsystem.nasa.gov/resources/795/the-rich-color-variations-of-pluto/?category=planets/dwarf-planets_pluto)\
+//: Source: [Dansa Serpentina, Gaumont (1900)](https://www.youtube.com/watch?v=dGi63uVrJzk)\
 //: [Next](@next)

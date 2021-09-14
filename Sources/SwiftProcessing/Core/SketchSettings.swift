@@ -39,6 +39,10 @@ public extension Sketch{
         var textAlignY = Default.textAlignY
         var blendMode = Default.blendMode
         
+        var perlinSize = Default.perlinSize
+        var perlinOctaves = Default.perlinOctaves
+        var perlinFalloff = Default.perlinFalloff
+        
         // Re: textMode – A bitmap mode could be done using CTLineDraw from Core Text.
         // Source 1: https://developer.apple.com/documentation/coretext/1511145-ctlinedraw
         // Source 2: https://blog.krzyzanowskim.com/2020/07/13/coretext-swift-academy-part-3/
@@ -62,6 +66,7 @@ public extension Sketch{
             sketch.textSize(textSize)
             sketch.textLeading(textLeading)
             sketch.textAlign(textAlign)
+            // Leaving Perlin settings off for now because they are not really global states that need to be tracked.
         }
         
         public func debugSettings() {

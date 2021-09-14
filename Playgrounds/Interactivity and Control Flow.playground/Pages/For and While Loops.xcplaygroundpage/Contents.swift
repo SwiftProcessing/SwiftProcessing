@@ -85,32 +85,16 @@ import UIKit
 
 class MySketch: Sketch, SketchDelegate {
     
-    var topColor = Color(#colorLiteral(red: 0.9686274529, green: 0.78039217, blue: 0.3450980484, alpha: 1))
+    var topColor = Color(#colorLiteral(red: 0.9607843161, green: 0.7058823705, blue: 0.200000003, alpha: 1))
     var bottomColor = Color(#colorLiteral(red: 0.8078431487, green: 0.02745098062, blue: 0.3333333433, alpha: 1))
-    
-    var increment = 1
+
+    var increment = 1.0 // Try increasing this increment to see what happens!
     
     func setup() {
-        
-        // Remember that the start and end of a for loop need to be both be integers. Height is a double, so we'll convert it to an integer.
-        
-        for i in stride(from: increment/2, to: Int(height), by: increment) {
-            
-            // To use i in SwiftProcessing functions it should be converted to a Double.
-            
-            let double_i = Double(i)
-            
-            // Creating gradients involves mapping from one color's r,g,and b values to another. Here we create mapped colors that fade from topColor to bottomColor.
-            
-            let red = map(double_i, 0, height, topColor.red, bottomColor.red)
-            let green = map(double_i, 0, height, topColor.green, bottomColor.green)
-            let blue = map(double_i, 0, height, topColor.blue, bottomColor.blue)
-            
-            // Draw lines from the top of the screen to the bottom.
-            
+        for i in stride(from: 0, to: height, by: increment) {
             (strokeWeight(increment),
-            stroke(red, green, blue),
-            line(0, double_i, width, double_i))
+             stroke(lerpColor(topColor, bottomColor, i/height)),
+             line(0, i, width, i))
         }
     }
     

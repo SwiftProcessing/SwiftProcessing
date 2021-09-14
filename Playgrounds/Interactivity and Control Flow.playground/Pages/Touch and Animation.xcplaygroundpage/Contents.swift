@@ -28,6 +28,18 @@
  `func touchMoved()` - Executes when a finger has moved.\
  `func touchEnded()` - Executes when a finger has left the screen.
  
+ ## SwiftProcessing's Touches Array
+ 
+ Sometimes you need access to all of the touches as an array or count how many touches there are on your multi-touch display. For this you can use `touches`.  Its an array of `Vector`s. You can loop through them with a `for` loop. The code below displays how many touches are on your device's multitouch display.
+ 
+ ```
+ func draw() {
+     clear()
+     let display = "\(touches.count) touches"
+     text(display, 5, 10)
+ }
+ ```
+ 
  ## Let's get interative with touch!
  
  */

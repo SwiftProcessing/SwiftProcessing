@@ -6,6 +6,7 @@
 
 import UIKit
 import SceneKit
+import GameplayKit
 
 // =======================================================================
 // MARK: - Delegate/Protocol
@@ -55,6 +56,7 @@ import SceneKit
     /// The `Default` struct contains the defaults for the style states that SwiftProcessing keeps track of.
     
     public struct Default {
+        public static let backgroundColor = Color(204)
         public static let colorMode = ColorMode.rgb
         public static let fill = Color(255)
         public static let stroke = Color(0.0)
@@ -71,6 +73,9 @@ import SceneKit
         public static let textAlign = Alignment.left
         public static let textAlignY = AlignmentY.baseline
         public static let blendMode = CGBlendMode.normal
+        public static let perlinSize = 4096
+        public static let perlinOctaves = 4
+        public static let perlinFalloff = 0.5
     }
     
     
@@ -125,8 +130,7 @@ import SceneKit
     open var touched: Bool = false
     open var touchX: Double = -1
     open var touchY: Double = -1
-    
-    // This is the last string-based constant in SwiftProcessing. Leaving this here for future contributors. It needs to be converted to an enum but .self cannot be the name of a member of an enum.
+ 
     var touchMode: TouchMode = .sketch
     var touchRecongizer: UIGestureRecognizer!
     
@@ -173,6 +177,20 @@ import SceneKit
     var scnmat: SCNMaterial = SCNMaterial()
     var enable3DMode: Bool = false
     
+    /*
+     * MARK: - NOISE
+     */
+    
+    var noiseSource = GKPerlinNoiseSource()
+    var noise = GKNoise()
+    
+    func initNoise(_ size: Int = Default.perlinSize, _ detail: Int = Default.perlinOctaves, _ falloff: Double = Default.perlinFalloff) {
+        noiseSource = GKPerlinNoiseSource()
+        noiseSource.octaveCount = detail
+        noiseSource.persistence = falloff
+        noise = GKNoise(noiseSource)
+    }
+    
     // Used to store references to UIKitViewElements created using SwiftProcessing. Storing references avoids the elements being deallocated from memory. This is needed to have the touch events continue to function
     
     open var viewRefs: [String: UIKitViewElement?] = [:]
@@ -193,6 +211,7 @@ import SceneKit
     
     private func initHelper(){
         initTouch()
+        initNoise()
         initNotifications()
         sketchDelegate = self as? SketchDelegate
         createCanvas(0.0, 0.0, UIScreen.main.bounds.width, UIScreen.main.bounds.height)
@@ -204,9 +223,6 @@ import SceneKit
         
         UIGraphicsEndImageContext()
         
-        self.clearsContextBeforeDrawing = false
-        self.isOpaque = true
-        
         loop()
     }
     
@@ -215,7 +231,6 @@ import SceneKit
     private func initializeGlobalContextStates() {
         Sketch.SketchSettings.defaultSettings(self)
     }
-    
     
     // ========================================================
     // MARK: - DRAW LOOP
@@ -248,6 +263,7 @@ import SceneKit
         
         // To ensure setup only runs once.
         if !isSetup{
+            background(Default.backgroundColor)
             sketchDelegate?.setup()
             isSetup = true
         }
