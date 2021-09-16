@@ -346,7 +346,7 @@ public extension Sketch {
         ///      - v2: vector 2
         
         public static func dot(_ v1: Vector, _ v2: Vector) -> Double {
-            return v1.x * v2.x + v2.y * v2.y + v1.z * v2.z
+            return v1.x * v2.x + v1.y * v2.y + v1.z * v2.z
         }
         
         /// Returns the dot product of a vector with itself, which is the square of its magnitude.
