@@ -174,11 +174,6 @@ public extension Sketch {
             x = x + xOffset
             attributedString.draw(in: CGRect(x: x, y: y, width: textSize.width, height: textSize.height))
         } else {
-            push()
-            stroke(255)
-            noFill()
-            rect(x, y, width, height)
-            pop()
             attributedString.draw(in:
                                     CGRect(
                                         x: x,
