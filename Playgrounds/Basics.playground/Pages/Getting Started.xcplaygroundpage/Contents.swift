@@ -76,7 +76,7 @@ import PlaygroundSupport
 //: Code runs from top to bottom. Learning how to follow the steps of your code is one of the most important skills you'll learn!
 //: Functions are chunks of code that do actions. Eventually you'll write your own functions, but for now Processing sketch's are made up of two fundamental functions.
 //: 1. `func setup()` - This happens once at the very beginning of your sketch. Whatever commands you write in here will be called when your program launches. That's why it's called setup! It's for settin things up.
-//:  2. `func draw()` - The draw function gets called in a loop. By default it runs at 60 frames per second.
+//:  2. `func draw()` - The draw function gets called in a loop. By default it runs at 60 frames per second. In this Sketch, we allow our background to persist by not clearing it with the `background()` function every frame. If you want to clear your background and get rid of the trails, just set your background color at the begining of your `draw()`.
 // Note: This sketch is being sped up by the use of parentheses around each statement.
 
 class MySketch: Sketch, SketchDelegate {
@@ -88,6 +88,7 @@ class MySketch: Sketch, SketchDelegate {
     }
 
     func draw() {
+        // Try moving background() here to clear the background every frame.
         (noStroke(),
         // Draw a circle wherever the screen is touched.
         // Try changing 25 to some other number and see what happens!
