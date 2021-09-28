@@ -98,6 +98,7 @@ extension Sketch {
     public enum AlignmentY {
         case top
         case bottom
+        case center
         case baseline
     }
 

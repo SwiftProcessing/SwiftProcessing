@@ -67,9 +67,9 @@ import GameplayKit
         public static let rectMode = ShapeMode.corner
         public static let ellipseMode = ShapeMode.center
         public static let imageMode = ShapeMode.corner
-        public static let textFont = "HelveticaNeue-Thin"
-        public static let textSize = 32.0 // Processing is 12, so let's test this out.
-        public static let textLeading = 37.0 // Processing is 14. This is a similar increase.
+        public static let textFont = "HelveticaNeue"
+        public static let textSize = 32.0
+        public static let textLeading = 38.4 // Generally 120% of size. This is derived from Adobe's default treatment of leading.
         public static let textAlign = Alignment.left
         public static let textAlignY = AlignmentY.baseline
         public static let blendMode = CGBlendMode.normal
@@ -139,6 +139,36 @@ import GameplayKit
     
     var isSetup: Bool = false
     open var context: CGContext?
+    
+    /*
+     * MARK: - TEXT/TYPOGRAPHY
+     */
+    
+    var paragraphStyle: NSMutableParagraphStyle?
+    var attributes: [NSAttributedString.Key: Any] = [:]
+    
+    func setTextAttributes() {
+        paragraphStyle = NSMutableParagraphStyle()
+        
+        switch settings.textAlign {
+        case .left:
+            paragraphStyle?.alignment = .left
+        case .right:
+            paragraphStyle?.alignment = .right
+        case .center:
+            paragraphStyle?.alignment = .center
+        }
+    
+        paragraphStyle?.lineSpacing = CGFloat(settings.textLeading)
+        
+        attributes = [
+            .font: UIFont(name: settings.textFont, size: CGFloat(settings.textSize))!,
+            .foregroundColor: settings.fill.uiColor(),
+            .strokeWidth: -settings.strokeWeight,
+            .strokeColor: settings.stroke.uiColor(),
+            .paragraphStyle: paragraphStyle!
+        ]
+    }
     
     /*
      * MARK: - VERTICES
@@ -230,6 +260,7 @@ import GameplayKit
     
     private func initializeGlobalContextStates() {
         Sketch.SketchSettings.defaultSettings(self)
+        setTextAttributes()
     }
     
     // ========================================================
@@ -252,8 +283,6 @@ import GameplayKit
         updateDimensions()
         updateTimes()
 
-        // Refresh all of the settings just in case to maintain state. At some point, we might be able to remove this. It is here as a precaution for now.
-        settings.reapplySettings(self)
         context?.saveGState()
         
         // Having two pushes (.saveGState() and below) might seem redundant, but UIGraphicsPush is necessary for UIImages.

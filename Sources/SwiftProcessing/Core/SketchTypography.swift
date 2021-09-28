@@ -18,6 +18,8 @@ public extension Sketch {
     
     func textSize<S: Numeric>(_ size: S) {
         settings.textSize = size.convert()
+        
+        setTextAttributes()
     }
     
     /// Sets the text font. For a list of pre-installed fonts on iOS, see here: https://developer.apple.com/fonts/system-fonts/#preinstalled
@@ -30,6 +32,8 @@ public extension Sketch {
     
     func textFont(_ name: String) {
         settings.textFont = name
+        
+        setTextAttributes()
     }
     
     /// Sets the text alignment horizontally and, optionally, vertically.
@@ -45,6 +49,10 @@ public extension Sketch {
     
     func textAlign(_ alignX: Alignment, _ alignY: AlignmentY = Default.textAlignY){
         settings.textAlign = alignX
+        setTextAttributes()
+        
+        // Vertical alignment is not supported by UIKit outside of control elements.
+        // We'll calculate it ourselves inside of text().
         settings.textAlignY = alignY
     }
     
@@ -60,6 +68,34 @@ public extension Sketch {
     
     func textLeading<L: Numeric>(_ leading: L) {
         settings.textLeading = leading.convert()
+        
+        setTextAttributes()
+    }
+    
+    /// Returns the text ascent (height above the baseline) of the current font and text size setting, i.e. the space between the baseline and the top of the font.
+    /// ```
+    /// textFont("HelveticaNeue")
+    /// textSize(65)
+    /// print(textAscent())
+    /// ```
+    
+    func textAscent() -> Double {
+        let currentFont = UIFont(name: settings.textFont, size: CGFloat(settings.textSize))
+        
+        return Double(currentFont?.ascender ?? 0.0)
+    }
+    
+    /// Returns the text descent (height below the baseline) of the current font and text size setting, i.e. the space between the baseline and the bottom of the font.
+    /// ```
+    /// textFont("HelveticaNeue")
+    /// textSize(65)
+    /// print(textDescent())
+    /// ```
+    
+    func textDescent() -> Double {
+        let currentFont = UIFont(name: settings.textFont, size: CGFloat(settings.textSize))
+        
+        return Double(currentFont?.descender ?? 0.0)
     }
     
     /// Draws a string of text to the screen using an x and y coordinate. Optionally you can specify a second x and y to draw within a rectangular space.
@@ -84,33 +120,66 @@ public extension Sketch {
         cg_x2 = x2?.convert()
         cg_y2 = y2?.convert()
         
-        let paragraphStyle = NSMutableParagraphStyle()
+        let attributedString = NSAttributedString(string: string,
+                                                  attributes: attributes)
         
-        var align: NSTextAlignment!
-        switch settings.textAlign {
-        case .left:
-            align = .left
-        case .right:
-            align = .right
+        let textSize = attributedString.size()
+        var xOffset: CGFloat = 0.0
+        var yOffset: CGFloat = 0.0
+        
+        switch attributedString.getAlignment() {
         case .center:
-            align = .center
+            xOffset = -textSize.width / 2
+        case .left:
+            xOffset = 0.0
+        case .right:
+            xOffset = -textSize.width
+        default:
+            print("No alignment initialized.")
         }
-        paragraphStyle.alignment = align
-        paragraphStyle.lineSpacing = CGFloat(settings.textLeading)
         
+        var x = cg_x
+        var y = cg_y
+        let width = (cg_x2 ?? CGFloat(width))
+        let height = (cg_y2 ?? CGFloat(height))
         
-        let attributes: [NSAttributedString.Key: Any] = [
-            .paragraphStyle: paragraphStyle,
-            .font: UIFont(name: settings.textFont, size: CGFloat(settings.textSize))!,
-            .foregroundColor: settings.fill.uiColor(),
-            .strokeWidth: -settings.strokeWeight,
-            .strokeColor: settings.stroke.uiColor()
-        ]
+        switch settings.textAlignY {
+        case .baseline:
+            if cg_y2 == nil {
+                yOffset = -textSize.height - CGFloat(textDescent())
+            } else {
+                yOffset = 0.0
+            }
+        case .bottom:
+            if cg_y2 == nil {
+                yOffset = -textSize.height
+            } else {
+                yOffset = height - textSize.height
+            }
+        case .top:
+            yOffset = 0.0
+        case .center:
+            if cg_y2 == nil {
+                yOffset = -textSize.height / 2
+            } else {
+                yOffset = (height - textSize.height) / 2
+            }
+        }
+        
+        y = y + yOffset
+        
+        // Because draw(at:) does not honor alignment, we need to use draw(in:), which takes a rect. This means that calculation needs to be done so that SwiftProcessing's alignment attributes are honored.
         
         if cg_x2 == nil {
-            string.draw(at: CGPoint(x: cg_x, y: cg_y), withAttributes: attributes)
+            x = x + xOffset
+            attributedString.draw(in: CGRect(x: x, y: y, width: textSize.width, height: textSize.height))
         } else {
-            string.draw(with: CGRect(x: cg_x, y: cg_y, width: (cg_x2 != nil) ? cg_x2! : CGFloat(width), height: (cg_y2 != nil) ? cg_y2! : CGFloat(height)), options: .usesLineFragmentOrigin, attributes: attributes, context: nil)
+            attributedString.draw(in:
+                                    CGRect(
+                                        x: x,
+                                        y: y,
+                                        width: width,
+                                        height: height))
         }
     }
     
@@ -129,4 +198,23 @@ public extension Sketch {
         let cg_x2 = nil as CGFloat?
         text(string, x, y, cg_x1, cg_x2)
     }
+}
+
+
+extension NSAttributedString {
+    func getAlignment() -> NSTextAlignment {
+        
+        var alignment: NSTextAlignment?
+        
+        self.enumerateAttribute(NSAttributedString.Key.paragraphStyle, in: NSRange(location: 0, length: self.length), options: [], using: { (value, range, stop) -> Void in
+            guard let currentStyle = value as? NSParagraphStyle else {
+                print("Paragraph style not set.")
+                return
+            }
+            alignment = currentStyle.alignment
+        } )
+        
+        return alignment ?? .left
+    }
+    
 }
