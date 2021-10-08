@@ -25,7 +25,7 @@ public protocol Calculation {
     ///   - x2: x-coordinate of the second point
     ///   - y2: y-coordinate of the second point
     
-    func distance<X1: Numeric, Y1: Numeric, X2: Numeric, Y2: Numeric>(_ x1: X1, _ y1: Y1, _ x2: X2, _ y2: Y2) -> Double
+    func dist<X1: Numeric, Y1: Numeric, X2: Numeric, Y2: Numeric>(_ x1: X1, _ y1: Y1, _ x2: X2, _ y2: Y2) -> Double
     
     /// Calculates a number between two numbers at a specific increment
     /// - Parameters:
@@ -90,7 +90,7 @@ extension Sketch: Calculation {
         return Swift.min(Swift.max(d_n, d_low), d_high)
     }
     
-    public func distance<X1: Numeric, Y1: Numeric, X2: Numeric, Y2: Numeric>(_ x1: X1, _ y1: Y1, _ x2: X2, _ y2: Y2) -> Double {
+    public func dist<X1: Numeric, Y1: Numeric, X2: Numeric, Y2: Numeric>(_ x1: X1, _ y1: Y1, _ x2: X2, _ y2: Y2) -> Double {
         let d_x1, d_y1, d_x2, d_y2: Double
         d_x1 = x1.convert()
         d_y1 = y1.convert()
@@ -118,7 +118,7 @@ extension Sketch: Calculation {
         d_a = a.convert()
         d_b = b.convert()
         
-        return distance(0, 0, d_a, d_b)
+        return dist(0, 0, d_a, d_b)
     }
     
     public func map<V: Numeric, START1: Numeric, STOP1: Numeric, START2: Numeric, STOP2: Numeric>(_ value: V, _ start1: START1, _ stop1: STOP1, _ start2: START2, _ stop2: STOP2, _ withinBounds: Bool = true) -> Double {
