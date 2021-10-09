@@ -137,6 +137,7 @@ open class AudioIn {
     public static func start() {
         shared.recorder.prepareToRecord()
         shared.recorder.isMeteringEnabled = true
+        shared.recorder.record()
     }
     
     /// Returns the level of the input coming into the microphone. This can be done on a
