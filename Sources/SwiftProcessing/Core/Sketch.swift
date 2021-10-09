@@ -283,9 +283,9 @@ import GameplayKit
         updateDimensions()
         updateTimes()
 
-        context?.saveGState()
-        // Whenever we call .saveGState(), Core Graphics reverts to its defaults. At the very least, we must reapply Processing's defaults or the settings users have set.
+        // Refresh all of the settings just in case to maintain state.
         settings.reapplySettings(self)
+        context?.saveGState()
         
         // Having two pushes (.saveGState() and below) might seem redundant, but UIGraphicsPush is necessary for UIImages.
         UIGraphicsPushContext(context!)
