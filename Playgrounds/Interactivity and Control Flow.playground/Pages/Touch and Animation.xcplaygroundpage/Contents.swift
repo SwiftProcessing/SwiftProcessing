@@ -57,6 +57,7 @@ class MySketch: Sketch, SketchDelegate {
     var squareSize = 50.0
     
     func setup() {
+        print("Click and drag on the Live View.")
     }
     
     func draw() {

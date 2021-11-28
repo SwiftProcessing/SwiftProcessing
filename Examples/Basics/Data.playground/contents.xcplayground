@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<playground version='6.0' target-platform='ios' display-mode='rendered' buildActiveScheme='true' importAppTypes='true'>
+    <pages>
+        <page name='Character Strings'/>
+        <page name='Datatype Conversion'/>
+        <page name='Integers Doubles'/>
+        <page name='True False'/>
+        <page name='Variable Scope'/>
+        <page name='Variables'/>
+    </pages>
+</playground>

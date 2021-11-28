@@ -800,6 +800,16 @@ public extension Sketch {
 public extension Sketch {
     class Color {
         
+        public static var hueMax:CGFloat = 360
+        public static var saturationMax:CGFloat = 100
+        public static var brightnessMax:CGFloat = 100
+        
+        public static var redMax:CGFloat = 255
+        public static var greenMax:CGFloat = 255
+        public static var blueMax:CGFloat = 255
+        
+        public static var alphaMax:CGFloat!
+        
         public var red: Double
         public var green: Double
         public var blue: Double
@@ -812,15 +822,15 @@ public extension Sketch {
         
         private var mode: ColorMode
         
-        convenience init<V1: Numeric, A: Numeric>(_ v1: V1, _ a: A) {
+        public convenience init<V1: Numeric, A: Numeric>(_ v1: V1, _ a: A) {
             self.init(v1, v1, v1, a, .rgb)
         }
         
-        convenience init<V1: Numeric>(_ v1: V1) {
+        public convenience init<V1: Numeric>(_ v1: V1) {
             self.init(v1, v1, v1, 255.0, .rgb)
         }
         
-        convenience init<V1: Numeric, V2: Numeric, V3: Numeric>(_ v1: V1, _ v2: V2, _ v3: V3) {
+        public convenience init<V1: Numeric, V2: Numeric, V3: Numeric>(_ v1: V1, _ v2: V2, _ v3: V3) {
             self.init(v1, v2, v3, 255.0, .rgb)
         }
         
@@ -837,30 +847,31 @@ public extension Sketch {
             switch mode {
             case .rgb:
                 // Set RGB
-                self.red = clamp(value: d_v1, minimum: 0.0, maximum: 255.0)
-                self.green = clamp(value: d_v2, minimum: 0.0, maximum: 255.0)
-                self.blue = clamp(value: d_v3, minimum: 0.0, maximum: 255.0)
-                self.alpha = clamp(value: d_a, minimum: 0.0, maximum: 255.0)
+                self.red = clamp(value: d_v1, minimum: 0.0, maximum: Color.redMax)
+                self.green = clamp(value: d_v2, minimum: 0.0, maximum: Color.greenMax)
+                self.blue = clamp(value: d_v3, minimum: 0.0, maximum: Color.blueMax)
+                self.alpha = clamp(value: d_a, minimum: 0.0, maximum: Color.alphaMax ?? 255.0)
                 
                 // Extract and Set HSB
                 // Doesn't feel right to create a temporary UIColor here.
                 // For future contributors: Is further optimization necessary/possible here?
-                let temp = UIColor(red: CGFloat(self.red / 255), green: CGFloat(self.green) / 255, blue: CGFloat(self.blue / 255), alpha: CGFloat(self.alpha / 255))
+                let temp = UIColor(red: CGFloat(self.red / Color.redMax), green: CGFloat(self.green) / Color.greenMax, blue: CGFloat(self.blue / Color.blueMax), alpha: CGFloat(self.alpha / (Color.alphaMax ?? 255.0)))
 
                 self.hue = temp.double_hsba360.hue
                 self.saturation = temp.double_hsba360.saturation
                 self.brightness = temp.double_hsba360.brightness
+                
             case .hsb:
                 // Set HSB
-                self.hue = clamp(value: d_v1, minimum: 0.0, maximum: 360.0)
-                self.saturation = clamp(value: d_v2, minimum: 0.0, maximum: 100)
-                self.brightness = clamp(value: d_v3, minimum: 0.0, maximum: 100)
-                self.alpha = clamp(value: d_a, minimum: 0.0, maximum: 100)
+                self.hue = clamp(value: d_v1, minimum: 0.0, maximum: Color.hueMax)
+                self.saturation = clamp(value: d_v2, minimum: 0.0, maximum: Color.saturationMax)
+                self.brightness = clamp(value: d_v3, minimum: 0.0, maximum: Color.brightnessMax)
+                self.alpha = clamp(value: d_a, minimum: 0.0, maximum: Color.alphaMax ?? 100.0)
                 
                 // Extract and Set RGB
                 // Doesn't feel right to create a temporary UIColor here.
                 // For future contributors: Is further optimization necessary/possible here?
-                let temp = UIColor(hue: CGFloat(self.hue / 360), saturation: CGFloat(self.saturation / 100), brightness: CGFloat(self.brightness / 100), alpha: CGFloat(self.alpha / 100))
+                let temp = UIColor(hue: CGFloat(self.hue / Color.hueMax), saturation: CGFloat(self.saturation / Color.saturationMax), brightness: CGFloat(self.brightness / Color.brightnessMax), alpha: CGFloat(self.alpha / (Color.alphaMax ?? 100)))
 
                 // Extract and Set RGB
                 self.red = temp.double_rgba255.red
@@ -914,18 +925,18 @@ public extension Sketch {
         func uiColor() -> UIColor {
             switch mode {
             case .rgb:
-                return UIColor(red: self.red.convert() / 255.0, green: self.green.convert() / 255.0, blue: self.blue.convert() / 255.0, alpha: self.alpha.convert() / 255.0)
+                return UIColor(red: self.red.convert() / Color.redMax, green: self.green.convert() / Color.greenMax, blue: self.blue.convert() / Color.blueMax, alpha: self.alpha.convert() / (Color.alphaMax ?? 255.0))
             case .hsb:
-                return UIColor(red: self.red.convert() / 255.0, green: self.green.convert() / 255.0, blue: self.blue.convert() / 255.0, alpha: self.alpha.convert() / 100.0)
+                return UIColor(hue: self.hue.convert() / Color.hueMax, saturation: self.saturation.convert() / Color.saturationMax, brightness: self.brightness.convert() / Color.brightnessMax, alpha: self.alpha.convert() / (Color.alphaMax ?? 100.0))
             }
         }
         
         func cgColor() -> CGColor {
             switch mode {
             case .rgb:
-                return CGColor(red: self.red.convert() / 255.0, green: self.green.convert() / 255.0, blue: self.blue.convert() / 255.0, alpha: self.alpha.convert() / 255.0)
+                return UIColor(red: self.red.convert() / Color.redMax, green: self.green.convert() / Color.greenMax, blue: self.blue.convert() / Color.blueMax, alpha: self.alpha.convert() / (Color.alphaMax ?? 255.0)).cgColor
             case .hsb:
-                return CGColor(red: self.red.convert() / 255.0, green: self.green.convert() / 255.0, blue: self.blue.convert() / 255.0, alpha: self.alpha.convert() / 100.0)
+                return UIColor(hue: self.hue.convert() / Color.hueMax, saturation: self.saturation.convert() / Color.saturationMax, brightness: self.brightness.convert() / Color.brightnessMax, alpha: self.alpha.convert() / (Color.alphaMax ?? 100.0)).cgColor
             }
         }
         

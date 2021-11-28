@@ -23,7 +23,14 @@ public extension Sketch {
     }
     
     /// Sets the text font. For a list of pre-installed fonts on iOS, see here: https://developer.apple.com/fonts/system-fonts/#preinstalled
+    /// If you are using your own font, be advised that internal font names may be different than the font file title: 
     /// ```
+    /// // If you need to find the font name of a font you have installed:
+    /// for family in UIFont.familyNames.sorted() {
+    ///     let names = UIFont.fontNames(forFamilyName: family)
+    ///     print("Family: \(family) Font names: \(names)")
+    /// }
+    ///
     /// // Below sets font to Courier.
     /// textFont("Courier")
     /// ```
@@ -31,6 +38,7 @@ public extension Sketch {
     ///     - name: font name as a string.
     
     func textFont(_ name: String) {
+        
         settings.textFont = name
         
         setTextAttributes()

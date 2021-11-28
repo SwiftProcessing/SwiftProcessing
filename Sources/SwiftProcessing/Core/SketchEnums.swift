@@ -149,7 +149,28 @@ extension Sketch {
         case rgb
         case hsb
     }
-
+    
+    /*
+     * MARK: - KEY CODE
+     */
+    
+    // KeyCodes we'll keep track of for now are:
+    // backspace, down, enter, esc, left, right, tab, up,
+    
+    public enum KeyCode {
+        case up
+        case down
+        case left
+        case right
+        case backspace
+        case enter
+        case esc
+        case tab
+        case option
+        case control
+        case command
+        case none
+    }
 }
 
 // NOTE TO FUTURE CONTRIBUTORS: Leaving this out here because of a quirk with how Label was created. Might be a quick fix. Should really be up with the other enums. This was created to accommodate UIKit's text alignment, which is different from Core Graphics' alignment options.

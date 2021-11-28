@@ -146,7 +146,7 @@ extension Sketch: Shapes {
         
         // We're going to manipulate the coordinate matrix, so we need to freeze everything.
         context?.saveGState()
-        ellipseModeHelper(cg_x, cg_y, cg_w, cg_h)
+        ellipseModeHelper(&cg_x, &cg_y, &cg_w, &cg_h)
         
         // Corners adjustment
         var newW = cg_w
@@ -168,12 +168,14 @@ extension Sketch: Shapes {
     }
     
     // Private methods remain CGFloat.
-    private func ellipseModeHelper(_ x: CGFloat, _ y: CGFloat, _ width: CGFloat, _ height: CGFloat) {
+    private func ellipseModeHelper(_ x: inout CGFloat, _ y: inout CGFloat, _ width: inout CGFloat, _ height: inout CGFloat) {
         switch settings.ellipseMode {
         case .center:
             translate(-width * 0.5, -height * 0.5)
         case .radius:
-            scale(0.5, 0.5)
+            width = width * 2
+            height = height * 2
+            translate(-width * 0.5, -height * 0.5)
         case .corner:
             return
         case .corners:
@@ -213,7 +215,7 @@ extension Sketch: Shapes {
         // We're going to manipulate the coordinate matrix, so we need to freeze everything.
         context?.saveGState()
         
-        rectModeHelper(cg_x, cg_y, cg_w, cg_h)
+        rectModeHelper(&cg_x, &cg_y, &cg_w, &cg_h)
         
         var newW = cg_w
         var newH = cg_h
@@ -234,12 +236,14 @@ extension Sketch: Shapes {
         context?.restoreGState()
     }
     
-    private func rectModeHelper(_ x: CGFloat, _ y: CGFloat, _ width: CGFloat, _ height: CGFloat) {
+    private func rectModeHelper(_ x: inout CGFloat, _ y: inout CGFloat, _ width: inout CGFloat, _ height: inout CGFloat) {
         switch settings.rectMode {
         case .center:
             translate(-width * 0.5, -height * 0.5)
         case .radius:
-            scale(0.5, 0.5)
+            width = width * 2
+            height = height * 2
+            translate(-width * 0.5, -height * 0.5)
         case .corner:
             return
         case .corners:
