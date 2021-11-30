@@ -1,4 +1,4 @@
-# SwiftProcessing
+# SwiftProcessing
 
 Welcome to the beautiful world of Swift Processing. 
 
