@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<playground version='6.0' target-platform='ios' display-mode='rendered' buildActiveScheme='true' importAppTypes='true'>
+    <pages>
+        <page name='Clock'/>
+        <page name='Constrain'/>
+        <page name='Easing'/>
+        <page name='Keyboard'/>
+        <page name='Keyboard Functions'/>
+        <page name='Milliseconds'/>
+        <page name='Touch 1D'/>
+        <page name='Touch 2D'/>
+        <page name='Touch Functions'/>
+        <page name='Storing Input'/>
+    </pages>
+</playground>

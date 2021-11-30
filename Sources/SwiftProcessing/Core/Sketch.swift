@@ -87,6 +87,8 @@ import GameplayKit
         public static let two_pi = Double.pi * 2
         public static let tau = Double.pi * 2
         public static let e = M_E
+        public static let degToRadian =   Double.pi / 180.0
+        public static let radToDegree = 180.0 / Double.pi
     }
     
     /*
@@ -123,44 +125,32 @@ import GameplayKit
     
     open func colorMode(_ mode: ColorMode) {
         settings.colorMode = mode
-        
-        
     }
     
     open func colorMode(_ mode: ColorMode, _ max: Numeric) {
         settings.colorMode = mode
         
-        Color.redMax = max.convert()
-        Color.greenMax = max.convert()
-        Color.blueMax = max.convert()
+        Color.v1Max = max.convert()
+        Color.v2Max = max.convert()
+        Color.v3Max = max.convert()
         
-        Color.hueMax = max.convert()
-        Color.saturationMax = max.convert()
-        Color.brightnessMax = max.convert()
+        Color.alphaMax = max.convert()
     }
     
     open func colorMode(_ mode: ColorMode,_ max1: Numeric,_ max2: Numeric,_ max3: Numeric) {
         settings.colorMode = mode
         
-        Color.redMax = max1.convert()
-        Color.greenMax = max2.convert()
-        Color.blueMax = max3.convert()
-        
-        Color.hueMax = max1.convert()
-        Color.saturationMax = max2.convert()
-        Color.brightnessMax = max3.convert()
+        Color.v1Max = max1.convert()
+        Color.v2Max = max2.convert()
+        Color.v3Max = max3.convert()
     }
     
     open func colorMode(_ mode: ColorMode,_ max1: Numeric,_ max2: Numeric,_ max3: Numeric, _ maxA: Numeric) {
         settings.colorMode = mode
         
-        Color.redMax = max1.convert()
-        Color.greenMax = max2.convert()
-        Color.blueMax = max3.convert()
-        
-        Color.hueMax = max1.convert()
-        Color.saturationMax = max2.convert()
-        Color.brightnessMax = max3.convert()
+        Color.v1Max = max1.convert()
+        Color.v2Max = max2.convert()
+        Color.v3Max = max3.convert()
         
         Color.alphaMax = maxA.convert()
     }
@@ -170,8 +160,8 @@ import GameplayKit
      */
     
     public weak var sketchDelegate: SketchDelegate?
-    public var width: Double = 0
-    public var height: Double = 0
+    public var width: Int = 0
+    public var height: Int = 0
     public var nativeWidth: Double = 0
     public var nativeHeight: Double = 0
     public let deviceWidth = Double(UIScreen.main.bounds.width)
@@ -180,7 +170,9 @@ import GameplayKit
     public var isFaceMode: Bool = false
     public var isFaceFill: Bool = true
     
-    public var frameCount: Double = 0
+    /// The number of frames that have passed since the sketch started.
+    public var frameCount: Int = 0
+    
     public var deltaTime: Double = 1/60
     var lastTime: Double = CACurrentMediaTime()
     var millsOffset: Int = Int(NSDate().timeIntervalSince1970 * 1000)
@@ -218,6 +210,7 @@ import GameplayKit
     var notificationActions: [String: () -> Void] = [:]
     
     var isSetup: Bool = false
+    var keyTyped: Bool = false
     open var context: CGContext?
     
     /*
@@ -335,7 +328,7 @@ import GameplayKit
         noiseSource.persistence = falloff
         noise = GKNoise(noiseSource)
     }
-    
+      
     // Used to store references to UIKitViewElements created using SwiftProcessing. Storing references avoids the elements being deallocated from memory. This is needed to have the touch events continue to function
     
     open var viewRefs: [String: UIKitViewElement?] = [:]
@@ -359,6 +352,7 @@ import GameplayKit
         becomeFirstResponder() // Keyboard Input
         initNoise()
         initNotifications()
+//        dateComponents = DateComponents(from: dateNow as! Decoder)
         sketchDelegate = self as? SketchDelegate
         createCanvas(0.0, 0.0, UIScreen.main.bounds.width, UIScreen.main.bounds.height)
         self.layer.drawsAsynchronously = true
@@ -417,18 +411,21 @@ import GameplayKit
         
         // Should happen right before draw and inside of the push() and pop().
         updateTouches()
+
+        sketchDelegate?.draw() // All instructions go into current context.
         
         // Update keypresses
         if #available(iOS 13.4, *) {
+            if keyTyped {
+                sketchDelegate?.keyTyped?()
+                keyTyped = false
+            }
             if keyPressed {
                 sketchDelegate?.keyPressed?()
             }
         } else {
             // Fallback on earlier versions
         }
-        
-        
-        sketchDelegate?.draw() // All instructions go into current context.
         
         postDraw3D()
         
@@ -442,8 +439,8 @@ import GameplayKit
     }
     
     private func updateDimensions() {
-        self.width = Double(self.frame.width)
-        self.height = Double(self.frame.height)
+        self.width = Int(self.frame.width)
+        self.height = Int(self.frame.height)
         self.nativeWidth = Double(self.frame.width) * Double(UIScreen.main.scale)
         self.nativeHeight = Double(self.frame.height) * Double(UIScreen.main.scale)
         

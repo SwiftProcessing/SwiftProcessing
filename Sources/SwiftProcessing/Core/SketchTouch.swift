@@ -57,7 +57,7 @@ extension Sketch: UIGestureRecognizerDelegate {
             return // This cuts out of the function.
         }
         
-        var newTouches = (0...touchRecongizer.numberOfTouches - 1)
+        let newTouches = (0...touchRecongizer.numberOfTouches - 1)
             .map({touchRecongizer.location(ofTouch: $0, in: self)})
             .map({createVector($0.x, $0.y)})
         

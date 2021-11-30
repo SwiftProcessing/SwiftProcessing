@@ -77,6 +77,22 @@ public protocol Calculation {
     /// - Returns: squared number
     
     func sq<N: Numeric>(_ num: N) -> N
+    
+    /// Returns a decimal number raised to a given power.
+    /// - Parameters:
+    ///   - base: base value
+    ///   - exponent: power to raise the base to
+    /// - Returns: a number raised to a power
+    
+    func pow<B: Numeric, P: Numeric>(_ base: B, _ power: P) -> Double
+    
+    /// Returns the lesser of two comparable values.
+    /// - Parameters:
+    ///   - x: A value to compare.
+    ///   - y: Another value to compare.
+    /// - Returns: The lesser of x and y. If x is equal to y, returns x.
+    
+    func min<T>(_ x: T, _ y: T) -> T where T : Comparable
 }
 
 extension Sketch: Calculation {
@@ -86,7 +102,7 @@ extension Sketch: Calculation {
         d_n = n.convert()
         d_low = low.convert()
         d_high = high.convert()
-
+        
         return Swift.min(Swift.max(d_n, d_low), d_high)
     }
     
@@ -163,6 +179,17 @@ extension Sketch: Calculation {
     // can't be resolved. Maybe there's a better solution out there?
     
     public func sq<N: Numeric>(_ num: N) -> N {
-        return pow(num as! Decimal, 2) as! N
+        return Foundation.pow(num as! Decimal, 2) as! N
+    }
+    
+    public func pow<B: Numeric, P: Numeric>(_ base: B, _ power: P) -> Double {
+        let d_base, d_power: Double
+        d_base = base.convert()
+        d_power = power.convert()
+        return Foundation.pow(d_base, d_power)
+    }
+    
+    public func min<T>(_ x: T, _ y: T) -> T where T : Comparable {
+        return Swift.min(x, y)
     }
 }

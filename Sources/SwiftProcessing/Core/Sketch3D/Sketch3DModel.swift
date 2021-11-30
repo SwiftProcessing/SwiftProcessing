@@ -21,7 +21,7 @@ public extension Sketch {
     }
 
     func model(_ mdlObject: ModelNode){
-        if var shapeNode = self.currentTransformationNode.getAvailableShape(mdlObject.tag) {
+        if self.currentTransformationNode.getAvailableShape(mdlObject.tag) != nil {
 
 
         } else {

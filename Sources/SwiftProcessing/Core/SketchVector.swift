@@ -372,7 +372,7 @@ public extension Sketch {
         ///      - v2: vector 2
         
         public static func dist(_ v1: Vector, _ v2: Vector) -> Double {
-            return sqrt(pow(v2.x - v1.x, 2) + pow(v2.y - v1.y, 2) + pow(v2.z - v1.z, 2))
+            return sqrt(Foundation.pow(v2.x - v1.x, 2) + Foundation.pow(v2.y - v1.y, 2) + Foundation.pow(v2.z - v1.z, 2))
         }
         
         /// Returns the distance betwen two vectors.
@@ -414,7 +414,7 @@ public extension Sketch {
         ///      - v2: vector 2
         
         open func heading() -> Double {
-            let h = atan2(self.y, self.x)
+            let h = Foundation.atan2(self.y, self.x)
             return h
         }
         
@@ -431,8 +431,8 @@ public extension Sketch {
             var newHeading = self.heading()
             newHeading += theta.convert();
             let mag = self.mag();
-            self.x = cos(newHeading) * mag;
-            self.y = sin(newHeading) * mag;
+            self.x = Foundation.cos(newHeading) * mag;
+            self.y = Foundation.sin(newHeading) * mag;
             return self;
         }
         

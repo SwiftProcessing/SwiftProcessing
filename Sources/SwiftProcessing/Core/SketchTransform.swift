@@ -9,7 +9,7 @@ public extension Sketch {
     
     // Note for future contributors: p5.js has implemented a global angle mode state. This could easily be added to SwiftProcessing as well. Creating a helper function with a switch inside that checks the current state would be a good approach. See colorModeHelper for an example of this approach.
     
-    var translation: Vector{
+    internal var translation: Vector{
         get{
             let translationX = context == nil ? 0 : (context?.ctm.tx)! / UIScreen.main.scale
             let translationY = context == nil ? 0 :  -(context?.ctm.ty)! / UIScreen.main.scale + frame.height
@@ -17,7 +17,7 @@ public extension Sketch {
         }
     }
     
-    var scale: Vector{
+    internal var scale: Vector{
         get{
             let scaleX = context == nil ? 1 : (context?.ctm.a)! / UIScreen.main.scale
             let scaleY = context == nil ? 1 :  -(context?.ctm.d)! / UIScreen.main.scale

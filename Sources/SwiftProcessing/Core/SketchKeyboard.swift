@@ -58,7 +58,7 @@ extension Sketch: Keyboard {
     
     // Source: https://developer.apple.com/videos/play/wwdc2020/10109/
     open override func pressesBegan(_ presses: Set<UIPress>, with event: UIPressesEvent?) {
-
+        
         if #available(iOS 13.4, *) {
             keyPressed = true
         } else {
@@ -71,23 +71,22 @@ extension Sketch: Keyboard {
             if #available(iOS 13.4, *) {
                 self.keyCode = convertModifierKey(key: pressKey)
                 self.key = pressKey.charactersIgnoringModifiers.isEmpty ? "\0"
-                 : pressKey.characters[0]
+                : pressKey.characters[0]
                 if self.keyCode == KeyCode.none {
-                    sketchDelegate?.keyTyped?()
+                    keyTyped = true
                 }
-                sketchDelegate?.keyPressed?()
             } else {
             }
         }
     }
     
     open override func pressesEnded(_ presses: Set<UIPress>, with event: UIPressesEvent?) {
-
+        
         if #available(iOS 13.4, *) {
             keyPressed = false
         }
         
-        for press in presses {
+        for _ in presses {
             if #available(iOS 13.4, *) {
                 sketchDelegate?.keyReleased?()
             } else {

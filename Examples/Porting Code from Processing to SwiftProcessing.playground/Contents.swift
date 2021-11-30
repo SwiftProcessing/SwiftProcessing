@@ -158,15 +158,104 @@
      print(i)
  }
  ```
+ ### Arrays with Predetermined Sizes
+ 
+ In Java it's very common to create an instance of an array at a specific size. This is because Java arrays are not mutable, meaning once you create one, you cannot change its size. This is not the case with Swift `Array`s, which dynamically resize depending on how many items you add or remove. If you are familiar with Java, the behavior of a Swift `Array` is similar to Java `ArrayList`s.
+ 
+ If you are looking at some example code from Processing that has an array of a predetermined or calculated size, you do have options in Swift!
+ 
+ First we'll get rid of the fixed size with a 1-dimensional array and simply use Swift's `.append()` function, which allows us to add elements to an existing array:
+ 
+ #### For a 1-Dimensional Array
+ 
+ In Processing it might look like this:
+ ```
+ color[] colors = new color[numChars];
+ for(int i = 0; i < numChars; i++) {
+   colors[i] = color(i, numChars, numChars);
+ }
+ ```
+ 
+ One correct way to do this in Swift would be with the append function:
+ ```
+ var colors = [Color]()
+ for i in 0..<numChars {
+     colors.append(color(i, numChars, numChars))
+ }
+ ```
+ 
+ Be careful with the append function when dealing with very large numbers. It can fail. One example of this is when appending an array for every pixel on the screen. You will likely face a crash.
+ 
+ Next we'll actually create an array of a fixed size and populate it with 0's before we make our calculations. This strategy might be useful for arrays of numbers. In the example below we're using a 2-dimensional array.
+ 
+ #### For a 2-Dimensional Array of a Fixed Size
+ 
+ In Processing it might look like this:
+ ```
+ float[][] distances;
+ distances = new float[width][height];
+ 
+ for (int y = 0; y < height; y++) {
+   for (int x = 0; x < width; x++) {
+     float distance = dist(width/2, height/2, x, y);
+     distances[x][y] = distance/maxDistance * 255;
+   }
+ }
+ ```
+ 
+ One correct way to do this in Swift would be:
+ ```
+ var distances = [[Double]](repeating: [Double](repeating: 0, count: Int(height)), count: Int(width))
+ 
+ for y in 0..<Int(height) {
+     for x in 0..<Int(width) {
+         let distance = dist(width/2, height/2, x, y)
+         (distances[x][y] = distance/maxDistance * 255)
+     }
+ }
+ ```
+ ### Unitialized Variables Don't Have Implicit Values in Swift
+ 
+ In many Processing sketch examples you'll see that variables have been left uninitialized and yet the code runs perfectly fine. That's because Java interprets uninitialized numerical values as zeros and unitialized booleans as false.
+ 
+ In general this kind of behavior has been eliminated by Swift because the designers of Swift see it as the source of bugs. In general, you are not allowed to leave variables in Swift unintialized.
+ 
+ Often this kind of problem is simply fixed by assigning 0, 0.0, or false to any uninitialized variables in Processing sketches.
+ 
+ 
  ## Differences Between Processing and SwiftProcessing
  
  ### There is No size() Function
  
  Because all SwiftProcessing projects are designed to work in full-screen mode, there is no `size()` function in SwiftProcessing. In most cases you can safely omit this from code without altering major components of the examples you are bringing in.
  
+ If you want to center a sketch that's been designed for a specific size (w, h), the following pattern will work:
+ 
+ ```
+ translate((width - w)/2, (height - h)/2)
+ ```
+ 
  ### Mouse Interaction is Now Touch Interaction
  
- In SwiftProcessing any reference to `mouseX` should be replaced with `touchX`.
+ In SwiftProcessing any reference to `mouseX` should be replaced with `touchX`. Many sketches depend upon detecting the mouse when it is not clicking. This is not possible in touch-based interfaces, so this functionality has been removed. This will require a rethinking of certain examples you may find.
+ 
+ ### Math Constants Are in a Struct Called Math Now
+ 
+ To access math constants, you can first type `Math` and then a `.` and you will get a pull down menu of all available constants. For example, the Processing constant `TWO_PI` has been renamed `Math.two_pi` in SwiftProcessing.
+ 
+ ### SwiftProcessing Leverages Enums for Many Constants
+ 
+ For constants that are context dependant, SwiftProcessing leverages enums. This enables new learners to, in most cases, just type a `.` and get a drop down of appropriate choices that are relevant to their current context.
+ 
+ In Processing:
+ ```
+ ellipseMode(CENTER)
+ ```
+ 
+ In SwiftProcesing
+ ```
+ ellipseMode(.center)
+ ```
  
  ### Fonts
  

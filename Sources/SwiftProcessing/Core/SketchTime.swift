@@ -29,14 +29,82 @@ extension Sketch {
         return Int(Date().timeIntervalSince1970 * 1000 - millsOffset)
     }
     
-    // FOR FUTURE CONTRIBUTORS
+    /// Returns the current day as a value from 1 - 31.
+    /// ```
+    /// func draw() {
+    ///   print(day())
+    /// }
+    /// ```
     
-    // Processing has many Time & Date functions. These return the date formatted in different ways. The functions would be easy to implement. They are day(), hour(), minute(), month(), second(), and year().
+    public func day() -> Int {
+        let dateNow = Date()
+        let components = Calendar.current.dateComponents([.day], from: dateNow)
+        return components.day ?? 0
+    }
     
-    // The Date and Calender classes are the best places to start.
+    /// Returns the current hour as a value from 0 - 23.
+    /// ```
+    /// func draw() {
+    ///   print(hour())
+    /// }
+    /// ```
     
-    // Resources: https://coderwall.com/p/b8pz5q/swift-4-current-year-mont-day
-    // https://developer.apple.com/documentation/foundation/date
-    // https://developer.apple.com/documentation/foundation/calendar
+    public func hour() -> Int {
+        let dateNow = Date()
+        let components = Calendar.current.dateComponents([.hour], from: dateNow)
+        return components.hour ?? 0
+    }
+    
+    /// Returns the current minute as a value from 0 - 59.
+    /// ```
+    /// func draw() {
+    ///   print(minute())
+    /// }
+    /// ```
+    
+    public func minute() -> Int {
+        let dateNow = Date()
+        let components = Calendar.current.dateComponents([.minute], from: dateNow)
+        return components.minute ?? 0
+    }
+    
+    /// Returns the current month as a value from 1 - 12.
+    /// ```
+    /// func draw() {
+    ///   print(month())
+    /// }
+    /// ```
+    
+    public func month() -> Int {
+        let dateNow = Date()
+        let components = Calendar.current.dateComponents([.month], from: dateNow)
+        return components.month ?? 0
+    }
+    
+    /// Returns the current second as a value from 0 - 59.
+    /// ```
+    /// func draw() {
+    ///   print(second())
+    /// }
+    /// ```
+    
+    public func second() -> Int {
+        let dateNow = Date()
+        let components = Calendar.current.dateComponents([.second], from: dateNow)
+        return components.second ?? 0
+    }
+    
+    /// Returns the current year as an integer (2003, 2004, 2005, etc).
+    /// ```
+    /// func draw() {
+    ///   print(year())
+    /// }
+    /// ```
+    
+    public func year() -> Int {
+        let dateNow = Date()
+        let components = Calendar.current.dateComponents([.year], from: dateNow)
+        return components.year ?? 0
+    }
     
 }
