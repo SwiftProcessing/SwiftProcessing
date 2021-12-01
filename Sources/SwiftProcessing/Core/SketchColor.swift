@@ -137,7 +137,7 @@ public extension Sketch {
     ///     - v1: A red value from 0-255 by default unless you've specified a specific maximum via `colorMode()`
     ///     - a: An alpha value from 0-255 by default unless you've specified a specific maximum via `colorMode()`
     func color<V1: Numeric, A: Numeric>(_ v1: V1, _ a: A) -> Color {
-        return Color(v1, v1, v1, a, .rgb)
+        return Color(v1 / Color.v1Max, v1 / Color.v1Max, v1 / Color.v1Max, a / Color.alphaMax, .rgb, true)
     }
     
     /// Creates a SwiftProcessing color object.
@@ -145,7 +145,7 @@ public extension Sketch {
     /// - Parameters:
     ///     - v1: A red value from 0-255 by default unless you've specified a specific maximum via `colorMode()`
     func color<V1: Numeric>(_ v1: V1) -> Color {
-        return Color(v1, v1, v1, Color.alphaMax, .rgb)
+        return Color(v1 / Color.v1Max, v1 / Color.v1Max, v1 / Color.v1Max, 1.0, .rgb, true)
     }
     
     /// Clears the background if there is a color.
@@ -223,7 +223,7 @@ public extension Sketch {
     ///     - a: An optional alpha value from 0-255. Defaults to 255 (RGB). An alpha value from 0-100. Defaults to 255 (HSB). Defaults to 255.
     
     func background<V1: Numeric, V2: Numeric, V3: Numeric>(_ v1: V1, _ v2: V2, _ v3: V3){
-        background(v1, v2, v3, 255.0)
+        background(v1, v2, v3, Color.alphaMax)
     }
     
     /// Sets the background color with a system color name.
@@ -319,7 +319,7 @@ public extension Sketch {
     ///     - v3: A blue value from 0-255 (RGB). A brightness value from 0-100 (HSB).
     
     func fill<V1: Numeric, V2: Numeric, V3: Numeric>(_ v1: V1, _ v2: V2, _ v3: V3) {
-        fill(v1, v2, v3, 255.0)
+        fill(v1, v2, v3, Color.alphaMax)
     }
     
     /// Sets the fill color with a system color name.
@@ -351,8 +351,8 @@ public extension Sketch {
         cg_v1 = v1.convert()
         cg_a = a.convert()
         
-        context?.setFillColor(Color(cg_v1, cg_v1, cg_v1, cg_a, .rgb).cgColor())
-        settings.fill = Color(cg_v1, cg_v1, cg_v1, cg_a, .rgb) // Single arguments always use .rgb range.
+        context?.setFillColor(Color(cg_v1 / Color.v1Max, cg_v1 / Color.v1Max, cg_v1 / Color.v1Max, cg_a / Color.alphaMax, .rgb, true).cgColor())
+        settings.fill = Color(cg_v1 / Color.v1Max, cg_v1 / Color.v1Max, cg_v1 / Color.v1Max, cg_a / Color.alphaMax, .rgb, true)
     }
     
     /// Sets the fill color with a single gray value.
@@ -361,7 +361,7 @@ public extension Sketch {
     ///     - v1: A gray value from 0-255.
     
     func fill<V1: Numeric>(_ v1: V1) {
-        fill(v1, 255.0)
+        fill(v1, Color.alphaMax)
     }
     
     /// Sets the fill to be completely clear.
@@ -427,7 +427,7 @@ public extension Sketch {
     ///     - v3: A blue value from 0-255 (RGB). A brightness value from 0-100 (HSB).
     
     func stroke<V1: Numeric, V2: Numeric, V3: Numeric>(_ v1: V1, _ v2: V2, _ v3: V3) {
-        stroke(v1, v2, v3, 255.0)
+        stroke(v1, v2, v3, Color.alphaMax)
     }
     
     /// Sets the stroke color with a system color name.
@@ -457,8 +457,8 @@ public extension Sketch {
         cg_v1 = v1.convert()
         cg_a = a.convert()
         
-        context?.setStrokeColor(Color(cg_v1, cg_v1, cg_v1, cg_a, .rgb).cgColor())
-        settings.stroke = Color(cg_v1, cg_v1, cg_v1, cg_a, .rgb) // Single arguments always use .rgb range.
+        context?.setStrokeColor(Color(cg_v1 / Color.v1Max, cg_v1 / Color.v1Max, cg_v1 / Color.v1Max, cg_a / Color.alphaMax, .rgb, true).cgColor())
+        settings.stroke = Color(cg_v1 / Color.v1Max, cg_v1 / Color.v1Max, cg_v1 / Color.v1Max, cg_a / Color.alphaMax, .rgb, true)
     }
     
     /// Sets the stroke color with a single gray value.
@@ -467,7 +467,7 @@ public extension Sketch {
     ///     - v1: A gray value from 0-255.
     
     func stroke<V1: Numeric>(_ v1: V1) {
-        stroke(v1, 255.0)
+        stroke(v1, Color.alphaMax)
     }
     
     /// Sets the stroke to be completely clear.
@@ -549,7 +549,7 @@ public extension Sketch {
             settings.colorMode
         )
         
-        return newColor ?? Color(0)
+        return newColor ?? color(0)
     }
     
     /// Blends two colors using color literals to find a third color at a point you define between them. **Note:** Color literals only work in Playgrounds.
@@ -794,25 +794,27 @@ public extension Sketch {
         // For dependency injection only. Swift doesn't allow inner classes to access outer class properties.
         private var mode: ColorMode
         
-        internal convenience init<V1: Numeric, A: Numeric>(_ v1: V1, _ a: A) {
-            self.init(v1, v1, v1, a, .rgb)
-        }
-        
-        internal convenience init<V1: Numeric>(_ v1: V1) {
-            self.init(v1, v1, v1, Self.alphaMax, .rgb)
-        }
-        
-        internal init<V1: Numeric, V2: Numeric, V3: Numeric, A: Numeric>(_ v1: V1, _ v2: V2, _ v3: V3, _ a: A, _ mode: ColorMode = .rgb) {
+        internal init<V1: Numeric, V2: Numeric, V3: Numeric, A: Numeric>(_ v1: V1, _ v2: V2, _ v3: V3, _ a: A, _ mode: ColorMode = .rgb,_ normalized: Bool = false) {
             self.mode = mode
             
             var d_v1, d_v2, d_v3, d_a: Double
             d_v1 = v1.convert(); d_v2 = v2.convert(); d_v3 = v3.convert(); d_a = a.convert()
             
-            // Set RGB
-            self.v1 = clamp(value: d_v1, minimum: 0.0, maximum: Color.v1Max)
-            self.v2 = clamp(value: d_v2, minimum: 0.0, maximum: Color.v2Max)
-            self.v3 = clamp(value: d_v3, minimum: 0.0, maximum: Color.v3Max)
-            self.a = clamp(value: d_a, minimum: 0.0, maximum: Color.alphaMax)
+            switch normalized {
+            case true:
+                // Set RGB
+                self.v1 = clamp(value: d_v1 * Color.v1Max, minimum: 0.0, maximum: Color.v1Max)
+                self.v2 = clamp(value: d_v2 * Color.v2Max, minimum: 0.0, maximum: Color.v2Max)
+                self.v3 = clamp(value: d_v3 * Color.v3Max, minimum: 0.0, maximum: Color.v3Max)
+                self.a = clamp(value: d_a * Color.alphaMax, minimum: 0.0, maximum: Color.alphaMax)
+            case false:
+                // Set RGB
+                self.v1 = clamp(value: d_v1, minimum: 0.0, maximum: Color.v1Max)
+                self.v2 = clamp(value: d_v2, minimum: 0.0, maximum: Color.v2Max)
+                self.v3 = clamp(value: d_v3, minimum: 0.0, maximum: Color.v3Max)
+                self.a = clamp(value: d_a, minimum: 0.0, maximum: Color.alphaMax)
+            }
+
         }
         
         // This initializer is to enable Color Literals in playgrounds. It feels clunky and I doubt new learners will understand that they need to specify the current color mode. Without some kind of dependendy injection here, it's impossible to assess the state of SwiftProcessing's settings to assess color mode. For now, setting a default of .rgb will capture most cases, but this will cause confusion and is not a desirable solution.

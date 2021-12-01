@@ -31,7 +31,7 @@ class MySketch: Sketch, SketchDelegate {
         
         noStroke()
         colorMode(.hsb, numChars)
-        background(12)
+        background(numChars/2)
 
         // Set a hue value for each key
         for i in 0..<numChars {

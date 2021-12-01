@@ -98,11 +98,11 @@ import GameplayKit
     /// The `Default` struct contains the defaults for the style states that SwiftProcessing keeps track of.
     
     public struct Default {
-        public static let backgroundColor = Color(204)
+        public static let backgroundColor = Color(204.0, 204.0, 204.0, 255.0)
         public static let colorMode = ColorMode.rgb
-        public static let fill = Color(255)
-        public static let stroke = Color(0.0)
-        public static let tint = Color(0.0, 0.0)
+        public static let fill = Color(255.0, 255.0, 255.0, 255.0)
+        public static let stroke = Color(0.0, 0.0, 0.0, 0.0)
+        public static let tint = Color(0.0, 0.0, 0.0, 0.0)
         public static let strokeWeight = 1.0
         public static let strokeJoin = StrokeJoin.miter
         public static let strokeCap = StrokeCap.round
