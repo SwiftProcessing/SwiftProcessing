@@ -51,6 +51,22 @@ public func / <L: Numeric, R: Numeric>(left: L, right: R) -> Double {
 }
 
 // =======================================================================
+// MARK: - ARITHMETIC OPERATOR OVERLOADS FOR CHARACTERS
+// =======================================================================
+
+public func - (left: Character, right: Character) -> Int {
+    let asciiValue_left: UInt8 = left.asciiValue!
+    let asciiValue_right: UInt8 = right.asciiValue!
+    return Int(asciiValue_left - asciiValue_right)
+}
+
+public func + (left: Character, right: Character) -> Int {
+    let asciiValue_left: UInt8 = left.asciiValue!
+    let asciiValue_right: UInt8 = right.asciiValue!
+    return Int(asciiValue_left + asciiValue_right)
+}
+
+// =======================================================================
 // MARK: - COMPARISON OPERATOR OVERLOADS
 // =======================================================================
 

@@ -89,12 +89,12 @@ public extension Sketch {
         
         guard bounds.contains(point) else {
             // print("Point is outside the image bounds")
-            return Color(0, 0 ,0)
+            return Color(0, 0 ,0, 0)
         }
 
         guard let pixelImage = cgimage(at: point) else {
             // print("Could not create pixel Image from CGImage")
-            return Color(0, 0 ,0)
+            return Color(0, 0 ,0, 0)
         }
 
         let imageProvider = pixelImage.dataProvider

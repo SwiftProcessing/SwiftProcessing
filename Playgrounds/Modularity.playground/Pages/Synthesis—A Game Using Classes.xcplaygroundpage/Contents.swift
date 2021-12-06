@@ -46,6 +46,8 @@ class MySketch: Sketch, SketchDelegate {
     var ball: Ball!
     var paddle: Paddle!
     
+    var keySpeed = 5.0
+    
     func setup() {
         background(0)
         ball = Ball(sketch: self)
@@ -69,12 +71,19 @@ class MySketch: Sketch, SketchDelegate {
         (paddle.moveTo(target: touchX))
     }
     
+    func keyPressed() {
+        if keyCode == .left {
+            paddle.targetX -= keySpeed
+        } else if keyCode == .right {
+            paddle.targetX += keySpeed
+        }
+    }
+    
     func collision(ball: Ball, paddle: Paddle) -> Bool {
         return
             ((ball.x + ball.size/2 > paddle.x - paddle.width/2) &&
                 (ball.x - ball.size/2 < paddle.x + paddle.width/2) &&
                 (ball.y + ball.size/2 > paddle.y - paddle.height/2))
-        
     }
  }
 
@@ -127,7 +136,6 @@ class Ball {
             (speed.y *= -1)
         }
     }
-    
 }
 
 class Paddle {

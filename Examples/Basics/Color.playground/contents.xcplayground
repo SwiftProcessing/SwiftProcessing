@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<playground version='6.0' target-platform='ios' display-mode='rendered' buildActiveScheme='true'>
+    <pages>
+        <page name='Brightness'/>
+        <page name='Color Variables'/>
+        <page name='Hue'/>
+        <page name='Simple Linear Gradient'/>
+        <page name='Radial Gradient'/>
+        <page name='Relativity'/>
+        <page name='Saturation'/>
+    </pages>
+</playground>

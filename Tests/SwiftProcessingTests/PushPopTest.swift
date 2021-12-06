@@ -18,9 +18,9 @@ final class PushPopTest: XCTestCase {
         sketch.fill(0.0, 0.0, 0.0, 255.0) // Clear
         sketch.push()
         sketch.fill(255.0, 0.0, 0.0, 255.0) // Red
-        XCTAssertEqual(sketch.settings.fill.red, 255.0)
+        XCTAssertEqual(sketch.settings.fill.v1, 255.0)
         sketch.pop()
-        XCTAssertEqual(sketch.settings.fill.red, 0.0)
+        XCTAssertEqual(sketch.settings.fill.v1, 0.0)
     }
     
     // Try this.
@@ -49,8 +49,8 @@ final class PushPopTest: XCTestCase {
         sketch.display(layer)
         // check whether global fill state is red
         sketch.fill(255.0, 0.0, 0.0, 255.0) // Red
-        XCTAssertEqual(sketch.settings.fill.red, 255.0)
+        XCTAssertEqual(sketch.settings.fill.v1, 255.0)
         sketch.pop()
-        XCTAssertEqual(sketch.settings.fill.red, 0.0)
+        XCTAssertEqual(sketch.settings.fill.v1, 0.0)
     }
 }

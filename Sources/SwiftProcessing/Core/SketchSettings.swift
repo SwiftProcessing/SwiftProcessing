@@ -17,7 +17,7 @@ import UIKit
 
 public extension Sketch{
 
-    struct SketchSettings {
+    struct SketchSettings : CustomStringConvertible{
         // Source: https://processing.org/reference/push_.html
         // push() stores information related to the current transformation state and style settings controlled by the following functions: rotate(), translate(), scale(), fill(), stroke(), tint(), strokeWeight(), strokeCap(), strokeJoin(), imageMode(), rectMode(), ellipseMode(), colorMode(), textAlign(), textFont(), textMode(), textSize(), textLeading().
         // The source code has a more comprehensive list of states.
@@ -69,8 +69,8 @@ public extension Sketch{
             // Leaving Perlin settings off for now because they are not really global states that need to be tracked.
         }
         
-        public func debugSettings() {
-            print("""
+        public var description: String {
+            let description = """
             colorMode = \(colorMode)
             fill = \(fill.toString())
             stroke = \(stroke.toString())
@@ -85,8 +85,13 @@ public extension Sketch{
             textSize = \(textSize)
             textLeading = \(textLeading)
             textAlign = \(textAlign)
+            textAlignY = \(textAlignY)
+            blendMode = \(blendMode)
+            perlinSize = \(perlinSize)
+            perlineOctaves = \(perlinOctaves)
+            perlinFalloff = \(perlinFalloff)
             """
-            )
+            return description
         }
     }
 }

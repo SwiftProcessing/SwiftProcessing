@@ -312,7 +312,7 @@ public extension Sketch {
                 case Filter.monochrome:
                     filter = CIFilter(name: "CIColorMonochrome")
                     let c = params as! Color
-                    let ciColor = CIColor(red: CGFloat(c.red), green: CGFloat(c.green), blue: CGFloat(c.blue))
+                    let ciColor = CIColor(red: c.uiColor().rgba.red, green: c.uiColor().rgba.green, blue: c.uiColor().rgba.blue, alpha: c.uiColor().rgba.alpha)
                     filter?.setValue(currentCIImage, forKey: kCIInputImageKey)
                     filter?.setValue(ciColor, forKey: kCIInputColorKey)
                 case Filter.invert:

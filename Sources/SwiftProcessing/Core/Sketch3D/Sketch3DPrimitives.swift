@@ -4,17 +4,22 @@ import SceneKit
 public extension Sketch {
 
     func shapeCreate(_ tag: String, _ geometry: SCNGeometry,_ type: String) {
+        
+        let redDescription = CGFloat(self.settings.fill.v1 / Color.v1Max).description
+        let greenDescription = CGFloat(self.settings.fill.v2 / Color.v2Max).description
+        let blueDescription = CGFloat(self.settings.fill.v3 / Color.v3Max).description
+        let alphaDescription = CGFloat(self.settings.fill.a / Color.alphaMax).description
+        
+        let colorTag =  "r" + redDescription + "g" + greenDescription + "b" + blueDescription + "a" + alphaDescription
 
-        var colorTag =  "r" + self.settings.fill.red.description + "g" + self.settings.fill.green.description + "b" + self.settings.fill.blue.description + "a" + self.settings.fill.alpha.description
-
-        var materialTag =  String(UInt(bitPattern: ObjectIdentifier(self.scnmat)))
+        let materialTag =  String(UInt(bitPattern: ObjectIdentifier(self.scnmat)))
 
         var newtag = tag + colorTag + materialTag
 
-        if var shapeNode = self.currentTransformationNode.getAvailableShape(newtag) {
+        if self.currentTransformationNode.getAvailableShape(newtag) != nil {
 
         } else {
-            geometry.firstMaterial?.diffuse.contents = UIColor(red: CGFloat(self.settings.fill.red/255.0), green: CGFloat(self.settings.fill.green/255.0), blue: CGFloat(self.settings.fill.blue/255.0), alpha: CGFloat(self.settings.fill.alpha))
+            geometry.firstMaterial?.diffuse.contents = UIColor(red: CGFloat(self.settings.fill.v1 / Color.v1Max), green: CGFloat(self.settings.fill.v2 / Color.v2Max), blue: CGFloat(self.settings.fill.v3 / Color.v3Max), alpha: CGFloat(self.settings.fill.a / Color.alphaMax))
 
             if self.texture != nil && self.textureEnabled {
                 geometry.firstMaterial?.diffuse.contents = self.texture!.currentFrame()

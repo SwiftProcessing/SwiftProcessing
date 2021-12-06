@@ -257,6 +257,7 @@
 		1F1EF91426ACC7A200A943FF /* SketchRandom.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SketchRandom.swift; sourceTree = "<group>"; };
 		1F1EF91526ACC7A200A943FF /* SketchData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SketchData.swift; sourceTree = "<group>"; };
 		1F22588F26D1595F0029B7C6 /* Interactivity and Control Flow.playground */ = {isa = PBXFileReference; lastKnownFileType = file.playground; path = "Interactivity and Control Flow.playground"; sourceTree = "<group>"; };
+		1F48212D26F8F8D900E9B975 /* Arrays.playground */ = {isa = PBXFileReference; lastKnownFileType = file.playground; path = Arrays.playground; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		1F91C79026D1840100C7A2E9 /* Modularity.playground */ = {isa = PBXFileReference; lastKnownFileType = file.playground; path = Modularity.playground; sourceTree = "<group>"; };
 		1F9EB3DA26D1526500FF3AE5 /* SketchStacks.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SketchStacks.swift; sourceTree = "<group>"; };
 		1F9EB3DE26D152EC00FF3AE5 /* SketchEnums.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SketchEnums.swift; sourceTree = "<group>"; };
@@ -386,6 +387,22 @@
 			path = Sketch3D;
 			sourceTree = "<group>";
 		};
+		1F48212C26F8F87300E9B975 /* Examples */ = {
+			isa = PBXGroup;
+			children = (
+				1F48212E26F8F8E100E9B975 /* Basics */,
+			);
+			path = Examples;
+			sourceTree = "<group>";
+		};
+		1F48212E26F8F8E100E9B975 /* Basics */ = {
+			isa = PBXGroup;
+			children = (
+				1F48212D26F8F8D900E9B975 /* Arrays.playground */,
+			);
+			path = Basics;
+			sourceTree = "<group>";
+		};
 		1F9EB3FB26D153B300FF3AE5 /* Playgrounds */ = {
 			isa = PBXGroup;
 			children = (
@@ -399,6 +416,7 @@
 		OBJ_5 = {
 			isa = PBXGroup;
 			children = (
+				1F48212C26F8F87300E9B975 /* Examples */,
 				1F9EB3FB26D153B300FF3AE5 /* Playgrounds */,
 				OBJ_6 /* Package.swift */,
 				OBJ_7 /* Sources */,
