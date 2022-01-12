@@ -85,12 +85,17 @@ import UIKit
 
 class MySketch: Sketch, SketchDelegate {
     
-    var topColor = Color(#colorLiteral(red: 0.9607843161, green: 0.7058823705, blue: 0.200000003, alpha: 1))
-    var bottomColor = Color(#colorLiteral(red: 0.8078431487, green: 0.02745098062, blue: 0.3333333433, alpha: 1))
+    // Declare colors as optionals.
+    var topColor: Color!
+    var bottomColor: Color!
 
     var increment = 1.0 // Try increasing this increment to see what happens!
     
     func setup() {
+        // Initialize colors
+        topColor = color(#colorLiteral(red: 0.9607843161, green: 0.7058823705, blue: 0.200000003, alpha: 1))
+        bottomColor = color(#colorLiteral(red: 0.8078431487, green: 0.02745098062, blue: 0.3333333433, alpha: 1))
+        
         for i in stride(from: 0, to: height, by: increment) {
             (strokeWeight(increment),
              stroke(lerpColor(topColor, bottomColor, i/height)),

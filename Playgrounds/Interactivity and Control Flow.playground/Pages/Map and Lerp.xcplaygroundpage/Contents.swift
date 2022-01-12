@@ -72,15 +72,22 @@ class MySketch: Sketch, SketchDelegate {
     var targetX = 0.0
     var targetY = 0.0
     
-    // We're going to map between two colors from the
-    // top of the screen to the bottom to mimic sunset and sunrise.
-    var topColor = Color(#colorLiteral(red: 0.9686274529, green: 0.78039217, blue: 0.3450980484, alpha: 1))
-    var bottomColor = Color(#colorLiteral(red: 0.7450980544, green: 0.1568627506, blue: 0.07450980693, alpha: 1))
+    // Declare colors as optionals
+    var topColor: Color!
+    var bottomColor: Color!
     
-    var backgroundTop = Color(#colorLiteral(red: 0.2392156869, green: 0.6745098233, blue: 0.9686274529, alpha: 1))
-    var backgroundBottom = Color(#colorLiteral(red: 0.009056979678, green: 0, blue: 0.5434187807, alpha: 1))
+    var backgroundTop: Color!
+    var backgroundBottom: Color!
     
     func setup() {
+        // We're going to map between two colors from the
+        // top of the screen to the bottom to mimic sunset and sunrise.
+        topColor = color(#colorLiteral(red: 0.9686274529, green: 0.78039217, blue: 0.3450980484, alpha: 1))
+        bottomColor = color(#colorLiteral(red: 0.7450980544, green: 0.1568627506, blue: 0.07450980693, alpha: 1))
+        
+        backgroundTop = color(#colorLiteral(red: 0.2392156869, green: 0.6745098233, blue: 0.9686274529, alpha: 1))
+        backgroundBottom = color(#colorLiteral(red: 0.009056979678, green: 0, blue: 0.5434187807, alpha: 1))
+        
         // The default starting value for touchX and touchY is 0.0, so it will draw in the corner if we don't change it before draw is called.
         
         // Comment these out and see how the sketch changes.

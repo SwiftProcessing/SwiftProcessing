@@ -17,10 +17,10 @@ class MySketch: Sketch, SketchDelegate {
     var b1:Color!, b2: Color!, c1: Color!, c2: Color!
     
     func setup() {
-        b1 = Color(255)
-        b2 = Color(0)
-        c1 = Color(204, 102, 0)
-        c2 = Color(0, 102, 153)
+        b1 = color(255)
+        b2 = color(0)
+        c1 = color(204, 102, 0)
+        c2 = color(0, 102, 153)
         
         noLoop()
     }
