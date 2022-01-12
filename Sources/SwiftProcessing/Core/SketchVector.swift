@@ -323,7 +323,7 @@ public extension Sketch {
         /// ```
         
         open func mag() -> Double {
-            return sqrt(self.magSq())
+            return Foundation.sqrt(self.magSq())
         }
         
         /// Returns the magnitude squared of the vector. Uses the distance formula minus the square root. **Note:** This is faster than `mag()` if you are just trying to compare whether one object is farther than another and don't need exact distances.
@@ -372,7 +372,7 @@ public extension Sketch {
         ///      - v2: vector 2
         
         public static func dist(_ v1: Vector, _ v2: Vector) -> Double {
-            return sqrt(Foundation.pow(v2.x - v1.x, 2) + Foundation.pow(v2.y - v1.y, 2) + Foundation.pow(v2.z - v1.z, 2))
+            return Foundation.sqrt(Foundation.pow(v2.x - v1.x, 2) + Foundation.pow(v2.y - v1.y, 2) + Foundation.pow(v2.z - v1.z, 2))
         }
         
         /// Returns the distance betwen two vectors.

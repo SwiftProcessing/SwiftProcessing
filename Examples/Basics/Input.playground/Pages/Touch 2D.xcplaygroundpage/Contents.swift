@@ -11,18 +11,18 @@ import PlaygroundSupport
 class MySketch: Sketch, SketchDelegate {
     
     func setup() {
-      noStroke()
+        noStroke()
         rectMode(.center)
     }
-
+    
     func draw() {
-      background(51)
-      fill(255, 204)
-      rect(touchX, height/2, touchY/2+10, touchY/2+10)
-      fill(255, 204)
-      let inverseX = width-touchX
-      let inverseY = height-touchY
-      rect(inverseX, height/2, (inverseY/2)+10, (inverseY/2)+10)
+        background(51)
+        fill(255, 204)
+        rect(touchX, height/2, touchY/2+10, touchY/2+10)
+        fill(255, 204)
+        let inverseX = width-touchX
+        let inverseY = height-touchY
+        rect(inverseX, height/2, (inverseY/2)+10, (inverseY/2)+10)
     }
     
 }

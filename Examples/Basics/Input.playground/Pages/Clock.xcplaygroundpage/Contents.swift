@@ -31,11 +31,11 @@ class MySketch: Sketch, SketchDelegate {
     
     func draw() {
         (background(0),
-        
-        // Draw the clock background
-        fill(80),
-        noStroke(),
-        ellipse(cx, cy, clockDiameter, clockDiameter))
+         
+         // Draw the clock background
+         fill(80),
+         noStroke(),
+         ellipse(cx, cy, clockDiameter, clockDiameter))
         
         // Angles for sin() and cos() start at 3 o'clock;
         // subtract HALF_PI to make them start at the top
@@ -45,12 +45,12 @@ class MySketch: Sketch, SketchDelegate {
         
         // Draw the hands of the clock
         (stroke(255),
-        strokeWeight(1),
-        line(cx, cy, cx + cos(s) * secondsRadius, cy + sin(s) * secondsRadius),
-        strokeWeight(2),
-        line(cx, cy, cx + cos(m) * minutesRadius, cy + sin(m) * minutesRadius),
-        strokeWeight(4),
-        line(cx, cy, cx + cos(h) * hoursRadius, cy + sin(h) * hoursRadius))
+         strokeWeight(1),
+         line(cx, cy, cx + cos(s) * secondsRadius, cy + sin(s) * secondsRadius),
+         strokeWeight(2),
+         line(cx, cy, cx + cos(m) * minutesRadius, cy + sin(m) * minutesRadius),
+         strokeWeight(4),
+         line(cx, cy, cx + cos(h) * hoursRadius, cy + sin(h) * hoursRadius))
         
         // Draw the minute ticks
         strokeWeight(2)

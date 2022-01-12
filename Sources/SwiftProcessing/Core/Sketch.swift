@@ -160,8 +160,8 @@ import GameplayKit
      */
     
     public weak var sketchDelegate: SketchDelegate?
-    public var width: Int = 0
-    public var height: Int = 0
+    public var width: Double = 0
+    public var height: Double = 0
     public var nativeWidth: Double = 0
     public var nativeHeight: Double = 0
     public let deviceWidth = Double(UIScreen.main.bounds.width)
@@ -237,14 +237,14 @@ import GameplayKit
         paragraphStyle?.lineSpacing = CGFloat(settings.textLeading)
         
         attributes = [
-            .font: UIFont(name: settings.textFont, size: CGFloat(settings.textSize)) ?? UIFont(name: Default.textFont, size: settings.textSize)!,
+            .font: UIFont(name: settings.textFont, size: CGFloat(settings.textSize)) ?? UIFont(name: Default.textFont, size: CGFloat(settings.textSize))!,
             .foregroundColor: settings.fill.uiColor(),
             .strokeWidth: -settings.strokeWeight,
             .strokeColor: settings.stroke.uiColor(),
             .paragraphStyle: paragraphStyle!
         ]
         
-        if UIFont(name: settings.textFont, size: settings.textSize) == nil && !fontErrorHasDisplayed {
+        if UIFont(name: settings.textFont, size: CGFloat(settings.textSize)) == nil && !fontErrorHasDisplayed {
             print("ERROR: It looks like the font you are trying to call isn't installed. Font file names are not always the same as the name the system refers to them as. You can find out the internal name by iterating through the installed fonts. See reference for textFont().")
             fontErrorHasDisplayed = true
         }
@@ -439,8 +439,8 @@ import GameplayKit
     }
     
     private func updateDimensions() {
-        self.width = Int(self.frame.width)
-        self.height = Int(self.frame.height)
+        self.width = self.frame.width
+        self.height = self.frame.height
         self.nativeWidth = Double(self.frame.width) * Double(UIScreen.main.scale)
         self.nativeHeight = Double(self.frame.height) * Double(UIScreen.main.scale)
         

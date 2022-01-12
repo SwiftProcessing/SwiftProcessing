@@ -78,6 +78,12 @@ public protocol Calculation {
     
     func sq<N: Numeric>(_ num: N) -> N
     
+    /// Returns the square root of a number
+    /// - Parameter num: number to find the square root of.
+    /// - Returns: square root
+    
+    func sqrt<N: Numeric>(_ num: N) -> Double
+    
     /// Returns a decimal number raised to a given power.
     /// - Parameters:
     ///   - base: base value
@@ -93,6 +99,8 @@ public protocol Calculation {
     /// - Returns: The lesser of x and y. If x is equal to y, returns x.
     
     func min<T>(_ x: T, _ y: T) -> T where T : Comparable
+    
+    
 }
 
 extension Sketch: Calculation {
@@ -180,6 +188,12 @@ extension Sketch: Calculation {
     
     public func sq<N: Numeric>(_ num: N) -> N {
         return Foundation.pow(num as! Decimal, 2) as! N
+    }
+    
+    public func sqrt<N: Numeric>(_ num: N) -> Double {
+        let d_num: Double = num.convert()
+        
+        return Foundation.sqrt(d_num)
     }
     
     public func pow<B: Numeric, P: Numeric>(_ base: B, _ power: P) -> Double {

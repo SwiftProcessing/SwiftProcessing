@@ -3,7 +3,13 @@
     <pages>
         <page name='Additive Wave'/>
         <page name='Arctangent'/>
+        <page name='Distance 1D'/>
         <page name='Distance 2D'/>
         <page name='NoiseWave'/>
+        <page name='Double Random'/>
+        <page name='Increment Decrement'/>
+        <page name='Interpolate'/>
+        <page name='Map'/>
+        <page name='Noise 1D'/>
     </pages>
 </playground>

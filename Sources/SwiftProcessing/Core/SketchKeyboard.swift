@@ -123,6 +123,8 @@ extension Sketch: Keyboard {
             return KeyCode.esc
         case .keyboardDeleteOrBackspace:
             return KeyCode.backspace
+        case .keyboardReturnOrEnter:
+            return KeyCode.enter
         default:
             return KeyCode.none
         }
