@@ -24,7 +24,6 @@ class MySketch: Sketch, SketchDelegate {
     func draw() {
         var y1 = 0.0
         var y2 = height/3
-        print(y2)
         for i in 0...Int(width) {
           (stroke(coswave[i]*255),
           line(i, y1, i, y2))
