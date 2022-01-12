@@ -87,7 +87,7 @@ In Swift for loops have been given a major overhaul. C-style for loops you may b
  }
 
  // 2
- for i in 0..<width {
+ for i in 0..<Int(width) {
   print(i)
  }
 
