@@ -2,7 +2,7 @@
  ## Additive Wave
  
  by Daniel Shiffman
-
+ 
  Create a more complex wave by adding two waves together.
  
  [Source](https://processing.org/examples/additivewave.html)
@@ -26,7 +26,7 @@ class MySketch: Sketch, SketchDelegate {
         colorMode(.rgb, 255, 255, 255, 100)
         w = width + 16
         
-        for i in 0..<maxwaves {
+        for _ in 0..<maxwaves {
             amplitude.append(random(10,30))
             let period = random(100,300) // How many pixels before the wave repeats
             dx.append((Math.two_pi / period) * xspacing)
@@ -37,8 +37,8 @@ class MySketch: Sketch, SketchDelegate {
     
     func draw() {
         (background(0),
-        calcWave(),
-        renderWave())
+         calcWave(),
+         renderWave())
     }
     
     func calcWave() {
@@ -69,8 +69,8 @@ class MySketch: Sketch, SketchDelegate {
     func renderWave() {
         // A simple way to draw the wave with an ellipse at each location
         (noStroke(),
-        fill(255,50),
-        ellipseMode(.center))
+         fill(255,50),
+         ellipseMode(.center))
         for x in 0..<yvalues.count {
             (ellipse(x*xspacing,height/2+yvalues[x],16,16))
         }

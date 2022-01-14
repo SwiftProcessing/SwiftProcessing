@@ -57,11 +57,9 @@ class MySketch: Sketch, SketchDelegate {
     var ySpeed0 = 0.0, ySpeed1 = 0.0, ySpeed2 = 0.0, ySpeed3 = 0.0, ySpeed4 = 0.0
     var maxSpeed = 10.0
 
-    // This is a partially transparent gray color.
-    // This is what gives our raindrops trails.
-    
-    var skyColor = Color(#colorLiteral(red: 0.2549019754, green: 0.2745098174, blue: 0.3019607961, alpha: 0.1))
-    var raindropColor = Color(#colorLiteral(red: 0.4745098054, green: 0.8392156959, blue: 0.9764705896, alpha: 1))
+    // Set up the color variables here as optionals.
+    var skyColor: Color!
+    var raindropColor: Color!
     
     var diameter0 = 0.0, diameter1 = 0.0, diameter2 = 0.0, diameter3 = 0.0, diameter4 = 0.0
     var maxDiameter = 50.0
@@ -69,6 +67,12 @@ class MySketch: Sketch, SketchDelegate {
     // We're going to generate our random numbers once at the beginning.
     
     func setup() {
+        // Initialize our colors here.
+        // This is a partially transparent gray color.
+        // This is what gives our raindrops trails.
+        skyColor = color(#colorLiteral(red: 0.2549019754, green: 0.2745098174, blue: 0.3019607961, alpha: 0.1))
+        raindropColor = color(#colorLiteral(red: 0.4745098054, green: 0.8392156959, blue: 0.9764705896, alpha: 1))
+        
         xPos0 = random(width)
         xPos1 = random(width)
         xPos2 = random(width)

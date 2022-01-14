@@ -86,7 +86,7 @@ In Swift for loops have been given a major overhaul. C-style for loops you may b
   print(i)
  }
 
- // 2 - Note: width is a Double in SwiftProcessing, so we convert it to an Int.
+ // 2
  for i in 0..<Int(width) {
   print(i)
  }

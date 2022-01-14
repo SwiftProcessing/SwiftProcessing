@@ -27,7 +27,12 @@ public extension Sketch {
     ///   - high: upper bound of the random value
     
     func random<L: Numeric, H: Numeric>(_ low: L = L(0), _ high: H = H(1)) -> Double {
-        return Double.random(in: low.convert()...high.convert())
+        
+        let d_low: Double = low.convert()
+        let d_high: Double = high.convert()
+        
+        // This behavior mimics p5.js by *always* returning a random number, even if the lower bound is higher than the upper bound. Processing exits out if low >= high and returns low.
+        return Double.random(in: Swift.min(d_low, d_high) ... Swift.max(d_low, d_high))
     }
     
     /// Generate a random floating point number from 0 and high value (inclusive).
@@ -41,7 +46,10 @@ public extension Sketch {
     ///   - high: upper bound of the value's current range
     
     func random<T: Numeric>(_ high: T = T(1)) -> Double {
-        return Double.random(in: 0.0...high.convert())
+        let d_high: Double = high.convert()
+        
+        // Ensures that random() always returns a value, even if a negative value is entered.
+        return Double.random(in: Swift.min(0.0, d_high) ... Swift.max(0.0, d_high))
     }
     
     /*

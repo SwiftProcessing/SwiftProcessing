@@ -40,7 +40,7 @@ public extension UIColor {
         return (h, s, b, a)
     }
     
-    var double_hsba: (hue: CGFloat, saturation: CGFloat, brightness: CGFloat, alpha: CGFloat) {
+    var double_hsba: (hue: Double, saturation: Double, brightness: Double, alpha: Double) {
         var h: CGFloat = 0
         var s: CGFloat = 0
         var b: CGFloat = 0
@@ -803,16 +803,16 @@ public extension Sketch {
             switch normalized {
             case true:
                 // Set RGB
-                self.v1 = clamp(value: d_v1 * Color.v1Max, minimum: 0.0, maximum: Color.v1Max)
-                self.v2 = clamp(value: d_v2 * Color.v2Max, minimum: 0.0, maximum: Color.v2Max)
-                self.v3 = clamp(value: d_v3 * Color.v3Max, minimum: 0.0, maximum: Color.v3Max)
-                self.a = clamp(value: d_a * Color.alphaMax, minimum: 0.0, maximum: Color.alphaMax)
+                self.v1 = clamp(value: d_v1 * Double(Color.v1Max), minimum: 0.0, maximum: Double(Color.v1Max))
+                self.v2 = clamp(value: d_v2 * Double(Color.v2Max), minimum: 0.0, maximum: Double(Color.v2Max))
+                self.v3 = clamp(value: d_v3 * Double(Color.v3Max), minimum: 0.0, maximum: Double(Color.v3Max))
+                self.a = clamp(value: d_a * Double(Color.alphaMax), minimum: 0.0, maximum: Double(Color.alphaMax))
             case false:
                 // Set RGB
-                self.v1 = clamp(value: d_v1, minimum: 0.0, maximum: Color.v1Max)
-                self.v2 = clamp(value: d_v2, minimum: 0.0, maximum: Color.v2Max)
-                self.v3 = clamp(value: d_v3, minimum: 0.0, maximum: Color.v3Max)
-                self.a = clamp(value: d_a, minimum: 0.0, maximum: Color.alphaMax)
+                self.v1 = clamp(value: d_v1, minimum: 0.0, maximum: Double(Color.v1Max))
+                self.v2 = clamp(value: d_v2, minimum: 0.0, maximum: Double(Color.v2Max))
+                self.v3 = clamp(value: d_v3, minimum: 0.0, maximum: Double(Color.v3Max))
+                self.a = clamp(value: d_a, minimum: 0.0, maximum: Double(Color.alphaMax))
             }
 
         }
@@ -839,18 +839,18 @@ public extension Sketch {
         func uiColor() -> UIColor {
             switch mode {
             case .rgb:
-                return UIColor(red: v1 / Color.v1Max, green: v2 / Color.v2Max, blue: v3 / Color.v3Max, alpha: a / Color.alphaMax)
+                return UIColor(red: CGFloat(v1) / Color.v1Max, green: CGFloat(v2) / Color.v2Max, blue: CGFloat(v3) / Color.v3Max, alpha: CGFloat(a) / Color.alphaMax)
             case .hsb:
-                return UIColor(hue: v1 / Color.v1Max, saturation: v2 / Color.v2Max, brightness: v3 / Color.v3Max, alpha: a / Color.alphaMax)
+                return UIColor(hue: CGFloat(v1) / Color.v1Max, saturation: CGFloat(v2) / Color.v2Max, brightness: CGFloat(v3) / Color.v3Max, alpha: CGFloat(a) / Color.alphaMax)
             }
         }
         
         func cgColor() -> CGColor {
             switch mode {
             case .rgb:
-                return UIColor(red: v1 / Color.v1Max, green: v2 / Color.v2Max, blue: v3 / Color.v3Max, alpha: a / Color.alphaMax).cgColor
+                return UIColor(red: CGFloat(v1) / Color.v1Max, green: CGFloat(v2) / Color.v2Max, blue: CGFloat(v3) / Color.v3Max, alpha: CGFloat(a) / Color.alphaMax).cgColor
             case .hsb:
-                return UIColor(hue: v1 / Color.v1Max, saturation: v2 / Color.v2Max, brightness: v3 / Color.v3Max, alpha: a / Color.alphaMax).cgColor
+                return UIColor(hue: CGFloat(v1) / Color.v1Max, saturation: CGFloat(v2) / Color.v2Max, brightness: CGFloat(v3) / Color.v3Max, alpha: CGFloat(a) / Color.alphaMax).cgColor
             }
         }
         

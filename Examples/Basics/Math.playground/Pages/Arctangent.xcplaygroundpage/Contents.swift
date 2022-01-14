@@ -52,13 +52,13 @@ class MySketch: Sketch, SketchDelegate {
         
         func display() {
             (sketch.pushMatrix(),
-            sketch.translate(x, y),
-            sketch.fill(255),
-            sketch.ellipse(0, 0, size, size),
-            sketch.rotate(angle),
-            sketch.fill(153, 204, 0),
-            sketch.ellipse(size/4, 0, size/2, size/2),
-            sketch.popMatrix())
+             sketch.translate(x, y),
+             sketch.fill(255),
+             sketch.ellipse(0, 0, size, size),
+             sketch.rotate(angle),
+             sketch.fill(153, 204, 0),
+             sketch.ellipse(size/4, 0, size/2, size/2),
+             sketch.popMatrix())
         }
     }
 }

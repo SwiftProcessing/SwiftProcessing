@@ -29,7 +29,7 @@ public protocol Numeric {
     init(_ v:UInt32)
     init(_ v:Int64)
     init(_ v:UInt64)
-    init(_ v: CGFloat)
+    init(_ v:CGFloat)
 }
 
 extension Float   : Numeric {func _asOther<T:Numeric>() -> T { return T(self) }}

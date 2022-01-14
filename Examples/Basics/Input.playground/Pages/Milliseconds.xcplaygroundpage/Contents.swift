@@ -20,8 +20,8 @@ class MySketch: Sketch, SketchDelegate {
     func draw() {
         for i in 0..<scale {
             (colorMode(.rgb, (i+1) * scale * 10),
-            fill(millis()%((i+1) * scale * 10)),
-            rect(i*scale, 0, scale, height))
+             fill(millis()%((i+1) * scale * 10)),
+             rect(i*scale, 0, scale, height))
         }
     }
     

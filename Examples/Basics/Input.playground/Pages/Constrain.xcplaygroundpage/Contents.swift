@@ -38,9 +38,9 @@ class MySketch: Sketch, SketchDelegate {
         mx = (constrain(mx, inner, width - inner))
         my = (constrain(my, inner, height - inner))
         (fill(76),
-        rect(edge, edge, width-edge, height-edge),
-        fill(255),
-        ellipse(mx, my, radius, radius))
+         rect(edge, edge, width-edge, height-edge),
+         fill(255),
+         ellipse(mx, my, radius, radius))
     }
 }
 
