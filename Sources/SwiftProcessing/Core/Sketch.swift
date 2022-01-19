@@ -409,11 +409,10 @@ import GameplayKit
             isSetup = true
         }
         
-        // Should happen right before draw and inside of the push() and pop().
+        sketchDelegate?.draw() // All instructions go into current context.
+                
         updateTouches()
 
-        sketchDelegate?.draw() // All instructions go into current context.
-        
         // Update keypresses
         if #available(iOS 13.4, *) {
             if keyTyped {
