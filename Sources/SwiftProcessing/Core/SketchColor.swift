@@ -309,6 +309,7 @@ public extension Sketch {
         
         context?.setFillColor(colorModeHelper(cg_v1, cg_v2, cg_v3, cg_a).cgColor())
         settings.fill = Color(cg_v1, cg_v2, cg_v3, cg_a, settings.colorMode)
+        setTextAttributes()
     }
     
     /// Sets the fill color with an RGB or HSB value. RGB is the default color mode.
@@ -338,6 +339,8 @@ public extension Sketch {
         case .hsb:
             settings.fill = Color(systemColor.double_hsba.hue * Color.v1Max, systemColor.double_hsba.saturation * Color.v2Max, systemColor.double_hsba.brightness * Color.v3Max, systemColor.double_hsba.alpha * Color.alphaMax, .hsb)
         }
+        
+        setTextAttributes()
     }
     
     /// Sets the fill color with a gray and alpha values.
@@ -353,6 +356,7 @@ public extension Sketch {
         
         context?.setFillColor(Color(cg_v1 / Color.v1Max, cg_v1 / Color.v1Max, cg_v1 / Color.v1Max, cg_a / Color.alphaMax, .rgb, true).cgColor())
         settings.fill = Color(cg_v1 / Color.v1Max, cg_v1 / Color.v1Max, cg_v1 / Color.v1Max, cg_a / Color.alphaMax, .rgb, true)
+        setTextAttributes()
     }
     
     /// Sets the fill color with a single gray value.
@@ -417,6 +421,7 @@ public extension Sketch {
         
         context?.setStrokeColor(colorModeHelper(cg_v1, cg_v2, cg_v3, cg_a).cgColor())
         settings.stroke = Color(cg_v1, cg_v2, cg_v3, cg_a, settings.colorMode)
+        setTextAttributes()
     }
     
     /// Sets the stroke color with an RGB or HSB value. RGB is the default color mode.
@@ -444,6 +449,8 @@ public extension Sketch {
         case .hsb:
             settings.stroke = Color(systemColor.double_hsba.hue * Color.v1Max, systemColor.double_hsba.saturation * Color.v2Max, systemColor.double_hsba.brightness * Color.v3Max, systemColor.double_hsba.alpha * Color.alphaMax, .hsb)
         }
+        
+        setTextAttributes()
     }
     
     /// Sets the fill color with a gray and alpha values.
@@ -459,6 +466,8 @@ public extension Sketch {
         
         context?.setStrokeColor(Color(cg_v1 / Color.v1Max, cg_v1 / Color.v1Max, cg_v1 / Color.v1Max, cg_a / Color.alphaMax, .rgb, true).cgColor())
         settings.stroke = Color(cg_v1 / Color.v1Max, cg_v1 / Color.v1Max, cg_v1 / Color.v1Max, cg_a / Color.alphaMax, .rgb, true)
+        
+        setTextAttributes()
     }
     
     /// Sets the stroke color with a single gray value.
