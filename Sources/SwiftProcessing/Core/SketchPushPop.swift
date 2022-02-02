@@ -28,12 +28,16 @@ extension Sketch {
     ///  ````
     ///  pushMatrix()
     ///  ````
-    /// - parameter at: a CGPoint.
     
     open func pushMatrix() {
         let currentTransformation = (context?.ctm)!
         matrixStack.push(matrix: currentTransformation)
     }
+    
+    ///  `pushMatrix()` saves the current transformation matrix of the graphics context and pushes it onto the matrix stacks. **Note:** Each `pushMatrix()` must be accompanied by a `popMatrix()`.
+    ///  ````
+    ///  pushMatrix()
+    ///  ````
     
     open func popMatrix() {
         resetMatrixToIdentity()
@@ -44,9 +48,18 @@ extension Sketch {
     // MARK: - PUSH AND POP STYLE
     // =======================================================================
 
+    /// The `pushStyle()` function saves the current style settings and `popStyle()` restores the prior settings. Note that these functions are always used together. They allow you to change the style settings and later return to what you had. When a new style is started with `pushStyle()`, it builds on the current style information. The `pushStyle()` and `popStyle()` functions can be embedded to provide more control (see the second example above for a demonstration`.)
+    /// The style information controlled by the following functions are included in the style: `fill()`, `stroke()`, `tint()`, `strokeWeight()`, `strokeCap()`, `strokeJoin()`, `imageMode()`, `rectMode()`, `ellipseMode()`, `shapeMode()`, `colorMode()`, `textAlign()`, `textFont()`, `textMode()`, `textSize()`, `textLeading()`
+    /// Not yet implemented: `emissive()`, `specular()`, `shininess()`, `ambient()`
+    
     open func pushStyle() {
         settingsStack.push(settings: settings)
+        setTextAttributes()
     }
+    
+    /// The `pushStyle()` function saves the current style settings and `popStyle()` restores the prior settings. Note that these functions are always used together. They allow you to change the style settings and later return to what you had. When a new style is started with `pushStyle()`, it builds on the current style information. The `pushStyle()` and `popStyle()` functions can be embedded to provide more control (see the second example above for a demonstration`.)
+    /// The style information controlled by the following functions are included in the style: `fill()`, `stroke()`, `tint()`, `strokeWeight()`, `strokeCap()`, `strokeJoin()`, `imageMode()`, `rectMode()`, `ellipseMode()`, `shapeMode()`, `colorMode()`, `textAlign()`, `textFont()`, `textMode()`, `textSize()`, `textLeading()`
+    /// Not yet implemented: `emissive()`, `specular()`, `shininess()`, `ambient()`
     
     open func popStyle() {
         settings = settingsStack.pop()!
@@ -61,6 +74,8 @@ extension Sketch {
     
     open func push() {
         pushStyle()
+        setTextAttributes()
+        
         pushMatrix()
         
         if (self.enable3DMode) {
@@ -79,6 +94,8 @@ extension Sketch {
     
     open func pop() {
         popStyle()
+        setTextAttributes()
+        
         popMatrix()
         
         if(self.enable3DMode){
