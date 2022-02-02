@@ -64,6 +64,7 @@ extension Sketch {
     open func popStyle() {
         settings = settingsStack.pop()!
         settings.reapplySettings(self)
+        setTextAttributes()
     }
     
     // =======================================================================

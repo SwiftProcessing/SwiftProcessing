@@ -67,7 +67,6 @@ public extension Sketch{
             sketch.textLeading(textLeading)
             sketch.textAlign(textAlign)
             // Leaving Perlin settings off for now because they are not really global states that need to be tracked.
-            setTextAttributes()
         }
         
         public var description: String {

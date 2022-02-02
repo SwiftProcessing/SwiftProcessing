@@ -395,6 +395,7 @@ import GameplayKit
         
         // Refresh all of the settings just in case to maintain state.
         settings.reapplySettings(self)
+        setTextAttributes()
         context?.saveGState()
         
         // Having two pushes (.saveGState() and below) might seem redundant, but UIGraphicsPush is necessary for UIImages.
