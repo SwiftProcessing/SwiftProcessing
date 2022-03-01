@@ -395,6 +395,7 @@ import GameplayKit
         
         // Refresh all of the settings just in case to maintain state.
         settings.reapplySettings(self)
+        setTextAttributes()
         context?.saveGState()
         
         // Having two pushes (.saveGState() and below) might seem redundant, but UIGraphicsPush is necessary for UIImages.
@@ -409,11 +410,10 @@ import GameplayKit
             isSetup = true
         }
         
-        // Should happen right before draw and inside of the push() and pop().
+        sketchDelegate?.draw() // All instructions go into current context.
+                
         updateTouches()
 
-        sketchDelegate?.draw() // All instructions go into current context.
-        
         // Update keypresses
         if #available(iOS 13.4, *) {
             if keyTyped {
