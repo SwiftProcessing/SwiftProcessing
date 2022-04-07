@@ -200,9 +200,11 @@ extension Sketch: Shapes {
         cg_x = x.convert()
         cg_y = y.convert()
         
+        context?.saveGState()
         context?.setLineCap(.round)
-        line(cg_x, cg_y, cg_x + CGFloat(settings.strokeWeight), cg_y)
-        context?.setLineCap(.square)
+        line(cg_x, cg_y, cg_x, cg_y)
+        context?.restoreGState()
+        
     }
     
     public func rect<X: Numeric, Y: Numeric, W: Numeric, H: Numeric>(_ x: X, _ y: Y, _ width: W, _ height: H) {

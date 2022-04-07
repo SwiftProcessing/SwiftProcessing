@@ -121,7 +121,7 @@ class MySketch: Sketch, SketchDelegate {
         for _ in 0..<numFlies {
             (fireflies.append(
                 Firefly(
-                color: Color(#colorLiteral(red: 0.9764705896, green: 0.850980401, blue: 0.5490196347, alpha: 1)),
+                    color: color(#colorLiteral(red: 0.9764705896, green: 0.850980401, blue: 0.5490196347, alpha: 1)),
                 location: Vector(random(width), random(height)),
                 sketch: self)))
         }
