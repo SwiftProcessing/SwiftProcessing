@@ -22,13 +22,16 @@ public extension Sketch {
         return Image(image!)
     }
     
-    // FOR FUTURE CONTRIBUTORS: UIImage must be supported to accept image literals in Playgrounds.
-    /*
+    /// Loads a UIImage to be stored in a SwiftProcessing Image variable.
+    /// ```
+    /// let image = loadImage(uiImage)
+    /// ```
+    /// - Parameters:
+    ///   - image: a UIImage that you wish to use in SwiftProcessing.
+    
     func loadImage(_ image: UIImage) -> Image {
-        var out_image = UIImage.gifImageWithData(image.data)
-        return Image(out_image!)
+        return Image(image)
     }
-    */
     
     // FOR FUTURE CONTRIBUTORS: The basic infrastructure for tinting images and the sketch view is here, but it has not been implemented.
     
