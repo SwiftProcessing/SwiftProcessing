@@ -87,4 +87,29 @@ extension Sketch {
     
 }
 
+/*
+ 
+ NOTE FOR FUTURE CONTRIBUTORS
+ 
+ The Sound library API for Processing can be found here:
+ https://processing.org/reference/libraries/sound/index.html
+ 
+ Future contributors should aim for parity with the Processing API.
+ 
+ Currently missing calls for SoundFile from the Processing API include:
+
+ add() - Offset the output of the player by the given value.
+ amp() - Changes the amplitude/volume of the player.
+ channels() - Returns the number of channels of the soundfile as an int (1 for mono, 2 for stereo).
+ cue() - Cues the playhead to a fixed position in the soundfile.
+ duration() - Returns the duration of the soundfile in seconds.
+ frames() - Returns the number of frames of this soundfile.
+ isPlaying() - Check whether this soundfile is currently playing.
+ jump() - Jump to a specific position in the soundfile while continuing to play (or starting to play if it wasn't playing already).
+ pan() - Move the sound in a stereo panorama.
+ pause() - Stop the playback of the file, but cue it to the current position.
+ rate() - Set the playback rate of the soundfile.
+ removeFromCache() - Remove this SoundFile's decoded audio sample from the cache, allowing it to be garbage collected once there are no more references to this SoundFile.
+ set() - Set multiple playback parameters of the soundfile at once.
+ */
 
