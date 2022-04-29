@@ -3,7 +3,7 @@
  *
  * This is an implementation of microphone input for
  * SwiftProcessing. It allows the user to access a global
- * static singleton
+ * static singleton microphone.
  *
  * */
 
