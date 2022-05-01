@@ -108,7 +108,7 @@ import GameplayKit
         public static let strokeCap = StrokeCap.round
         public static let rectMode = ShapeMode.corner
         public static let ellipseMode = ShapeMode.center
-        public static let imageMode = ShapeMode.corner
+        public static let imageMode = ImageMode.corner
         public static let textFont = "HelveticaNeue"
         public static let textSize = 32.0
         public static let textLeading = 38.4 // Generally 120% of size. This is derived from Adobe's default treatment of leading.
