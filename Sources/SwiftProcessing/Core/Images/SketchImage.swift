@@ -138,8 +138,6 @@ public extension Sketch {
     
     /// Places an image in a sketch with an x and y position. Image placement is partially controlled by the `imageMode()` function. By default the x and y values are the upper-left- and upper-right-hand corner of the image.
     /// ```
-    /// // Tints the image to a UIColor, which is useful for color literals.
-    /// tint(ColorLiteral) // Typing ColorLiteral will bring up a color picker.
     /// image(image, 0, 0)
     /// ```
     /// - Parameters:
@@ -165,12 +163,12 @@ public extension Sketch {
     ///     - height: height of the image
 
     func image<X: Numeric, Y: Numeric, W: Numeric, H: Numeric>(_ image: Image, _ x: X, _ y: Y, _ width: W? = nil, _ height: H? = nil) {
-        let cg_x, cg_y: CGFloat
+        var cg_x, cg_y: CGFloat
         cg_x = x.convert()
         cg_y = y.convert()
         
-        let cg_w:CGFloat = width == nil ? CGFloat(image.width) : width!.convert()
-        let cg_h:CGFloat = height == nil ? CGFloat(image.height) : height!.convert()
+        var cg_w:CGFloat = width == nil ? CGFloat(image.width) : width!.convert()
+        var cg_h:CGFloat = height == nil ? CGFloat(image.height) : height!.convert()
                 
         image.width = Double(cg_w)
         image.height = Double(cg_h)
@@ -178,7 +176,7 @@ public extension Sketch {
         // We're going to manipulate the coordinate matrix, so we need to freeze everything.
         context?.saveGState()
         
-        imageModeHelper(cg_x, cg_y, cg_w, cg_h)
+        imageModeHelper(&cg_x, &cg_y, &cg_w, &cg_h)
         
         // Corners adjustment
         var newW = cg_w
@@ -194,12 +192,10 @@ public extension Sketch {
         context?.restoreGState()
     }
     
-    private func imageModeHelper(_ x: CGFloat, _ y: CGFloat, _ w: CGFloat, _ h: CGFloat) {
-        switch settings.ellipseMode {
+    private func imageModeHelper(_ x: inout CGFloat, _ y: inout CGFloat, _ width: inout CGFloat, _ height: inout CGFloat) {
+        switch settings.imageMode {
         case .center:
-            translate(-w * 0.5, -h * 0.5)
-        case .radius:
-            scale(0.5, 0.5)
+            translate(-width * 0.5, -height * 0.5)
         case .corner:
             return
         case .corners:

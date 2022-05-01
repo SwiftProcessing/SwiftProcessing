@@ -27,10 +27,11 @@ public protocol Attributes: Sketch {
     /// Draws all geometry with jagged (aliased) edges
     func noSmooth()
     
-    /// Modifies the location from which ellipses, circles, and arcs are drawn. The default mode is `.center`.
-    /// The default mode is `imageMode(.corner)`, which interprets the second and third parameters of `image()` as the upper-left corner of the image. If two additional parameters are specified, they are used to set the image's width and height.
-    /// `imageMode(.corners)` interprets the second and third parameters of `image()` as the location of one corner, and the fourth and fifth parameters as the opposite corner.
-    /// `imageMode(.center)` interprets the second and third parameters of `image()` as the image's center point. If two additional parameters are specified, they are used to set the image's width and height.
+    /// Modifies the location from which ellipses are drawn by changing the way in which parameters given to `ellipse()` are interpreted.
+    /// The default mode is `ellipseMode(.center)`, which interprets the first two parameters of `ellipse()` as the shape's center point, while the third and fourth parameters are its width and height.
+    /// `ellipseMode(.radius)` also uses the first two parameters of `ellipse()` as the shape's center point, but uses the third and fourth parameters to specify half of the shape's width and height.
+    /// `ellipseMode(.corner)` interprets the first two parameters of `ellipse()` as the upper-left corner of the shape, while the third and fourth parameters are its width and height.
+    /// `ellipseMode(.corners)` interprets the first two parameters of `ellipse()` as the location of one corner of the ellipse's bounding box, and the third and fourth parameters as the location of the opposite corner.
     /// - Parameter eMode: either `.center`, `.radius`, `.corner`, or `.corners`
     func ellipseMode(_ eMode: ShapeMode)
     
@@ -47,7 +48,7 @@ public protocol Attributes: Sketch {
     /// `imageMode(.corners)` interprets the second and third parameters of image() as the location of one corner, and the fourth and fifth parameters as the opposite corner.
     /// `imageMode(.center)` interprets the second and third parameters of image() as the image's center point. If two additional parameters are specified, they are used to set the image's width and height.
     /// - Parameter eMode: either `.center`, `.radius`, `.corner`, or `.corners`
-    func imageMode(_ iMode: ShapeMode)
+    func imageMode(_ iMode: ImageMode)
 }
 
 extension Sketch: Attributes {
@@ -105,7 +106,7 @@ extension Sketch: Attributes {
         settings.rectMode = mode
     }
     
-    public func imageMode(_ mode: ShapeMode) {
+    public func imageMode(_ mode: ImageMode) {
         settings.imageMode = mode
     }
 }
