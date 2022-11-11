@@ -289,7 +289,7 @@ import GameplayKit
             return _keyPressed as! Bool
         }
         set {
-            keyPressed = newValue
+            _keyPressed = newValue
         }
     }
     
@@ -307,7 +307,7 @@ import GameplayKit
             return _keyCode as! KeyCode
         }
         set {
-            keyCode = newValue
+            _keyCode = newValue
         }
     }
     
