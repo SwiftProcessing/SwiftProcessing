@@ -263,7 +263,7 @@ import GameplayKit
     
     public var key: Character = "\0"
     
-    var _internalKey: Any? = nil
+    private var _internalKey: Any? = nil
     @available(iOS 13.4, *)
     fileprivate var internalKey: UIKey {
         get {
@@ -279,7 +279,7 @@ import GameplayKit
     
     /// The boolean system variable keyPressed is true if any key is pressed and false if no keys are pressed. Note that there is a similarly named function called keyPressed(). See its reference page for more information.
     
-    var _keyPressed: Any? = nil
+    private var _keyPressed: Any? = nil
     @available(iOS 13.4, *)
     public var keyPressed: Bool {
         get {
@@ -297,7 +297,7 @@ import GameplayKit
     /// When checking for these keys, it can be useful to first check if the key is coded. This is done with the conditional if (key == CODED), as shown in the example above.
     /// The keys included in the ASCII specification (BACKSPACE, TAB, ENTER, RETURN, ESC, and DELETE) do not require checking to see if the key is coded; for those keys, you should simply use the key variable directly (and not keyCode). If you're making cross-platform projects, note that the ENTER key is commonly used on PCs and Unix, while the RETURN key is used on Macs. Make sure your program will work on all platforms by checking for both ENTER and RETURN.
     
-    var _keyCode: Any? = nil
+    private var _keyCode: Any? = nil
     @available(iOS 13.4, *)
     public var keyCode: KeyCode {
         get {
