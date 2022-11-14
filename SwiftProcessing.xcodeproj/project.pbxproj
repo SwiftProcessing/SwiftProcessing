@@ -181,6 +181,9 @@
 		1F9EB3E426D152FE00FF3AE5 /* SketchPushPop.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F9EB3E226D152FE00FF3AE5 /* SketchPushPop.swift */; };
 		1F9EB3E526D152FE00FF3AE5 /* SketchPushPop.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F9EB3E226D152FE00FF3AE5 /* SketchPushPop.swift */; };
 		1FEBB17426DF3194001F29E3 /* SketchTime.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FEBB17326DF3194001F29E3 /* SketchTime.swift */; };
+		44D30323291E2C960082CBD0 /* SketchKeyboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44D30322291E2C960082CBD0 /* SketchKeyboard.swift */; };
+		44D30324291E2C960082CBD0 /* SketchKeyboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44D30322291E2C960082CBD0 /* SketchKeyboard.swift */; };
+		44D30325291E2C960082CBD0 /* SketchKeyboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44D30322291E2C960082CBD0 /* SketchKeyboard.swift */; };
 		OBJ_129 /* Package.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_6 /* Package.swift */; };
 		OBJ_140 /* SwiftProcessingTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_62 /* SwiftProcessingTests.swift */; };
 		OBJ_141 /* VectorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_63 /* VectorTests.swift */; };
@@ -264,6 +267,7 @@
 		1F9EB3E226D152FE00FF3AE5 /* SketchPushPop.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SketchPushPop.swift; sourceTree = "<group>"; };
 		1F9EB3FC26D153F000FF3AE5 /* Basics.playground */ = {isa = PBXFileReference; lastKnownFileType = file.playground; path = Basics.playground; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		1FEBB17326DF3194001F29E3 /* SketchTime.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SketchTime.swift; sourceTree = "<group>"; };
+		44D30322291E2C960082CBD0 /* SketchKeyboard.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SketchKeyboard.swift; sourceTree = "<group>"; };
 		OBJ_6 /* Package.swift */ = {isa = PBXFileReference; explicitFileType = sourcecode.swift; path = Package.swift; sourceTree = "<group>"; };
 		OBJ_62 /* SwiftProcessingTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftProcessingTests.swift; sourceTree = "<group>"; };
 		OBJ_63 /* VectorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VectorTests.swift; sourceTree = "<group>"; };
@@ -311,6 +315,7 @@
 				1F1EF91526ACC7A200A943FF /* SketchData.swift */,
 				1F9EB3DE26D152EC00FF3AE5 /* SketchEnums.swift */,
 				1F1EF8FC26ACC7A200A943FF /* SketchEnvironment.swift */,
+				44D30322291E2C960082CBD0 /* SketchKeyboard.swift */,
 				1F1EF90D26ACC7A200A943FF /* SketchNotifications.swift */,
 				1F1EF8FE26ACC7A200A943FF /* SketchOperatorOverloads.swift */,
 				1F1EF8EE26ACC7A200A943FF /* SketchPixels.swift */,
@@ -531,6 +536,11 @@
 			attributes = {
 				LastSwiftMigration = 9999;
 				LastUpgradeCheck = 9999;
+				TargetAttributes = {
+					"SwiftProcessing::SwiftProcessingPackageTests::ProductTarget" = {
+						LastSwiftMigration = 1410;
+					};
+				};
 			};
 			buildConfigurationList = OBJ_2 /* Build configuration list for PBXProject "SwiftProcessing" */;
 			compatibilityVersion = "Xcode 3.2";
@@ -587,6 +597,7 @@
 				1F1EF97126ACC7A200A943FF /* AudioIn.swift in Sources */,
 				1F1EF92626ACC7A200A943FF /* TextField.swift in Sources */,
 				1F1EF92326ACC7A200A943FF /* Switch.swift in Sources */,
+				44D30324291E2C960082CBD0 /* SketchKeyboard.swift in Sources */,
 				1F1EF92F26ACC7A200A943FF /* UIApplicationExtensions.swift in Sources */,
 				1F1EF99826ACC7A200A943FF /* SketchVisibility.swift in Sources */,
 				1F1EF97D26ACC7A200A943FF /* Sketch3DTransform.swift in Sources */,
@@ -626,6 +637,7 @@
 				1F1EF96926ACC7A200A943FF /* SketchEnvironment.swift in Sources */,
 				1F1EF94B26ACC7A200A943FF /* ImagePicker.swift in Sources */,
 				1F1EF92426ACC7A200A943FF /* Switch.swift in Sources */,
+				44D30325291E2C960082CBD0 /* SketchKeyboard.swift in Sources */,
 				1F1EF9A526ACC7A200A943FF /* SketchCalculation.swift in Sources */,
 				1F1EF98A26ACC7A200A943FF /* Sketch3DModel.swift in Sources */,
 				1F1EF9AB26ACC7A200A943FF /* SketchRandom.swift in Sources */,
@@ -711,6 +723,7 @@
 				1F1EF99126ACC7A200A943FF /* Sketch3DLight.swift in Sources */,
 				1F1EF92B26ACC7A200A943FF /* Stepper.swift in Sources */,
 				1F9EB3E326D152FE00FF3AE5 /* SketchPushPop.swift in Sources */,
+				44D30323291E2C960082CBD0 /* SketchKeyboard.swift in Sources */,
 				1F1EF94C26ACC7A200A943FF /* SketchImage.swift in Sources */,
 				1F1EF93126ACC7A200A943FF /* UIKitControlElement.swift in Sources */,
 				1F1EF98B26ACC7A200A943FF /* TransitionSCNNode.swift in Sources */,
@@ -775,12 +788,19 @@
 		OBJ_132 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 5.0;
 			};
 			name = Debug;
 		};
 		OBJ_133 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				SWIFT_VERSION = 5.0;
 			};
 			name = Release;
 		};
